@@ -2,9 +2,12 @@
   "name": "deckgl-typings",
   "version": "1.0.0",
   "description": "TypeScript declaration files for deck.gl",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "dts-gen -m deck.gl"
+    "add-tsconfig": "shx cp tsconfig.json ./node_modules/deck.gl/.",
+    "to-ts": "shx cp ./node_modules/deck.gl/src/index.js ./node_modules/deck.gl/src/index.ts",
+    "dts": "dts-generator --name deck.gl --project ./node_modules/deck.gl --out deck.gl/index.d.ts",
+    "build": "npm run add-tsconfig && npm run to-ts && npm run dts"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,8 @@
   "homepage": "https://github.com/danmarshall/deckgl-typings#readme",
   "devDependencies": {
     "deck.gl": "^5.3.1",
-    "dts-gen": "^0.5.7"
+    "dts-generator": "^2.1.0",
+    "shx": "^0.3.0",
+    "typescript": "^2.9.2"
   }
 }

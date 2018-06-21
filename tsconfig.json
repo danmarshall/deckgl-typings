@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "ts",
+        "outDir": "js",
+        "moduleResolution": "node",
+        "target": "es6"
+    }
+}
