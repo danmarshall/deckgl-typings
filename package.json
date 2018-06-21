@@ -1,0 +1,27 @@
+{
+  "name": "deckgl-typings",
+  "version": "1.0.0",
+  "description": "TypeScript declaration files for deck.gl",
+  "main": "index.js",
+  "scripts": {
+    "build": "dts-gen -m deck.gl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danmarshall/deckgl-typings.git"
+  },
+  "keywords": [
+    "deck.gl",
+    "TypeScript"
+  ],
+  "author": "Dan Marshall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danmarshall/deckgl-typings/issues"
+  },
+  "homepage": "https://github.com/danmarshall/deckgl-typings#readme",
+  "devDependencies": {
+    "deck.gl": "^5.3.1",
+    "dts-gen": "^0.5.7"
+  }
+}
