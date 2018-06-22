@@ -4,6 +4,9 @@
         "declarationDir": "ts",
         "outDir": "js",
         "moduleResolution": "node",
-        "target": "es6"
+        "target": "es6",
+        "types": [
+            "@types/node"
+        ]
     }
 }

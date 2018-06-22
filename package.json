@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/danmarshall/deckgl-typings#readme",
   "devDependencies": {
+    "@types/node": "^10.3.4",
     "dts-generator": "^2.1.0",
     "glob": "^7.1.2",
     "shx": "^0.3.0",
