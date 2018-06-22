@@ -8,16 +8,6 @@ declare module '@deck.gl/core/lib/init' {
 	export {};
 
 }
-declare module '@deck.gl/core/shaderlib/project/project.glsl' {
-	 const _default: "// EXTERNAL CONSTANTS: these must match JavaScript constants in \"src/core/lib/constants.js\"\nconst float COORDINATE_SYSTEM_IDENTITY = 0.;\nconst float COORDINATE_SYSTEM_LNG_LAT = 1.;\nconst float COORDINATE_SYSTEM_METER_OFFSETS = 2.;\nconst float COORDINATE_SYSTEM_LNGLAT_OFFSETS = 3.;\n\nuniform float project_uCoordinateSystem;\nuniform float project_uScale;\nuniform vec3 project_uPixelsPerMeter;\nuniform vec3 project_uPixelsPerDegree;\nuniform vec3 project_uPixelsPerUnit;\nuniform vec3 project_uPixelsPerUnit2;\nuniform vec4 project_uCenter;\nuniform mat4 project_uModelMatrix;\nuniform mat4 project_uViewProjectionMatrix;\nuniform vec2 project_uViewportSize;\nuniform float project_uDevicePixelRatio;\nuniform float project_uFocalDistance;\nuniform vec3 project_uCameraPosition;\n\nconst float TILE_SIZE = 512.0;\nconst float PI = 3.1415926536;\nconst float WORLD_SCALE = TILE_SIZE / (PI * 2.0);\n\n//\n// Scaling offsets - scales meters to \"pixels\"\n// Note the scalar version of project_scale is for scaling the z component only\n//\nfloat project_scale(float meters) {\n  return meters * project_uPixelsPerMeter.z;\n}\n\nvec2 project_scale(vec2 meters) {\n  return meters * project_uPixelsPerMeter.xy;\n}\n\nvec3 project_scale(vec3 meters) {\n  return meters * project_uPixelsPerMeter;\n}\n\nvec4 project_scale(vec4 meters) {\n  return vec4(meters.xyz * project_uPixelsPerMeter, meters.w);\n}\n\n//\n// Projecting normal - transform deltas from current coordinate system to\n// normals in the worldspace\n//\nvec3 project_normal(vec3 vector) {\n  if (project_uCoordinateSystem == COORDINATE_SYSTEM_LNG_LAT ||\n    project_uCoordinateSystem == COORDINATE_SYSTEM_LNGLAT_OFFSETS) {\n    return normalize(vector * project_uPixelsPerDegree);\n  }\n  // Apply model matrix\n  vec4 normal_modelspace = project_uModelMatrix * vec4(vector, 0.0);\n  return normalize(normal_modelspace.xyz * project_uPixelsPerMeter);\n}\n\nvec4 project_offset_(vec4 offset) {\n  vec3 pixelsPerUnit = project_uPixelsPerUnit + project_uPixelsPerUnit2 * offset.y;\n  return vec4(offset.xyz * pixelsPerUnit, offset.w);\n}\n\n//\n// Projecting positions - non-linear projection: lnglats => unit tile [0-1, 0-1]\n//\nvec2 project_mercator_(vec2 lnglat) {\n  return vec2(\n    radians(lnglat.x) + PI,\n    PI - log(tan_fp32(PI * 0.25 + radians(lnglat.y) * 0.5))\n  );\n}\n\n//\n// Projects lnglats (or meter offsets, depending on mode) to pixels\n//\nvec4 project_position(vec4 position) {\n  // TODO - why not simply subtract center and fall through?\n  if (project_uCoordinateSystem == COORDINATE_SYSTEM_LNG_LAT) {\n    return project_uModelMatrix * vec4(\n      project_mercator_(position.xy) * WORLD_SCALE * project_uScale,\n      project_scale(position.z),\n      position.w\n    );\n  }\n\n  if (project_uCoordinateSystem == COORDINATE_SYSTEM_LNGLAT_OFFSETS) {\n    return project_offset_(position);\n  }\n\n  // METER_OFFSETS or IDENTITY\n  // Apply model matrix\n  vec4 position_modelspace = project_uModelMatrix * position;\n  return project_offset_(position_modelspace);\n}\n\nvec3 project_position(vec3 position) {\n  vec4 projected_position = project_position(vec4(position, 1.0));\n  return projected_position.xyz;\n}\n\nvec2 project_position(vec2 position) {\n  vec4 projected_position = project_position(vec4(position, 0.0, 1.0));\n  return projected_position.xy;\n}\n\n//\n// Projects from \"world\" coordinates to clip space.\n// Uses project_uViewProjectionMatrix\n//\nvec4 project_to_clipspace(vec4 position) {\n  if (project_uCoordinateSystem == COORDINATE_SYSTEM_METER_OFFSETS ||\n    project_uCoordinateSystem == COORDINATE_SYSTEM_LNGLAT_OFFSETS) {\n    // Needs to be divided with project_uPixelsPerMeter\n    position.w *= project_uPixelsPerMeter.z;\n  }\n  return project_uViewProjectionMatrix * position + project_uCenter;\n}\n\n// Returns a clip space offset that corresponds to a given number of **non-device** pixels\nvec4 project_pixel_to_clipspace(vec2 pixels) {\n  vec2 offset = pixels / project_uViewportSize * project_uDevicePixelRatio;\n  return vec4(offset * project_uFocalDistance, 0.0, 0.0);\n}\n";
-	export default _default;
-
-}
-declare module '@deck.gl/core/deprecated/shaderlib/project/project-deprecated.glsl' {
-	 const _default: "float scale(float position) {\n  return project_scale(position);\n}\n\nvec2 scale(vec2 position) {\n  return project_scale(position);\n}\n\nvec3 scale(vec3 position) {\n  return project_scale(position);\n}\n\nvec4 scale(vec4 position) {\n  return project_scale(position);\n}\n\nvec2 preproject(vec2 position) {\n  return project_position(position);\n}\n\nvec3 preproject(vec3 position) {\n  return project_position(position);\n}\n\nvec4 preproject(vec4 position) {\n  return project_position(position);\n}\n\nvec4 project(vec4 position) {\n  return project_to_clipspace(position);\n}\n";
-	export default _default;
-
-}
 declare module '@deck.gl/core/lib/constants' {
 	export const COORDINATE_SYSTEM: {
 	    LNGLAT: number;
@@ -118,11 +108,6 @@ declare module '@deck.gl/core/shaderlib/project32/project32' {
 	export default _default;
 
 }
-declare module '@deck.gl/core/shaderlib/project64/project64.glsl' {
-	 const _default: "\nconst vec2 WORLD_SCALE_FP64 = vec2(81.4873275756836, 0.0000032873668232014097);\n\nuniform vec2 project64_uScale;\nuniform vec2 project_uViewProjectionMatrixFP64[16];\n\n// longitude: lnglat_fp64.xy; latitude: lnglat_fp64.zw\nvoid mercatorProject_fp64(vec4 lnglat_fp64, out vec2 out_val[2]) {\n\n#if defined(NVIDIA_FP64_WORKAROUND)\n  out_val[0] = sum_fp64(radians_fp64(lnglat_fp64.xy), PI_FP64 * ONE);\n#else\n  out_val[0] = sum_fp64(radians_fp64(lnglat_fp64.xy), PI_FP64);\n#endif\n  out_val[1] = sub_fp64(PI_FP64,\n    log_fp64(tan_fp64(sum_fp64(PI_4_FP64, radians_fp64(lnglat_fp64.zw) / 2.0))));\n  return;\n}\n\nvoid project_position_fp64(vec4 position_fp64, out vec2 out_val[2]) {\n  vec2 pos_fp64[2];\n  mercatorProject_fp64(position_fp64, pos_fp64);\n  vec2 x_fp64 = mul_fp64(pos_fp64[0], project64_uScale);\n  vec2 y_fp64 = mul_fp64(pos_fp64[1], project64_uScale);\n  out_val[0] = mul_fp64(x_fp64, WORLD_SCALE_FP64);\n  out_val[1] = mul_fp64(y_fp64, WORLD_SCALE_FP64);\n\n  return;\n}\n\nvoid project_position_fp64(vec2 position, vec2 position64xyLow, out vec2 out_val[2]) {\n  vec4 position64xy = vec4(\n    position.x, position64xyLow.x,\n    position.y, position64xyLow.y);\n\n  project_position_fp64(position64xy, out_val);\n}\n\nvec4 project_to_clipspace_fp64(vec2 vertex_pos_modelspace[4]) {\n  vec2 vertex_pos_clipspace[4];\n  mat4_vec4_mul_fp64(project_uViewProjectionMatrixFP64, vertex_pos_modelspace,\n    vertex_pos_clipspace);\n  return vec4(\n    vertex_pos_clipspace[0].x,\n    vertex_pos_clipspace[1].x,\n    vertex_pos_clipspace[2].x,\n    vertex_pos_clipspace[3].x\n    );\n}\n\nvec4 project_position_to_clipspace(\n  vec3 position, vec2 position64xyLow, vec3 offset, out vec4 worldPosition\n) {\n  // This is the local offset to the instance position\n  vec2 offset64[4];\n  vec4_fp64(vec4(offset, 0.0), offset64);\n\n  float z = project_scale(position.z);\n\n  // Apply web mercator projection (depends on coordinate system imn use)\n  vec2 projectedPosition64xy[2];\n  project_position_fp64(position.xy, position64xyLow, projectedPosition64xy);\n\n  vec2 worldPosition64[4];\n  worldPosition64[0] = sum_fp64(offset64[0], projectedPosition64xy[0]);\n  worldPosition64[1] = sum_fp64(offset64[1], projectedPosition64xy[1]);\n  worldPosition64[2] = sum_fp64(offset64[2], vec2(z, 0.0));\n  worldPosition64[3] = vec2(1.0, 0.0);\n\n  worldPosition = vec4(projectedPosition64xy[0].x, projectedPosition64xy[1].x, z, 1.0);\n\n  return project_to_clipspace_fp64(worldPosition64);\n}\n\nvec4 project_position_to_clipspace(\n  vec3 position, vec2 position64xyLow, vec3 offset\n) {\n  vec4 worldPosition;\n  return project_position_to_clipspace(\n    position, position64xyLow, offset, worldPosition\n  );\n}\n";
-	export default _default;
-
-}
 declare module '@deck.gl/core/shaderlib/project64/project64' {
 	 const _default: {
 	    name: string;
@@ -136,11 +121,6 @@ declare module '@deck.gl/core/shaderlib/project64/project64' {
 	    }[];
 	};
 	export default _default; function getUniforms(opts?: {}, context?: {}): any;
-
-}
-declare module '@deck.gl/core/shaderlib/lighting/lighting.glsl' {
-	 const _default: "#define MAX_NUM_OF_LIGHTS 5\n\n// TODO these should be using lighting_ prefix\nuniform vec3 lighting_lightPositions[MAX_NUM_OF_LIGHTS];\nuniform vec2 lighting_lightStrengths[MAX_NUM_OF_LIGHTS];\nuniform float lighting_ambientRatio;\nuniform float lighting_diffuseRatio;\nuniform float lighting_specularRatio;\nuniform int lighting_numberOfLights;\n\nfloat lighting_getLightWeight(vec3 position_worldspace_vec3, vec3 normals_worldspace) {\n  float lightWeight = 0.0;\n\n  vec3 normals_worldspace_vec3 = normals_worldspace.xyz;\n\n  vec3 camera_pos_worldspace = project_uCameraPosition;\n  vec3 view_direction = normalize(camera_pos_worldspace - position_worldspace_vec3);\n\n  for (int i = 0; i < MAX_NUM_OF_LIGHTS; i++) {\n    if (i >= lighting_numberOfLights) {\n      break;\n    }\n    vec3 light_position_worldspace = lighting_lightPositions[i];\n    vec3 light_direction = normalize(light_position_worldspace - position_worldspace_vec3);\n\n    vec3 halfway_direction = normalize(light_direction + view_direction);\n    float lambertian = dot(light_direction, normals_worldspace_vec3);\n    float specular = 0.0;\n    if (lambertian > 0.0) {\n      float specular_angle = max(dot(normals_worldspace_vec3, halfway_direction), 0.0);\n      specular = pow(specular_angle, 32.0);\n    }\n    lambertian = max(lambertian, 0.0);\n    lightWeight += (lighting_ambientRatio + lambertian * lighting_diffuseRatio + specular * lighting_specularRatio) *\n      lighting_lightStrengths[i].x;\n  }\n\n  return lightWeight;\n}\n\n// DEPRECATED - Backwards compatibility\n\nfloat getLightWeight(vec3 position_worldspace_vec3, vec3 normals_worldspace) {\n  return lighting_getLightWeight(position_worldspace_vec3, normals_worldspace);\n}\n";
-	export default _default;
 
 }
 declare module '@deck.gl/core/shaderlib/project/project-functions' {
@@ -1794,16 +1774,6 @@ declare module '@deck.gl/core/transitions/viewport-fly-to-interpolator' {
 	}
 
 }
-declare module '@deck.gl/core/experimental/reflection-effect/reflection-effect-vertex.glsl' {
-	 const _default: "#define SHADER_NAME reflection-effect-vs\n\nattribute vec3 vertices;\n\nvarying vec2 uv;\n\nvoid main(void) {\n  uv = vertices.xy;\n  gl_Position = vec4(2. * vertices.xy - vec2(1., 1.), 1., 1.);\n}\n";
-	export default _default;
-
-}
-declare module '@deck.gl/core/experimental/reflection-effect/reflection-effect-fragment.glsl' {
-	 const _default: "#define SHADER_NAME reflection-effect-fs\n\n#ifdef GL_ES\nprecision highp float;\n#endif\n\nuniform sampler2D reflectionTexture;\nuniform int reflectionTextureWidth;\nuniform int reflectionTextureHeight;\n\nuniform float reflectivity;\nuniform float blur;\n\n\nvarying vec2 uv;\n\n#define KERNEL_SIZE 7\n\n/*\n * Samples from tex with a gaussian-shaped patch, centered at uv and\n * with standard deviation sigma.  The size of the texture in\n * pixels must be specified by dim\n */\nvec4 sample_gaussian(sampler2D tex, vec2 dim, vec2 uv, float sigma) {\n  if (sigma == 0.0) {\n    return texture2D(tex, uv);\n  }\n\n  vec2 delta = 1.0 / dim;\n  vec2 top_left = uv - delta * float(KERNEL_SIZE+1) / 2.0;\n\n  vec4 color = vec4(0);\n  float sum = 0.0;\n  for (int i = 0; i <  KERNEL_SIZE; ++i) {\n    for (int j = 0; j < KERNEL_SIZE; ++j) {\n      vec2 uv2 = top_left + vec2(i, j) * delta;\n      float d = length((uv2 - uv) * dim);\n      float f = exp(-(d*d) / (2.0*sigma * sigma));\n      color += f * texture2D(tex, uv2);\n      sum += f;\n    }\n  }\n  return color / sum;\n}\n\nvoid main(void) {\n  //map blur in [0, 1] to sigma in [0, inf]\n  //alpha will determine the \"steepness\" of our curve.\n  //this was picked just to make the scale feel \"natural\"\n  //if our image is 1000 pixels wide, a blur of 0.5 should correspond\n  //to a sigma of 1 pixels\n  float alpha = 1000.0;\n  float sigma = blur / (alpha * (1.0 - blur));\n  //let this be our standard deviation in terms of screen-widths.\n  //rewrite this in terms of pixels.\n  sigma *= float(reflectionTextureWidth);\n\n\n  gl_FragColor = sample_gaussian(reflectionTexture, vec2(reflectionTextureWidth,\n    reflectionTextureHeight), vec2(uv.x, 1. - uv.y), sigma);\n  //because our canvas expects alphas to be pre-multiplied, we multiply by whole\n  //color vector by reflectivity, not just the alpha channel\n  gl_FragColor *= reflectivity;\n}\n";
-	export default _default;
-
-}
 declare module '@deck.gl/core/experimental/reflection-effect/reflection-effect' {
 	import Effect from '@deck.gl/core/experimental/lib/effect';
 	export default class ReflectionEffect extends Effect {
@@ -2062,11 +2032,6 @@ declare module '@deck.gl/core/lib' {
 	export { default as CompositeLayer } from '@deck.gl/core/lib/composite-layer';
 	export { default as AttributeManager } from '@deck.gl/core/lib/attribute-manager';
 	export { default as LayerManager } from '@deck.gl/core/lib/layer-manager';
-
-}
-declare module '@deck.gl/core/shaderlib/misc/random.glsl' {
-	 const _default: "highp float random(vec2 co) {\n  highp float a = 12.9898;\n  highp float b = 78.233;\n  highp float c = 43758.5453;\n  highp float dt= dot(co.xy ,vec2(a,b));\n  highp float sn= mod(dt,3.14);\n  return fract(sin(sn) / c) - .5;\n}\n";
-	export default _default;
 
 }
 declare module '@deck.gl/core/utils/color' {
