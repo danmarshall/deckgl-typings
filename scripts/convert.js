@@ -9,13 +9,29 @@ function js_to_ts(js) {
     fs.copyFileSync(js, ts);
 }
 
+function removeIndex(packageName, moduleName) {
+    let result = null;
+    if (/\/index/g.test(moduleName)) {
+        result = moduleName.replace(/\/index/g, '');
+    }
+    if (moduleName === 'index') {
+        result = packageName;
+    }
+    return result;
+}
+
 function genDts(name) {
     console.log(`generating ${name}/index.d.ts`);
-    dtsGen({
+
+    const options = {
         name,
         project: `./node_modules/${name}`,
-        out: `${name}/index.d.ts`
-    });
+        out: `${name}/index.d.ts`,
+        resolveModuleId: params => removeIndex(name, params.currentModuleId),
+        resolveModuleImport: params => removeIndex(name, params.importedModuleId)
+    };
+
+    dtsGen(options);
 }
 
 function genProcess(obj) {
@@ -41,7 +57,7 @@ var list = [
 
     //comment out any of these that you don't want to execute.
     //make convert:false if you need to manually edit the .ts files in node_modules
-    
+
     { name: 'luma.gl', convert: true },
     { name: 'deck.gl', convert: true },
     { name: '@deck.gl/core', convert: true },

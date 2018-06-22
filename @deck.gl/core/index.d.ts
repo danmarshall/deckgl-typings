@@ -219,7 +219,7 @@ declare module '@deck.gl/core/shaderlib/lighting/lighting' {
 	};
 
 }
-declare module '@deck.gl/core/shaderlib/index' {
+declare module '@deck.gl/core/shaderlib' {
 	import { fp32, fp64, picking } from 'luma.gl';
 	import project from '@deck.gl/core/shaderlib/project/project';
 	import project64 from '@deck.gl/core/shaderlib/project64/project64';
@@ -1952,7 +1952,7 @@ declare module '@deck.gl/core/deprecated/third-person-viewport' {
 	}
 
 }
-declare module '@deck.gl/core/index' {
+declare module '@deck.gl/core' {
 	import '@deck.gl/core/lib/init';
 	import '@deck.gl/core/shaderlib';
 	export { COORDINATE_SYSTEM } from '@deck.gl/core/lib/constants';
@@ -2055,7 +2055,7 @@ declare module '@deck.gl/core/experimental/utils/container' {
 	export function toJS(container: any): any;
 
 }
-declare module '@deck.gl/core/lib/index' {
+declare module '@deck.gl/core/lib' {
 	import '@deck.gl/core/lib/init';
 	export { COORDINATE_SYSTEM } from '@deck.gl/core/lib/constants';
 	export { default as Layer } from '@deck.gl/core/lib/layer';

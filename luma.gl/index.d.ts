@@ -1,5 +1,5 @@
 declare module 'luma.gl/utils/globals' {
-	 const self_: any; const window_: any; const global_: any; const document_: {};
+	 const self_: Window | NodeJS.Global; const window_: Window | NodeJS.Global; const global_: Window | NodeJS.Global; const document_: {};
 	export { self_ as self, window_ as window, global_ as global, document_ as document };
 
 }
@@ -695,7 +695,7 @@ declare module 'luma.gl/constants' {
 	export default _default;
 
 }
-declare module 'luma.gl/webgl-utils/index' {
+declare module 'luma.gl/webgl-utils' {
 	export { Image, WebGLRenderingContext, WebGLProgram, WebGLShader, WebGLBuffer, WebGLFramebuffer, WebGLRenderbuffer, WebGLTexture, WebGLUniformLocation, WebGLActiveInfo, WebGLShaderPrecisionFormat, WebGL2RenderingContext, webGLTypesAvailable } from 'luma.gl/webgl-utils/webgl-types';
 	export { isWebGL, isWebGL2, assertWebGLContext, assertWebGL2Context } from 'luma.gl/webgl-utils/webgl-checks';
 	export { requestAnimationFrame, cancelAnimationFrame } from 'luma.gl/webgl-utils/request-animation-frame';
@@ -768,7 +768,7 @@ declare module 'luma.gl/utils/format-value' {
 	export function formatValue(v: any, opts?: {}): any;
 
 }
-declare module 'luma.gl/utils/index' {
+declare module 'luma.gl/utils' {
 	export { default as isBrowser } from 'luma.gl/utils/is-browser';
 	export { default as isOldIE } from 'luma.gl/utils/is-old-ie';
 	export { promisify } from 'luma.gl/utils/promise-utils';
@@ -1066,7 +1066,7 @@ declare module 'luma.gl/webgl-context/context-state' {
 	export function withParameters(gl: any, parameters: any, func: any): any;
 
 }
-declare module 'luma.gl/webgl-context/index' {
+declare module 'luma.gl/webgl-context' {
 	export { createGLContext, destroyGLContext, resizeGLContext, pollGLContext } from 'luma.gl/webgl-context/context';
 	export { withParameters, resetParameters } from 'luma.gl/webgl-context/context-state';
 	export { getContextInfo } from 'luma.gl/webgl-context/context-limits';
@@ -1146,7 +1146,7 @@ declare module 'luma.gl/webgl/resource' {
 	    setParameters(parameters: any): this;
 	    initialize(opts: any): void;
 	    _createHandle(): void;
-	    _deleteHandle(): void;
+	    _deleteHandle(handle?: any): void;
 	    _getOptsFromHandle(): void;
 	    _getParameter(pname: any, opts: any): void;
 	    /**
@@ -1358,7 +1358,7 @@ declare module 'luma.gl/webgl/vertex-array' {
 	    _setGenericIntArray(location: any, array: any): void;
 	    _setGenericUintArray(location: any, array: any): void;
 	    _createHandle(): any;
-	    //_deleteHandle(handle: any): any[];
+	    _deleteHandle(handle: any): any[];
 	    _getParameter(pname: any, { location }: {
 	        location: any;
 	    }): any;
@@ -1751,7 +1751,7 @@ declare module 'luma.gl/webgl/sampler' {
 	     * @param {GLuint} unit - texture unit index
 	     * @return {Sampler} - returns self to enable chaining
 	     */
-	    //unbind(unit: any): this;
+	    unbind(unit?: any): this;
 	    _createHandle(): any;
 	    _deleteHandle(): void;
 	    _getParameter(pname: any): any;
@@ -2034,8 +2034,8 @@ declare module 'luma.gl/webgl/functions' {
 	}): void;
 
 }
-declare module 'luma.gl/webgl/index' {
-	//export { Image, WebGLRenderingContext, WebGLProgram, WebGLShader, WebGLBuffer, WebGLFramebuffer, WebGLRenderbuffer, WebGLTexture, WebGLUniformLocation, WebGLActiveInfo, WebGLShaderPrecisionFormat, WebGL2RenderingContext, webGLTypesAvailable } from 'luma.gl/webgl-utils';
+declare module 'luma.gl/webgl' {
+	export { Image, WebGLRenderingContext, WebGLProgram, WebGLShader, WebGLBuffer, WebGLFramebuffer, WebGLRenderbuffer, WebGLTexture, WebGLUniformLocation, WebGLActiveInfo, WebGLShaderPrecisionFormat, WebGL2RenderingContext, webGLTypesAvailable } from 'luma.gl/webgl-utils';
 	export { isWebGL, isWebGL2, createGLContext, destroyGLContext } from 'luma.gl/webgl-context/context';
 	export { withParameters, resetParameters } from 'luma.gl/webgl-context/context-state';
 	export { getContextInfo } from 'luma.gl/webgl-context/context-limits';
@@ -2157,18 +2157,18 @@ declare module 'luma.gl/webgl/texture-3d' {
 	     */
 	    constructor(gl: any, opts?: {});
 	    initialize(opts?: {}): void;
-	    // setImage3D({ level, internalformat, width, height, depth, border, format, type, offset, pixels }: {
-	    //     level?: number;
-	    //     internalformat?: number;
-	    //     width: any;
-	    //     height: any;
-	    //     depth?: number;
-	    //     border?: number;
-	    //     format: any;
-	    //     type?: number;
-	    //     offset?: number;
-	    //     pixels: any;
-	    // }): void;
+	    setImage3D({ level, internalformat, width, height, depth, border, format, type, offset, pixels }: {
+	        level?: number;
+	        internalformat?: number;
+	        width: any;
+	        height: any;
+	        depth?: number;
+	        border?: number;
+	        format: any;
+	        type?: number;
+	        offset?: number;
+	        pixels: any;
+	    }): this;
 	}
 
 }
@@ -2307,7 +2307,7 @@ declare module 'luma.gl/shadertools/shaders/modular-fragment.glsl' {
 	export default _default;
 
 }
-declare module 'luma.gl/shadertools/shaders/index' {
+declare module 'luma.gl/shadertools/shaders' {
 	export const MODULAR_SHADERS: {
 	    vs: string;
 	    fs: string;
@@ -2428,7 +2428,7 @@ declare module 'luma.gl/shadertools/lib/shader-cache' {
 	}
 
 }
-declare module 'luma.gl/shadertools/index' {
+declare module 'luma.gl/shadertools' {
 	export { registerShaderModules } from 'luma.gl/shadertools/lib/shader-modules';
 	export { assembleShaders } from 'luma.gl/shadertools/lib/assemble-shaders';
 	export { default as ShaderCache } from 'luma.gl/shadertools/lib/shader-cache';
@@ -2695,7 +2695,7 @@ declare module 'luma.gl/packages/events/add-events' {
 	export function removeEvents(domElement: any, opt?: {}): EventsProxy;
 
 }
-declare module 'luma.gl/packages/events/index' {
+declare module 'luma.gl/packages/events' {
 	export { addEvents } from 'luma.gl/packages/events/add-events';
 
 }
@@ -2748,7 +2748,7 @@ declare module 'luma.gl/geometry/sphere-geometry' {
 	}
 
 }
-declare module 'luma.gl/geometry/index' {
+declare module 'luma.gl/geometry' {
 	export { default as Geometry } from 'luma.gl/geometry/geometry';
 	export { default as ConeGeometry } from 'luma.gl/geometry/cone-geometry';
 	export { default as CubeGeometry } from 'luma.gl/geometry/cube-geometry';
@@ -2759,24 +2759,21 @@ declare module 'luma.gl/geometry/index' {
 	export { default as TruncatedConeGeometry } from 'luma.gl/geometry/truncated-cone-geometry';
 
 }
-declare module 'luma.gl/core/index' {
+declare module 'luma.gl/core' {
 	export { default as AnimationLoop } from 'luma.gl/core/animation-loop';
 	export { default as AnimationLoopProxy } from 'luma.gl/core/animation-loop-proxy';
 	export { default as Model } from 'luma.gl/core/model';
 
 }
-
-declare class Model {}
-
 declare module 'luma.gl/models/cone' {
-	//import { Model } from 'luma.gl/core';
+	import { Model } from 'luma.gl/core';
 	export default class Cone extends Model {
 	    constructor(gl: any, opts?: {});
 	}
 
 }
 declare module 'luma.gl/models/cube' {
-	//import { Model } from 'luma.gl/core';
+	import { Model } from 'luma.gl/core';
 	export default class Cube extends Model {
 	    constructor(gl: any, opts?: {});
 	}
@@ -2790,7 +2787,7 @@ declare module 'luma.gl/models/cylinder' {
 
 }
 declare module 'luma.gl/models/ico-sphere' {
-	//import { Model } from 'luma.gl/core';
+	import { Model } from 'luma.gl/core';
 	export default class IcoSphere extends Model {
 	    constructor(gl: any, opts?: {});
 	}
@@ -2804,21 +2801,21 @@ declare module 'luma.gl/models/plane' {
 
 }
 declare module 'luma.gl/models/sphere' {
-	//import { Model } from 'luma.gl/core';
+	import { Model } from 'luma.gl/core';
 	export default class Sphere extends Model {
 	    constructor(gl: any, opts?: {});
 	}
 
 }
 declare module 'luma.gl/models/truncated-cone' {
-	//import { Model } from 'luma.gl/core';
+	import { Model } from 'luma.gl/core';
 	export default class TruncatedCone extends Model {
 	    constructor(gl: any, opts?: {});
 	}
 
 }
 declare module 'luma.gl/models/clip-space-quad' {
-	//import { Model } from 'luma.gl/core';
+	import { Model } from 'luma.gl/core';
 	export default class ClipSpaceQuad extends Model {
 	    constructor(gl: any, opts: any);
 	}
@@ -2835,21 +2832,21 @@ declare module 'luma.gl/io/browser-load' {
 
 }
 declare module 'luma.gl/io/load-files' {
-	//import { Program, Texture2D } from 'luma.gl/webgl';
-	//import { Model } from 'luma.gl/core';
-	//export function loadTexture(gl: any, url: any, opts?: {}): Promise<Texture2D[]>;
+	import { Program, Texture2D } from 'luma.gl/webgl';
+	import { Model } from 'luma.gl/core';
+	export function loadTexture(gl: any, url: any, opts?: {}): Promise<Texture2D[]>;
 	export function loadFiles(opts?: {}): Promise<[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]>;
 	export function loadImages(opts?: {}): Promise<[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]>;
-	//export function loadTextures(gl: any, opts?: {}): Promise<Texture2D[]>;
-	//export function loadProgram(gl: any, opts?: {}): Promise<Program>;
+	export function loadTextures(gl: any, opts?: {}): Promise<Texture2D[]>;
+	export function loadProgram(gl: any, opts?: {}): Promise<Program>;
 	export function loadModel(gl: any, opts?: {}): Promise<Model>;
 	export function parseModel(gl: any, opts?: {}): Model;
 
 }
-declare module 'luma.gl/io/index' {
+declare module 'luma.gl/io' {
 	export { setPathPrefix, loadFile, loadImage } from 'luma.gl/io/browser-load';
-	//export { loadFiles, loadImages, loadTextures } from 'luma.gl/io/load-files';
-	//export { loadProgram, loadModel, parseModel } from 'luma.gl/io/load-files';
+	export { loadFiles, loadImages, loadTextures } from 'luma.gl/io/load-files';
+	export { loadProgram, loadModel, parseModel } from 'luma.gl/io/load-files';
 
 }
 declare module 'luma.gl/shadertools/modules/fp32/fp32' {
@@ -3066,11 +3063,11 @@ declare module 'luma.gl/deprecated/gl-constants' {
 	export function glKeyType(value: any): string;
 
 }
-declare module 'luma.gl/index' {
+declare module 'luma.gl' {
 	export { isWebGL, isWebGL2 } from 'luma.gl/webgl-utils/webgl-checks';
 	export { getKeyValue, getKey } from 'luma.gl/webgl-utils/constants-to-keys';
 	export { createGLContext, destroyGLContext, resizeGLContext, pollGLContext, setContextDefaults } from 'luma.gl/webgl-context/context';
-	//export { trackContextCreation, trackContextState } from 'luma.gl/webgl-context';
+	export { trackContextCreation, trackContextState } from 'luma.gl/webgl-context';
 	export { resetParameters, getParameter, getParameters, setParameter, setParameters, withParameters, getModifiedParameters } from 'luma.gl/webgl-context/context-state';
 	export { getContextInfo, getGLContextInfo, getContextLimits, glGetDebugInfo } from 'luma.gl/webgl-context/context-limits';
 	export { FEATURES, hasFeature, hasFeatures, getFeatures, canCompileGLGSExtension } from 'luma.gl/webgl-context/context-features';
@@ -3098,7 +3095,7 @@ declare module 'luma.gl/index' {
 	export { default as AnimationLoopProxy } from 'luma.gl/core/animation-loop-proxy';
 	export { default as pickModels } from 'luma.gl/core/pick-models';
 	export { encodePickingColor, decodePickingColor, getNullPickingColor } from 'luma.gl/core/picking-colors';
-	//export { addEvents } from 'luma.gl/packages/events';
+	export { addEvents } from 'luma.gl/packages/events';
 	export { default as Geometry } from 'luma.gl/geometry/geometry';
 	export { default as ConeGeometry } from 'luma.gl/geometry/cone-geometry';
 	export { default as CubeGeometry } from 'luma.gl/geometry/cube-geometry';
@@ -3115,7 +3112,7 @@ declare module 'luma.gl/index' {
 	export { default as Sphere } from 'luma.gl/models/sphere';
 	export { default as TruncatedCone } from 'luma.gl/models/truncated-cone';
 	export { default as ClipSpaceQuad } from 'luma.gl/models/clip-space-quad';
-	//export { setPathPrefix, loadFile, loadImage, loadFiles, loadImages, loadTextures, loadProgram, loadModel, parseModel } from 'luma.gl/io';
+	export { setPathPrefix, loadFile, loadImage, loadFiles, loadImages, loadTextures, loadProgram, loadModel, parseModel } from 'luma.gl/io';
 	export { default as ShaderCache } from 'luma.gl/shadertools/lib/shader-cache';
 	export { assembleShaders } from 'luma.gl/shadertools/lib/assemble-shaders';
 	export { registerShaderModules, setDefaultShaderModules } from 'luma.gl/shadertools/lib/shader-modules';
@@ -3141,11 +3138,6 @@ declare module 'luma.gl/index' {
 	export { radians, degrees, Vector2, Vector3, Vector4, Matrix4, Quaternion } from 'math.gl';
 	export { readPixels } from 'luma.gl/webgl/functions';
 	export { default as FramebufferObject } from 'luma.gl/webgl/framebuffer';
-
-}
-declare module 'luma.gl/bundle' {
-	import 'babel-polyfill';
-	import 'luma.gl/index';
 
 }
 declare module 'luma.gl/webgl-debug/debug-parameters' {
@@ -3258,7 +3250,7 @@ declare module 'luma.gl/io/node' {
 	export function loadImage(url: any): void;
 
 }
-declare module 'luma.gl/models/index' {
+declare module 'luma.gl/models' {
 	export { default as Cone } from 'luma.gl/models/cone';
 	export { default as Cube } from 'luma.gl/models/cube';
 	export { default as Cylinder } from 'luma.gl/models/cylinder';
@@ -3269,7 +3261,7 @@ declare module 'luma.gl/models/index' {
 	export { default as ClipSpaceQuad } from 'luma.gl/models/clip-space-quad';
 
 }
-declare module 'luma.gl/shadertools/modules/fog/index' {
+declare module 'luma.gl/shadertools/modules/fog' {
 	export const name = "fog";
 	export function getUniforms({ fogEnable, fogColor, fogNear, fogFar }?: {
 	    fogEnable?: boolean;
@@ -3311,10 +3303,9 @@ declare module 'luma.gl/shadertools/modules/fp64/fp64-arithmetic.spec' {
 
 }
 declare module 'luma.gl/shadertools/modules/fp64/test-deprecated/fp64-shader.spec' {
-	import 'babel-polyfill';
+	import 'luma.gl/babel-polyfill';
 
 }
-//declare const resolve: any;
 declare module 'luma.gl/shadertools/modules/geometry/geometry' {
 	 function getUniforms(opts?: {}): {}; const _default: {
 	    name: string;
@@ -3335,7 +3326,7 @@ declare module 'luma.gl/shadertools/shaders/default-vertex.glsl' {
 	export default _default;
 
 }
-declare module 'luma.gl/shadertools/test/index' {
+declare module 'luma.gl/shadertools/test' {
 	import 'luma.gl/shadertools/modules/fp64/fp64-arithmetic.spec';
 
 }
