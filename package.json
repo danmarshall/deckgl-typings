@@ -2,6 +2,7 @@
   "name": "deckgl-typings",
   "version": "1.0.0",
   "description": "TypeScript declaration files for deck.gl",
+  "types": "deck.gl/index.d.ts",
   "private": true,
   "scripts": {
     "build": "node ./scripts/convert.js"
