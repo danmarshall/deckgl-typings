@@ -11,7 +11,7 @@ declare module '@deck.gl/react/utils/inherits-from' {
 
 }
 declare module '@deck.gl/react/deckgl' {
-	import React from 'react';
+	import * as React from 'react';
 	export default class DeckGL extends React.Component {
 	    constructor(props: any);
 	    componentDidMount(): void;
@@ -81,7 +81,7 @@ declare module '@deck.gl/react/viewport-controller' {
 	}
 
 }
-declare module '@deck.gl/react/index' {
+declare module '@deck.gl/react' {
 	export { default as DeckGL } from '@deck.gl/react/deckgl';
 	export { default } from '@deck.gl/react/deckgl';
 	export { default as ViewportController } from '@deck.gl/react/viewport-controller';
