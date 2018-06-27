@@ -626,7 +626,26 @@ declare module '@deck.gl/core/lib/layer-state' {
 }
 declare module '@deck.gl/core/lib/layer' {
 	import Component from '@deck.gl/core/lifecycle/component';
+	export interface LayerProps {
+		coordinateSystem?: number;
+		id?: string;
+		transitions?: {};
+		pickable?: boolean;
+		autoHighlight?: boolean;
+		highlightColor?: number[];
+		onClick?: (o) => void;
+		onHover?: (o) => void;
+		lightSettings?: {
+			lightsPosition: number[],
+			ambientRatio: number,
+			diffuseRatio: number,
+			specularRatio: number,
+			lightsStrength: number[],
+			numberOfLights: number
+		}
+	}
 	export default class Layer extends Component {
+		constructor(props: LayerProps);
 	    toString(): string;
 	    setState(updateObject: any): void;
 	    setNeedsRedraw(redraw?: boolean): void;
@@ -1554,10 +1573,19 @@ declare module '@deck.gl/core/controllers/map-controller' {
 
 }
 declare module '@deck.gl/core/lib/deck' {
+	import Layer from '@deck.gl/core/lib/layer';
+	import View from '@deck.gl/core/views/view';
+	export interface DeckProps {
+		layers?: Layer[];
+		parent?: HTMLElement;
+		style?: {};
+		views?: View[];
+		viewState?: any;
+	}
 	export default class Deck {
-	    constructor(props: any);
+	    constructor(props: DeckProps);
 	    finalize(): void;
-	    setProps(props: any): void;
+	    setProps(props: DeckProps): void;
 	    pickObject({ x, y, radius, layerIds }: {
 	        x: any;
 	        y: any;
@@ -1604,8 +1632,10 @@ declare module '@deck.gl/core/lib/deck' {
 }
 declare module '@deck.gl/core/lib/composite-layer' {
 	import Layer from '@deck.gl/core/lib/layer';
+	export interface CompositeLayerProps {		
+	}
 	export default class CompositeLayer extends Layer {
-	    constructor(props: any);
+	    constructor(props: CompositeLayerProps);
 	    readonly isComposite: boolean;
 	    getSubLayers(): any;
 	    initializeState(): void;
@@ -1655,6 +1685,14 @@ declare module '@deck.gl/core/views/orbit-view' {
 	    unproject(xyz: any, { topLeft }?: {
 	        topLeft?: boolean;
 	    }): any;
+	}
+	export interface OrbitViewState {
+		distance: number;
+		fov: number;
+		lookAt: number[];
+		rotationOrbit: number;
+		rotationX: number;
+		zoom: number;	
 	}
 	export default class OrbitView extends View {
 	    static getDistance({ boundingBox, fov }: {
