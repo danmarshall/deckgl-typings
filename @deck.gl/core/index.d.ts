@@ -1577,6 +1577,7 @@ declare module '@deck.gl/core/lib/deck' {
 	import View from '@deck.gl/core/views/view';
 	export interface DeckProps {
 		layers?: Layer[];
+		container?: HTMLElement | string;
 		parent?: HTMLElement;
 		style?: {};
 		views?: View[];
