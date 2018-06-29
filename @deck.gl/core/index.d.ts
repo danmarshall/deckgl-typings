@@ -2006,7 +2006,7 @@ declare module '@deck.gl/core' {
 	export { default as MapView } from '@deck.gl/core/views/map-view';
 	export { default as FirstPersonView } from '@deck.gl/core/views/first-person-view';
 	export { default as ThirdPersonView } from '@deck.gl/core/views/third-person-view';
-	export { default as OrbitView } from '@deck.gl/core/views/orbit-view';
+	export { default as OrbitView, OrbitViewState } from '@deck.gl/core/views/orbit-view';
 	export { default as PerspectiveView } from '@deck.gl/core/views/perspective-view';
 	export { default as OrthographicView } from '@deck.gl/core/views/orthographic-view';
 	export { default as Controller } from '@deck.gl/core/controllers/controller';
