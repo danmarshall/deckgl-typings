@@ -662,10 +662,14 @@ declare module '@deck.gl/core/lib/layer-state' {
 }
 declare module '@deck.gl/core/lib/layer' {
 	import Component from '@deck.gl/core/lifecycle/component';
+	export interface TransitionTiming {
+		duration?: number;
+		easing?: (t: number) => number;
+	}
 	export interface LayerProps {
 		coordinateSystem?: number;
 		id?: string;
-		transitions?: {};
+		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
 		autoHighlight?: boolean;
 		highlightColor?: number[];
