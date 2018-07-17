@@ -695,14 +695,29 @@ declare module '@deck.gl/layers/text-layer/font-atlas' {
 declare module '@deck.gl/layers/text-layer/text-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
+	export type TextAnchor = 'start' | 'middle' | 'end';
+	export type AlignmentBaseline  = 'top' | 'center' | 'bottom';
 	export interface TextLayerDatum {
 		text: string;
 		position: number[];
-		size: number;
+		color?: number[];
+		size?: number;
+		angle?: number;
+		textAnchor?: TextAnchor;
+		alignmentBaseline?: AlignmentBaseline;
+		offset?: number[];
+		pixelOffset?: number[];
 	}
 	export interface TextLayerProps {
 		data: TextLayerDatum[];
 		getColor?: (x: TextLayerDatum) => number[]; //TODO: color type
+		getText?: (x: TextLayerDatum) => string;
+		getPosition?: (x: TextLayerDatum) => number[];
+		getSize?: (x: TextLayerDatum) => number;
+		getAngle?: (x: TextLayerDatum) => number;
+		getTextAnchor?: (x: TextLayerDatum) => TextAnchor;
+		getAlignmentBaseline?: (x: TextLayerDatum) => AlignmentBaseline;
+		getPixelOffset?: (x: TextLayerDatum) => number[];
 	}
 	export default class TextLayer extends CompositeLayer {
 		constructor(props: LayerProps & TextLayerProps);
