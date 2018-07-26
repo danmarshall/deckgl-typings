@@ -591,14 +591,21 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { COORDINATE_SYSTEM } from '@deck.gl/core';
 	export interface PolygonLayerDatum {
-		polygon: number[][];
-		elevation: number;
-		fillColor: number[];
+		polygon?: number[][];
+		elevation?: number;
+		fillColor?: number[];
+		lineColor?: number[];
+		lineWidth?: number;
 	}
 	export interface PolygonLayerProps {
 		data: PolygonLayerDatum[];
 		extruded: boolean;
 		stroked: boolean;
+		getElevation?: (x: PolygonLayerDatum) => number;
+		getFillColor?: (x: PolygonLayerDatum) => number[]; //TODO: color type
+		getLineColor?: (x: PolygonLayerDatum) => number[]; //TODO: color type
+		getLineWidth?: (x: PolygonLayerDatum) => number;
+		getPolygon?: (x: PolygonLayerDatum) => number[][];
 	}
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
@@ -696,7 +703,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
 	export type TextAnchor = 'start' | 'middle' | 'end';
-	export type AlignmentBaseline  = 'top' | 'center' | 'bottom';
+	export type AlignmentBaseline = 'top' | 'center' | 'bottom';
 	export interface TextLayerDatum {
 		text: string;
 		position: number[];
