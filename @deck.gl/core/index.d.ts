@@ -1616,6 +1616,7 @@ declare module '@deck.gl/core/lib/deck' {
 	}
 	export default class Deck {
 		constructor(props: DeckProps);
+		viewState: any;
 		finalize(): void;
 		setProps(props: DeckProps): void;
 		pickObject({ x, y, radius, layerIds }: {
