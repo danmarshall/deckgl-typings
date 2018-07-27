@@ -15,6 +15,7 @@ declare module '@deck.gl/react/deckgl' {
 	import * as React from 'react';
 	export default class DeckGL extends React.Component<DeckProps, {}> {
 		constructor(props: DeckProps);
+		viewState: any;
 		setProps(props: DeckProps): void;
 	    componentDidMount(): void;
 	    componentWillReceiveProps(nextProps: any): void;
