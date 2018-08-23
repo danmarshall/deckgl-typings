@@ -28,7 +28,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "@types/react": "^16.4.2",
+    "@types/react": "*",
     "deck.gl": "^5.3.2",
     "luma.gl": "^5.3.0"
   }
