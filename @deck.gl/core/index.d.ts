@@ -667,12 +667,12 @@ declare module '@deck.gl/core/lib/layer' {
 		easing?: (t: number) => number;
 	}
 	export interface LightSettings {
-		lightsPosition: number[],
-		ambientRatio: number,
-		diffuseRatio: number,
-		specularRatio: number,
-		lightsStrength: number[],
-		numberOfLights: number
+		lightsPosition?: number[],
+		ambientRatio?: number,
+		diffuseRatio?: number,
+		specularRatio?: number,
+		lightsStrength?: number[],
+		numberOfLights?: number
 	}
 	export interface LayerProps {
 		coordinateSystem?: number;
