@@ -666,6 +666,14 @@ declare module '@deck.gl/core/lib/layer' {
 		duration?: number;
 		easing?: (t: number) => number;
 	}
+	export interface LightSettings {
+		lightsPosition: number[],
+		ambientRatio: number,
+		diffuseRatio: number,
+		specularRatio: number,
+		lightsStrength: number[],
+		numberOfLights: number
+	}
 	export interface LayerProps {
 		coordinateSystem?: number;
 		id?: string;
@@ -675,14 +683,7 @@ declare module '@deck.gl/core/lib/layer' {
 		highlightColor?: number[];
 		onClick?: (o) => void;
 		onHover?: (o) => void;
-		lightSettings?: {
-			lightsPosition: number[],
-			ambientRatio: number,
-			diffuseRatio: number,
-			specularRatio: number,
-			lightsStrength: number[],
-			numberOfLights: number
-		}
+		lightSettings?: LightSettings;
 	}
 	export interface LayerStateChange {
 		oldProps: LayerProps;
