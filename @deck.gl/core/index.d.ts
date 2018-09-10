@@ -2107,6 +2107,7 @@ declare module '@deck.gl/core/lib' {
 
 }
 declare module '@deck.gl/core/utils/color' {
+	export type Color = [number, number, number] | [number, number, number, number];	
 	function parseColor(color: any, target: any, index?: number): any; function setOpacity(color: any, opacity?: number): any[]; function applyOpacity(color: any, opacity?: number): any[]; const _default: {
 		parseColor: typeof parseColor;
 		setOpacity: typeof setOpacity;

@@ -87,14 +87,17 @@ declare module '@deck.gl/layers/line-layer/line-layer-fragment.glsl' {
 declare module '@deck.gl/layers/line-layer/line-layer' {
 	import { Layer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
+	import { Color } from '@deck.gl/core/utils/color';
 	export interface LineLayerDatum {
+		color?: Color
 		sourcePosition: number[];
 		targetPosition: number[];
 	}
 	export interface LineLayerProps {
 		data: LineLayerDatum[];
-		strokeWidth: number;
-		getColor?: (x: LineLayerDatum) => number[]; //TODO: color type
+		strokeWidth?: number;
+		getColor?: ((x: LineLayerDatum) => Color) | Color;
+		getStrokeWidth?: ((x: LineLayerDatum) => number) | number;
 	}
 	export default class LineLayer extends Layer {
 		constructor(props: LayerProps & LineLayerProps);
@@ -590,6 +593,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 }
 declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { COORDINATE_SYSTEM } from '@deck.gl/core';
+	import { Color } from '@deck.gl/core/utils/color';
 	export interface PolygonLayerDatum {
 		polygon?: number[][];
 		elevation?: number;
@@ -601,10 +605,10 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 		data: PolygonLayerDatum[];
 		extruded: boolean;
 		stroked: boolean;
-		getElevation?: (x: PolygonLayerDatum) => number;
-		getFillColor?: (x: PolygonLayerDatum) => number[]; //TODO: color type
-		getLineColor?: (x: PolygonLayerDatum) => number[]; //TODO: color type
-		getLineWidth?: (x: PolygonLayerDatum) => number;
+		getElevation?: ((x: PolygonLayerDatum) => number) | number;
+		getFillColor?: ((x: PolygonLayerDatum) => Color) | Color;
+		getLineColor?: ((x: PolygonLayerDatum) => Color) | Color;
+		getLineWidth?: ((x: PolygonLayerDatum) => number) | number;
 		getPolygon?: (x: PolygonLayerDatum) => number[][];
 	}
 	import { CompositeLayer } from '@deck.gl/core';
@@ -702,12 +706,13 @@ declare module '@deck.gl/layers/text-layer/font-atlas' {
 declare module '@deck.gl/layers/text-layer/text-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
+	import { Color } from '@deck.gl/core/utils/color';
 	export type TextAnchor = 'start' | 'middle' | 'end';
 	export type AlignmentBaseline = 'top' | 'center' | 'bottom';
 	export interface TextLayerDatum {
 		text: string;
 		position: number[];
-		color?: number[];
+		color?: Color;
 		size?: number;
 		angle?: number;
 		textAnchor?: TextAnchor;
@@ -717,11 +722,11 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 	}
 	export interface TextLayerProps {
 		data: TextLayerDatum[];
-		getColor?: (x: TextLayerDatum) => number[]; //TODO: color type
+		getColor?: ((x: TextLayerDatum) => Color) | Color;
 		getText?: (x: TextLayerDatum) => string;
 		getPosition?: (x: TextLayerDatum) => number[];
-		getSize?: (x: TextLayerDatum) => number;
-		getAngle?: (x: TextLayerDatum) => number;
+		getSize?: ((x: TextLayerDatum) => number) | number;
+		getAngle?: ((x: TextLayerDatum) => number) | number;
 		getTextAnchor?: (x: TextLayerDatum) => TextAnchor;
 		getAlignmentBaseline?: (x: TextLayerDatum) => AlignmentBaseline;
 		getPixelOffset?: (x: TextLayerDatum) => number[];
