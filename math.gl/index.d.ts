@@ -12,15 +12,15 @@ declare module 'math.gl/lib/common' {
 	}): string;
 	export function isArray(value: any): boolean;
 	export function clone(array: any): any;
-	export function radians(degrees: any): any;
-	export function degrees(radians: any): any;
-	export function sin(radians: any): any;
-	export function cos(radians: any): any;
-	export function tan(radians: any): any;
-	export function asin(radians: any): any;
-	export function acos(radians: any): any;
-	export function atan(radians: any): any;
-	export function clamp(value: any, min: any, max: any): any;
+	export function radians(degrees: number): number;
+	export function degrees(radians: number): number;
+	export function sin(radians: number): number;
+	export function cos(radians: number): number;
+	export function tan(radians: number): number;
+	export function asin(radians: number): number;
+	export function acos(radians: number): number;
+	export function atan(radians: number): number;
+	export function clamp(value: number, min: number, max: number): number;
 	export function lerp(a: any, b: any, t: any): any;
 	export function equals(a: any, b: any): boolean;
 
