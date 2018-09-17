@@ -1,8 +1,3 @@
-declare module 'luma.gl/utils/globals' {
-	const self_: Window | NodeJS.Global; const window_: Window | NodeJS.Global; const global_: Window | NodeJS.Global; const document_: {};
-	export { self_ as self, window_ as window, global_ as global, document_ as document };
-
-}
 declare module 'luma.gl/utils/is-electron' {
 	const _default: boolean;
 	export default _default;
@@ -1108,12 +1103,6 @@ declare module 'luma.gl/webgl-context/context-features' {
 			GLSL_TEXTURE_LOD: (string | boolean)[];
 		};
 	};
-
-}
-declare module 'luma.gl/init' {
-	import { global } from 'luma.gl/utils/globals';
-	export { global }; const _default: any;
-	export default _default;
 
 }
 declare module 'luma.gl/webgl/resource' {
