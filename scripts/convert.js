@@ -57,7 +57,8 @@ var list = [
 
     //comment out any of these that you don't want to execute.
     //make convert:false if you need to manually edit the .ts files in node_modules
-
+    
+    { name: 'math.gl', convert: true },
     { name: 'luma.gl', convert: true },
     { name: 'deck.gl', convert: true },
     { name: '@deck.gl/core', convert: true },
