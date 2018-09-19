@@ -1605,11 +1605,20 @@ declare module '@deck.gl/core/controllers/map-controller' {
 
 }
 declare module '@deck.gl/core/lib/deck' {
+	import Controller from '@deck.gl/core/controllers/controller';
 	import Layer from '@deck.gl/core/lib/layer';
 	import View from '@deck.gl/core/views/view';
 	export interface DeckProps {
+		bearing?: number;
+		latitude?: number;
+		longitude?: number;
+		pitch?: number;
+		zoom?: number;
 		layers?: Layer[];
+		canvas?: HTMLCanvasElement | string;
 		container?: HTMLElement | string;
+		controller?: Controller;
+		initialViewState?: any;
 		parent?: HTMLElement;
 		style?: {};
 		views?: View[];
@@ -1619,6 +1628,7 @@ declare module '@deck.gl/core/lib/deck' {
 		constructor(props: DeckProps);
 		viewState: any;
 		finalize(): void;
+		props: DeckProps;
 		setProps(props: DeckProps): void;
 		pickObject({ x, y, radius, layerIds }: {
 			x: any;
