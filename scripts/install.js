@@ -9,7 +9,7 @@ if (!fs.existsSync(types)) {
     console.log(`${d} creating folder ${types}`)
     fs.mkdirSync(types);
 }
-const dirsToCopy = ['@deck.gl', 'deck.gl', 'luma.gl', 'math.gl'];
+const dirsToCopy = ['deck.gl__core', 'deck.gl__layers', 'deck.gl__react', 'deck.gl', 'luma.gl', 'math.gl'];
 dirsToCopy.forEach(dir => {
     const destDir = path.resolve(types, dir);
     if (fs.existsSync(destDir)) {
