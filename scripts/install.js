@@ -4,7 +4,7 @@ console.log(`${d} installing ...`)
 
 const fs = require('fs-extra');
 const path = require('path');
-const types = path.resolve(__dirname, '../../../node_modules/@types');
+const types = path.resolve(__dirname, '../../../@types');
 if (!fs.existsSync(types)) {
     console.log(`${d} creating folder ${types}`)
     fs.mkdirSync(types);
