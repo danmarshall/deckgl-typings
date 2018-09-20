@@ -4,7 +4,8 @@
   "description": "TypeScript declaration files for deck.gl",
   "types": "deck.gl/index.d.ts",
   "scripts": {
-    "build": "node ./scripts/convert.js"
+    "build": "node ./scripts/convert.js",
+    "postinstall": "node ./scripts/install.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
   "dependencies": {
     "@types/react": "*",
     "deck.gl": "^5.3.2",
+    "fs-extra": "^7.0.0",
     "luma.gl": "^5.3.0"
   }
 }
