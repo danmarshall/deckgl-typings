@@ -1,6 +1,6 @@
-/// <reference path="../@deck.gl/core/index.d.ts" />
-/// <reference path="../@deck.gl/layers/index.d.ts" />
-/// <reference path="../@deck.gl/react/index.d.ts" />
+/// <reference path="../deck.gl__core/index.d.ts" />
+/// <reference path="../deck.gl__layers/index.d.ts" />
+/// <reference path="../deck.gl__react/index.d.ts" />
 
 declare module 'deck.gl' {
 	import OrbitController from '@deck.gl/core/controllers/orbit-controller';
