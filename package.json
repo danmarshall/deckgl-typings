@@ -5,7 +5,7 @@
   "types": "deck.gl/index.d.ts",
   "scripts": {
     "build": "node ./scripts/convert.js",
-    "postinstall": "node ./scripts/install.js"
+    "postinstall": "indefinitely-typed --folder deck.gl__core --folder deck.gl__layers --folder deck.gl__react --folder deck.gl --folder luma.gl --folder math.gl"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "@types/react": "*",
     "deck.gl": "^5.3.2",
     "fs-extra": "^7.0.0",
+    "indefinitely-typed": "^1.0.2",
     "luma.gl": "^5.3.0"
   }
 }
