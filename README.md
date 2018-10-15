@@ -5,5 +5,6 @@ This is a work in progress - see the [issues list](https://github.com/danmarshal
 
 ```
 npm install
-npm run build
 ```
+
+These will automatically appear in your projects `node_modules/@types` folder, thanks to [indefinitely-typed](https://github.com/danmarshall/indefinitely-typed#readme).
