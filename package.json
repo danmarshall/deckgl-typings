@@ -32,7 +32,7 @@
     "@types/react": "*",
     "deck.gl": "^5.3.2",
     "fs-extra": "^7.0.0",
-    "indefinitely-typed": "git+https://github.com/danmarshall/indefinitely-typed.git",
+    "indefinitely-typed": "^1.0.2",
     "luma.gl": "^5.3.0"
   }
 }
