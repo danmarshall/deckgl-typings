@@ -5,7 +5,7 @@
   "types": "deck.gl/index.d.ts",
   "scripts": {
     "build": "node ./scripts/convert.js",
-    "postinstall": "indefinitely-typed-install .. -p 4 --stuff=a,b,c,d"
+    "postinstall": "indefinitely-typed --omitThis=true --copy=deck.gl__core,deck.gl__layers,deck.gl__react,deck.gl,luma.gl,math.gl"
   },
   "repository": {
     "type": "git",
