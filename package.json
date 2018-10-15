@@ -5,7 +5,7 @@
   "types": "deck.gl/index.d.ts",
   "scripts": {
     "build": "node ./scripts/convert.js",
-    "postinstall": "node ./scripts/install.js"
+    "postinstall": "indefinitely-typed-install .. -p 4 --stuff=a,b,c,d"
   },
   "repository": {
     "type": "git",
