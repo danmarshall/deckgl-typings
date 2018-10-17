@@ -51,7 +51,96 @@ declare module '@deck.gl/layers/icon-layer/icon-layer-fragment.glsl' {
 }
 declare module '@deck.gl/layers/icon-layer/icon-layer' {
 	import { Layer } from '@deck.gl/core';
+	import { LayerProps } from '@deck.gl/core/lib/layer';
+	import { Color } from '@deck.gl/core/utils/color';
+	import { Position } from '@deck.gl/core/utils/positions';
+	import { Texture2D } from 'luma.gl/webgl/texture-2d';
+
+	export interface IconDefinition {
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+		/*
+		* x anchor of icon on the atlas image,
+		* default to width / 2
+		*/
+		anchorX?: number;
+		/*
+		* y anchor of icon on the atlas image,
+		* default to height / 2
+		*/
+		anchorY?: number;
+		/*
+		* whether icon is treated as a transparency
+		* mask. If true, user defined color is applied. If false, original color from the image is
+		* applied. Default to false.
+		*/
+		mask?: boolean;
+	}
+
+	/*
+	 * icon names mapped to icon definitions
+	*/
+	export interface IconMapping {
+		[key: string]: IconDefinition;
+	}
+
+	export interface IconLayerDatum {
+		/*
+		*  icon name
+		*/
+		icon?: string;
+		/*
+		*  color of the icon in [r, g, b, a].
+		*/
+		color?: Color;
+		/*
+		*  anchor position of the icon, in [lng, lat, z]
+		*/
+		position?: Position;
+	}
+
+	export interface IconLayerProps {
+		data: IconLayerDatum[];
+		/*
+		*  atlas image url or texture
+		*/
+		iconAtlas?: Texture2D | string,
+		iconMapping?: IconMapping,
+		sizeScale?: number,
+		fp64?: number,
+
+		/*
+		*  returns anchor position of the icon, in [lng, lat, z]
+		*/
+		getPosition?: ((x: IconLayerDatum) => Position),
+
+		/*
+		*  returns icon name as a string
+		*/
+		getIcon?: ((x: IconLayerDatum) => string) | string,
+
+		/*
+		*  returns color of the icon in [r, g, b, a].
+		*  Only works on icons with mask: true.
+		*/
+		getColor?: ((x: IconLayerDatum) => Color) | Color,
+
+		/*
+		*  returns icon size multiplier as a number
+		*/
+		getSize?: ((x: IconLayerDatum) => number) | number,
+
+		/*
+		*  returns rotating angle (in degree) of the icon.
+		*/
+		getAngle?: ((x: IconLayerDatum) => number) | number,
+	}
+
 	export default class IconLayer extends Layer {
+		constructor(props: LayerProps & IconLayerProps);
+
 		getShaders(): {
 			vs: string;
 			fs: string;
@@ -595,7 +684,7 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { COORDINATE_SYSTEM } from '@deck.gl/core';
 	import { Color } from '@deck.gl/core/utils/color';
 	export interface PolygonLayerDatum {
-		polygon?: number[][];
+		polygon?: number[[][]];
 		elevation?: number;
 		fillColor?: number[];
 		lineColor?: number[];
@@ -609,7 +698,7 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 		getFillColor?: ((x: PolygonLayerDatum) => Color) | Color;
 		getLineColor?: ((x: PolygonLayerDatum) => Color) | Color;
 		getLineWidth?: ((x: PolygonLayerDatum) => number) | number;
-		getPolygon?: (x: PolygonLayerDatum) => number[][];
+		getPolygon?: (x: PolygonLayerDatum) => number[[][]];
 	}
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
