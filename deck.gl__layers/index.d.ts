@@ -594,8 +594,9 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { COORDINATE_SYSTEM } from '@deck.gl/core';
 	import { Color } from '@deck.gl/core/utils/color';
+	export type Polygon = number[][] | number[][][];
 	export interface PolygonLayerDatum {
-		polygon?: number[[][]];
+		polygon?: Polygon;
 		elevation?: number;
 		fillColor?: number[];
 		lineColor?: number[];
@@ -609,7 +610,7 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 		getFillColor?: ((x: PolygonLayerDatum) => Color) | Color;
 		getLineColor?: ((x: PolygonLayerDatum) => Color) | Color;
 		getLineWidth?: ((x: PolygonLayerDatum) => number) | number;
-		getPolygon?: (x: PolygonLayerDatum) => number[[][]];
+		getPolygon?: (x: PolygonLayerDatum) => Polygon;
 	}
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
