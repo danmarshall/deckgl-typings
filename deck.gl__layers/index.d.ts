@@ -54,7 +54,7 @@ declare module '@deck.gl/layers/icon-layer/icon-layer' {
 	import { LayerProps } from '@deck.gl/core/lib/layer';
 	import { Color } from '@deck.gl/core/utils/color';
 	import { Position } from '@deck.gl/core/utils/positions';
-	import { Texture2D } from 'luma.gl/webgl/texture-2d';
+	import Texture2D from 'luma.gl/webgl/texture-2d';
 
 	export interface IconDefinition {
 		x: number;
