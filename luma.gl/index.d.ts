@@ -3294,10 +3294,6 @@ declare module 'luma.gl/shadertools/modules/fp64/fp64-arithmetic.spec' {
 	export { };
 
 }
-declare module 'luma.gl/shadertools/modules/fp64/test-deprecated/fp64-shader.spec' {
-	import 'luma.gl/babel-polyfill';
-
-}
 declare module 'luma.gl/shadertools/modules/geometry/geometry' {
 	function getUniforms(opts?: {}): {}; const _default: {
 		name: string;
