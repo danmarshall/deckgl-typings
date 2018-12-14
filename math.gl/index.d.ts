@@ -12,15 +12,15 @@ declare module 'math.gl/lib/common' {
 	}): string;
 	export function isArray(value: any): boolean;
 	export function clone(array: any): any;
-	export function radians(degrees: number): number;
-	export function degrees(radians: number): number;
-	export function sin(radians: number): number;
-	export function cos(radians: number): number;
-	export function tan(radians: number): number;
-	export function asin(radians: number): number;
-	export function acos(radians: number): number;
-	export function atan(radians: number): number;
-	export function clamp(value: number, min: number, max: number): number;
+	export function radians(degrees: any): any;
+	export function degrees(radians: any): any;
+	export function sin(radians: any): any;
+	export function cos(radians: any): any;
+	export function tan(radians: any): any;
+	export function asin(radians: any): any;
+	export function acos(radians: any): any;
+	export function atan(radians: any): any;
+	export function clamp(value: any, min: any, max: any): any;
 	export function lerp(a: any, b: any, t: any): any;
 	export function equals(a: any, b: any): boolean;
 
@@ -58,6 +58,8 @@ declare module 'math.gl/lib/math-array' {
 declare module 'math.gl/lib/vector' {
 	import MathArray from 'math.gl/lib/math-array';
 	export default class Vector extends MathArray {
+	    x: any;
+	    y: any;
 	    len(): number;
 	    magnitude(): number;
 	    lengthSquared(): number;
@@ -88,8 +90,6 @@ declare module 'math.gl/vector2' {
 	export default class Vector2 extends Vector {
 	    constructor(x?: number, y?: number);
 	    readonly ELEMENTS: number;
-	    x: any;
-	    y: any;
 	    cross(vector: any): this;
 	    horizontalAngle(): number;
 	    verticalAngle(): number;
@@ -102,8 +102,6 @@ declare module 'math.gl/vector3' {
 	export default class Vector3 extends Vector {
 	    constructor(x?: number, y?: number, z?: number);
 	    readonly ELEMENTS: number;
-	    x: any;
-	    y: any;
 	    z: any;
 	    angle(vector: any): any;
 	    cross(vector: any): this;
@@ -128,8 +126,6 @@ declare module 'math.gl/vector4' {
 	export default class Vector4 extends Vector {
 	    constructor(x?: number, y?: number, z?: number, w?: number);
 	    readonly ELEMENTS: number;
-	    x: any;
-	    y: any;
 	    z: any;
 	    w: any;
 	    applyMatrix4(m: any): this;
@@ -223,7 +219,7 @@ declare module 'math.gl/quaternion' {
 	    y: any;
 	    z: any;
 	    w: any;
-	    //length(): any;	
+	    //length(): any;
 	    squaredLength(a: any): any;
 	    dot(a: any, b: any): any;
 	    rotationTo(vectorA: any, vectorB: any): this;
@@ -353,13 +349,15 @@ declare module 'math.gl/pose' {
 	     * pose's position and with with the defining pose's orientation
 	     * aligned with axis.
 	     */
-	    constructor({ x, y, z, roll, pitch, yaw }: {
+	    constructor({ x, y, z, roll, pitch, yaw, position, orientation }: {
 	        x?: number;
 	        y?: number;
 	        z?: number;
 	        roll?: number;
 	        pitch?: number;
 	        yaw?: number;
+	        position: any;
+	        orientation: any;
 	    });
 	    x: any;
 	    y: any;
@@ -369,6 +367,8 @@ declare module 'math.gl/pose' {
 	    yaw: any;
 	    getPosition(): any;
 	    getOrientation(): any;
+	    equals(pose: any): any;
+	    exactEquals(pose: any): any;
 	    getTransformationMatrix(): Matrix4;
 	    getTransformationMatrixFromPose(pose: any): Matrix4;
 	    getTransformationMatrixToPose(pose: any): Matrix4;
@@ -392,16 +392,10 @@ declare module 'math.gl' {
 	export { default as Matrix4 } from 'math.gl/matrix4';
 	export { default as Quaternion } from 'math.gl/quaternion';
 	export { config, checkNumber, configure, formatValue, isArray, clone, radians, degrees, sin, cos, tan, asin, acos, atan, clamp, lerp, equals } from 'math.gl/lib/common';
-	import { default as SphericalCoordinates } from 'math.gl/spherical-coordinates';
-	import { default as Pose } from 'math.gl/pose';
-	import { default as Euler } from 'math.gl/euler';
-	import { default as Polygon } from 'math.gl/addons/polygon';
-	export const experimental: {
-	    SphericalCoordinates: typeof SphericalCoordinates;
-	    Euler: typeof Euler;
-	    Pose: typeof Pose;
-	    Polygon: typeof Polygon;
-	};
+	export { default as _SphericalCoordinates } from 'math.gl/spherical-coordinates';
+	export { default as _Pose } from 'math.gl/pose';
+	export { default as _Euler } from 'math.gl/euler';
+	export { default as _Polygon } from 'math.gl/addons/polygon';
 
 }
 declare module 'math.gl/matrix3' {

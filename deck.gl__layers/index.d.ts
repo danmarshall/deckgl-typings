@@ -23,11 +23,6 @@ declare module '@deck.gl/layers/arc-layer/arc-layer' {
 			modules: string[];
 		};
 		initializeState(): void;
-		updateAttribute({ props, oldProps, changeFlags }: {
-			props: any;
-			oldProps: any;
-			changeFlags: any;
-		}): void;
 		updateState({ props, oldProps, changeFlags }: {
 			props: any;
 			oldProps: any;
@@ -275,7 +270,17 @@ declare module '@deck.gl/layers/screen-grid-layer/screen-grid-layer-vertex.glsl'
 	export default _default;
 
 }
+declare module '@deck.gl/layers/screen-grid-layer/screen-grid-layer-vertex-webgl1.glsl' {
+	const _default: string;
+	export default _default;
+
+}
 declare module '@deck.gl/layers/screen-grid-layer/screen-grid-layer-fragment.glsl' {
+	const _default: string;
+	export default _default;
+
+}
+declare module '@deck.gl/layers/screen-grid-layer/screen-grid-layer-fragment-webgl1.glsl' {
 	const _default: string;
 	export default _default;
 
@@ -286,28 +291,47 @@ declare module '@deck.gl/layers/screen-grid-layer/screen-grid-layer' {
 		getShaders(): {
 			vs: string;
 			fs: string;
-			modules: string[];
 		};
 		initializeState(): void;
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;
 		}): any;
-		updateState({ oldProps, props, changeFlags }: {
+		updateState(opts: any): void;
+		draw({ uniforms }: {
+			uniforms: any;
+		}): void;
+		calculateInstancePositions(attribute: any, { numInstances }: {
+			numInstances: any;
+		}): void;
+		calculateInstanceCounts(attribute: any, { numInstances }: {
+			numInstances: any;
+		}): void;
+		getPickingInfo({ info, mode }: {
+			info: any;
+			mode: any;
+		}): any;
+		_getAggregationChangeFlags({ oldProps, props, changeFlags }: {
+			oldProps: any;
+			props: any;
+			changeFlags: any;
+		}): {
+			cellSizeChanged: boolean;
+			dataChanged: any;
+			viewportChanged: any;
+		};
+		_getModel(gl: any): any;
+		_getMaxCountBuffer(gl: any): any;
+		_getWeight(point: any): any[];
+		_processData(): void;
+		_setupUniformBuffer(): void;
+		_shouldUseMinMax(): boolean;
+		_updateAggregation(changeFlags: any): void;
+		_updateUniforms({ oldProps, props, changeFlags }: {
 			oldProps: any;
 			props: any;
 			changeFlags: any;
 		}): void;
-		draw({ uniforms }: {
-			uniforms: any;
-		}): void;
-		_getModel(gl: any): any;
-		updateCell(): void;
-		calculateInstancePositions(attribute: any, { numInstances }: {
-			numInstances: any;
-		}): void;
-		calculateInstanceColors(attribute: any): void;
-		_getColor(weight: any, maxCount: any): any;
-		_shouldUseMinMax(): boolean;
+		_updateGridParams(): void;
 	}
 
 }
@@ -358,7 +382,7 @@ declare module '@deck.gl/layers/grid-cell-layer/grid-cell-layer' {
 declare module '@deck.gl/layers/grid-layer/grid-aggregator' {
 	/**
 	 * Calculate density grid from an array of points
-	 * @param {array} points
+	 * @param {Iterable} points
 	 * @param {number} cellSize - cell size in meters
 	 * @param {function} getPosition - position accessor
 	 * @returns {object} - grid data, cell dimension
@@ -382,7 +406,7 @@ declare module '@deck.gl/layers/grid-layer/grid-layer' {
 			props: any;
 			changeFlags: any;
 		}): void;
-		needsReProjectPoints(oldProps: any, props: any): boolean;
+		needsReProjectPoints(oldProps: any, props: any, changeFlags: any): any;
 		getDimensionUpdaters(): {
 			getColor: {
 				id: string;
@@ -459,7 +483,7 @@ declare module '@deck.gl/layers/hexagon-cell-layer/hexagon-cell-layer' {
 declare module '@deck.gl/layers/hexagon-layer/hexagon-aggregator' {
 	/**
 	 * Use d3-hexbin to performs hexagonal binning from geo points to hexagons
-	 * @param {Array} data - array of points
+	 * @param {Iterable} data - array of points
 	 * @param {Number} radius - hexagon radius in meter
 	 * @param {function} getPosition - get points lon lat
 	 * @param {Object} viewport - current viewport object
@@ -471,8 +495,8 @@ declare module '@deck.gl/layers/hexagon-layer/hexagon-aggregator' {
 		radius: any;
 		getPosition: any;
 	}, viewport: any): {
-			hexagons: any;
-		};
+		hexagons: any;
+	};
 	/**
 	 * Get radius in mercator world space coordinates from meter
 	 * @param {Number} radius - in meter
@@ -553,11 +577,6 @@ declare module '@deck.gl/layers/path-layer/path-layer' {
 			modules: string[];
 		};
 		initializeState(): void;
-		updateAttribute({ props, oldProps, changeFlags }: {
-			props: any;
-			oldProps: any;
-			changeFlags: any;
-		}): void;
 		updateState({ oldProps, props, changeFlags }: {
 			oldProps: any;
 			props: any;
@@ -567,6 +586,7 @@ declare module '@deck.gl/layers/path-layer/path-layer' {
 			uniforms: any;
 		}): void;
 		_getModel(gl: any): any;
+		_getPathLength(path: any): any;
 		calculateStartPositions(attribute: any): void;
 		calculateEndPositions(attribute: any): void;
 		calculateInstanceStartEndPositions64xyLow(attribute: any): void;
@@ -603,7 +623,6 @@ declare module '@deck.gl/layers/solid-polygon-layer/polygon' {
 	 */
 	export function getVertexCount(polygon: any): any;
 	export function getTriangleCount(polygon: any): number;
-	export function forEachVertex(polygon: any, visitor: any): void;
 	export function getSurfaceIndices(complexPolygon: any): any;
 
 }
@@ -620,8 +639,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/polygon-tesselator' {
 		indices(): Uint32Array;
 		positions(): any;
 		positions64xyLow(): any;
-		nextPositions(): any;
-		nextPositions64xyLow(): any;
+		vertexValid(): any;
 		elevations({ key, getElevation }?: {
 			key?: string;
 			getElevation?: (x: any) => number;
@@ -646,6 +664,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer-fragment
 }
 declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 	import { Layer } from '@deck.gl/core';
+	import { PolygonTesselator } from '@deck.gl/layers/solid-polygon-layer/polygon-tesselator';
 	export default class SolidPolygonLayer extends Layer {
 		getShaders(): {
 			vs: string;
@@ -662,17 +681,17 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 			oldProps: any;
 			changeFlags: any;
 		}): void;
+		_getPolygonTesselator(polygons: any, IndexType: any): PolygonTesselator;
 		updateAttributes(props: any): void;
-		_updateAttributes(attributes: any): void;
 		_getModels(gl: any): {
 			models: any[];
-			modelsByName: {};
+			topModel: any;
+			sideModel: any;
 		};
 		calculateIndices(attribute: any): void;
 		calculatePositions(attribute: any): void;
 		calculatePositionsLow(attribute: any): void;
-		calculateNextPositions(attribute: any): void;
-		calculateNextPositionsLow(attribute: any): void;
+		calculateVertexValid(attribute: any): void;
 		calculateElevations(attribute: any): void;
 		calculateFillColors(attribute: any): void;
 		calculateLineColors(attribute: any): void;
@@ -681,7 +700,6 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 
 }
 declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
-	import { COORDINATE_SYSTEM } from '@deck.gl/core';
 	import { Color } from '@deck.gl/core/utils/color';
 	export type Polygon = number[][] | number[][][];
 	export interface PolygonLayerDatum {
@@ -740,6 +758,14 @@ declare module '@deck.gl/layers/geojson-layer/geojson' {
 		polygonFeatures: any[];
 		polygonOutlineFeatures: any[];
 	};
+	/**
+	 * Returns the source feature that was passed to `separateGeojsonFeatures`
+	 */
+	export function unwrapSourceFeature(wrappedFeature: any): any;
+	/**
+	 * Returns the index of the source feature that was passed to `separateGeojsonFeatures`
+	 */
+	export function unwrapSourceFeatureIndex(wrappedFeature: any): any;
 
 }
 declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
@@ -751,8 +777,9 @@ declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
 			props: any;
 			changeFlags: any;
 		}): void;
-		getPickingInfo({ info }: {
+		getPickingInfo({ info, sourceLayer }: {
 			info: any;
+			sourceLayer: any;
 		}): any;
 		renderLayers(): any[];
 	}
@@ -787,10 +814,10 @@ declare module '@deck.gl/layers/text-layer/font-atlas' {
 		fontSize?: number;
 		padding?: number;
 	}): {
-			scale: number;
-			mapping: {};
-			texture: any;
-		};
+		scale: number;
+		mapping: {};
+		texture: any;
+	};
 
 }
 declare module '@deck.gl/layers/text-layer/text-layer' {
@@ -842,6 +869,63 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 	}
 
 }
+declare module '@deck.gl/layers/contour-layer/marching-squares' {
+	export function getCode({ cellWeights, thresholdValue, x, y, width, height }: {
+		cellWeights: any;
+		thresholdValue: any;
+		x: any;
+		y: any;
+		width: any;
+		height: any;
+	}): number;
+	export function getVertices({ gridOrigin, cellSize, x, y, code }: {
+		gridOrigin: any;
+		cellSize: any;
+		x: any;
+		y: any;
+		code: any;
+	}): any[];
+
+}
+declare module '@deck.gl/layers/contour-layer/contour-utils' {
+	export function generateContours({ thresholds, colors, cellWeights, gridSize, gridOrigin, cellSize }: {
+		thresholds: any;
+		colors: any;
+		cellWeights: any;
+		gridSize: any;
+		gridOrigin: any;
+		cellSize: any;
+	}): any[];
+
+}
+declare module '@deck.gl/layers/contour-layer/contour-layer' {
+	import { CompositeLayer } from '@deck.gl/core';
+	export default class ContourLayer extends CompositeLayer {
+		initializeState(): void;
+		updateState({ oldProps, props, changeFlags }: {
+			oldProps: any;
+			props: any;
+			changeFlags: any;
+		}): void;
+		getSubLayerClass(): any;
+		getSubLayerProps(): any;
+		renderLayers(): any;
+		aggregateData(aggregationFlags: any): void;
+		generateContours(): void;
+		getAggregationFlags({ oldProps, props, changeFlags }: {
+			oldProps: any;
+			props: any;
+			changeFlags: any;
+		}): any;
+		onGetSublayerColor(segment: any): number[];
+		onGetSublayerStrokeWidth(segment: any): number;
+		rebuildContours({ oldProps, props }: {
+			oldProps: any;
+			props: any;
+		}): any;
+	}
+
+}
 declare module '@deck.gl/layers' {
 	export { default as ArcLayer } from '@deck.gl/layers/arc-layer/arc-layer';
 	export { default as IconLayer } from '@deck.gl/layers/icon-layer/icon-layer';
@@ -857,5 +941,8 @@ declare module '@deck.gl/layers' {
 	export { default as PolygonLayer } from '@deck.gl/layers/polygon-layer/polygon-layer';
 	export { default as GeoJsonLayer } from '@deck.gl/layers/geojson-layer/geojson-layer';
 	export { default as TextLayer } from '@deck.gl/layers/text-layer/text-layer';
+	export { default as ContourLayer } from '@deck.gl/layers/contour-layer/contour-layer';
+	export { default as _SolidPolygonLayer } from '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer';
+	export { default as _MultiIconLayer } from '@deck.gl/layers/text-layer/multi-icon-layer/multi-icon-layer';
 
 }
