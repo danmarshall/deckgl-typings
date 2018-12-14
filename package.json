@@ -1,6 +1,6 @@
 {
   "name": "@danmarshall/deckgl-typings",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "TypeScript declaration files for deck.gl",
   "types": "deck.gl/index.d.ts",
   "scripts": {
@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@types/react": "*",
-    "deck.gl": "^5.3.2",
+    "deck.gl": "^6.3.2",
     "fs-extra": "^7.0.0",
     "indefinitely-typed": "^1.0.2",
-    "luma.gl": "^5.3.0"
+    "luma.gl": "^6.3.2"
   }
 }
