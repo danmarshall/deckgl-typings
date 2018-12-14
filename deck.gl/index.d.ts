@@ -2,8 +2,6 @@
 /// <reference path="../deck.gl__layers/index.d.ts" />
 /// <reference path="../deck.gl__react/index.d.ts" />
 
-import { } from '@deck.gl/core';
-
 declare module 'deck.gl' {
 	export { experimental } from '@deck.gl/core';
 	export {
