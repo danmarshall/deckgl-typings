@@ -20,13 +20,13 @@ function removeIndex(packageName, moduleName) {
     return result;
 }
 
-function genDts(name) {
+function genDts(name, out) {
     console.log(`generating ${name}/index.d.ts`);
 
     const options = {
         name,
         project: `./node_modules/${name}`,
-        out: `${name}/index.d.ts`,
+        out: `${out || name}/index.d.ts`,
         resolveModuleId: params => removeIndex(name, params.currentModuleId),
         resolveModuleImport: params => removeIndex(name, params.importedModuleId)
     };
@@ -35,7 +35,7 @@ function genDts(name) {
 }
 
 function genProcess(obj) {
-    const { name, convert } = obj;
+    const { name, out, convert } = obj;
 
     if (convert) {
         console.log(`copy tsconfig to ${name}`);
@@ -45,10 +45,10 @@ function genProcess(obj) {
         console.log(`renaming files in ${pattern}`);
         glob(pattern, (er, files) => {
             files.forEach(js_to_ts);
-            genDts(name);
+            genDts(name, out);
         });
     } else {
-        genDts(name);
+        genDts(name, out);
     }
 }
 
@@ -57,13 +57,13 @@ var list = [
 
     //comment out any of these that you don't want to execute.
     //make convert:false if you need to manually edit the .ts files in node_modules
-    
+
     { name: 'math.gl', convert: true },
     { name: 'luma.gl', convert: true },
     { name: 'deck.gl', convert: true },
-    { name: '@deck.gl/core', convert: true },
-    { name: '@deck.gl/layers', convert: true },
-    { name: '@deck.gl/react', convert: true }
+    { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
+    { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
+    { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
 ];
 
 list.forEach(genProcess);
