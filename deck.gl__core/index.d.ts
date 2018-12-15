@@ -1657,7 +1657,7 @@ declare module '@deck.gl/core/lib/deck' {
 		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
 		views?: View[];
 		initialViewState?: any;
-		viewState: any;
+		viewState?: any;
 		effects?: Effect[];
 		controller?: Controller | boolean;
 
@@ -1671,7 +1671,7 @@ declare module '@deck.gl/core/lib/deck' {
 		// Callbacks
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
 		onResize?: () => any;
-		onViewStateChange: (viewState: any) => any;
+		onViewStateChange?: (viewState: any) => any;
 		onBeforeRender?: () => any;
 		onAfterRender?: () => any;
 		onLayerClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
