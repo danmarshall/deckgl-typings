@@ -1632,7 +1632,6 @@ declare module '@deck.gl/core/lib/deck' {
 	import Layer from '@deck.gl/core/lib/layer';
 	import View from '@deck.gl/core/views/view';
 	import Viewport from '@deck.gl/core/viewports/viewport';
-	import ViewState from '@deck.gl/core/controllers/view-state';
 
 	export interface PickInfo {
 		layer: Layer,
@@ -1657,8 +1656,8 @@ declare module '@deck.gl/core/lib/deck' {
 		layers: Layer[];
 		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
 		views?: View[];
-		initialViewState?: ViewState;
-		viewState: ViewState;
+		initialViewState?: any;
+		viewState: any;
 		effects?: Effect[];
 		controller?: Controller | boolean;
 
@@ -1672,7 +1671,7 @@ declare module '@deck.gl/core/lib/deck' {
 		// Callbacks
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
 		onResize?: () => any;
-		onViewStateChange: (viewState: ViewState) => ViewState;
+		onViewStateChange: (viewState: any) => any;
 		onBeforeRender?: () => any;
 		onAfterRender?: () => any;
 		onLayerClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
