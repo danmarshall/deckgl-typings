@@ -69,11 +69,6 @@ declare module 'luma.gl/debug' {
 	export default function installDebugger(): void;
 
 }
-declare module 'luma.gl/utils/globals' {
-	const self_: NodeJS.Global | Window; const window_: NodeJS.Global | Window; const global_: NodeJS.Global | Window; const document_: {};
-	export { self_ as self, window_ as window, global_ as global, document_ as document };
-
-}
 declare module 'luma.gl/utils/is-electron' {
 	const _default: boolean;
 	export default _default;
@@ -181,13 +176,6 @@ declare module 'luma.gl/webgl1/polyfill-context' {
 }
 declare module 'luma.gl/webgl1' {
 	export { default as polyfillContext } from 'luma.gl/webgl1/polyfill-context';
-
-}
-declare module 'luma.gl/init' {
-	import { global } from 'luma.gl/utils/globals';
-	import 'luma.gl/webgl1';
-	export { global }; const _default: any;
-	export default _default;
 
 }
 declare module 'luma.gl/utils/is-old-ie' {
