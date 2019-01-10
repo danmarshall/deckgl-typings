@@ -1649,11 +1649,11 @@ declare module '@deck.gl/core/lib/deck' {
 		style?: {};
 		canvas?: HTMLCanvasElement | string;
 
-		width: number | string;
-		height: number | string;
+		width?: number | string;
+		height?: number | string;
 
 		// layer/view/controller settings
-		layers: Layer[];
+		layers?: Layer[];
 		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
 		views?: View[];
 		initialViewState?: any;
