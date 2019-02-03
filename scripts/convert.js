@@ -52,6 +52,7 @@ function genProcess(obj) {
     }
 }
 
+console.log('make sure you have deck.gl installed with: "npm install deck.gl" ')
 
 var list = [
 
@@ -67,3 +68,4 @@ var list = [
 ];
 
 list.forEach(genProcess);
+

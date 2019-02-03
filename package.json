@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/danmarshall/deckgl-typings#readme",
   "devDependencies": {
+    "@types/hammerjs": "^2.0.36",
     "@types/node": "^10.3.4",
     "dts-generator": "^2.1.0",
     "glob": "^7.1.2",
@@ -31,7 +32,6 @@
   },
   "dependencies": {
     "@types/react": "*",
-    "deck.gl": "^6.3.2",
     "fs-extra": "^7.0.0",
     "indefinitely-typed": "^1.0.2",
     "luma.gl": "^6.3.2"
