@@ -638,7 +638,7 @@ declare module '@deck.gl/core/lib/layer' {
 	import AttributeManager from '@deck.gl/core/lib/attribute-manager';
 	import Component from '@deck.gl/core/lifecycle/component';
 	import { PickInfo } from '@deck.gl/core/lib/deck';
-	import { Input } from 'hammerjs';
+	import * as hammerjs from 'hammerjs';
 	export interface TransitionTiming {
 		duration?: number;
 		easing?: (t: number) => number;
@@ -652,7 +652,7 @@ declare module '@deck.gl/core/lib/layer' {
 		numberOfLights?: number
 	}
 	export interface LayerInputHandler {
-		(o: PickInfo, e: Input): void;
+		(o: PickInfo, e: HammerInput): void;
 	}
 	export interface LayerProps {
 		coordinateSystem?: number;

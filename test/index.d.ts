@@ -13,6 +13,5 @@ import {
 import {
     CubeGeometry,
     fp64,
-    GL,
     Model
 } from 'luma.gl';
