@@ -637,6 +637,8 @@ declare module '@deck.gl/core/lib/layer-state' {
 declare module '@deck.gl/core/lib/layer' {
 	import AttributeManager from '@deck.gl/core/lib/attribute-manager';
 	import Component from '@deck.gl/core/lifecycle/component';
+	import { PickInfo } from '@deck.gl/core/lib/deck';
+	import * as hammerjs from 'hammerjs';
 	export interface TransitionTiming {
 		duration?: number;
 		easing?: (t: number) => number;
@@ -649,6 +651,9 @@ declare module '@deck.gl/core/lib/layer' {
 		lightsStrength?: number[],
 		numberOfLights?: number
 	}
+	export interface LayerInputHandler {
+		(o: PickInfo, e: HammerInput): void;
+	}
 	export interface LayerProps {
 		coordinateSystem?: number;
 		id?: string;
@@ -656,8 +661,8 @@ declare module '@deck.gl/core/lib/layer' {
 		pickable?: boolean;
 		autoHighlight?: boolean;
 		highlightColor?: number[];
-		onClick?: (o) => void;
-		onHover?: (o) => void;
+		onClick?: LayerInputHandler;
+		onHover?: LayerInputHandler;
 		lightSettings?: LightSettings;
 	}
 	export default class Layer extends Component {
@@ -832,10 +837,10 @@ declare module '@deck.gl/core/lib/pick-layers' {
 		deviceRadius: any;
 		deviceRect: any;
 	}): {
-		pickedColor: any;
-		pickedLayer: any;
-		pickedObjectIndex: any;
-	};
+			pickedColor: any;
+			pickedLayer: any;
+			pickedObjectIndex: any;
+		};
 
 }
 declare module '@deck.gl/core/utils/flatten' {
@@ -876,10 +881,10 @@ declare module '@deck.gl/core/utils/math-utils' {
 		viewMatrix: any;
 		viewMatrixInverse: any;
 	}): {
-		eye: any[];
-		direction: any[];
-		up: any[];
-	};
+			eye: any[];
+			direction: any[];
+			up: any[];
+		};
 	export function mod(value: any, divisor: any): any;
 
 }
@@ -1038,9 +1043,9 @@ declare module '@deck.gl/core/lib/layer-manager' {
 			oldLayers: any;
 			newLayers: any;
 		}): {
-			error: any;
-			generatedLayers: any[];
-		};
+				error: any;
+				generatedLayers: any[];
+			};
 		_updateSublayersRecursively({ newLayers, oldLayerMap, generatedLayers }: {
 			newLayers: any;
 			oldLayerMap: any;
@@ -1090,11 +1095,11 @@ declare module '@deck.gl/core/views/view' {
 			width: any;
 			height: any;
 		}): {
-			x: any;
-			y: any;
-			width: any;
-			height: any;
-		};
+				x: any;
+				y: any;
+				width: any;
+				height: any;
+			};
 		_getControllerProps(defaultOpts: any): any;
 		_getViewport(props: any): any;
 		_parseDimensions({ x, y, width, height }: {
@@ -1523,9 +1528,9 @@ declare module '@deck.gl/core/controllers/map-controller' {
 			startBearing: any;
 			startPitch: any;
 		}): {
-			pitch: any;
-			bearing: any;
-		};
+				pitch: any;
+				bearing: any;
+			};
 	}
 	export default class MapController extends Controller {
 		constructor(props: any);
@@ -2131,18 +2136,18 @@ declare module '@deck.gl/core/experimental/utils/gpu-grid-aggregation/gpu-grid-a
 			maxData: any;
 			pixelIndex: any;
 		}): {
-			cellCount: any;
-			cellWeight: any;
-			totalCount: any;
-			maxCellWieght: any;
-		};
+				cellCount: any;
+				cellWeight: any;
+				totalCount: any;
+				maxCellWieght: any;
+			};
 		static getCellData({ countsData, size }: {
 			countsData: any;
 			size?: number;
 		}): {
-			cellCounts: any[];
-			cellWeights: any[];
-		};
+				cellCounts: any[];
+				cellWeights: any[];
+			};
 		constructor(gl: any, opts?: {});
 		delete(): void;
 		run(opts?: {}): {};
@@ -2186,15 +2191,15 @@ declare module '@deck.gl/core/experimental/utils/gpu-grid-aggregation/grid-aggre
 		viewport?: any;
 		boundingBox?: any;
 	}): {
-		countsBuffer: any;
-		maxCountBuffer: any;
-		countsData: any;
-		maxCountData: any;
-		gridSize: number[];
-		gridOrigin: any[];
-		cellSize: any[];
-		boundingBox: any;
-	};
+			countsBuffer: any;
+			maxCountBuffer: any;
+			countsData: any;
+			maxCountData: any;
+			gridSize: number[];
+			gridOrigin: any[];
+			cellSize: any[];
+			boundingBox: any;
+		};
 	export function alignToCell(inValue: any, cellSize: any): number;
 
 }

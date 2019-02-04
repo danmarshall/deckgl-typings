@@ -30,8 +30,8 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
+    "@types/hammerjs": "^2.0.36",
     "@types/react": "*",
-    "deck.gl": "^6.3.2",
     "fs-extra": "^7.0.0",
     "indefinitely-typed": "^1.0.2",
     "luma.gl": "^6.3.2"
