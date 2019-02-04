@@ -1,6 +1,6 @@
 {
   "name": "@danmarshall/deckgl-typings",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "TypeScript declaration files for deck.gl",
   "types": "deck.gl/index.d.ts",
   "scripts": {
