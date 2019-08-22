@@ -819,11 +819,11 @@ declare module '@deck.gl/layers/text-layer/font-atlas' {
 		texture: any;
 	};
 	export interface FontSettings {
-		fontSize: number;
-		buffer: number;
-		sdf: boolean;
-		cutoff: number;
-		radius: number;
+		fontSize?: number;
+		buffer?: number;
+		sdf?: boolean;
+		cutoff?: number;
+		radius?: number;
 	}
 }
 declare module '@deck.gl/layers/text-layer/text-layer' {
