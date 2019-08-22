@@ -818,12 +818,19 @@ declare module '@deck.gl/layers/text-layer/font-atlas' {
 		mapping: {};
 		texture: any;
 	};
-
+	export interface FontSettings {
+		fontSize: number;
+		buffer: number;
+		sdf: boolean;
+		cutoff: number;
+		radius: number;
+	}
 }
 declare module '@deck.gl/layers/text-layer/text-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
 	import { Color } from '@deck.gl/core/utils/color';
+	import { FontSettings } from '@deck.gl/layers/text-layer/font-atlas';
 	export type TextAnchor = 'start' | 'middle' | 'end';
 	export type AlignmentBaseline = 'top' | 'center' | 'bottom';
 	export interface TextLayerDatum {
@@ -839,6 +846,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 	}
 	export interface TextLayerProps {
 		data: TextLayerDatum[];
+		fontSettings?: FontSettings;
 		getColor?: ((x: TextLayerDatum) => Color) | Color;
 		getText?: (x: TextLayerDatum) => string;
 		getPosition?: (x: TextLayerDatum) => number[];
