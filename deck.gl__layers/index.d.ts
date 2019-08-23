@@ -845,8 +845,12 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 		pixelOffset?: number[];
 	}
 	export interface TextLayerProps {
+		characterSet?: string | string[];
 		data: TextLayerDatum[];
+		fontFamily?: string;
 		fontSettings?: FontSettings;
+		fontWeight?: number | string;
+		fp64?: boolean;
 		getColor?: ((x: TextLayerDatum) => Color) | Color;
 		getText?: (x: TextLayerDatum) => string;
 		getPosition?: (x: TextLayerDatum) => number[];
@@ -855,6 +859,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 		getTextAnchor?: (x: TextLayerDatum) => TextAnchor;
 		getAlignmentBaseline?: (x: TextLayerDatum) => AlignmentBaseline;
 		getPixelOffset?: (x: TextLayerDatum) => number[];
+		sizeScale?: number;
 	}
 	export default class TextLayer extends CompositeLayer {
 		constructor(props: LayerProps & TextLayerProps);
