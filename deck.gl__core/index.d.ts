@@ -693,7 +693,7 @@ declare module '@deck.gl/core/lib/layer' {
 		onHover(info: any): void;
 		onClick(info: any): void;
 		nullPickingColor(): Color;
-		encodePickingColor(i: any, target?: Color): Color;
+		encodePickingColor(i: any, target?: number[]): Color;
 		decodePickingColor(color: any): number;
 		initializeState(): void;
 		shouldUpdateState({ oldProps, props, context, changeFlags }: {
