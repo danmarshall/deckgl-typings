@@ -638,6 +638,7 @@ declare module '@deck.gl/core/lib/layer' {
 	import AttributeManager from '@deck.gl/core/lib/attribute-manager';
 	import Component from '@deck.gl/core/lifecycle/component';
 	import { PickInfo } from '@deck.gl/core/lib/deck';
+	import { Color } from '@deck.gl/core/utils/color';
 	import * as hammerjs from 'hammerjs';
 	export interface TransitionTiming {
 		duration?: number;
@@ -691,8 +692,8 @@ declare module '@deck.gl/core/lib/layer' {
 		screenToDevicePixels(screenPixels: any): number;
 		onHover(info: any): void;
 		onClick(info: any): void;
-		nullPickingColor(): number[];
-		encodePickingColor(i: any): number[];
+		nullPickingColor(): Color;
+		encodePickingColor(i: any, target?: number[]): Color;
 		decodePickingColor(color: any): number;
 		initializeState(): void;
 		shouldUpdateState({ oldProps, props, context, changeFlags }: {
@@ -1778,6 +1779,7 @@ declare module '@deck.gl/core/lib/composite-layer' {
 			wrapLongitude: any;
 			modelMatrix: any;
 		};
+		getSubLayerClass(id: string, layerClass: typeof Layer): typeof Layer;
 		_getAttributeManager(): any;
 		_renderLayers(): void;
 	}
