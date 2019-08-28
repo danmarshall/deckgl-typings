@@ -1779,6 +1779,7 @@ declare module '@deck.gl/core/lib/composite-layer' {
 			wrapLongitude: any;
 			modelMatrix: any;
 		};
+		getSubLayerClass(id: string, layerClass: typeof Layer): typeof Layer;
 		_getAttributeManager(): any;
 		_renderLayers(): void;
 	}
