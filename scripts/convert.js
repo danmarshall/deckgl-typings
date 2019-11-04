@@ -24,7 +24,7 @@ function genDts(name, out) {
     console.log(`generating ${name}/index.d.ts`);
 
     const options = {
-        name,
+        prefix: name,
         project: `./node_modules/${name}`,
         out: `${out || name}/index.d.ts`,
         resolveModuleId: params => removeIndex(name, params.currentModuleId),
