@@ -63,9 +63,10 @@ var list = [
     //comment out any of these that you don't want to execute.
     //make convert:false if you need to manually edit the .ts files in node_modules
 
-    { name: 'math.gl', convert: true },
-    { name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
-    //{ name: 'luma.gl', convert: true },
+    //{ name: 'math.gl', convert: true },
+    //{ name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
+    { name: '@luma.gl/webgl-state-tracker', out: 'luma.gl__webgl-state-tracker', convert: true },
+    //{ name: '@luma.gl/core', out: 'luma.gl__core', convert: true },
     // { name: 'deck.gl', convert: true },
     // { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
     // { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
