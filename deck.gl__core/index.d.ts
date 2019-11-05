@@ -878,11 +878,47 @@ declare module '@deck.gl/core/lifecycle/component-state' {
 
 }
 declare module '@deck.gl/core/lifecycle/component' {
+	import ShaderCache from '@luma.gl/core/lib/shader-cache';	
+
 	export default class Component {
 	    constructor();
 	    clone(newProps: any): any;
 	    readonly stats: any;
-	    _initState(): void;
+		_initState(): void;
+
+		props: any;	
+
+		/**	
+		 * The layer's id, used for matching with layers from last render cycle	
+		 */	
+		id: string;	
+
+		/**	
+		 * Keep track of how many layer instances you are generating	
+		 */	
+		count: number;	
+
+		/**	
+		 * Helps track and debug the life cycle of the layers	
+		 */	
+		lifecycle: string;	
+
+		/**	
+		 * reference to the composite layer parent that rendered this layer	
+		 */	
+		parent: Component;	
+
+		/**	
+		 * Will reference layer manager's context, contains state shared by layers	
+		 */	
+		context: { gl: WebGLRenderingContext, shaderCache: ShaderCache };	
+
+		/**	
+		 * Will be set to the shared layer state object during layer matching	
+		 */	
+		state: any;	
+
+		internalState: any;		
 	}
 
 }
