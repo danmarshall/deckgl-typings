@@ -11,3 +11,4 @@
 /// <reference path="./@deck.gl/mapbox.d.ts" />
 /// <reference path="./@deck.gl/mesh-layers.d.ts" />
 /// <reference path="./@deck.gl/react.d.ts" />
+/// <reference path="./deck.gl.d.ts" />

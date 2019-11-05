@@ -63,21 +63,21 @@ var list = [
     //comment out any of these that you don't want to execute.
     //make convert:false if you need to manually edit the .ts files in node_modules
 
-    //{ name: 'math.gl', convert: true },
-    //{ name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
-    //{ name: '@luma.gl/webgl-state-tracker', out: 'luma.gl__webgl-state-tracker', convert: true },
-    //{ name: '@luma.gl/core', out: 'luma.gl__core', convert: true },
-    //{ name: 'deck.gl', convert: true },
-    //{ name: '@deck.gl/aggregation-layers', out: 'deck.gl__aggregation-layers', convert: true },
-    //{ name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
-    //{ name: '@deck.gl/extensions', out: 'deck.gl__extensions', convert: true },
-    //{ name: '@deck.gl/geo-layers', out: 'deck.gl__geo-layers', convert: true },
-    //{ name: '@deck.gl/google-maps', out: 'deck.gl__google-maps', convert: true },
-    //{ name: '@deck.gl/json', out: 'deck.gl__json', convert: true },
-    //{ name: '@deck.gl/mapbox', out: 'deck.gl__mapbox', convert: true },
-    //{ name: '@deck.gl/mesh-layers', out: 'deck.gl__mesh-layers', convert: true },
-    //{ name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
-     { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
+    { name: 'math.gl', convert: true },
+    { name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
+    { name: '@luma.gl/webgl-state-tracker', out: 'luma.gl__webgl-state-tracker', convert: true },
+    { name: '@luma.gl/core', out: 'luma.gl__core', convert: true },
+    { name: 'deck.gl', convert: true },
+    { name: '@deck.gl/aggregation-layers', out: 'deck.gl__aggregation-layers', convert: true },
+    { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
+    { name: '@deck.gl/extensions', out: 'deck.gl__extensions', convert: true },
+    { name: '@deck.gl/geo-layers', out: 'deck.gl__geo-layers', convert: true },
+    { name: '@deck.gl/google-maps', out: 'deck.gl__google-maps', convert: true },
+    { name: '@deck.gl/json', out: 'deck.gl__json', convert: true },
+    { name: '@deck.gl/mapbox', out: 'deck.gl__mapbox', convert: true },
+    { name: '@deck.gl/mesh-layers', out: 'deck.gl__mesh-layers', convert: true },
+    { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
+    { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
 ];
 
 list.forEach(genProcess);
