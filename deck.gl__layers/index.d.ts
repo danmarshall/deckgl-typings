@@ -116,6 +116,93 @@ declare module '@deck.gl/layers/icon-layer/icon-manager' {
 }
 declare module '@deck.gl/layers/icon-layer/icon-layer' {
 	import { Layer } from '@deck.gl/core';
+	import { LayerProps } from '@deck.gl/core/lib/layer';
+	import { Color } from '@deck.gl/core/utils/color';
+	import { Position } from '@deck.gl/core/utils/positions';
+	import Texture2D from '@luma.gl/webgl/classes/texture-2d';
+
+	export interface IconDefinition {
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+		/*
+		* x anchor of icon on the atlas image,
+		* default to width / 2
+		*/
+		anchorX?: number;
+		/*
+		* y anchor of icon on the atlas image,
+		* default to height / 2
+		*/
+		anchorY?: number;
+		/*
+		* whether icon is treated as a transparency
+		* mask. If true, user defined color is applied. If false, original color from the image is
+		* applied. Default to false.
+		*/
+		mask?: boolean;
+	}
+
+	/*
+	 * icon names mapped to icon definitions
+	*/
+	export interface IconMapping {
+		[key: string]: IconDefinition;
+	}
+
+	export interface IconLayerDatum {
+		/*
+		*  icon name
+		*/
+		icon?: string;
+		/*
+		*  color of the icon in [r, g, b, a].
+		*/
+		color?: Color;
+		/*
+		*  anchor position of the icon, in [lng, lat, z]
+		*/
+		position?: Position;
+	}
+
+	export interface IconLayerProps {
+		data: IconLayerDatum[];
+		/*
+		*  atlas image url or texture
+		*/
+		iconAtlas?: Texture2D | string,
+		iconMapping?: IconMapping,
+		sizeScale?: number,
+		fp64?: number,
+
+		/*
+		*  returns anchor position of the icon, in [lng, lat, z]
+		*/
+		getPosition?: ((x: IconLayerDatum) => Position),
+
+		/*
+		*  returns icon name as a string
+		*/
+		getIcon?: ((x: IconLayerDatum) => string) | string,
+
+		/*
+		*  returns color of the icon in [r, g, b, a].
+		*  Only works on icons with mask: true.
+		*/
+		getColor?: ((x: IconLayerDatum) => Color) | Color,
+
+		/*
+		*  returns icon size multiplier as a number
+		*/
+		getSize?: ((x: IconLayerDatum) => number) | number,
+
+		/*
+		*  returns rotating angle (in degree) of the icon.
+		*/
+		getAngle?: ((x: IconLayerDatum) => number) | number,
+	}
+
 	export default class IconLayer extends Layer {
 	    getShaders(): any;
 	    initializeState(): void;
@@ -609,10 +696,49 @@ declare module '@deck.gl/layers/text-layer/font-atlas-manager' {
 	    };
 	    _getKey(): string;
 	}
-
+	export interface FontSettings {
+		fontSize?: number;
+		buffer?: number;
+		sdf?: boolean;
+		cutoff?: number;
+		radius?: number;
+	}
 }
 declare module '@deck.gl/layers/text-layer/text-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
+	import { LayerProps } from '@deck.gl/core/lib/layer';
+	import { Color } from '@deck.gl/core/utils/color';
+	import { FontSettings } from '@deck.gl/layers/text-layer/font-atlas-manager';
+	export type TextAnchor = 'start' | 'middle' | 'end';
+	export type AlignmentBaseline = 'top' | 'center' | 'bottom';
+	export interface TextLayerDatum {
+		text: string;
+		position: number[];
+		color?: Color;
+		size?: number;
+		angle?: number;
+		textAnchor?: TextAnchor;
+		alignmentBaseline?: AlignmentBaseline;
+		offset?: number[];
+		pixelOffset?: number[];
+	}
+	export interface TextLayerProps {
+		characterSet?: string | string[];
+		data: TextLayerDatum[];
+		fontFamily?: string;
+		fontSettings?: FontSettings;
+		fontWeight?: number | string;
+		fp64?: boolean;
+		getColor?: ((x: TextLayerDatum) => Color) | Color;
+		getText?: (x: TextLayerDatum) => string;
+		getPosition?: (x: TextLayerDatum) => number[];
+		getSize?: ((x: TextLayerDatum) => number) | number;
+		getAngle?: ((x: TextLayerDatum) => number) | number;
+		getTextAnchor?: (x: TextLayerDatum) => TextAnchor;
+		getAlignmentBaseline?: (x: TextLayerDatum) => AlignmentBaseline;
+		getPixelOffset?: (x: TextLayerDatum) => number[];
+		sizeScale?: number;
+	}
 	export default class TextLayer extends CompositeLayer {
 	    initializeState(): void;
 	    updateState({ props, oldProps, changeFlags }: {

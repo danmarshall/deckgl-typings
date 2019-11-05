@@ -1330,6 +1330,7 @@ declare module '@deck.gl/core/utils/deep-equal' {
 
 }
 declare module '@deck.gl/core/utils/positions' {
+	export type Position = [number, number] | [number, number, number];
 	export function parsePosition(value: any): {
 	    position: number;
 	    relative: boolean;
