@@ -1,18 +1,19 @@
+//typings for deck.gl v7.3.3
 /// <reference path="../deck.gl__core/index.d.ts" />
 /// <reference path="../deck.gl__layers/index.d.ts" />
+/// <reference path="../deck.gl__aggregation-layers/index.d.ts" />
+/// <reference path="../deck.gl__geo-layers/index.d.ts" />
+/// <reference path="../deck.gl__mesh-layers/index.d.ts" />
 /// <reference path="../deck.gl__react/index.d.ts" />
 
 declare module 'deck.gl' {
 	export { experimental } from '@deck.gl/core';
+
 	export {
-		// CONSTANTS
 		COORDINATE_SYSTEM,
-		// Main class
 		Deck,
-		// Base Layers
 		Layer,
 		CompositeLayer,
-		// Views
 		View,
 		MapView,
 		FirstPersonView,
@@ -20,49 +21,71 @@ declare module 'deck.gl' {
 		OrbitView,
 		PerspectiveView,
 		OrthographicView,
-		// Viewports
 		Viewport,
 		WebMercatorViewport,
-		// Controllers
 		Controller,
 		MapController,
-		// For custom layers
 		AttributeManager,
-		// Shader modules
 		project,
 		project64,
-		lighting,
-		// Internal classes
 		LayerManager,
-		// Logging
+		DeckRenderer,
 		log,
-		// Controllers
 		_OrbitController,
 		_FirstPersonController,
-		// Transition bindings
 		TRANSITION_EVENTS,
 		LinearInterpolator,
 		FlyToInterpolator,
-		// Effects
-		_EffectManager,
-		_Effect,
-		_ReflectionEffect
+		Effect,
+		LightingEffect,
+		PostProcessEffect,
+		AmbientLight,
+		PointLight,
+		DirectionalLight,
+		LayerExtension,
+		fp64LowPart,
+		createIterable
 	} from '@deck.gl/core';
 	export {
 		ArcLayer,
+		BitmapLayer,
 		IconLayer,
 		LineLayer,
 		PointCloudLayer,
 		ScatterplotLayer,
-		ScreenGridLayer,
-		GridLayer,
 		GridCellLayer,
-		HexagonLayer,
-		HexagonCellLayer,
+		ColumnLayer,
 		PathLayer,
 		PolygonLayer,
+		SolidPolygonLayer,
 		GeoJsonLayer,
 		TextLayer
 	} from '@deck.gl/layers';
-	export { default, DeckGL } from '@deck.gl/react';
+	export {
+		ScreenGridLayer,
+		CPUGridLayer,
+		HexagonLayer,
+		ContourLayer,
+		GridLayer,
+		GPUGridLayer,
+		AGGREGATION_OPERATION,
+		HeatmapLayer
+	} from '@deck.gl/aggregation-layers';
+	export {
+		GreatCircleLayer,
+		S2Layer,
+		H3ClusterLayer,
+		H3HexagonLayer,
+		TileLayer,
+		TripsLayer,
+		Tile3DLayer
+	} from '@deck.gl/geo-layers';
+	export {
+		SimpleMeshLayer,
+		ScenegraphLayer
+	} from '@deck.gl/mesh-layers';
+	export {
+		default,
+		DeckGL
+	} from '@deck.gl/react';
 }

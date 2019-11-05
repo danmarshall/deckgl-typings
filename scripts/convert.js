@@ -24,14 +24,18 @@ function genDts(name, out) {
     console.log(`generating ${name}/index.d.ts`);
 
     const options = {
-        name,
+        prefix: name,
         project: `./node_modules/${name}`,
         out: `${out || name}/index.d.ts`,
         resolveModuleId: params => removeIndex(name, params.currentModuleId),
         resolveModuleImport: params => removeIndex(name, params.importedModuleId)
     };
 
-    dtsGen(options);
+    dtsGen(options).then(() => {
+        const { version } = require(`.${options.project}/package.json`);
+        const data = fs.readFileSync(options.out, 'utf8');
+        fs.writeFileSync(options.out, `//typings for ${name} v${version}\n${data}`);
+    });
 }
 
 function genProcess(obj) {
@@ -60,9 +64,18 @@ var list = [
     //make convert:false if you need to manually edit the .ts files in node_modules
 
     { name: 'math.gl', convert: true },
-    { name: 'luma.gl', convert: true },
+    { name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
+    { name: '@luma.gl/webgl-state-tracker', out: 'luma.gl__webgl-state-tracker', convert: true },
+    { name: '@luma.gl/core', out: 'luma.gl__core', convert: true },
     { name: 'deck.gl', convert: true },
+    { name: '@deck.gl/aggregation-layers', out: 'deck.gl__aggregation-layers', convert: true },
     { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
+    { name: '@deck.gl/extensions', out: 'deck.gl__extensions', convert: true },
+    { name: '@deck.gl/geo-layers', out: 'deck.gl__geo-layers', convert: true },
+    { name: '@deck.gl/google-maps', out: 'deck.gl__google-maps', convert: true },
+    { name: '@deck.gl/json', out: 'deck.gl__json', convert: true },
+    { name: '@deck.gl/mapbox', out: 'deck.gl__mapbox', convert: true },
+    { name: '@deck.gl/mesh-layers', out: 'deck.gl__mesh-layers', convert: true },
     { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
     { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
 ];
