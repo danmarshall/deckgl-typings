@@ -31,7 +31,11 @@ function genDts(name, out) {
         resolveModuleImport: params => removeIndex(name, params.importedModuleId)
     };
 
-    dtsGen(options);
+    dtsGen(options).then(() => {
+        const { version } = require(`.${options.project}/package.json`);
+        const data = fs.readFileSync(options.out, 'utf8');
+        fs.writeFileSync(options.out, `//typings for math.gl v${version}\n${data}`);
+    });
 }
 
 function genProcess(obj) {
@@ -60,11 +64,11 @@ var list = [
     //make convert:false if you need to manually edit the .ts files in node_modules
 
     { name: 'math.gl', convert: true },
-    { name: 'luma.gl', convert: true },
-    { name: 'deck.gl', convert: true },
-    { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
-    { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
-    { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
+    // { name: 'luma.gl', convert: true },
+    // { name: 'deck.gl', convert: true },
+    // { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
+    // { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
+    // { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
 ];
 
 list.forEach(genProcess);
