@@ -2307,6 +2307,15 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 }
 declare module '@deck.gl/core/views/orbit-view' {
 	import View from '@deck.gl/core/views/view';
+	import Viewport from '@deck.gl/core/viewports/viewport'; 
+	export interface OrbitViewState {
+		distance: number;
+		fov: number;
+		lookAt: number[];
+		rotationOrbit: number;
+		rotationX: number;
+		zoom: number;
+	}	
 	export default class OrbitView extends View {
 		constructor(props: any);
 		readonly controller: any;
@@ -2422,7 +2431,7 @@ declare module '@deck.gl/core' {
 	export { default as MapView } from '@deck.gl/core/views/map-view';
 	export { default as FirstPersonView } from '@deck.gl/core/views/first-person-view';
 	export { default as ThirdPersonView } from '@deck.gl/core/views/third-person-view';
-	export { default as OrbitView } from '@deck.gl/core/views/orbit-view';
+	export { default as OrbitView, OrbitViewState } from '@deck.gl/core/views/orbit-view';
 	export { default as PerspectiveView } from '@deck.gl/core/views/perspective-view';
 	export { default as OrthographicView } from '@deck.gl/core/views/orthographic-view';
 	export { default as Controller } from '@deck.gl/core/controllers/controller';
