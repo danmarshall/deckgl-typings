@@ -2083,8 +2083,10 @@ declare module '@deck.gl/core/lib/deck' {
 	}
 
 	export default class Deck {
-	    constructor(props: DeckProps);
-	    finalize(): void;
+		constructor(props: DeckProps);
+		viewState: any;
+		finalize(): void;
+		props: DeckProps;
 	    setProps(props: any): void;
 	    needsRedraw(opts?: {
 	        clearRedrawFlags: boolean;
