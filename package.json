@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/danmarshall/deckgl-typings#readme",
   "devDependencies": {
+    "math.gl": "*",
+    "@luma.gl/webgl": "*",
     "@types/node": "^12.12.5",
     "dts-generator": "^3.0.0",
     "glob": "^7.1.5",
