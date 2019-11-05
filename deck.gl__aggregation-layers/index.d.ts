@@ -70,32 +70,32 @@ declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/gpu-grid-
 
 }
 declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/aggregate-to-grid-vs.glsl' {
-	 const _default: "#define SHADER_NAME gpu-aggregation-to-grid-vs\n\nattribute vec2 positions;\nattribute vec3 weights;\nuniform vec2 windowSize;\nuniform vec2 cellSize;\nuniform vec2 gridSize;\nuniform mat4 uProjectionMatrix;\nuniform bool projectPoints;\n\nvarying vec3 vWeights;\n\nvec2 project_to_pixel(vec4 pos) {\n  vec4 result =  uProjectionMatrix * pos;\n  return result.xy/result.w;\n}\n\nvoid main(void) {\n\n  vWeights = weights;\n\n  vec4 windowPos = vec4(positions, 0, 1.);\n  if (projectPoints) {\n    windowPos = project_position_to_clipspace(vec3(positions, 0), vec2(0, 0), vec3(0, 0, 0));\n  }\n\n  vec2 pos = project_to_pixel(windowPos);\n\n  // Transform (0,0):windowSize -> (0, 0): gridSize\n  pos = floor(pos / cellSize);\n\n  // Transform (0,0):gridSize -> (-1, -1):(1,1)\n  pos = (pos * (2., 2.) / (gridSize)) - (1., 1.);\n\n  // Move to pixel center, pixel-size in screen sapce (2/gridSize) * 0.5 => 1/gridSize\n  vec2 offset = 1.0 / gridSize;\n  pos = pos + offset;\n\n  gl_Position = vec4(pos, 0.0, 1.0);\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/aggregate-to-grid-vs-64.glsl' {
-	 const _default: "#define SHADER_NAME gpu-aggregation-to-grid-vs-64\n\nattribute vec2 positions;\nattribute vec2 positions64xyLow;\nattribute vec3 weights;\nuniform vec2 windowSize;\nuniform vec2 cellSize;\nuniform vec2 gridSize;\nuniform vec2 uProjectionMatrixFP64[16];\nuniform bool projectPoints;\n\nvarying vec3 vWeights;\n\nvoid project_to_pixel(vec2 pos, vec2 pos64xyLow, out vec2 pixelXY64[2]) {\n\n  vec2 result64[4];\n  vec2 position64[4];\n  position64[0] = vec2(pos.x, pos64xyLow.x);\n  position64[1] = vec2(pos.y, pos64xyLow.y);\n  position64[2] = vec2(0., 0.);\n  position64[3] = vec2(1., 0.);\n  mat4_vec4_mul_fp64(uProjectionMatrixFP64, position64,\n  result64);\n\n  pixelXY64[0] = div_fp64(result64[0], result64[3]);\n  pixelXY64[1] = div_fp64(result64[1], result64[3]);\n}\n\nvoid main(void) {\n\n  vWeights = weights;\n\n  vec2 windowPos = positions;\n  vec2 windowPos64xyLow = positions64xyLow;\n  if (projectPoints) {\n    vec2 projectedXY[2];\n    project_position_fp64(windowPos, windowPos64xyLow, projectedXY);\n    windowPos.x = projectedXY[0].x;\n    windowPos.y = projectedXY[1].x;\n    windowPos64xyLow.x = projectedXY[0].y;\n    windowPos64xyLow.y = projectedXY[1].y;\n  }\n\n  vec2 pixelXY64[2];\n  project_to_pixel(windowPos, windowPos64xyLow, pixelXY64);\n\n  // Transform (0,0):windowSize -> (0, 0): gridSize\n  vec2 gridXY64[2];\n  gridXY64[0] = div_fp64(pixelXY64[0], vec2(cellSize.x, 0));\n  gridXY64[1] = div_fp64(pixelXY64[1], vec2(cellSize.y, 0));\n  float x = floor(gridXY64[0].x);\n  float y = floor(gridXY64[1].x);\n  vec2 pos = vec2(x, y);\n\n  // Transform (0,0):gridSize -> (-1, -1):(1,1)\n  pos = (pos * (2., 2.) / (gridSize)) - (1., 1.);\n\n  // Move to pixel center, pixel-size in screen sapce (2/gridSize) * 0.5 => 1/gridSize\n  vec2 offset = 1.0 / gridSize;\n  pos = pos + offset;\n\n  gl_Position = vec4(pos, 0.0, 1.0);\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/aggregate-to-grid-fs.glsl' {
-	 const _default: "#define SHADER_NAME gpu-aggregation-to-grid-fs\n\nprecision highp float;\n\nvarying vec3 vWeights;\n\nvoid main(void) {\n  gl_FragColor = vec4(vWeights, 1.0);\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/aggregate-all-vs-64.glsl' {
-	 const _default: "#version 300 es\n#define SHADER_NAME gpu-aggregation-all-vs-64\n\nin vec2 position;\nuniform ivec2 gridSize;\nout vec2 vTextureCoord;\n\nvoid main(void) {\n  // Map each position to single pixel\n  vec2 pos = vec2(-1.0, -1.0);\n\n  // Move to pixel center, pixel-size in screen sapce (2/gridSize) * 0.5 => 1/gridSize\n  vec2 offset = 1.0 / vec2(gridSize);\n  pos = pos + offset;\n\n  gl_Position = vec4(pos, 0.0, 1.0);\n\n  int yIndex = gl_InstanceID / gridSize[0];\n  int xIndex = gl_InstanceID - (yIndex * gridSize[0]);\n\n  vec2 yIndexFP64 = vec2(float(yIndex), 0.);\n  vec2 xIndexFP64 = vec2(float(xIndex), 0.);\n  vec2 gridSizeYFP64 = vec2(gridSize[1], 0.);\n  vec2 gridSizeXFP64 = vec2(gridSize[0], 0.);\n\n  vec2 texCoordXFP64 = div_fp64(yIndexFP64, gridSizeYFP64);\n  vec2 texCoordYFP64 = div_fp64(xIndexFP64, gridSizeXFP64);\n\n  vTextureCoord = vec2(texCoordYFP64.x, texCoordXFP64.x);\n  // Enforce default value for ANGLE issue (https://bugs.chromium.org/p/angleproject/issues/detail?id=3941)\n  gl_PointSize = 1.0;\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/aggregate-all-fs.glsl' {
-	 const _default: "#version 300 es\n#define SHADER_NAME gpu-aggregation-all-fs\n\nprecision highp float;\n\nin vec2 vTextureCoord;\nuniform sampler2D uSampler;\nuniform bool combineMaxMin;\nout vec4 fragColor;\nvoid main(void) {\n  vec4 textureColor = texture(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));\n  if (textureColor.a == 0.) {\n    discard;\n  }\n  fragColor.rgb = textureColor.rgb;\n  // if combineMinMax is true, use Alpha channel for first weights min value.\n  fragColor.a = combineMaxMin ? textureColor.r : textureColor.a;\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/transform-mean-vs.glsl' {
-	 const _default: "#define SHADER_NAME gpu-aggregation-transform-mean-vs\nattribute vec4 aggregationValues;\nvarying vec4 meanValues;\n\nvoid main()\n{\n  // TODO: Use 64-bit division ?? not needed given this is aggregation ??\n  bool isCellValid = bool(aggregationValues.w > 0.);\n  // aggregationValues:  XYZ contain aggregated values, W contains count\n  meanValues.xyz = isCellValid ? aggregationValues.xyz/aggregationValues.w : vec3(0, 0, 0);\n  meanValues.w = aggregationValues.w;\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
@@ -164,12 +164,12 @@ declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/gpu-grid-
 
 }
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer-vertex.glsl' {
-	 const _default: "#define SHADER_NAME screen-grid-layer-vertex-shader\n#define RANGE_COUNT 6\n\nattribute vec3 positions;\nattribute vec3 instancePositions;\nattribute vec4 instanceCounts;\nattribute vec3 instancePickingColors;\n\nuniform float opacity;\nuniform vec3 cellScale;\nuniform vec4 minColor;\nuniform vec4 maxColor;\nuniform vec4 colorRange[RANGE_COUNT];\nuniform vec2 colorDomain;\nuniform bool shouldUseMinMax;\nuniform sampler2D maxTexture;\n\nvarying vec4 vColor;\nvarying float vSampleCount;\n\nvec4 quantizeScale(vec2 domain, vec4 range[RANGE_COUNT], float value) {\n  vec4 outColor = vec4(0., 0., 0., 0.);\n  if (value >= domain.x && value <= domain.y) {\n    float domainRange = domain.y - domain.x;\n    if (domainRange <= 0.) {\n      outColor = colorRange[0];\n    } else {\n      float rangeCount = float(RANGE_COUNT);\n      float rangeStep = domainRange / rangeCount;\n      float idx = floor((value - domain.x) / rangeStep);\n      idx = clamp(idx, 0., rangeCount - 1.);\n      int intIdx = int(idx);\n      outColor = colorRange[intIdx];\n    }\n  }\n  outColor = outColor / 255.;\n  return outColor;\n}\n\nvoid main(void) {\n  vSampleCount = instanceCounts.a;\n\n  float weight = instanceCounts.r;\n  float maxWeight = texture2D(maxTexture, vec2(0.5)).r;\n\n  float step = weight / maxWeight;\n  vec4 minMaxColor = mix(minColor, maxColor, step) / 255.;\n\n  vec2 domain = colorDomain;\n  float domainMaxValid = float(colorDomain.y != 0.);\n  domain.y = mix(maxWeight, colorDomain.y, domainMaxValid);\n  vec4 rangeColor = quantizeScale(domain, colorRange, weight);\n\n  float rangeMinMax = float(shouldUseMinMax);\n  vec4 color = mix(rangeColor, minMaxColor, rangeMinMax);\n  vColor = vec4(color.rgb, color.a * opacity);\n\n  // Set color to be rendered to picking fbo (also used to check for selection highlight).\n  picking_setPickingColor(instancePickingColors);\n\n  gl_Position = vec4(instancePositions + positions * cellScale, 1.);\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer-fragment.glsl' {
-	 const _default: "#define SHADER_NAME screen-grid-layer-fragment-shader\n\nprecision highp float;\n\nvarying vec4 vColor;\nvarying float vSampleCount;\n\nvoid main(void) {\n  if (vSampleCount <= 0.0) {\n    discard;\n  }\n  gl_FragColor = vColor;\n\n  DECKGL_FILTER_COLOR(gl_FragColor, geometry);\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
@@ -619,12 +619,12 @@ declare module '@deck.gl/aggregation-layers/contour-layer/contour-layer' {
 
 }
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer-vertex.glsl' {
-	 const _default: "#version 300 es\n#define SHADER_NAME gpu-grid-cell-layer-vertex-shader\n#define RANGE_COUNT 6\n\nin vec3 positions;\nin vec3 normals;\n\nin vec4 colors;\nin vec4 elevations;\nin vec3 instancePickingColors;\n\n// Custom uniforms\nuniform vec2 offset;\nuniform bool extruded;\nuniform float cellSize;\nuniform float coverage;\nuniform float opacity;\nuniform float elevationScale;\n\nuniform ivec2 gridSize;\nuniform vec2 gridOrigin;\nuniform vec2 gridOriginLow;\nuniform vec2 gridOffset;\nuniform vec2 gridOffsetLow;\nuniform vec4 colorRange[RANGE_COUNT];\nuniform vec2 elevationRange;\n\n// Domain uniforms\nuniform vec2 colorDomain;\nuniform bool colorDomainValid;\nuniform vec2 elevationDomain;\nuniform bool elevationDomainValid;\n\nlayout(std140) uniform;\nuniform ColorData\n{\n  vec4 maxMinCount;\n} colorData;\nuniform ElevationData\n{\n  vec4 maxMinCount;\n} elevationData;\n\n#define EPSILON 0.00001\n\n// Result\nout vec4 vColor;\n\nvec4 quantizeScale(vec2 domain, vec4 range[RANGE_COUNT], float value) {\n  vec4 outColor = vec4(0., 0., 0., 0.);\n  if (value >= (domain.x - EPSILON) && value <= (domain.y + EPSILON)) {\n    float domainRange = domain.y - domain.x;\n    if (domainRange <= 0.) {\n      outColor = colorRange[0];\n    } else {\n      float rangeCount = float(RANGE_COUNT);\n      float rangeStep = domainRange / rangeCount;\n      float idx = floor((value - domain.x) / rangeStep);\n      idx = clamp(idx, 0., rangeCount - 1.);\n      int intIdx = int(idx);\n      outColor = colorRange[intIdx];\n    }\n  }\n  return outColor;\n}\n\nfloat linearScale(vec2 domain, vec2 range, float value) {\n  if (value >= (domain.x - EPSILON) && value <= (domain.y + EPSILON)) {\n    return ((value - domain.x) / (domain.y - domain.x)) * (range.y - range.x) + range.x;\n  }\n  return -1.;\n}\n\nvoid main(void) {\n\n  vec2 clrDomain = colorDomainValid ? colorDomain : vec2(colorData.maxMinCount.a, colorData.maxMinCount.r);\n  vec4 color = quantizeScale(clrDomain, colorRange, colors.r);\n\n  float elevation = 0.0;\n\n  if (extruded) {\n    vec2 elvDomain = elevationDomainValid ? elevationDomain : vec2(elevationData.maxMinCount.a, elevationData.maxMinCount.r);\n    elevation = linearScale(elvDomain, elevationRange, elevations.r);\n    elevation = elevation  * (positions.z + 1.0) / 2.0 * elevationScale;\n  }\n\n  // if aggregated color or elevation is 0 do not render\n  float shouldRender = float(color.r > 0.0 && elevations.r >= 0.0);\n  float dotRadius = cellSize / 2. * coverage * shouldRender;\n\n  int yIndex = (gl_InstanceID / gridSize[0]);\n  int xIndex = gl_InstanceID - (yIndex * gridSize[0]);\n\n  vec2 instancePositionXFP64 = mul_fp64(vec2(gridOffset[0], gridOffsetLow[0]), vec2(float(xIndex), 0.));\n  instancePositionXFP64 = sum_fp64(instancePositionXFP64, vec2(gridOrigin[0], gridOriginLow[0]));\n  vec2 instancePositionYFP64 = mul_fp64(vec2(gridOffset[1], gridOffsetLow[1]), vec2(float(yIndex), 0.));\n  instancePositionYFP64 = sum_fp64(instancePositionYFP64, vec2(gridOrigin[1], gridOriginLow[1]));\n\n  vec3 centroidPosition = vec3(instancePositionXFP64[0], instancePositionYFP64[0], elevation);\n  vec2 centroidPosition64xyLow = vec2(instancePositionXFP64[1], instancePositionYFP64[1]);\n  vec3 pos = vec3(project_size(positions.xy + offset) * dotRadius, 0.);\n\n  // Set color to be rendered to picking fbo (also used to check for selection highlight).\n  picking_setPickingColor(instancePickingColors);\n\n  vec4 position_commonspace;\n  gl_Position = project_position_to_clipspace(centroidPosition, centroidPosition64xyLow, pos, position_commonspace);\n\n  // Light calculations\n  // Worldspace is the linear space after Mercator projection\n\n  vec3 normals_commonspace = project_normal(normals);\n\n   if (extruded) {\n    vec3 lightColor = lighting_getLightColor(color.rgb, project_uCameraPosition, position_commonspace.xyz, normals_commonspace);\n    vColor = vec4(lightColor, color.a * opacity) / 255.;\n  } else {\n    vColor = vec4(color.rgb, color.a * opacity) / 255.;\n  }\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer-fragment.glsl' {
-	 const _default: "#version 300 es\n#define SHADER_NAME gpu-grid-cell-layer-fragment-shader\n\nprecision highp float;\n\nin vec4 vColor;\n\nout vec4 fragColor;\n\nvoid main(void) {\n  fragColor = vColor;\n  fragColor = picking_filterColor(fragColor);\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
@@ -709,12 +709,12 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer-utils' {
 
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/triangle-layer-vertex.glsl' {
-	 const _default: "#define SHADER_NAME heatp-map-layer-vertex-shader\n\nuniform sampler2D maxTexture;\nuniform float intensity;\nuniform vec2 colorDomain;\nuniform float threshold;\n\nattribute vec3 positions;\nattribute vec2 texCoords;\n\nvarying vec2 vTexCoords;\nvarying float vIntensityMin;\nvarying float vIntensityMax;\n\nvoid main(void) {\n  gl_Position = project_position_to_clipspace(positions, vec2(0.0), vec3(0.0));\n  vTexCoords = texCoords;\n  float maxValue = texture2D(maxTexture, vec2(0.5)).r;\n  float minValue = maxValue * threshold;\n  if (colorDomain[1] > 0.) {\n    // if user specified custom domain use it.\n    maxValue = colorDomain[1];\n    minValue = colorDomain[0];\n  }\n  vIntensityMax = intensity / maxValue;\n  vIntensityMin = intensity / minValue;\n}\n";
+	 const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/triangle-layer-fragment.glsl' {
-	 const _default: "#define SHADER_NAME triangle-layer-fragment-shader\n\nprecision highp float;\n\nuniform float opacity;\nuniform sampler2D texture;\nvarying vec2 vTexCoords;\nuniform sampler2D colorTexture;\n\nvarying float vIntensityMin;\nvarying float vIntensityMax;\n\nvec4 getLinearColor(float value) {\n  float factor = clamp(value * vIntensityMax, 0., 1.);\n  vec4 color = texture2D(colorTexture, vec2(factor, 0.5));\n  color.a *= min(value * vIntensityMin, 1.0);\n  return color;\n}\n\nvoid main(void) {\n  float weight = texture2D(texture, vTexCoords).r;\n  // discard pixels with 0 weight.\n  if (weight <= 0.) {\n     discard;\n  }\n\n  vec4 linearColor = getLinearColor(weight);\n  linearColor.a *= opacity;\n  gl_FragColor =linearColor;\n}\n";
+	 const _default: string;
 	export default _default;
 
 }

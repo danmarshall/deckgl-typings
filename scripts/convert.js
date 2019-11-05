@@ -70,8 +70,9 @@ var list = [
     //{ name: 'deck.gl', convert: true },
     //{ name: '@deck.gl/aggregation-layers', out: 'deck.gl__aggregation-layers', convert: true },
     //{ name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
-    { name: '@deck.gl/extensions', out: 'deck.gl__extensions', convert: true },
-    // { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
+    //{ name: '@deck.gl/extensions', out: 'deck.gl__extensions', convert: true },
+    //{ name: '@deck.gl/geo-layers', out: 'deck.gl__geo-layers', convert: true },
+    { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: false },
     // { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
 ];
 
