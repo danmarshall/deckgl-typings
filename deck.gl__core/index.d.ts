@@ -900,7 +900,37 @@ declare module '@deck.gl/core/lib/layer-state' {
 declare module '@deck.gl/core/lib/layer' {
 	import AttributeManager from '@deck.gl/core/lib/attribute-manager';
 	import Component from '@deck.gl/core/lifecycle/component';
+	import { PickInfo } from '@deck.gl/core/lib/deck';
+	import { Color } from '@deck.gl/core/utils/color';
+	import * as hammerjs from 'hammerjs';
+	export interface TransitionTiming {
+		duration?: number;
+		easing?: (t: number) => number;
+	}
+	export interface LightSettings {
+		lightsPosition?: number[],
+		ambientRatio?: number,
+		diffuseRatio?: number,
+		specularRatio?: number,
+		lightsStrength?: number[],
+		numberOfLights?: number
+	}
+	export interface LayerInputHandler {
+		(o: PickInfo, e: HammerInput): void;
+	}
+	export interface LayerProps {
+		coordinateSystem?: number;
+		id?: string;
+		transitions?: { [attributeGetter: string]: TransitionTiming };
+		pickable?: boolean;
+		autoHighlight?: boolean;
+		highlightColor?: Color;
+		onClick?: LayerInputHandler;
+		onHover?: LayerInputHandler;
+		lightSettings?: LightSettings;
+	}
 	export default class Layer extends Component {
+		constructor(props: LayerProps);
 	    toString(): string;
 	    setState(updateObject: any): void;
 	    setNeedsRedraw(redraw?: boolean): void;
@@ -925,8 +955,8 @@ declare module '@deck.gl/core/lib/layer' {
 	    use64bitPositions(): boolean;
 	    onHover(info: any, pickingEvent: any): any;
 	    onClick(info: any, pickingEvent: any): any;
-	    nullPickingColor(): number[];
-	    encodePickingColor(i: any, target?: any[]): any[];
+	    nullPickingColor(): Color;
+	    encodePickingColor(i: any, target?: any[]): Color;
 	    decodePickingColor(color: any): number;
 	    initializeState(): void;
 	    getShaders(shaders: any): any;
@@ -1493,8 +1523,9 @@ declare module '@deck.gl/core/controllers/transition-manager' {
 
 }
 declare module '@deck.gl/core/controllers/controller' {
+	export interface ControllerOptions {}
 	export default class Controller {
-	    constructor(ControllerState: any, options?: {});
+	    constructor(ControllerState: any, options?: ControllerOptions);
 	    finalize(): void;
 	    /**
 	     * Callback for events
@@ -1952,6 +1983,7 @@ declare module '@deck.gl/core/lib/tooltip' {
 }
 declare module '@deck.gl/core/lib/deck' {
 	import Controller from '@deck.gl/core/controllers/controller';
+	import ControllerOptions from '@deck.gl/core/controllers/controller';
 	import Effect from '@deck.gl/core/lib/effect';
 	import Layer from '@deck.gl/core/lib/layer';
 	import View from '@deck.gl/core/views/view';
@@ -1973,17 +2005,17 @@ declare module '@deck.gl/core/lib/deck' {
 		style?: {};
 		canvas?: HTMLCanvasElement | string;
 
-		width?: number | string;
-		height?: number | string;
+		width: number | string;
+		height: number | string;
 
 		// layer/view/controller settings
-		layers?: Layer[];
+		layers: Layer[];
 		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
 		views?: View[];
 		initialViewState?: any;
 		viewState?: any;
 		effects?: Effect[];
-		controller?: Controller | boolean;
+		controller?: Controller | ControllerOptions | boolean;
 
 		// GL settings
 		gl?: WebGLRenderingContext;
@@ -1993,6 +2025,7 @@ declare module '@deck.gl/core/lib/deck' {
 		useDevicePixels?: boolean;
 
 		// Callbacks
+		getCursor?: (x:{isDragging: boolean})=> string;
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
 		onResize?: () => any;
 		onViewStateChange?: (viewState: any) => any;
@@ -2374,7 +2407,8 @@ declare module '@deck.gl/core' {
 
 }
 declare module '@deck.gl/core/utils/color' {
-	 function parseColor(color: any, target: any, index?: number): any; function applyOpacity(color: any, opacity?: number): any[]; const _default: {
+	export type Color = [number, number, number] | [number, number, number, number];
+    function parseColor(color: any, target: any, index?: number): any; function applyOpacity(color: any, opacity?: number): any[]; const _default: {
 	    parseColor: typeof parseColor;
 	    applyOpacity: typeof applyOpacity;
 	};
