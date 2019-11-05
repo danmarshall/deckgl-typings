@@ -2026,6 +2026,13 @@ declare module '@deck.gl/core/lib/deck' {
 	import View from '@deck.gl/core/views/view';
 	import Viewport from '@deck.gl/core/viewports/viewport';
 
+	export interface InteractiveState {
+		isDragging: boolean;
+		onCube: boolean;
+		onText: boolean;
+		onAxisSelection: boolean;
+	}
+	
 	export interface PickInfo {
 		layer: Layer,
 		index: number;
@@ -2062,7 +2069,7 @@ declare module '@deck.gl/core/lib/deck' {
 		useDevicePixels?: boolean;
 
 		// Callbacks
-		getCursor?: (x:{isDragging: boolean})=> string;
+		getCursor?: (interactiveState: InteractiveState)=> string;
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
 		onResize?: () => any;
 		onViewStateChange?: (viewState: any) => any;
@@ -2087,7 +2094,7 @@ declare module '@deck.gl/core/lib/deck' {
 		viewState: any;
 		finalize(): void;
 		props: DeckProps;
-	    setProps(props: any): void;
+	    setProps(props: Partial<DeckProps>): void;
 	    needsRedraw(opts?: {
 	        clearRedrawFlags: boolean;
 	    }): any;
