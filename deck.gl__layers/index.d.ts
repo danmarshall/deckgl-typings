@@ -528,7 +528,28 @@ declare module '@deck.gl/layers/utils' {
 }
 declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
+	import { Color } from '@deck.gl/core/utils/color';
+	export type Polygon = number[][] | number[][][];
+	export interface PolygonLayerDatum {
+		polygon?: Polygon;
+		elevation?: number;
+		fillColor?: number[];
+		lineColor?: number[];
+		lineWidth?: number;
+	}
+	export interface PolygonLayerProps {
+		data: PolygonLayerDatum[];
+		extruded: boolean;
+		stroked: boolean;
+		getElevation?: ((x: PolygonLayerDatum) => number) | number;
+		getFillColor?: ((x: PolygonLayerDatum) => Color) | Color;
+		getLineColor?: ((x: PolygonLayerDatum) => Color) | Color;
+		getLineWidth?: ((x: PolygonLayerDatum) => number) | number;
+		getPolygon?: (x: PolygonLayerDatum) => Polygon;
+	}
+	import { LayerProps } from '@deck.gl/core/lib/layer';
 	export default class PolygonLayer extends CompositeLayer {
+		constructor(props: LayerProps & PolygonLayerProps);
 		initializeState(): void;
 		updateState({ oldProps, props, changeFlags }: {
 			oldProps: any;
