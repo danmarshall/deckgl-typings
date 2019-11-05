@@ -204,6 +204,7 @@ declare module '@deck.gl/layers/icon-layer/icon-layer' {
 	}
 
 	export default class IconLayer extends Layer {
+		constructor(...props: (LayerProps & IconLayerProps)[]);
 	    getShaders(): any;
 	    initializeState(): void;
 	    updateState({ oldProps, props, changeFlags }: {
