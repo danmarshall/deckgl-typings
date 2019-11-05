@@ -34,7 +34,7 @@ function genDts(name, out) {
     dtsGen(options).then(() => {
         const { version } = require(`.${options.project}/package.json`);
         const data = fs.readFileSync(options.out, 'utf8');
-        fs.writeFileSync(options.out, `//typings for math.gl v${version}\n${data}`);
+        fs.writeFileSync(options.out, `//typings for ${name} v${version}\n${data}`);
     });
 }
 
