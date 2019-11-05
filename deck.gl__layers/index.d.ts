@@ -236,12 +236,26 @@ declare module '@deck.gl/layers/line-layer/line-layer-fragment.glsl' {
 }
 declare module '@deck.gl/layers/line-layer/line-layer' {
 	import { Layer } from '@deck.gl/core';
+	import { LayerProps } from '@deck.gl/core/lib/layer';
+	import { Color } from '@deck.gl/core/utils/color';
+	export interface LineLayerDatum {
+		color?: Color
+		sourcePosition: number[];
+		targetPosition: number[];
+	}
+	export interface LineLayerProps {
+		data: LineLayerDatum[];
+		strokeWidth?: number;
+		getColor?: ((x: LineLayerDatum) => Color) | Color;
+		getStrokeWidth?: ((x: LineLayerDatum) => number) | number;
+	}
 	export default class LineLayer extends Layer {
-	    getShaders(): any;
+		constructor(props: LayerProps & LineLayerProps);
+		getShaders(): any;
 	    initializeState(): void;
 	    updateState({ props, oldProps, changeFlags }: {
-	        props: any;
-	        oldProps: any;
+	        props: LayerProps & LineLayerProps;
+	        oldProps: LayerProps & LineLayerProps;
 	        changeFlags: any;
 	    }): void;
 	    draw({ uniforms }: {
