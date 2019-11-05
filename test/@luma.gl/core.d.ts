@@ -1,6 +1,6 @@
 /// <reference path="../../luma.gl__core/index.d.ts" />
 
-import {    
+import {
     AmbientLight,
     CubeGeometry,
     fp64,
