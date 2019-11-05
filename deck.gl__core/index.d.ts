@@ -1951,8 +1951,69 @@ declare module '@deck.gl/core/lib/tooltip' {
 
 }
 declare module '@deck.gl/core/lib/deck' {
+	import Controller from '@deck.gl/core/controllers/controller';
+	//import Effect from '@deck.gl/core';
+	import Layer from '@deck.gl/core/lib/layer';
+	import View from '@deck.gl/core/views/view';
+	import Viewport from '@deck.gl/core/viewports/viewport';
+
+	export interface PickInfo {
+		layer: Layer,
+		index: number;
+		object: object;
+		x: number;
+		y: number;
+		coordinate?: {}
+	}
+	
+	export interface DeckProps {
+		//https://github.com/uber/deck.gl/blob/6.3-release/modules/core/src/lib/deck.js
+
+		id?: string;
+		style?: {};
+		canvas?: HTMLCanvasElement | string;
+
+		width?: number | string;
+		height?: number | string;
+
+		// layer/view/controller settings
+		layers?: Layer[];
+		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
+		views?: View[];
+		initialViewState?: any;
+		viewState?: any;
+		//effects?: Effect[];
+		controller?: Controller | boolean;
+
+		// GL settings
+		gl?: WebGLRenderingContext;
+		glOptions?: WebGLContextAttributes;
+		parameters?: object;
+		pickingRadius?: number;
+		useDevicePixels?: boolean;
+
+		// Callbacks
+		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
+		onResize?: () => any;
+		onViewStateChange?: (viewState: any) => any;
+		onBeforeRender?: () => any;
+		onAfterRender?: () => any;
+		onLayerClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
+		onLayerHover?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
+		onLoad?: () => any;
+
+		// Debug settings
+		debug?: boolean;
+		drawPickingColors?: boolean;
+
+		// Experimental props
+
+		// Forces a redraw every animation frame
+		_animate?: boolean;
+	}
+
 	export default class Deck {
-	    constructor(props: any);
+	    constructor(props: DeckProps);
 	    finalize(): void;
 	    setProps(props: any): void;
 	    needsRedraw(opts?: {
