@@ -1060,7 +1060,6 @@ declare module '@deck.gl/core/lib/layer' {
 		_activeUpdateTrigger(propName: any): void;
 		setLayerNeedsUpdate(): void;
 		setUniforms(uniformMap: any): void;
-		use64bitProjection(): boolean;
 	}
 
 }
