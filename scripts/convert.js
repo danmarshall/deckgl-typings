@@ -73,7 +73,8 @@ var list = [
     //{ name: '@deck.gl/extensions', out: 'deck.gl__extensions', convert: true },
     //{ name: '@deck.gl/geo-layers', out: 'deck.gl__geo-layers', convert: true },
     //{ name: '@deck.gl/google-maps', out: 'deck.gl__google-maps', convert: true },
-    { name: '@deck.gl/json', out: 'deck.gl__json', convert: true },
+    //{ name: '@deck.gl/json', out: 'deck.gl__json', convert: true },
+    { name: '@deck.gl/mapbox', out: 'deck.gl__mapbox', convert: true },
     //{ name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
     // { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
 ];

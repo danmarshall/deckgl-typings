@@ -8,3 +8,4 @@
 /// <reference path="./@deck.gl/geo-layers.d.ts" />
 /// <reference path="./@deck.gl/google-maps.d.ts" />
 /// <reference path="./@deck.gl/json.d.ts" />
+/// <reference path="./@deck.gl/mapbox.d.ts" />
