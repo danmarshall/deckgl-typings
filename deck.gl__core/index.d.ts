@@ -6,66 +6,66 @@ declare module '@deck.gl/core/utils/globals' {
 
 }
 declare module '@deck.gl/core/utils/log' {
-	 const _default: any;
+	const _default: any;
 	export default _default;
 
 }
 declare module '@deck.gl/core/utils/json-loader' {
-	 function isJSON(text: any): boolean; const _default: {
-	    name: string;
-	    extensions: string[];
-	    testText: typeof isJSON;
-	    parseTextSync: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;
+	function isJSON(text: any): boolean; const _default: {
+		name: string;
+		extensions: string[];
+		testText: typeof isJSON;
+		parseTextSync: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;
 	};
 	export default _default;
 
 }
 declare module '@deck.gl/core/shaderlib/misc/geometry' {
-	 const _default: {
-	    name: string;
-	    vs: string;
-	    fs: string;
+	const _default: {
+		name: string;
+		vs: string;
+		fs: string;
 	};
 	export default _default;
 
 }
 declare module '@deck.gl/core/shaderlib/project/constants' {
 	export const PROJECT_COORDINATE_SYSTEM: {
-	    LNG_LAT: number;
-	    LNGLAT_AUTO_OFFSET: number;
-	    METER_OFFSETS: number;
-	    LNGLAT_OFFSETS: number;
-	    IDENTITY: number;
+		LNG_LAT: number;
+		LNGLAT_AUTO_OFFSET: number;
+		METER_OFFSETS: number;
+		LNGLAT_OFFSETS: number;
+		IDENTITY: number;
 	};
 
 }
 declare module '@deck.gl/core/shaderlib/project/project.glsl' {
-	 const _default: string;
+	const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/core/lib/constants' {
 	export const COORDINATE_SYSTEM: {
-	    LNGLAT: number;
-	    LNGLAT_DEPRECATED: number;
-	    METER_OFFSETS: number;
-	    METERS: number;
-	    LNGLAT_OFFSETS: number;
-	    IDENTITY: number;
+		LNGLAT: number;
+		LNGLAT_DEPRECATED: number;
+		METER_OFFSETS: number;
+		METERS: number;
+		LNGLAT_OFFSETS: number;
+		IDENTITY: number;
 	};
 	export const EVENTS: {
-	    click: {
-	        handler: string;
-	    };
-	    panstart: {
-	        handler: string;
-	    };
-	    panmove: {
-	        handler: string;
-	    };
-	    panend: {
-	        handler: string;
-	    };
+		click: {
+			handler: string;
+		};
+		panstart: {
+			handler: string;
+		};
+		panmove: {
+			handler: string;
+		};
+		panend: {
+			handler: string;
+		};
 	};
 
 }
@@ -94,78 +94,78 @@ declare module '@deck.gl/core/shaderlib/project/viewport-uniforms' {
 	 * @return {Float32Array} - 4x4 projection matrix that can be used in shaders
 	 */
 	export function getUniformsFromViewport({ viewport, devicePixelRatio, modelMatrix, coordinateSystem, coordinateOrigin, wrapLongitude, projectionMode, positionOrigin }?: {
-	    viewport: any;
-	    devicePixelRatio?: number;
-	    modelMatrix?: any;
-	    coordinateSystem?: number;
-	    coordinateOrigin?: number[];
-	    wrapLongitude?: boolean;
-	    projectionMode: any;
-	    positionOrigin: any;
+		viewport: any;
+		devicePixelRatio?: number;
+		modelMatrix?: any;
+		coordinateSystem?: number;
+		coordinateOrigin?: number[];
+		wrapLongitude?: boolean;
+		projectionMode: any;
+		positionOrigin: any;
 	}): any;
 
 }
 declare module '@deck.gl/core/shaderlib/project/project' {
-	 function getUniforms(opts?: {}): any; const _default: {
-	    name: string;
-	    dependencies: any[];
-	    vs: string;
-	    getUniforms: typeof getUniforms;
-	    deprecations: {
-	        type: string;
-	        old: string;
-	        new: string;
-	    }[];
+	function getUniforms(opts?: {}): any; const _default: {
+		name: string;
+		dependencies: any[];
+		vs: string;
+		getUniforms: typeof getUniforms;
+		deprecations: {
+			type: string;
+			old: string;
+			new: string;
+		}[];
 	};
 	export default _default;
 
 }
 declare module '@deck.gl/core/shaderlib/project32/project32' {
-	 const _default: {
-	    name: string;
-	    dependencies: {
-	        name: string;
-	        dependencies: any[];
-	        vs: string;
-	        getUniforms: (opts?: {}) => any;
-	        deprecations: {
-	            type: string;
-	            old: string;
-	            new: string;
-	        }[];
-	    }[];
-	    vs: string;
+	const _default: {
+		name: string;
+		dependencies: {
+			name: string;
+			dependencies: any[];
+			vs: string;
+			getUniforms: (opts?: {}) => any;
+			deprecations: {
+				type: string;
+				old: string;
+				new: string;
+			}[];
+		}[];
+		vs: string;
 	};
 	export default _default;
 
 }
 declare module '@deck.gl/core/shaderlib/project64/project64.glsl' {
-	 const _default: string;
+	const _default: string;
 	export default _default;
 
 }
 declare module '@deck.gl/core/shaderlib/project64/project64' {
-	 const _default: {
-	    name: string;
-	    dependencies: any[];
-	    vs: string;
-	    getUniforms: typeof getUniforms;
-	    deprecations: {
-	        type: string;
-	        old: string;
-	        new: string;
-	    }[];
+	const _default: {
+		name: string;
+		dependencies: any[];
+		vs: string;
+		getUniforms: typeof getUniforms;
+		deprecations: {
+			type: string;
+			old: string;
+			new: string;
+		}[];
 	};
 	export default _default; function getUniforms(opts?: {}, context?: {}): any;
 
 }
 declare module '@deck.gl/core/shaderlib/shadow/shadow' {
-	 const _default: {
-	    name: string;
-	    dependencies: string[];
-	    vs: string;
-	    fs: string;
-	    getUniforms: (opts?: {}, context?: {}) => {};
+	const _default: {
+		name: string;
+		dependencies: string[];
+		vs: string;
+		fs: string;
+		getUniforms: (opts?: {}, context?: {}) => {};
 	};
 	export default _default;
 
@@ -181,149 +181,149 @@ declare module 'shaderlib' {
 
 }
 declare module '@deck.gl/core/lib/init' {
-	 const _default: any;
+	const _default: any;
 	export default _default;
 
 }
 declare module '@deck.gl/core/effects/lighting/directional-light' {
 	import { DirectionalLight as BaseDirectionalLight } from '@luma.gl/core';
 	export default class DirectionalLight extends BaseDirectionalLight {
-	    constructor(props: any);
-	    getProjectedLight(l?:{
-	        layer: any;
-	    }): this;
+		constructor(props: any);
+		getProjectedLight(l?: {
+			layer: any;
+		}): this;
 	}
 
 }
 declare module '@deck.gl/core/lib/effect' {
 	export default class Effect {
-	    constructor(props?: {});
-	    prepare(gl?: any, v?: {
-	        layers: any;
-	        viewports: any;
-	        onViewportActive: any;
-	        views: any;
-	    }): void;
-	    getParameters(layer?: any): void;
-	    cleanup(): void;
+		constructor(props?: {});
+		prepare(gl?: any, v?: {
+			layers: any;
+			viewports: any;
+			onViewportActive: any;
+			views: any;
+		}): void;
+		getParameters(layer?: any): void;
+		cleanup(): void;
 	}
 
 }
 declare module '@deck.gl/core/passes/pass' {
 	export default class Pass {
-	    constructor(gl: any, props?: {});
-	    setProps(props: any): void;
-	    render(params?: any): void;
-	    cleanup(): void;
+		constructor(gl: any, props?: {});
+		setProps(props: any): void;
+		render(params?: any): void;
+		cleanup(): void;
 	}
 
 }
 declare module '@deck.gl/core/passes/layers-pass' {
 	import Pass from '@deck.gl/core/passes/pass';
 	export default class LayersPass extends Pass {
-	    render(params: any): any;
-	    drawLayers({ layers, viewports, views, onViewportActive, deviceRect, parameters, pass, redrawReason, clearCanvas, effects, effectProps }: {
-	        layers: any;
-	        viewports: any;
-	        views: any;
-	        onViewportActive: any;
-	        deviceRect?: any;
-	        parameters?: {};
-	        pass?: string;
-	        redrawReason?: string;
-	        clearCanvas?: boolean;
-	        effects: any;
-	        effectProps: any;
-	    }): any[];
-	    drawLayersInViewport(gl: any, { layers, viewport, view, deviceRect, parameters, pass, redrawReason, effects, effectProps }: {
-	        layers: any;
-	        viewport: any;
-	        view: any;
-	        deviceRect?: any;
-	        parameters?: {};
-	        pass?: string;
-	        redrawReason?: string;
-	        effects: any;
-	        effectProps: any;
-	    }): {
-	        totalCount: any;
-	        visibleCount: number;
-	        compositeCount: number;
-	        pickableCount: number;
-	    };
-	    drawLayerInViewport({ gl, layer, layerIndex, glViewport, parameters, effects, effectProps }: {
-	        gl: any;
-	        layer: any;
-	        layerIndex: any;
-	        glViewport: any;
-	        parameters: any;
-	        effects: any;
-	        effectProps: any;
-	    }): void;
-	    getViewportFromDescriptor(viewportOrDescriptor: any): any;
-	    shouldDrawLayer(layer: any, viewport: any): any;
-	    getModuleParameters(layer: any, effects?: any, effectProps?: any): any;
-	    getLayerParameters(layer: any, layerIndex: any, glViewport: any, parameters: any): any;
-	    getGLViewport(gl: any, { viewport }: {
-	        viewport: any;
-	    }): number[];
-	    clearCanvas(gl: any): void;
+		render(params: any): any;
+		drawLayers({ layers, viewports, views, onViewportActive, deviceRect, parameters, pass, redrawReason, clearCanvas, effects, effectProps }: {
+			layers: any;
+			viewports: any;
+			views: any;
+			onViewportActive: any;
+			deviceRect?: any;
+			parameters?: {};
+			pass?: string;
+			redrawReason?: string;
+			clearCanvas?: boolean;
+			effects: any;
+			effectProps: any;
+		}): any[];
+		drawLayersInViewport(gl: any, { layers, viewport, view, deviceRect, parameters, pass, redrawReason, effects, effectProps }: {
+			layers: any;
+			viewport: any;
+			view: any;
+			deviceRect?: any;
+			parameters?: {};
+			pass?: string;
+			redrawReason?: string;
+			effects: any;
+			effectProps: any;
+		}): {
+			totalCount: any;
+			visibleCount: number;
+			compositeCount: number;
+			pickableCount: number;
+		};
+		drawLayerInViewport({ gl, layer, layerIndex, glViewport, parameters, effects, effectProps }: {
+			gl: any;
+			layer: any;
+			layerIndex: any;
+			glViewport: any;
+			parameters: any;
+			effects: any;
+			effectProps: any;
+		}): void;
+		getViewportFromDescriptor(viewportOrDescriptor: any): any;
+		shouldDrawLayer(layer: any, viewport: any): any;
+		getModuleParameters(layer: any, effects?: any, effectProps?: any): any;
+		getLayerParameters(layer: any, layerIndex: any, glViewport: any, parameters: any): any;
+		getGLViewport(gl: any, { viewport }: {
+			viewport: any;
+		}): number[];
+		clearCanvas(gl: any): void;
 	}
 
 }
 declare module '@deck.gl/core/passes/shadow-pass' {
 	import { default as LayersPass } from '@deck.gl/core/passes/layers-pass';
 	export default class ShadowPass extends LayersPass {
-	    constructor(gl: any, props: any);
-	    render(params: any): void;
-	    getModuleParameters(layer: any, effects: any, effectProps: any): any;
-	    delete(): void;
+		constructor(gl: any, props: any);
+		render(params: any): void;
+		getModuleParameters(layer: any, effects: any, effectProps: any): any;
+		delete(): void;
 	}
 
 }
 declare module '@deck.gl/core/effects/lighting/lighting-effect' {
 	import Effect from '@deck.gl/core/lib/effect';
 	export default class LightingEffect extends Effect {
-	    constructor(props: any);
-	    prepare(gl: any, { layers, viewports, onViewportActive, views }: {
-	        layers: any;
-	        viewports: any;
-	        onViewportActive: any;
-	        views: any;
-	    }): {
-	        shadowMaps?: undefined;
-	        dummyShadowMap?: undefined;
-	        shadowColor?: undefined;
-	        shadowMatrices?: undefined;
-	    } | {
-	        shadowMaps: any[];
-	        dummyShadowMap: any;
-	        shadowColor: any;
-	        shadowMatrices: any[];
-	    };
-	    getParameters(layer: any): {
-	        lightSources: {
-	            ambientLight: any;
-	            directionalLights: any[];
-	            pointLights: any[];
-	        };
-	    };
-	    cleanup(): void;
-	    _createLightMatrix(): any[];
-	    _createShadowPasses(gl: any): void;
-	    _applyDefaultLights(): void;
-	    _getProjectedPointLights(layer: any): any[];
-	    _getProjectedDirectionalLights(layer: any): any[];
+		constructor(props: any);
+		prepare(gl: any, { layers, viewports, onViewportActive, views }: {
+			layers: any;
+			viewports: any;
+			onViewportActive: any;
+			views: any;
+		}): {
+			shadowMaps?: undefined;
+			dummyShadowMap?: undefined;
+			shadowColor?: undefined;
+			shadowMatrices?: undefined;
+		} | {
+			shadowMaps: any[];
+			dummyShadowMap: any;
+			shadowColor: any;
+			shadowMatrices: any[];
+		};
+		getParameters(layer: any): {
+			lightSources: {
+				ambientLight: any;
+				directionalLights: any[];
+				pointLights: any[];
+			};
+		};
+		cleanup(): void;
+		_createLightMatrix(): any[];
+		_createShadowPasses(gl: any): void;
+		_applyDefaultLights(): void;
+		_getProjectedPointLights(layer: any): any[];
+		_getProjectedDirectionalLights(layer: any): any[];
 	}
 
 }
 declare module '@deck.gl/core/shaderlib/project/project-functions' {
 	export function getWorldPosition(position: any, { viewport, modelMatrix, coordinateSystem, coordinateOrigin, offsetMode }: {
-	    viewport: any;
-	    modelMatrix: any;
-	    coordinateSystem: any;
-	    coordinateOrigin: any;
-	    offsetMode: any;
+		viewport: any;
+		modelMatrix: any;
+		coordinateSystem: any;
+		coordinateOrigin: any;
+		offsetMode: any;
 	}): any;
 	/**
 	 * Equivalent to project_position in project.glsl
@@ -347,12 +347,12 @@ declare module '@deck.gl/core/shaderlib/project/project-functions' {
 }
 declare module '@deck.gl/core/utils/iterable-utils' {
 	export function createIterable(data: any, startRow?: number, endRow?: number): {
-	    iterable: any[];
-	    objectInfo: {
-	        index: number;
-	        data: any;
-	        target: any[];
-	    };
+		iterable: any[];
+		objectInfo: {
+			index: number;
+			data: any;
+			target: any[];
+		};
 	};
 	export function isAsyncIterable(data: any): any;
 
@@ -371,19 +371,19 @@ declare module '@deck.gl/core/utils/flatten' {
 	 * @return {Array} Returns the new flattened array (new array or `result` if provided)
 	 */
 	export function flatten(array: any, { filter, map, result }?: {
-	    filter?: () => boolean;
-	    map?: (x: any) => any;
-	    result?: any[];
+		filter?: () => boolean;
+		map?: (x: any) => any;
+		result?: any[];
 	}): any;
 	export function flattenVertices(nestedArray: any, { result, dimensions }?: {
-	    result?: any[];
-	    dimensions?: number;
+		result?: any[];
+		dimensions?: number;
 	}): any[];
 	export function fillArray({ target, source, start, count }: {
-	    target: any;
-	    source: any;
-	    start?: number;
-	    count?: number;
+		target: any;
+		source: any;
+		start?: number;
+		count?: number;
 	}): any;
 
 }
@@ -395,33 +395,33 @@ declare module '@deck.gl/core/utils/range' {
 }
 declare module '@deck.gl/core/lib/base-attribute' {
 	export default class BaseAttribute {
-	    constructor(gl: any, opts?: {});
-	    delete(): void;
-	    update(opts: any): void;
-	    getBuffer(): any;
-	    getValue(): any;
-	    _createBuffer(opts: any): any;
-	    _setAccessor(opts: any): void;
-	    _normalizeConstant(value: any): any;
-	    _validateAttributeDefinition(): void;
+		constructor(gl: any, opts?: {});
+		delete(): void;
+		update(opts: any): void;
+		getBuffer(): any;
+		getValue(): any;
+		_createBuffer(opts: any): any;
+		_setAccessor(opts: any): void;
+		_normalizeConstant(value: any): any;
+		_validateAttributeDefinition(): void;
 	}
 
 }
 declare module '@deck.gl/core/utils/typed-array-manager' {
 	export class TypedArrayManager {
-	    constructor({ overAlloc, poolSize }?: {
-	        overAlloc?: number;
-	        poolSize?: number;
-	    });
-	    allocate(typedArray: any, count: any, { size, type, padding, copy }: {
-	        size?: number;
-	        type: any;
-	        padding?: number;
-	        copy?: boolean;
-	    }): any;
-	    release(typedArray: any): void;
-	    _allocate(Type: any, size: any): any;
-	    _release(typedArray: any): void;
+		constructor({ overAlloc, poolSize }?: {
+			overAlloc?: number;
+			poolSize?: number;
+		});
+		allocate(typedArray: any, count: any, { size, type, padding, copy }: {
+			size?: number;
+			type: any;
+			padding?: number;
+			copy?: boolean;
+		}): any;
+		release(typedArray: any): void;
+		_allocate(Type: any, size: any): any;
+		_release(typedArray: any): void;
 	} const _default: TypedArrayManager;
 	export default _default;
 
@@ -429,32 +429,32 @@ declare module '@deck.gl/core/utils/typed-array-manager' {
 declare module '@deck.gl/core/utils/math-utils' {
 	export function createMat4(): number[];
 	export function extractCameraVectors({ viewMatrix, viewMatrixInverse }: {
-	    viewMatrix: any;
-	    viewMatrixInverse: any;
+		viewMatrix: any;
+		viewMatrixInverse: any;
 	}): {
-	    eye: any[];
-	    direction: number[];
-	    up: any[];
-	    right: any[];
+		eye: any[];
+		direction: number[];
+		up: any[];
+		right: any[];
 	};
 	export function getFrustumPlanes({ aspect, near, far, fovyRadians, position, direction, up, right }: {
-	    aspect: any;
-	    near: any;
-	    far: any;
-	    fovyRadians: any;
-	    position: any;
-	    direction: any;
-	    up: any;
-	    right: any;
+		aspect: any;
+		near: any;
+		far: any;
+		fovyRadians: any;
+		position: any;
+		direction: any;
+		up: any;
+		right: any;
 	}): {
-	    near: {
-	        distance: any;
-	        normal: any;
-	    };
-	    far: {
-	        distance: any;
-	        normal: any;
-	    };
+		near: {
+			distance: any;
+			normal: any;
+		};
+		far: {
+			distance: any;
+			normal: any;
+		};
 	};
 	/**
 	 * Calculate the low part of a WebGL 64 bit float
@@ -472,21 +472,21 @@ declare module '@deck.gl/core/utils/math-utils' {
 	    [1xHi, 1yHi, 1zHi, 1xLow, 1yLow, 1zLow, 2xHi, ...]
 	 */
 	export function toDoublePrecisionArray(typedArray: any, { size, startIndex, endIndex }: {
-	    size?: number;
-	    startIndex?: number;
-	    endIndex: any;
+		size?: number;
+		startIndex?: number;
+		endIndex: any;
 	}): any;
 
 }
 declare module '@deck.gl/core/utils/array-utils' {
 	export function padArray({ source, target, size, offset, getData, sourceLayout, targetLayout }: {
-	    source: any;
-	    target: any;
-	    size: any;
-	    offset?: number;
-	    getData: any;
-	    sourceLayout: any;
-	    targetLayout: any;
+		source: any;
+		target: any;
+		size: any;
+		offset?: number;
+		getData: any;
+		sourceLayout: any;
+		targetLayout: any;
 	}): any;
 
 }
@@ -498,59 +498,59 @@ declare module '@deck.gl/core/lib/attribute-transition-utils' {
 	export function cycleBuffers(buffers: any): void;
 	export function getAttributeBufferLength(attribute: any, numInstances: any): number;
 	export function padBuffer({ buffer, numInstances, attribute, fromLength, fromBufferLayout, getData }: {
-	    buffer: any;
-	    numInstances: any;
-	    attribute: any;
-	    fromLength: any;
-	    fromBufferLayout: any;
-	    getData?: (x: any) => any;
+		buffer: any;
+		numInstances: any;
+		attribute: any;
+		fromLength: any;
+		fromBufferLayout: any;
+		getData?: (x: any) => any;
 	}): void;
 
 }
 declare module '@deck.gl/core/lib/attribute' {
 	import BaseAttribute from '@deck.gl/core/lib/base-attribute';
 	export default class Attribute extends BaseAttribute {
-	    constructor(gl: any, opts?: {});
-	    bufferLayout: any;
-	    delete(): void;
-	    needsUpdate(): any;
-	    needsRedraw({ clearChangedFlags }?: {
-	        clearChangedFlags?: boolean;
-	    }): any;
-	    getUpdateTriggers(): any[];
-	    getAccessor(): any;
-	    getShaderAttributes(): {};
-	    supportsTransition(): boolean;
-	    getTransitionSetting(opts: any): any;
-	    setNeedsUpdate(reason: any, dataRange: any): void;
-	    clearNeedsUpdate(): void;
-	    setNeedsRedraw(reason?: any): void;
-	    allocate(numInstances: any): boolean;
-	    updateBuffer({ numInstances, bufferLayout, data, props, context }: {
-	        numInstances: any;
-	        bufferLayout: any;
-	        data: any;
-	        props: any;
-	        context: any;
-	    }): boolean;
-	    update(props: any): void;
-	    setConstantValue(value: any): boolean;
-	    setExternalBuffer(buffer: any): boolean;
-	    _checkExternalBuffer(opts: any): void;
-	    getVertexOffset(row: any, bufferLayout?: any): any;
-	    _normalizeValue(value: any, out?: any[], start?: number): any[];
-	    _areValuesEqual(value1: any, value2: any, size?: any): boolean;
-	    _standardAccessor(attribute: any, { data, startRow, endRow, props, numInstances, bufferLayout }: {
-	        data: any;
-	        startRow: any;
-	        endRow: any;
-	        props: any;
-	        numInstances: any;
-	        bufferLayout: any;
-	    }): void;
-	    _validateAttributeUpdaters(): void;
-	    _checkAttributeArray(): void;
-	    _updateShaderAttributes(): void;
+		constructor(gl: any, opts?: {});
+		bufferLayout: any;
+		delete(): void;
+		needsUpdate(): any;
+		needsRedraw({ clearChangedFlags }?: {
+			clearChangedFlags?: boolean;
+		}): any;
+		getUpdateTriggers(): any[];
+		getAccessor(): any;
+		getShaderAttributes(): {};
+		supportsTransition(): boolean;
+		getTransitionSetting(opts: any): any;
+		setNeedsUpdate(reason: any, dataRange: any): void;
+		clearNeedsUpdate(): void;
+		setNeedsRedraw(reason?: any): void;
+		allocate(numInstances: any): boolean;
+		updateBuffer({ numInstances, bufferLayout, data, props, context }: {
+			numInstances: any;
+			bufferLayout: any;
+			data: any;
+			props: any;
+			context: any;
+		}): boolean;
+		update(props: any): void;
+		setConstantValue(value: any): boolean;
+		setExternalBuffer(buffer: any): boolean;
+		_checkExternalBuffer(opts: any): void;
+		getVertexOffset(row: any, bufferLayout?: any): any;
+		_normalizeValue(value: any, out?: any[], start?: number): any[];
+		_areValuesEqual(value1: any, value2: any, size?: any): boolean;
+		_standardAccessor(attribute: any, { data, startRow, endRow, props, numInstances, bufferLayout }: {
+			data: any;
+			startRow: any;
+			endRow: any;
+			props: any;
+			numInstances: any;
+			bufferLayout: any;
+		}): void;
+		_validateAttributeUpdaters(): void;
+		_checkAttributeArray(): void;
+		_updateShaderAttributes(): void;
 	}
 
 }
@@ -559,74 +559,74 @@ declare module '@deck.gl/core/transitions/transition' {
 	    /**
 	     * @params timeline {Timeline}
 	     */
-	    constructor(timeline: any);
-	    readonly inProgress: any;
+		constructor(timeline: any);
+		readonly inProgress: any;
 	    /**
 	     * (re)start this transition.
 	     * @params props {object} - optional overriding props. see constructor
 	     */
-	    start(props: any): void;
+		start(props: any): void;
 	    /**
 	     * end this transition if it is in progress.
 	     */
-	    end(): void;
+		end(): void;
 	    /**
 	     * cancel this transition if it is in progress.
 	     */
-	    cancel(): void;
+		cancel(): void;
 	    /**
 	     * update this transition. Returns `true` if updated.
 	     */
-	    update(): boolean;
-	    _onUpdate(): void;
+		update(): boolean;
+		_onUpdate(): void;
 	}
 
 }
 declare module '@deck.gl/core/transitions/gpu-interpolation-transition' {
 	export default class GPUInterpolationTransition {
-	    constructor({ gl, attribute, timeline }: {
-	        gl: any;
-	        attribute: any;
-	        timeline: any;
-	    });
-	    readonly inProgress: any;
-	    start(transitionSettings: any, numInstances: any): void;
-	    update(): any;
-	    cancel(): void;
+		constructor({ gl, attribute, timeline }: {
+			gl: any;
+			attribute: any;
+			timeline: any;
+		});
+		readonly inProgress: any;
+		start(transitionSettings: any, numInstances: any): void;
+		update(): any;
+		cancel(): void;
 	}
 
 }
 declare module '@deck.gl/core/transitions/gpu-spring-transition' {
 	export default class GPUSpringTransition {
-	    constructor({ gl, attribute, timeline }: {
-	        gl: any;
-	        attribute: any;
-	        timeline: any;
-	    });
-	    readonly inProgress: any;
-	    start(transitionSettings: any, numInstances: any): void;
-	    update(): boolean;
-	    cancel(): void;
+		constructor({ gl, attribute, timeline }: {
+			gl: any;
+			attribute: any;
+			timeline: any;
+		});
+		readonly inProgress: any;
+		start(transitionSettings: any, numInstances: any): void;
+		update(): boolean;
+		cancel(): void;
 	}
 
 }
 declare module '@deck.gl/core/lib/attribute-transition-manager' {
 	export default class AttributeTransitionManager {
-	    constructor(gl: any, { id, timeline }: {
-	        id: any;
-	        timeline: any;
-	    });
-	    finalize(): void;
-	    update({ attributes, transitions, numInstances }: {
-	        attributes: any;
-	        transitions?: {};
-	        numInstances: any;
-	    }): void;
-	    hasAttribute(attributeName: any): any;
-	    getAttributes(): {};
-	    run(): any;
-	    _removeTransition(attributeName: any): void;
-	    _updateAttribute(attributeName: any, attribute: any, settings: any): void;
+		constructor(gl: any, { id, timeline }: {
+			id: any;
+			timeline: any;
+		});
+		finalize(): void;
+		update({ attributes, transitions, numInstances }: {
+			attributes: any;
+			transitions?: {};
+			numInstances: any;
+		}): void;
+		hasAttribute(attributeName: any): any;
+		getAttributes(): {};
+		run(): any;
+		_removeTransition(attributeName: any): void;
+		_updateAttribute(attributeName: any, attribute: any, settings: any): void;
 	}
 
 }
@@ -647,12 +647,12 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 	     * @param {String} [onUpdateStart=] - called before update() starts
 	     * @param {String} [onUpdateEnd=] - called after update() ends
 	     */
-	    static setDefaultLogFunctions({ onLog, onUpdateStart, onUpdate, onUpdateEnd }?: {
-	        onLog: any;
-	        onUpdateStart: any;
-	        onUpdate: any;
-	        onUpdateEnd: any;
-	    }): void;
+		static setDefaultLogFunctions({ onLog, onUpdateStart, onUpdate, onUpdateEnd }?: {
+			onLog: any;
+			onUpdateStart: any;
+			onUpdate: any;
+			onUpdateEnd: any;
+		}): void;
 	    /**
 	     * @classdesc
 	     * Automated attribute generation and management. Suitable when a set of
@@ -676,18 +676,18 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 	     * change detection, but instead makes it easy to build such detection
 	     * by offering the ability to "invalidate" each attribute separately.
 	     */
-	    constructor(gl: any, { id, stats, timeline }?: {
-	        id?: string;
-	        stats: any;
-	        timeline: any;
-	    });
-	    finalize(): void;
-	    getNeedsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): any;
-	    setNeedsRedraw(redraw?: boolean): this;
-	    add(attributes: any, updaters: any): void;
-	    addInstanced(attributes: any, updaters: any): void;
+		constructor(gl: any, { id, stats, timeline }?: {
+			id?: string;
+			stats: any;
+			timeline: any;
+		});
+		finalize(): void;
+		getNeedsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): any;
+		setNeedsRedraw(redraw?: boolean): this;
+		add(attributes: any, updaters: any): void;
+		addInstanced(attributes: any, updaters: any): void;
 	    /**
 	     * Removes attributes
 	     * Takes an array of attribute names and delete them from
@@ -698,39 +698,39 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 	     *
 	     * @param {Object} attributeNameArray - attribute name array (see above)
 	     */
-	    remove(attributeNameArray: any): void;
-	    invalidate(triggerName: any, dataRange: any): void;
-	    invalidateAll(dataRange: any): void;
-	    update({ data, numInstances, bufferLayout, transitions, props, buffers, context }?: {
-	        data: any;
-	        numInstances: any;
-	        bufferLayout: any;
-	        transitions: any;
-	        props?: {};
-	        buffers?: {};
-	        context?: {};
-	    }): void;
-	    updateTransition(): any;
+		remove(attributeNameArray: any): void;
+		invalidate(triggerName: any, dataRange: any): void;
+		invalidateAll(dataRange: any): void;
+		update({ data, numInstances, bufferLayout, transitions, props, buffers, context }?: {
+			data: any;
+			numInstances: any;
+			bufferLayout: any;
+			transitions: any;
+			props?: {};
+			buffers?: {};
+			context?: {};
+		}): void;
+		updateTransition(): any;
 	    /**
 	     * Returns all attribute descriptors
 	     * Note: Format matches luma.gl Model/Program.setAttributes()
 	     * @return {Object} attributes - descriptors
 	     */
-	    getAttributes(): any;
+		getAttributes(): any;
 	    /**
 	     * Returns changed attribute descriptors
 	     * This indicates which WebGLBuffers need to be updated
 	     * @return {Object} attributes - descriptors
 	     */
-	    getChangedAttributes(opts?: {
-	        clearChangedFlags: boolean;
-	    }): any;
-	    getAccessors(): any;
-	    _add(attributes: any, updaters: any, extraProps?: {}): void;
-	    _createAttribute(name: any, attribute: any, extraProps: any): Attribute;
-	    _mapUpdateTriggersToAttributes(): void;
-	    _invalidateTrigger(triggerName: any, dataRange: any): any;
-	    _updateAttribute(opts: any): void;
+		getChangedAttributes(opts?: {
+			clearChangedFlags: boolean;
+		}): any;
+		getAccessors(): any;
+		_add(attributes: any, updaters: any, extraProps?: {}): void;
+		_createAttribute(name: any, attribute: any, extraProps: any): Attribute;
+		_mapUpdateTriggersToAttributes(): void;
+		_invalidateTrigger(triggerName: any, dataRange: any): any;
+		_updateAttribute(opts: any): void;
 	}
 
 }
@@ -767,38 +767,38 @@ declare module '@deck.gl/core/lib/seer-integration' {
 declare module '@deck.gl/core/transitions/cpu-interpolation-transition' {
 	import Transition from '@deck.gl/core/transitions/transition';
 	export default class CPUInterpolationTransition extends Transition {
-	    readonly value: any;
-	    _onUpdate(): void;
+		readonly value: any;
+		_onUpdate(): void;
 	}
 
 }
 declare module '@deck.gl/core/transitions/cpu-spring-transition' {
 	import Transition from '@deck.gl/core/transitions/transition';
 	export default class CPUSpringTransition extends Transition {
-	    readonly value: any;
-	    _onUpdate(): void;
+		readonly value: any;
+		_onUpdate(): void;
 	}
 
 }
 declare module '@deck.gl/core/lib/uniform-transition-manager' {
 	export default class UniformTransitionManager {
-	    constructor(timeline: any);
-	    readonly active: boolean;
-	    add(key: any, fromValue: any, toValue: any, settings: any): void;
-	    remove(key: any): void;
-	    update(): {};
-	    clear(): void;
+		constructor(timeline: any);
+		readonly active: boolean;
+		add(key: any, fromValue: any, toValue: any, settings: any): void;
+		remove(key: any): void;
+		update(): {};
+		clear(): void;
 	}
 
 }
 declare module '@deck.gl/core/lifecycle/props' {
 	export function validateProps(props: any): void;
 	export function diffProps(props: any, oldProps: any): {
-	    dataChanged: any;
-	    propsChanged: string;
-	    updateTriggersChanged: boolean;
-	    extensionsChanged: string | boolean;
-	    transitionsChanged: {};
+		dataChanged: any;
+		propsChanged: string;
+		updateTriggersChanged: boolean;
+		extensionsChanged: string | boolean;
+		transitionsChanged: {};
 	};
 	/**
 	 * Performs equality by iterating through keys on an object and returning false
@@ -810,11 +810,11 @@ declare module '@deck.gl/core/lifecycle/props' {
 	 *   if unequal, returns a string explaining what changed.
 	 */
 	export function compareProps({ newProps, oldProps, ignoreProps, propTypes, triggerName }?: {
-	    newProps: any;
-	    oldProps: any;
-	    ignoreProps?: {};
-	    propTypes?: {};
-	    triggerName?: string;
+		newProps: any;
+		oldProps: any;
+		ignoreProps?: {};
+		propTypes?: {};
+		triggerName?: string;
 	}): string;
 
 }
@@ -835,20 +835,20 @@ declare module '@deck.gl/core/utils/shader' {
 }
 declare module '@deck.gl/core/lifecycle/constants' {
 	export const LIFECYCLE: {
-	    NO_STATE: string;
-	    MATCHED: string;
-	    INITIALIZED: string;
-	    AWAITING_GC: string;
-	    AWAITING_FINALIZATION: string;
-	    FINALIZED: string;
+		NO_STATE: string;
+		MATCHED: string;
+		INITIALIZED: string;
+		AWAITING_GC: string;
+		AWAITING_FINALIZATION: string;
+		FINALIZED: string;
 	};
 
 }
 declare module '@deck.gl/core/lifecycle/prop-types' {
 	export function parsePropTypes(propDefs: any): {
-	    propTypes: {};
-	    defaultProps: {};
-	    deprecatedProps: {};
+		propTypes: {};
+		defaultProps: {};
+		deprecatedProps: {};
 	};
 
 }
@@ -858,78 +858,78 @@ declare module '@deck.gl/core/lifecycle/create-props' {
 }
 declare module '@deck.gl/core/lifecycle/component-state' {
 	export default class ComponentState {
-	    constructor(component?: any);
-	    getOldProps(): any;
-	    resetOldProps(): void;
-	    freezeAsyncOldProps(): void;
-	    hasAsyncProp(propName: any): boolean;
-	    getAsyncProp(propName: any): any;
-	    isAsyncPropLoading(propName: any): boolean;
-	    setAsyncProps(props: any): void;
-	    _updateAsyncProp(propName: any, value: any): void;
-	    _didAsyncInputValueChange(propName: any, value: any): boolean;
-	    _setPropValue(propName: any, value: any): void;
-	    _setAsyncPropValue(propName: any, value: any, loadCount: any): void;
-	    _watchPromise(propName: any, promise: any): void;
-	    _resolveAsyncIterable(propName: any, iterable: any): Promise<void>;
-	    _postProcessValue(propName: any, value: any, previousValue: any): any;
-	    _createAsyncPropData(propName: any, value: any, defaultValue: any): void;
+		constructor(component?: any);
+		getOldProps(): any;
+		resetOldProps(): void;
+		freezeAsyncOldProps(): void;
+		hasAsyncProp(propName: any): boolean;
+		getAsyncProp(propName: any): any;
+		isAsyncPropLoading(propName: any): boolean;
+		setAsyncProps(props: any): void;
+		_updateAsyncProp(propName: any, value: any): void;
+		_didAsyncInputValueChange(propName: any, value: any): boolean;
+		_setPropValue(propName: any, value: any): void;
+		_setAsyncPropValue(propName: any, value: any, loadCount: any): void;
+		_watchPromise(propName: any, promise: any): void;
+		_resolveAsyncIterable(propName: any, iterable: any): Promise<void>;
+		_postProcessValue(propName: any, value: any, previousValue: any): any;
+		_createAsyncPropData(propName: any, value: any, defaultValue: any): void;
 	}
 
 }
 declare module '@deck.gl/core/lifecycle/component' {
-	import ShaderCache from '@luma.gl/core/lib/shader-cache';	
+	import ShaderCache from '@luma.gl/core/lib/shader-cache';
 
 	export default class Component {
-	    constructor();
-	    clone(newProps: any): any;
-	    readonly stats: any;
+		constructor();
+		clone(newProps: any): any;
+		readonly stats: any;
 		_initState(): void;
 
-		props: any;	
+		props: any;
 
 		/**	
 		 * The layer's id, used for matching with layers from last render cycle	
-		 */	
-		id: string;	
+		 */
+		id: string;
 
 		/**	
 		 * Keep track of how many layer instances you are generating	
-		 */	
-		count: number;	
+		 */
+		count: number;
 
 		/**	
 		 * Helps track and debug the life cycle of the layers	
-		 */	
-		lifecycle: string;	
+		 */
+		lifecycle: string;
 
 		/**	
 		 * reference to the composite layer parent that rendered this layer	
-		 */	
-		parent: Component;	
+		 */
+		parent: Component;
 
 		/**	
 		 * Will reference layer manager's context, contains state shared by layers	
-		 */	
-		context: { gl: WebGLRenderingContext, shaderCache: ShaderCache };	
+		 */
+		context: { gl: WebGLRenderingContext, shaderCache: ShaderCache };
 
 		/**	
 		 * Will be set to the shared layer state object during layer matching	
-		 */	
-		state: any;	
+		 */
+		state: any;
 
-		internalState: any;		
+		internalState: any;
 	}
 
 }
 declare module '@deck.gl/core/lib/layer-state' {
 	import ComponentState from '@deck.gl/core/lifecycle/component-state';
 	export default class LayerState extends ComponentState {
-	    constructor({ attributeManager, layer }: {
-	        attributeManager: any;
-	        layer: any;
-	    });
-	    layer: any;
+		constructor({ attributeManager, layer }: {
+			attributeManager: any;
+			layer: any;
+		});
+		layer: any;
 	}
 
 }
@@ -967,136 +967,136 @@ declare module '@deck.gl/core/lib/layer' {
 	}
 	export default class Layer extends Component {
 		constructor(props: LayerProps);
-	    toString(): string;
-	    setState(updateObject: any): void;
-	    setNeedsRedraw(redraw?: boolean): void;
-	    setNeedsUpdate(): void;
-	    getNeedsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): boolean;
-	    needsUpdate(): any;
-	    hasUniformTransition(): any;
-	    isPickable(): any;
-	    getModels(): any;
-	    getSingleModel(): any;
-	    getAttributeManager(): any;
-	    getCurrentLayer(): any;
-	    getLoadOptions(): any;
-	    getFirstObject(): any;
-	    project(xyz: any): any[];
-	    unproject(xy: any): any;
-	    projectPosition(xyz: any): any;
-	    projectFlat(lngLat: any): any;
-	    unprojectFlat(xy: any): any;
-	    use64bitPositions(): boolean;
-	    onHover(info: any, pickingEvent: any): any;
-	    onClick(info: any, pickingEvent: any): any;
-	    nullPickingColor(): Color;
-	    encodePickingColor(i: any, target?: any[]): Color;
-	    decodePickingColor(color: any): number;
-	    initializeState(): void;
-	    getShaders(shaders: any): any;
-	    shouldUpdateState({ oldProps, props, context, changeFlags }: {
-	        oldProps: any;
-	        props: any;
-	        context: any;
-	        changeFlags: any;
-	    }): any;
-	    updateState({ oldProps, props, context, changeFlags }: {
-	        oldProps: any;
-	        props: any;
-	        context: any;
-	        changeFlags: any;
-	    }): void;
-	    finalizeState(): void;
-	    draw(opts: any): void;
-	    getPickingInfo({ info, mode }: {
-	        info: any;
-	        mode: any;
-	    }): any;
-	    invalidateAttribute(name?: string, diffReason?: string): void;
-	    updateAttributes(changedAttributes: any): void;
-	    _updateAttributes(props: any): void;
-	    _updateAttributeTransition(): void;
-	    _updateUniformTransition(): any;
-	    calculateInstancePickingColors(attribute: any, { numInstances, startRow, endRow }: {
-	        numInstances: any;
-	        startRow: any;
-	        endRow: any;
-	    }): void;
-	    _setModelAttributes(model: any, changedAttributes: any): void;
-	    clearPickingColor(color: any): void;
-	    restorePickingColors(): void;
-	    getNumInstances(props: any): any;
-	    getBufferLayout(props: any): any;
-	    _initialize(): void;
-	    _update(): void;
-	    _updateState(): void;
-	    _finalize(): void;
-	    drawLayer({ moduleParameters, uniforms, parameters }: {
-	        moduleParameters?: any;
-	        uniforms?: {};
-	        parameters?: {};
-	    }): void;
-	    pickLayer(opts: any): any;
-	    getChangeFlags(): any;
-	    setChangeFlags(flags: any): void;
-	    clearChangeFlags(): void;
-	    printChangeFlags(): string;
-	    diffProps(newProps: any, oldProps: any): void;
-	    validateProps(): void;
-	    setModuleParameters(moduleParameters: any): void;
-	    _getUpdateParams(): {
-	        props: any;
-	        oldProps: any;
-	        context: any;
-	        changeFlags: any;
-	    };
-	    _getNeedsRedraw(opts: any): boolean;
-	    _getAttributeManager(): AttributeManager;
-	    _initState(): void;
-	    _transferState(oldLayer: any): void;
-	    _onAsyncPropUpdated(): void;
-	    _activeUpdateTrigger(propName: any): void;
-	    setLayerNeedsUpdate(): void;
-	    setUniforms(uniformMap: any): void;
-	    use64bitProjection(): boolean;
+		toString(): string;
+		setState(updateObject: any): void;
+		setNeedsRedraw(redraw?: boolean): void;
+		setNeedsUpdate(): void;
+		getNeedsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): boolean;
+		needsUpdate(): any;
+		hasUniformTransition(): any;
+		isPickable(): any;
+		getModels(): any;
+		getSingleModel(): any;
+		getAttributeManager(): any;
+		getCurrentLayer(): any;
+		getLoadOptions(): any;
+		getFirstObject(): any;
+		project(xyz: any): any[];
+		unproject(xy: any): any;
+		projectPosition(xyz: any): any;
+		projectFlat(lngLat: any): any;
+		unprojectFlat(xy: any): any;
+		use64bitPositions(): boolean;
+		onHover(info: any, pickingEvent: any): any;
+		onClick(info: any, pickingEvent: any): any;
+		nullPickingColor(): Color;
+		encodePickingColor(i: any, target?: any[]): Color;
+		decodePickingColor(color: any): number;
+		initializeState(): void;
+		getShaders(shaders: any): any;
+		shouldUpdateState({ oldProps, props, context, changeFlags }: {
+			oldProps: any;
+			props: any;
+			context: any;
+			changeFlags: any;
+		}): any;
+		updateState({ oldProps, props, context, changeFlags }: {
+			oldProps: any;
+			props: any;
+			context: any;
+			changeFlags: any;
+		}): void;
+		finalizeState(): void;
+		draw(opts: any): void;
+		getPickingInfo({ info, mode }: {
+			info: any;
+			mode: any;
+		}): any;
+		invalidateAttribute(name?: string, diffReason?: string): void;
+		updateAttributes(changedAttributes: any): void;
+		_updateAttributes(props: any): void;
+		_updateAttributeTransition(): void;
+		_updateUniformTransition(): any;
+		calculateInstancePickingColors(attribute: any, { numInstances, startRow, endRow }: {
+			numInstances: any;
+			startRow: any;
+			endRow: any;
+		}): void;
+		_setModelAttributes(model: any, changedAttributes: any): void;
+		clearPickingColor(color: any): void;
+		restorePickingColors(): void;
+		getNumInstances(props: any): any;
+		getBufferLayout(props: any): any;
+		_initialize(): void;
+		_update(): void;
+		_updateState(): void;
+		_finalize(): void;
+		drawLayer({ moduleParameters, uniforms, parameters }: {
+			moduleParameters?: any;
+			uniforms?: {};
+			parameters?: {};
+		}): void;
+		pickLayer(opts: any): any;
+		getChangeFlags(): any;
+		setChangeFlags(flags: any): void;
+		clearChangeFlags(): void;
+		printChangeFlags(): string;
+		diffProps(newProps: any, oldProps: any): void;
+		validateProps(): void;
+		setModuleParameters(moduleParameters: any): void;
+		_getUpdateParams(): {
+			props: any;
+			oldProps: any;
+			context: any;
+			changeFlags: any;
+		};
+		_getNeedsRedraw(opts: any): boolean;
+		_getAttributeManager(): AttributeManager;
+		_initState(): void;
+		_transferState(oldLayer: any): void;
+		_onAsyncPropUpdated(): void;
+		_activeUpdateTrigger(propName: any): void;
+		setLayerNeedsUpdate(): void;
+		setUniforms(uniformMap: any): void;
+		use64bitProjection(): boolean;
 	}
 
 }
 declare module '@deck.gl/core/lib/composite-layer' {
 	import Layer from '@deck.gl/core/lib/layer';
 	export default class CompositeLayer extends Layer {
-	    readonly isComposite: boolean;
-	    getSubLayers(): any;
-	    initializeState(): void;
-	    setState(updateObject: any): void;
-	    getPickingInfo({ info }: {
-	        info: any;
-	    }): any;
-	    renderLayers(): any;
-	    shouldRenderSubLayer(id: any, data: any): any;
-	    getSubLayerClass(id: any, DefaultLayerClass: any): any;
-	    getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
-	    getSubLayerAccessor(accessor: any): any;
-	    getSubLayerProps(sublayerProps: any): {
-	        opacity: any;
-	        pickable: any;
-	        visible: any;
-	        parameters: any;
-	        getPolygonOffset: any;
-	        highlightedObjectIndex: any;
-	        autoHighlight: any;
-	        highlightColor: any;
-	        coordinateSystem: any;
-	        coordinateOrigin: any;
-	        wrapLongitude: any;
-	        positionFormat: any;
-	        modelMatrix: any;
-	        extensions: any;
-	    };
-	    _getAttributeManager(): any;
-	    _renderLayers(): void;
+		readonly isComposite: boolean;
+		getSubLayers(): any;
+		initializeState(): void;
+		setState(updateObject: any): void;
+		getPickingInfo({ info }: {
+			info: any;
+		}): any;
+		renderLayers(): any;
+		shouldRenderSubLayer(id: any, data: any): any;
+		getSubLayerClass(id: any, DefaultLayerClass: any): any;
+		getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
+		getSubLayerAccessor(accessor: any): any;
+		getSubLayerProps(sublayerProps: any): {
+			opacity: any;
+			pickable: any;
+			visible: any;
+			parameters: any;
+			getPolygonOffset: any;
+			highlightedObjectIndex: any;
+			autoHighlight: any;
+			highlightColor: any;
+			coordinateSystem: any;
+			coordinateOrigin: any;
+			wrapLongitude: any;
+			positionFormat: any;
+			modelMatrix: any;
+			extensions: any;
+		};
+		_getAttributeManager(): any;
+		_renderLayers(): void;
 	}
 
 }
@@ -1109,8 +1109,8 @@ declare module '@deck.gl/core/viewports/viewport' {
 	     * Note: The Viewport is immutable in the sense that it only has accessors.
 	     * A new viewport instance should be created if any parameters have changed.
 	     */
-	    constructor(opts?: {});
-	    equals(viewport: any): any;
+		constructor(opts?: {});
+		equals(viewport: any): any;
 	    /**
 	     * Projects xyz (possibly latitude and longitude) to pixel coordinates in window
 	     * using viewport projection parameters
@@ -1123,9 +1123,9 @@ declare module '@deck.gl/core/viewports/viewport' {
 	     * @param {Object} opts.topLeft=true - Whether projected coords are top left
 	     * @return {Array} - [x, y] or [x, y, z] in top left coords
 	     */
-	    project(xyz: any, { topLeft }?: {
-	        topLeft?: boolean;
-	    }): any[];
+		project(xyz: any, { topLeft }?: {
+			topLeft?: boolean;
+		}): any[];
 	    /**
 	     * Unproject pixel coordinates on screen onto world coordinates,
 	     * (possibly [lon, lat]) on map.
@@ -1136,12 +1136,12 @@ declare module '@deck.gl/core/viewports/viewport' {
 	     * @param {Object} opts.topLeft=true - Whether origin is top left
 	     * @return {Array|null} - [lng, lat, Z] or [X, Y, Z]
 	     */
-	    unproject(xyz: any, { topLeft, targetZ }?: {
-	        topLeft?: boolean;
-	        targetZ: any;
-	    }): any[];
-	    projectPosition(xyz: any): any[];
-	    unprojectPosition(xyz: any): any[];
+		unproject(xyz: any, { topLeft, targetZ }?: {
+			topLeft?: boolean;
+			targetZ: any;
+		}): any[];
+		projectPosition(xyz: any): any[];
+		unprojectPosition(xyz: any): any[];
 	    /**
 	     * Project [lng,lat] on sphere onto [x,y] on 512*512 Mercator Zoom 0 tile.
 	     * Performs the nonlinear part of the web mercator projection.
@@ -1151,7 +1151,7 @@ declare module '@deck.gl/core/viewports/viewport' {
 	     *   Specifies a point on the sphere to project onto the map.
 	     * @return {Array} [x,y] coordinates.
 	     */
-	    projectFlat(xyz: any, scale?: any): any;
+		projectFlat(xyz: any, scale?: any): any;
 	    /**
 	     * Unproject world point [x,y] on map onto {lat, lon} on sphere
 	     * @param {object|Vector} xy - object with {x,y} members
@@ -1160,87 +1160,87 @@ declare module '@deck.gl/core/viewports/viewport' {
 	     *   Has toArray method if you need a GeoJSON Array.
 	     *   Per cartographic tradition, lat and lon are specified as degrees.
 	     */
-	    unprojectFlat(xyz: any, scale?: any): any;
-	    getDistanceScales(coordinateOrigin?: any): any;
-	    getMatrices({ modelMatrix }?: {
-	        modelMatrix?: any;
-	    }): any;
-	    containsPixel({ x, y, width, height }: {
-	        x: any;
-	        y: any;
-	        width?: number;
-	        height?: number;
-	    }): boolean;
-	    getFrustumPlanes(): any;
-	    getCameraPosition(): any;
-	    getCameraDirection(): any;
-	    getCameraUp(): any;
-	    _createProjectionMatrix({ orthographic, fovyRadians, aspect, focalDistance, near, far }: {
-	        orthographic: any;
-	        fovyRadians: any;
-	        aspect: any;
-	        focalDistance: any;
-	        near: any;
-	        far: any;
-	    }): any;
-	    _initViewMatrix(opts: any): void;
-	    _getCenterInWorld({ longitude, latitude }: {
-	        longitude: any;
-	        latitude: any;
-	    }): any;
-	    _initProjectionMatrix(opts: any): void;
-	    _initPixelMatrices(): void;
+		unprojectFlat(xyz: any, scale?: any): any;
+		getDistanceScales(coordinateOrigin?: any): any;
+		getMatrices({ modelMatrix }?: {
+			modelMatrix?: any;
+		}): any;
+		containsPixel({ x, y, width, height }: {
+			x: any;
+			y: any;
+			width?: number;
+			height?: number;
+		}): boolean;
+		getFrustumPlanes(): any;
+		getCameraPosition(): any;
+		getCameraDirection(): any;
+		getCameraUp(): any;
+		_createProjectionMatrix({ orthographic, fovyRadians, aspect, focalDistance, near, far }: {
+			orthographic: any;
+			fovyRadians: any;
+			aspect: any;
+			focalDistance: any;
+			near: any;
+			far: any;
+		}): any;
+		_initViewMatrix(opts: any): void;
+		_getCenterInWorld({ longitude, latitude }: {
+			longitude: any;
+			latitude: any;
+		}): any;
+		_initProjectionMatrix(opts: any): void;
+		_initPixelMatrices(): void;
 	}
 
 }
 declare module '@deck.gl/core/lib/layer-manager' {
 	export default class LayerManager {
-	    constructor(gl: any, { deck, stats, viewport, timeline }?: {
-	        deck: any;
-	        stats: any;
-	        viewport?: any;
-	        timeline?: any;
-	    });
-	    finalize(): void;
-	    needsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): any;
-	    needsUpdate(): any;
-	    setNeedsRedraw(reason: any): void;
-	    setNeedsUpdate(reason: any): void;
-	    getLayers({ layerIds }?: {
-	        layerIds?: any;
-	    }): any;
-	    setProps(props: any): void;
-	    setLayers(newLayers: any, forceUpdate?: boolean): this;
-	    updateLayers(): void;
-	    _checkIfNeedsRedraw(opts: any): any;
-	    activateViewport(viewport: any): this;
-	    _updateLayers({ oldLayers, newLayers }: {
-	        oldLayers: any;
-	        newLayers: any;
-	    }): {
-	        error: any;
-	        generatedLayers: any[];
-	    };
-	    _updateSublayersRecursively({ newLayers, oldLayerMap, generatedLayers }: {
-	        newLayers: any;
-	        oldLayerMap: any;
-	        generatedLayers: any;
-	    }): any;
-	    _finalizeOldLayers(oldLayerMap: any): any;
-	    _initializeLayer(layer: any): any;
-	    _transferLayerState(oldLayer: any, newLayer: any): void;
-	    _updateLayer(layer: any): any;
-	    _finalizeLayer(layer: any): any;
+		constructor(gl: any, { deck, stats, viewport, timeline }?: {
+			deck: any;
+			stats: any;
+			viewport?: any;
+			timeline?: any;
+		});
+		finalize(): void;
+		needsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): any;
+		needsUpdate(): any;
+		setNeedsRedraw(reason: any): void;
+		setNeedsUpdate(reason: any): void;
+		getLayers({ layerIds }?: {
+			layerIds?: any;
+		}): any;
+		setProps(props: any): void;
+		setLayers(newLayers: any, forceUpdate?: boolean): this;
+		updateLayers(): void;
+		_checkIfNeedsRedraw(opts: any): any;
+		activateViewport(viewport: any): this;
+		_updateLayers({ oldLayers, newLayers }: {
+			oldLayers: any;
+			newLayers: any;
+		}): {
+			error: any;
+			generatedLayers: any[];
+		};
+		_updateSublayersRecursively({ newLayers, oldLayerMap, generatedLayers }: {
+			newLayers: any;
+			oldLayerMap: any;
+			generatedLayers: any;
+		}): any;
+		_finalizeOldLayers(oldLayerMap: any): any;
+		_initializeLayer(layer: any): any;
+		_transferLayerState(oldLayer: any, newLayer: any): void;
+		_updateLayer(layer: any): any;
+		_finalizeLayer(layer: any): any;
 	    /**
 	     * Called upon Seer initialization, manually sends layers data.
 	     */
-	    _initSeer(): void;
+		_initSeer(): void;
 	    /**
 	     * On Seer property edition, set override and update layers.
 	     */
-	    _editSeer(payload: any): void;
+		_editSeer(payload: any): void;
 	}
 
 }
@@ -1255,26 +1255,26 @@ declare module 'lib' {
 declare module '@deck.gl/core/effects/lighting/point-light' {
 	import { PointLight as BasePointLight } from '@luma.gl/core';
 	export default class PointLight extends BasePointLight {
-	    constructor(props: any);
-	    getProjectedLight({ layer }: {
-	        layer: any;
-	    }): any;
+		constructor(props: any);
+		getProjectedLight({ layer }: {
+			layer: any;
+		}): any;
 	}
 
 }
 declare module '@deck.gl/core/effects/lighting/camera-light' {
 	import PointLight from '@deck.gl/core/effects/lighting/point-light';
 	export default class CameraLight extends PointLight {
-	    getProjectedLight({ layer }: {
-	        layer: any;
-	    }): any;
+		getProjectedLight({ layer }: {
+			layer: any;
+		}): any;
 	}
 
 }
 declare module '@deck.gl/core/effects/lighting/suncalc' {
 	export function getSolarPosition(timestamp: any, latitude: any, longitude: any): {
-	    azimuth: number;
-	    altitude: number;
+		azimuth: number;
+		altitude: number;
 	};
 	export function getSunlightDirection(timestamp: any, latitude: any, longitude: any): number[];
 
@@ -1282,46 +1282,46 @@ declare module '@deck.gl/core/effects/lighting/suncalc' {
 declare module '@deck.gl/core/effects/lighting/sun-light' {
 	import DirectionalLight from '@deck.gl/core/effects/lighting/directional-light';
 	export default class SunLight extends DirectionalLight {
-	    constructor({ timestamp, ...others }: {
-	        [x: string]: any;
-	        timestamp: any;
-	    });
-	    getProjectedLight({ layer }: {
-	        layer: any;
-	    }): this;
+		constructor({ timestamp, ...others }: {
+			[x: string]: any;
+			timestamp: any;
+		});
+		getProjectedLight({ layer }: {
+			layer: any;
+		}): this;
 	}
 
 }
 declare module '@deck.gl/core/passes/screen-pass' {
 	import Pass from '@deck.gl/core/passes/pass';
 	export default class ScreenPass extends Pass {
-	    constructor(gl: any, props?: {});
-	    render(params: any): void;
-	    delete(): void;
-	    _getModel(gl: any, module: any, fs: any, id: any, userProps: any): any;
+		constructor(gl: any, props?: {});
+		render(params: any): void;
+		delete(): void;
+		_getModel(gl: any, module: any, fs: any, id: any, userProps: any): any;
 	    /**
 	     * Renders the pass.
 	     * This is an abstract method that should be overridden.
 	     * @param {Framebuffer} inputBuffer - Frame buffer that contains the result of the previous pass
 	     * @param {Framebuffer} outputBuffer - Frame buffer that serves as the output render target
 	     */
-	    _renderPass(gl: any, { inputBuffer, outputBuffer }: {
-	        inputBuffer: any;
-	        outputBuffer: any;
-	    }): void;
+		_renderPass(gl: any, { inputBuffer, outputBuffer }: {
+			inputBuffer: any;
+			outputBuffer: any;
+		}): void;
 	}
 
 }
 declare module '@deck.gl/core/effects/post-process-effect' {
 	import Effect from '@deck.gl/core/lib/effect';
 	export default class PostProcessEffect extends Effect {
-	    constructor(module: any, props?: {});
-	    prepare(gl: any): void;
-	    render(params: any): {
-	        inputBuffer: any;
-	        outputBuffer: any;
-	    };
-	    cleanup(): void;
+		constructor(module: any, props?: {});
+		prepare(gl: any): void;
+		render(params: any): {
+			inputBuffer: any;
+			outputBuffer: any;
+		};
+		cleanup(): void;
 	}
 
 }
@@ -1332,52 +1332,52 @@ declare module '@deck.gl/core/utils/deep-equal' {
 declare module '@deck.gl/core/utils/positions' {
 	export type Position = [number, number] | [number, number, number];
 	export function parsePosition(value: any): {
-	    position: number;
-	    relative: boolean;
+		position: number;
+		relative: boolean;
 	};
 	export function getPosition(position: any, extent: any): any;
 
 }
 declare module '@deck.gl/core/views/view' {
 	export default class View {
-	    constructor(props?: {});
-	    equals(view: any): any;
-	    makeViewport({ width, height, viewState }: {
-	        width: any;
-	        height: any;
-	        viewState: any;
-	    }): any;
-	    getViewStateId(): any;
-	    filterViewState(viewState: any): any;
-	    getDimensions({ width, height }: {
-	        width: any;
-	        height: any;
-	    }): {
-	        x: any;
-	        y: any;
-	        width: any;
-	        height: any;
-	    };
-	    _getControllerProps(defaultOpts: any): any;
-	    _getViewport(props: any): any;
-	    _parseDimensions({ x, y, width, height }: {
-	        x: any;
-	        y: any;
-	        width: any;
-	        height: any;
-	    }): void;
+		constructor(props?: {});
+		equals(view: any): any;
+		makeViewport({ width, height, viewState }: {
+			width: any;
+			height: any;
+			viewState: any;
+		}): any;
+		getViewStateId(): any;
+		filterViewState(viewState: any): any;
+		getDimensions({ width, height }: {
+			width: any;
+			height: any;
+		}): {
+			x: any;
+			y: any;
+			width: any;
+			height: any;
+		};
+		_getControllerProps(defaultOpts: any): any;
+		_getViewport(props: any): any;
+		_parseDimensions({ x, y, width, height }: {
+			x: any;
+			y: any;
+			width: any;
+			height: any;
+		}): void;
 	}
 
 }
 declare module '@deck.gl/core/lib/view-manager' {
 	export default class ViewManager {
-	    constructor(props?: {});
-	    finalize(): void;
-	    needsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): any;
-	    setNeedsUpdate(reason: any): void;
-	    updateViewStates(): void;
+		constructor(props?: {});
+		finalize(): void;
+		needsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): any;
+		setNeedsUpdate(reason: any): void;
+		updateViewStates(): void;
 	    /** Get a set of viewports for a given width and height
 	     * TODO - Intention is for deck.gl to autodeduce width and height and drop the need for props
 	     * @param rect (object, optional) - filter the viewports
@@ -1385,11 +1385,11 @@ declare module '@deck.gl/core/lib/view-manager' {
 	     *   + {x, y} - only return viewports that contain this pixel
 	     *   + {x, y, width, height} - only return viewports that overlap with this rectangle
 	     */
-	    getViewports(rect: any): any;
-	    getViews(): {};
-	    getView(viewOrViewId: any): any;
-	    getViewState(viewId: any): any;
-	    getViewport(viewId: any): any;
+		getViewports(rect: any): any;
+		getViews(): {};
+		getView(viewOrViewId: any): any;
+		getViewState(viewId: any): any;
+		getViewport(viewId: any): any;
 	    /**
 	     * Unproject pixel coordinates on screen onto world coordinates,
 	     * (possibly [lon, lat]) on map.
@@ -1400,18 +1400,18 @@ declare module '@deck.gl/core/lib/view-manager' {
 	     * @param {Object} opts.topLeft=true - Whether origin is top left
 	     * @return {Array|null} - [lng, lat, Z] or [X, Y, Z]
 	     */
-	    unproject(xyz: any, opts: any): any;
-	    setProps(props: any): void;
-	    _update(): void;
-	    _setSize(width: any, height: any): void;
-	    _setViews(views: any): void;
-	    _setViewState(viewState: any): void;
-	    _onViewStateChange(viewId: any, event: any): void;
-	    _createController(props: any): any;
-	    _updateController(view: any, viewState: any, viewport: any, controller: any): any;
-	    _rebuildViewports(): void;
-	    _buildViewportMap(): void;
-	    _diffViews(newViews: any, oldViews: any): any;
+		unproject(xyz: any, opts: any): any;
+		setProps(props: any): void;
+		_update(): void;
+		_setSize(width: any, height: any): void;
+		_setViews(views: any): void;
+		_setViewState(viewState: any): void;
+		_onViewStateChange(viewId: any, event: any): void;
+		_createController(props: any): any;
+		_updateController(view: any, viewState: any, viewport: any, controller: any): any;
+		_rebuildViewports(): void;
+		_buildViewportMap(): void;
+		_diffViews(newViews: any, oldViews: any): any;
 	}
 
 }
@@ -1424,7 +1424,7 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	     * Note: The Viewport is immutable in the sense that it only has accessors.
 	     * A new viewport instance should be created if any parameters have changed.
 	     */
-	    constructor(opts?: {});
+		constructor(opts?: {});
 	    /**
 	     * Converts a meter offset to a lnglat offset
 	     *
@@ -1434,7 +1434,7 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	     * @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
 	     * @return {[Number,Number]|[Number,Number,Number]) - array of [lng,lat,z] deltas
 	     */
-	    metersToLngLatDelta(xyz: any): any[];
+		metersToLngLatDelta(xyz: any): any[];
 	    /**
 	     * Converts a lnglat offset to a meter offset
 	     *
@@ -1444,7 +1444,7 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	     * @param {[Number,Number]|[Number,Number,Number]) deltaLngLatZ - array of [lng,lat,z] deltas
 	     * @return {[Number,Number]|[Number,Number,Number]) - array of meter deltas
 	     */
-	    lngLatDeltaToMeters(deltaLngLatZ: any): any[];
+		lngLatDeltaToMeters(deltaLngLatZ: any): any[];
 	    /**
 	     * Add a meter delta to a base lnglat coordinate, returning a new lnglat array
 	     *
@@ -1455,7 +1455,7 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	     * @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
 	     * @return {[Number,Number]|[Number,Number,Number]) array of [lng,lat,z] deltas
 	     */
-	    addMetersToLngLat(lngLatZ: any, xyz: any): any;
+		addMetersToLngLat(lngLatZ: any, xyz: any): any;
 	    /**
 	     * Get the map center that place a given [lng, lat] coordinate at screen
 	     * point [x, y]
@@ -1466,14 +1466,14 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	     *   Specifies a point on the screen.
 	     * @return {Array} [lng,lat] new map center.
 	     */
-	    getMapCenterByLngLatPosition({ lngLat, pos }: {
-	        lngLat: any;
-	        pos: any;
-	    }): any;
-	    getLocationAtPoint({ lngLat, pos }: {
-	        lngLat: any;
-	        pos: any;
-	    }): any;
+		getMapCenterByLngLatPosition({ lngLat, pos }: {
+			lngLat: any;
+			pos: any;
+		}): any;
+		getLocationAtPoint({ lngLat, pos }: {
+			lngLat: any;
+			pos: any;
+		}): any;
 	    /**
 	     * Returns a new viewport that fit around the given rectangle.
 	     * Only supports non-perspective mode.
@@ -1483,7 +1483,7 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	     *    [x, y] measured in pixels.
 	     * @returns {WebMercatorViewport}
 	     */
-	    fitBounds(bounds: any, options?: {}): WebMercatorViewport;
+		fitBounds(bounds: any, options?: {}): WebMercatorViewport;
 	}
 
 }
@@ -1496,14 +1496,14 @@ declare module '@deck.gl/core/transitions/transition-interpolator' {
 	     * @param opts.required {array} - prop names that must be supplied
 	     * alternatively, supply one list of prop names as `opts` if all of the above are the same.
 	     */
-	    constructor(opts?: {});
+		constructor(opts?: {});
 	    /**
 	     * Checks if two sets of props need transition in between
 	     * @param currentProps {object} - a list of viewport props
 	     * @param nextProps {object} - a list of viewport props
 	     * @returns {bool} - true if two props are equivalent
 	     */
-	    arePropsEqual(currentProps: any, nextProps: any): boolean;
+		arePropsEqual(currentProps: any, nextProps: any): boolean;
 	    /**
 	     * Called before transition starts to validate/pre-process start and end props
 	     * @param startProps {object} - a list of starting viewport props
@@ -1511,7 +1511,7 @@ declare module '@deck.gl/core/transitions/transition-interpolator' {
 	     * @returns {Object} {start, end} - start and end props to be passed
 	     *   to `interpolateProps`
 	     */
-	    initializeProps(startProps: any, endProps: any): any;
+		initializeProps(startProps: any, endProps: any): any;
 	    /**
 	     * Returns viewport props in transition
 	     * @param startProps {object} - a list of starting viewport props
@@ -1519,8 +1519,8 @@ declare module '@deck.gl/core/transitions/transition-interpolator' {
 	     * @param t {number} - a time factor between [0, 1]
 	     * @returns {object} - a list of interpolated viewport props
 	     */
-	    interpolateProps(startProps: any, endProps: any, t: any): void;
-	    _checkRequiredProps(props: any): void;
+		interpolateProps(startProps: any, endProps: any, t: any): void;
+		_checkRequiredProps(props: any): void;
 	}
 
 }
@@ -1533,79 +1533,79 @@ declare module '@deck.gl/core/transitions/linear-interpolator' {
 	    /**
 	     * @param {Array} transitionProps - list of props to apply linear transition to.
 	     */
-	    constructor(transitionProps?: string[]);
-	    interpolateProps(startProps: any, endProps: any, t: any): {};
+		constructor(transitionProps?: string[]);
+		interpolateProps(startProps: any, endProps: any, t: any): {};
 	}
 
 }
 declare module '@deck.gl/core/controllers/transition-manager' {
 	export const TRANSITION_EVENTS: {
-	    BREAK: number;
-	    SNAP_TO_END: number;
-	    IGNORE: number;
+		BREAK: number;
+		SNAP_TO_END: number;
+		IGNORE: number;
 	};
 	export default class TransitionManager {
-	    constructor(ControllerState: any, props?: {});
-	    finalize(): void;
-	    getViewportInTransition(): any;
-	    processViewStateChange(nextProps: any): boolean;
-	    updateTransition(): void;
-	    _isTransitionEnabled(props: any): any;
-	    _isUpdateDueToCurrentTransition(props: any): any;
-	    _shouldIgnoreViewportChange(currentProps: any, nextProps: any): any;
-	    _triggerTransition(startProps: any, endProps: any): void;
-	    _onTransitionEnd(callback: any): (transition: any) => void;
-	    _onTransitionUpdate(transition: any): void;
+		constructor(ControllerState: any, props?: {});
+		finalize(): void;
+		getViewportInTransition(): any;
+		processViewStateChange(nextProps: any): boolean;
+		updateTransition(): void;
+		_isTransitionEnabled(props: any): any;
+		_isUpdateDueToCurrentTransition(props: any): any;
+		_shouldIgnoreViewportChange(currentProps: any, nextProps: any): any;
+		_triggerTransition(startProps: any, endProps: any): void;
+		_onTransitionEnd(callback: any): (transition: any) => void;
+		_onTransitionUpdate(transition: any): void;
 	}
 
 }
 declare module '@deck.gl/core/controllers/controller' {
-	export interface ControllerOptions {}
+	export interface ControllerOptions { }
 	export default class Controller {
-	    constructor(ControllerState: any, options?: ControllerOptions);
-	    finalize(): void;
+		constructor(ControllerState: any, options?: ControllerOptions);
+		finalize(): void;
 	    /**
 	     * Callback for events
 	     * @param {hammer.Event} event
 	     */
-	    handleEvent(event: any): boolean;
-	    getCenter(event: any): number[];
-	    isPointInBounds(pos: any, event: any): boolean;
-	    isFunctionKeyPressed(event: any): boolean;
-	    isDragging(): any;
+		handleEvent(event: any): boolean;
+		getCenter(event: any): number[];
+		isPointInBounds(pos: any, event: any): boolean;
+		isFunctionKeyPressed(event: any): boolean;
+		isDragging(): any;
 	    /**
 	     * Extract interactivity options
 	     */
-	    setProps(props: any): void;
-	    updateTransition(): void;
-	    toggleEvents(eventNames: any, enabled: any): void;
-	    setOptions(props: any): void;
-	    updateViewport(newControllerState: any, extraProps?: {}, interactionState?: {}): void;
-	    _onPanStart(event: any): boolean;
-	    _onPan(event: any): boolean;
-	    _onPanEnd(event: any): boolean;
-	    _onPanMove(event: any): boolean;
-	    _onPanRotate(event: any): boolean | void;
-	    _onWheel(event: any): boolean;
-	    _onPinchStart(event: any): boolean;
-	    _onPinch(event: any): boolean;
-	    _onPinchEnd(event: any): boolean;
-	    _onDoubleTap(event: any): boolean;
-	    _onKeyDown(event: any): boolean;
-	    _getTransitionProps(): {
-	        transitionDuration: number;
-	    };
+		setProps(props: any): void;
+		updateTransition(): void;
+		toggleEvents(eventNames: any, enabled: any): void;
+		setOptions(props: any): void;
+		updateViewport(newControllerState: any, extraProps?: {}, interactionState?: {}): void;
+		_onPanStart(event: any): boolean;
+		_onPan(event: any): boolean;
+		_onPanEnd(event: any): boolean;
+		_onPanMove(event: any): boolean;
+		_onPanRotate(event: any): boolean | void;
+		_onWheel(event: any): boolean;
+		_onPinchStart(event: any): boolean;
+		_onPinch(event: any): boolean;
+		_onPinchEnd(event: any): boolean;
+		_onDoubleTap(event: any): boolean;
+		_onKeyDown(event: any): boolean;
+		_getTransitionProps(): {
+			transitionDuration: number;
+		};
 	}
 
 }
 declare module '@deck.gl/core/controllers/view-state' {
 	export default class ViewState {
-	    constructor(opts: any);
-	    getViewportProps(): any;
-	    getDirection(): any;
-	    getDirectionFromBearing(bearing: any): any;
-	    shortestPathFrom(viewState: any): any;
-	    _applyConstraints(props: any): any;
+		constructor(opts: any);
+		getViewportProps(): any;
+		getDirection(): any;
+		getDirectionFromBearing(bearing: any): any;
+		shortestPathFrom(viewState: any): any;
+		_applyConstraints(props: any): any;
 	}
 
 }
@@ -1614,92 +1614,92 @@ declare module '@deck.gl/core/controllers/map-controller' {
 	import ViewState from '@deck.gl/core/controllers/view-state';
 	import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
 	export const MAPBOX_LIMITS: {
-	    minZoom: number;
-	    maxZoom: number;
-	    minPitch: number;
-	    maxPitch: number;
+		minZoom: number;
+		maxZoom: number;
+		minPitch: number;
+		maxPitch: number;
 	}; class MapState extends ViewState {
-	    constructor({ 
-	    /** Mapbox viewport properties */
-	    /** The width of the viewport */
-	    width, 
-	    /** The height of the viewport */
-	    height, 
-	    /** The latitude at the center of the viewport */
-	    latitude, 
-	    /** The longitude at the center of the viewport */
-	    longitude, 
-	    /** The tile zoom level of the map. */
-	    zoom, 
-	    /** The bearing of the viewport in degrees */
-	    bearing, 
-	    /** The pitch of the viewport in degrees */
-	    pitch, 
-	    /**
-	     * Specify the altitude of the viewport camera
-	     * Unit: map heights, default 1.5
-	     * Non-public API, see https://github.com/mapbox/mapbox-gl-js/issues/1137
-	     */
-	    altitude, 
-	    /** Viewport constraints */
-	    maxZoom, minZoom, maxPitch, minPitch, 
-	    /** Interaction states, required to calculate change during transform */
-	    startPanLngLat, startZoomLngLat, 
-	    /** Bearing when current perspective rotate operation started */
-	    startBearing, 
-	    /** Pitch when current perspective rotate operation started */
-	    startPitch, 
-	    /** Zoom when current zoom operation started */
-	    startZoom }?: {
-	        width: any;
-	        height: any;
-	        latitude: any;
-	        longitude: any;
-	        zoom: any;
-	        bearing?: number;
-	        pitch?: number;
-	        altitude?: number;
-	        maxZoom?: number;
-	        minZoom?: number;
-	        maxPitch?: number;
-	        minPitch?: number;
-	        startPanLngLat: any;
-	        startZoomLngLat: any;
-	        startBearing: any;
-	        startPitch: any;
-	        startZoom: any;
-	    });
-	    getViewportProps(): any;
-	    getInteractiveState(): any;
+		constructor({
+			/** Mapbox viewport properties */
+			/** The width of the viewport */
+			width,
+			/** The height of the viewport */
+			height,
+			/** The latitude at the center of the viewport */
+			latitude,
+			/** The longitude at the center of the viewport */
+			longitude,
+			/** The tile zoom level of the map. */
+			zoom,
+			/** The bearing of the viewport in degrees */
+			bearing,
+			/** The pitch of the viewport in degrees */
+			pitch,
+			/**
+			 * Specify the altitude of the viewport camera
+			 * Unit: map heights, default 1.5
+			 * Non-public API, see https://github.com/mapbox/mapbox-gl-js/issues/1137
+			 */
+			altitude,
+			/** Viewport constraints */
+			maxZoom, minZoom, maxPitch, minPitch,
+			/** Interaction states, required to calculate change during transform */
+			startPanLngLat, startZoomLngLat,
+			/** Bearing when current perspective rotate operation started */
+			startBearing,
+			/** Pitch when current perspective rotate operation started */
+			startPitch,
+			/** Zoom when current zoom operation started */
+			startZoom }?: {
+				width: any;
+				height: any;
+				latitude: any;
+				longitude: any;
+				zoom: any;
+				bearing?: number;
+				pitch?: number;
+				altitude?: number;
+				maxZoom?: number;
+				minZoom?: number;
+				maxPitch?: number;
+				minPitch?: number;
+				startPanLngLat: any;
+				startZoomLngLat: any;
+				startBearing: any;
+				startPitch: any;
+				startZoom: any;
+			});
+		getViewportProps(): any;
+		getInteractiveState(): any;
 	    /**
 	     * Start panning
 	     * @param {[Number, Number]} pos - position on screen where the pointer grabs
 	     */
-	    panStart({ pos }: {
-	        pos: any;
-	    }): MapState;
+		panStart({ pos }: {
+			pos: any;
+		}): MapState;
 	    /**
 	     * Pan
 	     * @param {[Number, Number]} pos - position on screen where the pointer is
 	     * @param {[Number, Number], optional} startPos - where the pointer grabbed at
 	     *   the start of the operation. Must be supplied of `panStart()` was not called
 	     */
-	    pan({ pos, startPos }: {
-	        pos: any;
-	        startPos: any;
-	    }): MapState;
+		pan({ pos, startPos }: {
+			pos: any;
+			startPos: any;
+		}): MapState;
 	    /**
 	     * End panning
 	     * Must call if `panStart()` was called
 	     */
-	    panEnd(): MapState;
+		panEnd(): MapState;
 	    /**
 	     * Start rotating
 	     * @param {[Number, Number]} pos - position on screen where the center is
 	     */
-	    rotateStart({ pos }: {
-	        pos: any;
-	    }): MapState;
+		rotateStart({ pos }: {
+			pos: any;
+		}): MapState;
 	    /**
 	     * Rotate
 	     * @param {Number} deltaScaleX - a number between [-1, 1] specifying the
@@ -1707,22 +1707,22 @@ declare module '@deck.gl/core/controllers/map-controller' {
 	     * @param {Number} deltaScaleY - a number between [-1, 1] specifying the
 	     *   change to pitch. -1 sets to minPitch and 1 sets to maxPitch.
 	     */
-	    rotate({ deltaScaleX, deltaScaleY }: {
-	        deltaScaleX?: number;
-	        deltaScaleY?: number;
-	    }): MapState;
+		rotate({ deltaScaleX, deltaScaleY }: {
+			deltaScaleX?: number;
+			deltaScaleY?: number;
+		}): MapState;
 	    /**
 	     * End rotating
 	     * Must call if `rotateStart()` was called
 	     */
-	    rotateEnd(): MapState;
+		rotateEnd(): MapState;
 	    /**
 	     * Start zooming
 	     * @param {[Number, Number]} pos - position on screen where the center is
 	     */
-	    zoomStart({ pos }: {
-	        pos: any;
-	    }): MapState;
+		zoomStart({ pos }: {
+			pos: any;
+		}): MapState;
 	    /**
 	     * Zoom
 	     * @param {[Number, Number]} pos - position on screen where the current center is
@@ -1731,155 +1731,155 @@ declare module '@deck.gl/core/controllers/map-controller' {
 	     * @param {Number} scale - a number between [0, 1] specifying the accumulated
 	     *   relative scale.
 	     */
-	    zoom({ pos, startPos, scale }: {
-	        pos: any;
-	        startPos: any;
-	        scale: any;
-	    }): MapState;
+		zoom({ pos, startPos, scale }: {
+			pos: any;
+			startPos: any;
+			scale: any;
+		}): MapState;
 	    /**
 	     * End zooming
 	     * Must call if `zoomStart()` was called
 	     */
-	    zoomEnd(): MapState;
-	    zoomIn(): any;
-	    zoomOut(): any;
-	    moveLeft(): MapState;
-	    moveRight(): MapState;
-	    moveUp(): MapState;
-	    moveDown(): MapState;
-	    rotateLeft(): MapState;
-	    rotateRight(): MapState;
-	    rotateUp(): MapState;
-	    rotateDown(): MapState;
-	    shortestPathFrom(viewState: any): any;
-	    _zoomFromCenter(scale: any): any;
-	    _panFromCenter(offset: any): MapState;
-	    _getUpdatedState(newProps: any): MapState;
-	    _applyConstraints(props: any): any;
-	    _unproject(pos: any): any;
-	    _calculateNewLngLat({ startPanLngLat, pos }: {
-	        startPanLngLat: any;
-	        pos: any;
-	    }): any;
-	    _calculateNewZoom({ scale, startZoom }: {
-	        scale: any;
-	        startZoom: any;
-	    }): any;
-	    _calculateNewPitchAndBearing({ deltaScaleX, deltaScaleY, startBearing, startPitch }: {
-	        deltaScaleX: any;
-	        deltaScaleY: any;
-	        startBearing: any;
-	        startPitch: any;
-	    }): {
-	        pitch: any;
-	        bearing: any;
-	    };
+		zoomEnd(): MapState;
+		zoomIn(): any;
+		zoomOut(): any;
+		moveLeft(): MapState;
+		moveRight(): MapState;
+		moveUp(): MapState;
+		moveDown(): MapState;
+		rotateLeft(): MapState;
+		rotateRight(): MapState;
+		rotateUp(): MapState;
+		rotateDown(): MapState;
+		shortestPathFrom(viewState: any): any;
+		_zoomFromCenter(scale: any): any;
+		_panFromCenter(offset: any): MapState;
+		_getUpdatedState(newProps: any): MapState;
+		_applyConstraints(props: any): any;
+		_unproject(pos: any): any;
+		_calculateNewLngLat({ startPanLngLat, pos }: {
+			startPanLngLat: any;
+			pos: any;
+		}): any;
+		_calculateNewZoom({ scale, startZoom }: {
+			scale: any;
+			startZoom: any;
+		}): any;
+		_calculateNewPitchAndBearing({ deltaScaleX, deltaScaleY, startBearing, startPitch }: {
+			deltaScaleX: any;
+			deltaScaleY: any;
+			startBearing: any;
+			startPitch: any;
+		}): {
+			pitch: any;
+			bearing: any;
+		};
 	}
 	export default class MapController extends Controller {
-	    constructor(props: any);
-	    _getTransitionProps(): {
-	        transitionDuration: number;
-	        transitionEasing: (t: any) => any;
-	        transitionInterpolator: LinearInterpolator;
-	        transitionInterruption: number;
-	    };
-	    _onPanRotate(event: any): boolean | void;
+		constructor(props: any);
+		_getTransitionProps(): {
+			transitionDuration: number;
+			transitionEasing: (t: any) => any;
+			transitionInterpolator: LinearInterpolator;
+			transitionInterruption: number;
+		};
+		_onPanRotate(event: any): boolean | void;
 	}
 	export const testExports: {
-	    MapState: typeof MapState;
+		MapState: typeof MapState;
 	};
-	export {};
+	export { };
 
 }
 declare module '@deck.gl/core/views/map-view' {
 	import View from '@deck.gl/core/views/view';
 	export default class MapView extends View {
-	    constructor(props: any);
-	    readonly controller: any;
+		constructor(props: any);
+		readonly controller: any;
 	}
 
 }
 declare module '@deck.gl/core/lib/effect-manager' {
 	export default class EffectManager {
-	    constructor();
-	    setProps(props: any): void;
-	    needsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): any;
-	    getEffects(): any;
-	    finalize(): void;
-	    setEffects(effects?: any[]): void;
-	    cleanup(): void;
-	    _createInternalEffects(): void;
+		constructor();
+		setProps(props: any): void;
+		needsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): any;
+		getEffects(): any;
+		finalize(): void;
+		setEffects(effects?: any[]): void;
+		cleanup(): void;
+		_createInternalEffects(): void;
 	}
 
 }
 declare module '@deck.gl/core/passes/draw-layers-pass' {
 	import LayersPass from '@deck.gl/core/passes/layers-pass';
 	export default class DrawLayersPass extends LayersPass {
-	    getModuleParameters(layer: any, effects: any, effectProps: any): any;
+		getModuleParameters(layer: any, effects: any, effectProps: any): any;
 	    /**
 	     * Returns the picking color of currenlty selected object of the given 'layer'.
 	     * @return {Array} - the picking color or null if layers selected object is invalid.
 	     */
-	    getObjectHighlightParameters(layer: any): {
-	        pickingHighlightColor: any[];
-	    };
+		getObjectHighlightParameters(layer: any): {
+			pickingHighlightColor: any[];
+		};
 	}
 
 }
 declare module '@deck.gl/core/passes/pick-layers-pass' {
 	import LayersPass from '@deck.gl/core/passes/layers-pass';
 	export default class PickLayersPass extends LayersPass {
-	    render(props: any): void;
-	    drawPickingBuffer({ layers, viewports, onViewportActive, pickingFBO, effectProps, deviceRect: { x, y, width, height }, redrawReason }: {
-	        layers: any;
-	        viewports: any;
-	        onViewportActive: any;
-	        pickingFBO: any;
-	        effectProps: any;
-	        deviceRect: {
-	            x: any;
-	            y: any;
-	            width: any;
-	            height: any;
-	        };
-	        redrawReason?: string;
-	    }): any;
-	    shouldDrawLayer(layer: any, viewport: any): any;
-	    getModuleParameters(layer: any, effects: any, effectProps: any): any;
-	    getLayerParameters(layer: any, layerIndex: any, glViewport: any, parameters: any): any;
+		render(props: any): void;
+		drawPickingBuffer({ layers, viewports, onViewportActive, pickingFBO, effectProps, deviceRect: { x, y, width, height }, redrawReason }: {
+			layers: any;
+			viewports: any;
+			onViewportActive: any;
+			pickingFBO: any;
+			effectProps: any;
+			deviceRect: {
+				x: any;
+				y: any;
+				width: any;
+				height: any;
+			};
+			redrawReason?: string;
+		}): any;
+		shouldDrawLayer(layer: any, viewport: any): any;
+		getModuleParameters(layer: any, effects: any, effectProps: any): any;
+		getLayerParameters(layer: any, layerIndex: any, glViewport: any, parameters: any): any;
 	}
 
 }
 declare module '@deck.gl/core/lib/deck-renderer' {
 	export default class DeckRenderer {
-	    constructor(gl: any);
-	    setProps(props: any): void;
-	    renderLayers({ layers, viewports, activateViewport, views, redrawReason, clearCanvas, effects, pass, stats }: {
-	        layers: any;
-	        viewports: any;
-	        activateViewport: any;
-	        views: any;
-	        redrawReason?: string;
-	        clearCanvas?: boolean;
-	        effects?: any[];
-	        pass: any;
-	        stats: any;
-	    }): void;
-	    needsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): any;
-	    finalize(): void;
-	    prepareEffects(params: any): {};
-	    prepareRenderBuffers(): void;
-	    postRender(effects: any): void;
-	    logRenderStats({ renderStats, pass, redrawReason, stats }: {
-	        renderStats: any;
-	        pass: any;
-	        redrawReason: any;
-	        stats: any;
-	    }): void;
+		constructor(gl: any);
+		setProps(props: any): void;
+		renderLayers({ layers, viewports, activateViewport, views, redrawReason, clearCanvas, effects, pass, stats }: {
+			layers: any;
+			viewports: any;
+			activateViewport: any;
+			views: any;
+			redrawReason?: string;
+			clearCanvas?: boolean;
+			effects?: any[];
+			pass: any;
+			stats: any;
+		}): void;
+		needsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): any;
+		finalize(): void;
+		prepareEffects(params: any): {};
+		prepareRenderBuffers(): void;
+		postRender(effects: any): void;
+		logRenderStats({ renderStats, pass, redrawReason, stats }: {
+			renderStats: any;
+			pass: any;
+			redrawReason: any;
+			stats: any;
+		}): void;
 	}
 
 }
@@ -1889,132 +1889,132 @@ declare module '@deck.gl/core/lib/picking/query-object' {
 	 * Returns the closest object to the pixel in shape `{pickedColor, pickedLayer, pickedObjectIndex}`
 	 */
 	export function getClosestObject({ pickedColors, layers, deviceX, deviceY, deviceRadius, deviceRect }: {
-	    pickedColors: any;
-	    layers: any;
-	    deviceX: any;
-	    deviceY: any;
-	    deviceRadius: any;
-	    deviceRect: any;
+		pickedColors: any;
+		layers: any;
+		deviceX: any;
+		deviceY: any;
+		deviceRadius: any;
+		deviceRect: any;
 	}): {
-	    pickedColor: any;
-	    pickedLayer: any;
-	    pickedObjectIndex: any;
+		pickedColor: any;
+		pickedLayer: any;
+		pickedObjectIndex: any;
 	};
 	/**
 	 * Examines a picking buffer for unique colors
 	 * Returns array of unique objects in shape `{x, y, pickedColor, pickedLayer, pickedObjectIndex}`
 	 */
 	export function getUniqueObjects({ pickedColors, layers }: {
-	    pickedColors: any;
-	    layers: any;
+		pickedColors: any;
+		layers: any;
 	}): any[];
 
 }
 declare module '@deck.gl/core/lib/picking/pick-info' {
 	export function processPickInfo({ pickInfo, lastPickedInfo, mode, layers, viewports, x, y, deviceX, deviceY, pixelRatio }: {
-	    pickInfo: any;
-	    lastPickedInfo: any;
-	    mode: any;
-	    layers: any;
-	    viewports: any;
-	    x: any;
-	    y: any;
-	    deviceX: any;
-	    deviceY: any;
-	    pixelRatio: any;
+		pickInfo: any;
+		lastPickedInfo: any;
+		mode: any;
+		layers: any;
+		viewports: any;
+		x: any;
+		y: any;
+		deviceX: any;
+		deviceY: any;
+		pixelRatio: any;
 	}): Map<any, any>;
 	export function getLayerPickingInfo({ layer, info, mode }: {
-	    layer: any;
-	    info: any;
-	    mode: any;
+		layer: any;
+		info: any;
+		mode: any;
 	}): any;
 
 }
 declare module '@deck.gl/core/lib/deck-picker' {
 	export default class DeckPicker {
-	    constructor(gl: any);
-	    setProps(props: any): void;
-	    pickObject({ x, y, mode, radius, layers, viewports, activateViewport, depth, event }: {
-	        x: any;
-	        y: any;
-	        mode: any;
-	        radius?: number;
-	        layers: any;
-	        viewports: any;
-	        activateViewport: any;
-	        depth?: number;
-	        event?: any;
-	    }): {
-	        result: any[];
-	        emptyInfo: any;
-	    };
-	    pickObjects({ x, y, width, height, layers, viewports, activateViewport }: {
-	        x: any;
-	        y: any;
-	        width: any;
-	        height: any;
-	        layers: any;
-	        viewports: any;
-	        activateViewport: any;
-	    }): any[];
-	    getLastPickedObject({ x, y, layers, viewports }: {
-	        x: any;
-	        y: any;
-	        layers: any;
-	        viewports: any;
-	    }, lastPickedInfo?: any): any;
-	    updatePickingBuffer(): any;
-	    pickClosestObject({ layers, viewports, x, y, radius, depth, mode, onViewportActive }: {
-	        layers: any;
-	        viewports: any;
-	        x: any;
-	        y: any;
-	        radius: any;
-	        depth?: number;
-	        mode: any;
-	        onViewportActive: any;
-	    }): {
-	        result: any[];
-	        emptyInfo: any;
-	    };
-	    pickVisibleObjects({ layers, viewports, x, y, width, height, mode, onViewportActive }: {
-	        layers: any;
-	        viewports: any;
-	        x: any;
-	        y: any;
-	        width: any;
-	        height: any;
-	        mode: any;
-	        onViewportActive: any;
-	    }): any[];
-	    drawAndSamplePickingBuffer({ layers, viewports, onViewportActive, deviceRect, redrawReason }: {
-	        layers: any;
-	        viewports: any;
-	        onViewportActive: any;
-	        deviceRect: any;
-	        redrawReason: any;
-	    }): Uint8Array;
-	    getPickingRect({ deviceX, deviceY, deviceRadius, deviceWidth, deviceHeight }: {
-	        deviceX: any;
-	        deviceY: any;
-	        deviceRadius: any;
-	        deviceWidth: any;
-	        deviceHeight: any;
-	    }): {
-	        x: number;
-	        y: number;
-	        width: number;
-	        height: number;
-	    };
-	    callLayerPickingCallbacks(infos: any, mode: any): any[];
+		constructor(gl: any);
+		setProps(props: any): void;
+		pickObject({ x, y, mode, radius, layers, viewports, activateViewport, depth, event }: {
+			x: any;
+			y: any;
+			mode: any;
+			radius?: number;
+			layers: any;
+			viewports: any;
+			activateViewport: any;
+			depth?: number;
+			event?: any;
+		}): {
+			result: any[];
+			emptyInfo: any;
+		};
+		pickObjects({ x, y, width, height, layers, viewports, activateViewport }: {
+			x: any;
+			y: any;
+			width: any;
+			height: any;
+			layers: any;
+			viewports: any;
+			activateViewport: any;
+		}): any[];
+		getLastPickedObject({ x, y, layers, viewports }: {
+			x: any;
+			y: any;
+			layers: any;
+			viewports: any;
+		}, lastPickedInfo?: any): any;
+		updatePickingBuffer(): any;
+		pickClosestObject({ layers, viewports, x, y, radius, depth, mode, onViewportActive }: {
+			layers: any;
+			viewports: any;
+			x: any;
+			y: any;
+			radius: any;
+			depth?: number;
+			mode: any;
+			onViewportActive: any;
+		}): {
+			result: any[];
+			emptyInfo: any;
+		};
+		pickVisibleObjects({ layers, viewports, x, y, width, height, mode, onViewportActive }: {
+			layers: any;
+			viewports: any;
+			x: any;
+			y: any;
+			width: any;
+			height: any;
+			mode: any;
+			onViewportActive: any;
+		}): any[];
+		drawAndSamplePickingBuffer({ layers, viewports, onViewportActive, deviceRect, redrawReason }: {
+			layers: any;
+			viewports: any;
+			onViewportActive: any;
+			deviceRect: any;
+			redrawReason: any;
+		}): Uint8Array;
+		getPickingRect({ deviceX, deviceY, deviceRadius, deviceWidth, deviceHeight }: {
+			deviceX: any;
+			deviceY: any;
+			deviceRadius: any;
+			deviceWidth: any;
+			deviceHeight: any;
+		}): {
+			x: number;
+			y: number;
+			width: number;
+			height: number;
+		};
+		callLayerPickingCallbacks(infos: any, mode: any): any[];
 	}
 
 }
 declare module '@deck.gl/core/lib/tooltip' {
 	export default class Tooltip {
-	    constructor(canvas: any);
-	    setTooltip(displayInfo: any, x: any, y: any): void;
-	    remove(): void;
+		constructor(canvas: any);
+		setTooltip(displayInfo: any, x: any, y: any): void;
+		remove(): void;
 	}
 
 }
@@ -2032,7 +2032,7 @@ declare module '@deck.gl/core/lib/deck' {
 		onText: boolean;
 		onAxisSelection: boolean;
 	}
-	
+
 	export interface PickInfo {
 		layer: Layer,
 		index: number;
@@ -2041,7 +2041,7 @@ declare module '@deck.gl/core/lib/deck' {
 		y: number;
 		coordinate?: {}
 	}
-	
+
 	export interface DeckProps {
 		//https://github.com/uber/deck.gl/blob/6.3-release/modules/core/src/lib/deck.js
 
@@ -2069,7 +2069,7 @@ declare module '@deck.gl/core/lib/deck' {
 		useDevicePixels?: boolean;
 
 		// Callbacks
-		getCursor?: (interactiveState: InteractiveState)=> string;
+		getCursor?: (interactiveState: InteractiveState) => string;
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
 		onResize?: () => any;
 		onViewStateChange?: (viewState: any) => any;
@@ -2094,64 +2094,64 @@ declare module '@deck.gl/core/lib/deck' {
 		viewState: any;
 		finalize(): void;
 		props: DeckProps;
-	    setProps(props: Partial<DeckProps>): void;
-	    needsRedraw(opts?: {
-	        clearRedrawFlags: boolean;
-	    }): any;
-	    redraw(force: any): void;
-	    getViews(): any;
-	    getViewports(rect: any): any;
-	    pickObject({ x, y, radius, layerIds }: {
-	        x: any;
-	        y: any;
-	        radius?: number;
-	        layerIds?: any;
-	    }): any;
-	    pickMultipleObjects({ x, y, radius, layerIds, depth }: {
-	        x: any;
-	        y: any;
-	        radius?: number;
-	        layerIds?: any;
-	        depth?: number;
-	    }): any;
-	    pickObjects({ x, y, width, height, layerIds }: {
-	        x: any;
-	        y: any;
-	        width?: number;
-	        height?: number;
-	        layerIds?: any;
-	    }): any;
-	    _createCanvas(props: any): any;
-	    _setCanvasSize(props: any): void;
-	    _updateCanvasSize(): void;
-	    _checkForCanvasSizeChange(): boolean;
-	    _createAnimationLoop(props: any): any;
-	    _getViewState(props: any): any;
-	    _getViews(props: any): any;
-	    _onPointerMove(event: any): void;
-	    _pickAndCallback(): void;
-	    _updateCursor(): void;
-	    _setGLContext(gl: any): void;
-	    _drawLayers(redrawReason: any, renderOptions: any): void;
-	    _onRendererInitialized({ gl }: {
-	        gl: any;
-	    }): void;
-	    _onRenderFrame(animationProps: any): void;
-	    _onViewStateChange(params: any): void;
-	    _onInteractiveStateChange({ isDragging }: {
-	        isDragging?: boolean;
-	    }): void;
-	    _onEvent(event: any): void;
-	    _onPointerDown(event: any): void;
-	    _getFrameStats(): void;
-	    _getMetrics(): void;
+		setProps(props: Partial<DeckProps>): void;
+		needsRedraw(opts?: {
+			clearRedrawFlags: boolean;
+		}): any;
+		redraw(force: any): void;
+		getViews(): any;
+		getViewports(rect: any): any;
+		pickObject({ x, y, radius, layerIds }: {
+			x: any;
+			y: any;
+			radius?: number;
+			layerIds?: any;
+		}): any;
+		pickMultipleObjects({ x, y, radius, layerIds, depth }: {
+			x: any;
+			y: any;
+			radius?: number;
+			layerIds?: any;
+			depth?: number;
+		}): any;
+		pickObjects({ x, y, width, height, layerIds }: {
+			x: any;
+			y: any;
+			width?: number;
+			height?: number;
+			layerIds?: any;
+		}): any;
+		_createCanvas(props: any): any;
+		_setCanvasSize(props: any): void;
+		_updateCanvasSize(): void;
+		_checkForCanvasSizeChange(): boolean;
+		_createAnimationLoop(props: any): any;
+		_getViewState(props: any): any;
+		_getViews(props: any): any;
+		_onPointerMove(event: any): void;
+		_pickAndCallback(): void;
+		_updateCursor(): void;
+		_setGLContext(gl: any): void;
+		_drawLayers(redrawReason: any, renderOptions: any): void;
+		_onRendererInitialized({ gl }: {
+			gl: any;
+		}): void;
+		_onRenderFrame(animationProps: any): void;
+		_onViewStateChange(params: any): void;
+		_onInteractiveStateChange({ isDragging }: {
+			isDragging?: boolean;
+		}): void;
+		_onEvent(event: any): void;
+		_onPointerDown(event: any): void;
+		_getFrameStats(): void;
+		_getMetrics(): void;
 	}
 
 }
 declare module '@deck.gl/core/controllers/first-person-controller' {
 	import Controller from '@deck.gl/core/controllers/controller';
 	export default class FirstPersonController extends Controller {
-	    constructor(props: any);
+		constructor(props: any);
 	}
 
 }
@@ -2159,8 +2159,8 @@ declare module '@deck.gl/core/views/first-person-view' {
 	import View from '@deck.gl/core/views/view';
 	import Viewport from '@deck.gl/core/viewports/viewport';
 	export default class FirstPersonView extends View {
-	    readonly controller: any;
-	    _getViewport(props: any): Viewport;
+		readonly controller: any;
+		_getViewport(props: any): Viewport;
 	}
 
 }
@@ -2168,7 +2168,7 @@ declare module '@deck.gl/core/views/third-person-view' {
 	import View from '@deck.gl/core/views/view';
 	import Viewport from '@deck.gl/core/viewports/viewport';
 	export default class ThirdPersonView extends View {
-	    _getViewport(props: any): Viewport;
+		_getViewport(props: any): Viewport;
 	}
 
 }
@@ -2177,83 +2177,83 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 	import ViewState from '@deck.gl/core/controllers/view-state';
 	import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
 	export class OrbitState extends ViewState {
-	    constructor({ ViewportType, width, // Width of viewport
-	    height, // Height of viewport
-	    orbitAxis, rotationX, // Rotation around x axis
-	    rotationOrbit, // Rotation around orbit axis
-	    target, zoom, fovy, minRotationX, maxRotationX, minZoom, maxZoom, 
-	    /** Interaction states, required to calculate change during transform */
-	    startPanPosition, startTarget, startRotationX, startRotationOrbit, startZoomPosition, startZoom }: {
-	        ViewportType: any;
-	        width: any;
-	        height: any;
-	        orbitAxis?: string;
-	        rotationX?: number;
-	        rotationOrbit?: number;
-	        target?: number[];
-	        zoom?: number;
-	        fovy?: number;
-	        minRotationX?: number;
-	        maxRotationX?: number;
-	        minZoom?: number;
-	        maxZoom?: number;
-	        startPanPosition: any;
-	        startTarget: any;
-	        startRotationX: any;
-	        startRotationOrbit: any;
-	        startZoomPosition: any;
-	        startZoom: any;
-	    });
-	    getViewportProps(): any;
-	    getInteractiveState(): any;
+		constructor({ ViewportType, width, // Width of viewport
+			height, // Height of viewport
+			orbitAxis, rotationX, // Rotation around x axis
+			rotationOrbit, // Rotation around orbit axis
+			target, zoom, fovy, minRotationX, maxRotationX, minZoom, maxZoom,
+			/** Interaction states, required to calculate change during transform */
+			startPanPosition, startTarget, startRotationX, startRotationOrbit, startZoomPosition, startZoom }: {
+				ViewportType: any;
+				width: any;
+				height: any;
+				orbitAxis?: string;
+				rotationX?: number;
+				rotationOrbit?: number;
+				target?: number[];
+				zoom?: number;
+				fovy?: number;
+				minRotationX?: number;
+				maxRotationX?: number;
+				minZoom?: number;
+				maxZoom?: number;
+				startPanPosition: any;
+				startTarget: any;
+				startRotationX: any;
+				startRotationOrbit: any;
+				startZoomPosition: any;
+				startZoom: any;
+			});
+		getViewportProps(): any;
+		getInteractiveState(): any;
 	    /**
 	     * Start panning
 	     * @param {[Number, Number]} pos - position on screen where the pointer grabs
 	     */
-	    panStart({ pos }: {
-	        pos: any;
-	    }): OrbitState;
+		panStart({ pos }: {
+			pos: any;
+		}): OrbitState;
 	    /**
 	     * Pan
 	     * @param {[Number, Number]} pos - position on screen where the pointer is
 	     */
-	    pan({ pos, startPos }: {
-	        pos: any;
-	        startPos: any;
-	    }): OrbitState;
+		pan({ pos, startPos }: {
+			pos: any;
+			startPos: any;
+		}): OrbitState;
 	    /**
 	     * End panning
 	     * Must call if `panStart()` was called
 	     */
-	    panEnd(): OrbitState;
+		panEnd(): OrbitState;
 	    /**
 	     * Start rotating
 	     * @param {[Number, Number]} pos - position on screen where the pointer grabs
 	     */
-	    rotateStart({ pos }: {
-	        pos: any;
-	    }): OrbitState;
+		rotateStart({ pos }: {
+			pos: any;
+		}): OrbitState;
 	    /**
 	     * Rotate
 	     * @param {[Number, Number]} pos - position on screen where the pointer is
 	     */
-	    rotate({ deltaScaleX, deltaScaleY }: {
-	        deltaScaleX: any;
-	        deltaScaleY: any;
-	    }): OrbitState;
+		rotate({ deltaScaleX, deltaScaleY }: {
+			deltaScaleX: any;
+			deltaScaleY: any;
+		}): OrbitState;
 	    /**
 	     * End rotating
 	     * Must call if `rotateStart()` was called
 	     */
-	    rotateEnd(): OrbitState;
-	    shortestPathFrom(viewState: any): any;
+		rotateEnd(): OrbitState;
+		shortestPathFrom(viewState: any): any;
 	    /**
 	     * Start zooming
 	     * @param {[Number, Number]} pos - position on screen where the pointer grabs
 	     */
-	    zoomStart({ pos }: {
-	        pos: any;
-	    }): OrbitState;
+		zoomStart({ pos }: {
+			pos: any;
+		}): OrbitState;
 	    /**
 	     * Zoom
 	     * @param {[Number, Number]} pos - position on screen where the current target is
@@ -2262,54 +2262,54 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 	     * @param {Number} scale - a number between [0, 1] specifying the accumulated
 	     *   relative scale.
 	     */
-	    zoom({ pos, startPos, scale }: {
-	        pos: any;
-	        startPos: any;
-	        scale: any;
-	    }): OrbitState;
+		zoom({ pos, startPos, scale }: {
+			pos: any;
+			startPos: any;
+			scale: any;
+		}): OrbitState;
 	    /**
 	     * End zooming
 	     * Must call if `zoomStart()` was called
 	     */
-	    zoomEnd(): OrbitState;
-	    zoomIn(): OrbitState;
-	    zoomOut(): OrbitState;
-	    moveLeft(): OrbitState;
-	    moveRight(): OrbitState;
-	    moveUp(): OrbitState;
-	    moveDown(): OrbitState;
-	    rotateLeft(): OrbitState;
-	    rotateRight(): OrbitState;
-	    rotateUp(): OrbitState;
-	    rotateDown(): OrbitState;
-	    _calculateNewZoom({ scale, startZoom }: {
-	        scale: any;
-	        startZoom: any;
-	    }): any;
-	    _calculateNewTarget({ startTarget, zoom, pixelOffset }: {
-	        startTarget: any;
-	        zoom: any;
-	        pixelOffset: any;
-	    }): any;
-	    _getUpdatedState(newProps: any): OrbitState;
-	    _applyConstraints(props: any): any;
+		zoomEnd(): OrbitState;
+		zoomIn(): OrbitState;
+		zoomOut(): OrbitState;
+		moveLeft(): OrbitState;
+		moveRight(): OrbitState;
+		moveUp(): OrbitState;
+		moveDown(): OrbitState;
+		rotateLeft(): OrbitState;
+		rotateRight(): OrbitState;
+		rotateUp(): OrbitState;
+		rotateDown(): OrbitState;
+		_calculateNewZoom({ scale, startZoom }: {
+			scale: any;
+			startZoom: any;
+		}): any;
+		_calculateNewTarget({ startTarget, zoom, pixelOffset }: {
+			startTarget: any;
+			zoom: any;
+			pixelOffset: any;
+		}): any;
+		_getUpdatedState(newProps: any): OrbitState;
+		_applyConstraints(props: any): any;
 	}
 	export default class OrbitController extends Controller {
-	    constructor(props: any);
-	    _getTransitionProps(): {
-	        transitionDuration: number;
-	        transitionEasing: (t: any) => any;
-	        transitionInterpolator: LinearInterpolator;
-	        transitionInterruption: number;
-	    };
+		constructor(props: any);
+		_getTransitionProps(): {
+			transitionDuration: number;
+			transitionEasing: (t: any) => any;
+			transitionInterpolator: LinearInterpolator;
+			transitionInterruption: number;
+		};
 	}
 
 }
 declare module '@deck.gl/core/views/orbit-view' {
 	import View from '@deck.gl/core/views/view';
 	export default class OrbitView extends View {
-	    constructor(props: any);
-	    readonly controller: any;
+		constructor(props: any);
+		readonly controller: any;
 	}
 
 }
@@ -2317,7 +2317,7 @@ declare module '@deck.gl/core/views/perspective-view' {
 	import View from '@deck.gl/core/views/view';
 	import Viewport from '@deck.gl/core/viewports/viewport';
 	export default class PerspectiveView extends View {
-	    _getViewport(props: any): Viewport;
+		_getViewport(props: any): Viewport;
 	}
 
 }
@@ -2325,22 +2325,22 @@ declare module '@deck.gl/core/controllers/orthographic-controller' {
 	import Controller from '@deck.gl/core/controllers/controller';
 	import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
 	export default class OrthographicController extends Controller {
-	    constructor(props: any);
-	    _onPanRotate(event: any): boolean | void;
-	    _getTransitionProps(): {
-	        transitionDuration: number;
-	        transitionEasing: (t: any) => any;
-	        transitionInterpolator: LinearInterpolator;
-	        transitionInterruption: number;
-	    };
+		constructor(props: any);
+		_onPanRotate(event: any): boolean | void;
+		_getTransitionProps(): {
+			transitionDuration: number;
+			transitionEasing: (t: any) => any;
+			transitionInterpolator: LinearInterpolator;
+			transitionInterruption: number;
+		};
 	}
 
 }
 declare module '@deck.gl/core/views/orthographic-view' {
 	import View from '@deck.gl/core/views/view';
 	export default class OrthographicView extends View {
-	    constructor(props: any);
-	    readonly controller: any;
+		constructor(props: any);
+		readonly controller: any;
 	}
 
 }
@@ -2354,46 +2354,46 @@ declare module '@deck.gl/core/transitions/viewport-fly-to-interpolator' {
 	 * "Jarke J. van Wijk and Wim A.A. Nuij"
 	 */
 	export default class FlyToInterpolator extends TransitionInterpolator {
-	    constructor();
-	    interpolateProps(startProps: any, endProps: any, t: any): any;
+		constructor();
+		interpolateProps(startProps: any, endProps: any, t: any): any;
 	}
 
 }
 declare module '@deck.gl/core/utils/tesselator' {
 	export default class Tesselator {
-	    constructor(opts?: {});
-	    updateGeometry({ data, getGeometry, positionFormat, dataChanged }: {
-	        data: any;
-	        getGeometry: any;
-	        positionFormat: any;
-	        dataChanged: any;
-	    }): void;
-	    updatePartialGeometry({ startRow, endRow }: {
-	        startRow: any;
-	        endRow: any;
-	    }): void;
-	    updateGeometryAttributes(geometry: any, startIndex: any, size: any): void;
-	    getGeometrySize(geometry: any): void;
+		constructor(opts?: {});
+		updateGeometry({ data, getGeometry, positionFormat, dataChanged }: {
+			data: any;
+			getGeometry: any;
+			positionFormat: any;
+			dataChanged: any;
+		}): void;
+		updatePartialGeometry({ startRow, endRow }: {
+			startRow: any;
+			endRow: any;
+		}): void;
+		updateGeometryAttributes(geometry: any, startIndex: any, size: any): void;
+		getGeometrySize(geometry: any): void;
 	    /**
 	     * Visit all objects
 	     * `data` is expected to be an iterable consistent with the base Layer expectation
 	     */
-	    _forEachGeometry(visitor: any, startRow: any, endRow: any): void;
-	    _rebuildGeometry(dataRange: any): void;
+		_forEachGeometry(visitor: any, startRow: any, endRow: any): void;
+		_rebuildGeometry(dataRange: any): void;
 	}
 
 }
 declare module '@deck.gl/core/lib/layer-extension' {
 	export class LayerExtension {
-	    constructor(opts?: {});
-	    equals(extension: any): any;
-	    getShaders(extension: any): any;
-	    getSubLayerProps(extension: any): {
-	        updateTriggers: {};
-	    };
-	    initializeState(context: any, extension: any): void;
-	    updateState(params: any, extension: any): void;
-	    finalizeState(extension: any): void;
+		constructor(opts?: {});
+		equals(extension: any): any;
+		getShaders(extension: any): any;
+		getSubLayerProps(extension: any): {
+			updateTriggers: {};
+		};
+		initializeState(context: any, extension: any): void;
+		updateState(params: any, extension: any): void;
+		finalizeState(extension: any): void;
 	}
 
 }
@@ -2444,19 +2444,19 @@ declare module '@deck.gl/core' {
 	export { AmbientLight } from '@luma.gl/core';
 	export { LayerExtension } from '@deck.gl/core/lib/layer-extension';
 	export const experimental: {
-	    Tesselator: typeof Tesselator;
-	    flattenVertices: typeof flattenVertices;
-	    fillArray: typeof fillArray;
-	    count: typeof count;
-	    memoize: typeof memoize;
+		Tesselator: typeof Tesselator;
+		flattenVertices: typeof flattenVertices;
+		fillArray: typeof fillArray;
+		count: typeof count;
+		memoize: typeof memoize;
 	};
 
 }
 declare module '@deck.gl/core/utils/color' {
 	export type Color = [number, number, number] | [number, number, number, number];
-    function parseColor(color: any, target: any, index?: number): any; function applyOpacity(color: any, opacity?: number): any[]; const _default: {
-	    parseColor: typeof parseColor;
-	    applyOpacity: typeof applyOpacity;
+	function parseColor(color: any, target: any, index?: number): any; function applyOpacity(color: any, opacity?: number): any[]; const _default: {
+		parseColor: typeof parseColor;
+		applyOpacity: typeof applyOpacity;
 	};
 	export default _default;
 

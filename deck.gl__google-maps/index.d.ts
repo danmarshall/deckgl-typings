@@ -18,29 +18,29 @@ declare module '@deck.gl/google-maps/utils' {
 	 * @param overlay (google.maps.OverlayView) - A maps Overlay instance
 	 */
 	export function getViewState(map: any, overlay: any): {
-	    width: any;
-	    height: any;
-	    left: any;
-	    top: any;
-	    zoom: number;
-	    pitch: any;
-	    latitude: any;
-	    longitude: any;
+		width: any;
+		height: any;
+		left: any;
+		top: any;
+		zoom: number;
+		pitch: any;
+		latitude: any;
+		longitude: any;
 	};
 
 }
 declare module '@deck.gl/google-maps/google-maps-overlay' {
 	export default class GoogleMapsOverlay {
-	    constructor(props: any);
-	    setMap(map: any): void;
-	    setProps(props: any): void;
-	    pickObject(params: any): any;
-	    pickMultipleObjects(params: any): any;
-	    pickObjects(params: any): any;
-	    finalize(): void;
-	    _onAdd(): void;
-	    _onRemove(): void;
-	    _draw(): void;
+		constructor(props: any);
+		setMap(map: any): void;
+		setProps(props: any): void;
+		pickObject(params: any): any;
+		pickMultipleObjects(params: any): any;
+		pickObjects(params: any): any;
+		finalize(): void;
+		_onAdd(): void;
+		_onRemove(): void;
+		_draw(): void;
 	}
 
 }

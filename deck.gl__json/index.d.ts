@@ -20,9 +20,9 @@ declare module '@deck.gl/json/helpers/parse-expression-string' {
 }
 declare module '@deck.gl/json/json-configuration' {
 	export default class JSONConfiguration {
-	    constructor(...configurations: any[]);
-	    _merge(configuration: any): void;
-	    validate(configuration: any): boolean;
+		constructor(...configurations: any[]);
+		_merge(configuration: any): void;
+		validate(configuration: any): boolean;
 	}
 
 }
@@ -45,11 +45,11 @@ declare module '@deck.gl/json/helpers/parse-json' {
 }
 declare module '@deck.gl/json/json-converter' {
 	export default class JSONConverter {
-	    constructor(props: any);
-	    finalize(): void;
-	    setProps(props: any): void;
-	    convert(json: any): any;
-	    convertJson(json: any): any;
+		constructor(props: any);
+		finalize(): void;
+		setProps(props: any): void;
+		convert(json: any): any;
+		convertJson(json: any): any;
 	}
 
 }

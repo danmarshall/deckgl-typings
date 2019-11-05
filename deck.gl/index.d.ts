@@ -8,7 +8,7 @@
 
 declare module 'deck.gl' {
 	export { experimental } from '@deck.gl/core';
-	
+
 	export {
 		COORDINATE_SYSTEM,
 		Deck,
