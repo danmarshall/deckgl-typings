@@ -2075,8 +2075,8 @@ declare module '@deck.gl/core/lib/deck' {
 		onViewStateChange?: (viewState: any) => any;
 		onBeforeRender?: () => any;
 		onAfterRender?: () => any;
-		onLayerClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
-		onLayerHover?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
+		onClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
+		onHover?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
 		onLoad?: () => any;
 
 		// Debug settings
