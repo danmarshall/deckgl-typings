@@ -490,8 +490,28 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer-fragment
 
 }
 declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
+	import { Material } from '@luma.gl/core';
+	import { Color } from '@deck.gl/core/utils/color';
 	import { Layer } from '@deck.gl/core';
+	export type Polygon = number[][] | number[][][];
+	export interface SolidPolygonLayerDatum {
+		polygon?: Polygon
+	}
+	export interface SolidPolygonLayerProps {
+		data: SolidPolygonLayerDatum[];
+		filled?: boolean;
+		extruded?: boolean;
+		material?: Material;
+		wireframe?: boolean;
+		elevationScale?: number;
+		getElevation?: ((x: SolidPolygonLayerDatum) => number) | number;
+		getFillColor?: ((x: SolidPolygonLayerDatum) => Color) | Color;
+		getLineColor?: ((x: SolidPolygonLayerDatum) => Color) | Color;
+		getPolygon?: (x: SolidPolygonLayerDatum) => Polygon;		
+	}
+	import { LayerProps } from '@deck.gl/core/lib/layer';
 	export default class SolidPolygonLayer extends Layer {
+		constructor(props: LayerProps & SolidPolygonLayerProps);
 		getShaders(vs: any): any;
 		initializeState(): void;
 		draw({ uniforms }: {
@@ -529,7 +549,8 @@ declare module '@deck.gl/layers/utils' {
 declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { Color } from '@deck.gl/core/utils/color';
-	export type Polygon = number[][] | number[][][];
+	import { Polygon } from '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer';
+	export { Polygon };
 	export interface PolygonLayerDatum {
 		polygon?: Polygon;
 		elevation?: number;
