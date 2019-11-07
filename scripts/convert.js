@@ -67,6 +67,7 @@ var list = [
     { name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
     { name: '@luma.gl/webgl-state-tracker', out: 'luma.gl__webgl-state-tracker', convert: true },
     { name: '@luma.gl/core', out: 'luma.gl__core', convert: true },
+    { name: '@luma.gl/shadertools', out: 'luma.gl__shadertools', convert: true },
     { name: 'deck.gl', convert: true },
     { name: '@deck.gl/aggregation-layers', out: 'deck.gl__aggregation-layers', convert: true },
     { name: '@deck.gl/core', out: 'deck.gl__core', convert: true },
