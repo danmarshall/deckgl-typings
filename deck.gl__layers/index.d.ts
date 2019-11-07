@@ -239,15 +239,19 @@ declare module '@deck.gl/layers/line-layer/line-layer' {
 	import { LayerProps } from '@deck.gl/core/lib/layer';
 	import { Color } from '@deck.gl/core/utils/color';
 	export interface LineLayerDatum {
-		color?: Color
-		sourcePosition: number[];
-		targetPosition: number[];
+		sourcePosition?: number[];
+		targetPosition?: number[];
 	}
 	export interface LineLayerProps {
 		data: LineLayerDatum[];
-		strokeWidth?: number;
-		getColor?: ((x: LineLayerDatum) => Color) | Color;
-		getStrokeWidth?: ((x: LineLayerDatum) => number) | number;
+		getColor?: ((o: LineLayerDatum) => Color) | Color;
+		getSourcePosition?: (o: LineLayerDatum) => number[];
+		getTargetPosition ?: (o: LineLayerDatum) => number[];
+		getWidth?: ((o: LineLayerDatum) => number) | number;
+		widthMaxPixels?: number;
+		widthMinPixels?: number;
+		widthScale?: number;
+		widthUnits?: 'meters' | 'pixels';
 	}
 	export default class LineLayer extends Layer {
 		constructor(props: LayerProps & LineLayerProps);
@@ -507,7 +511,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 		getElevation?: ((x: SolidPolygonLayerDatum) => number) | number;
 		getFillColor?: ((x: SolidPolygonLayerDatum) => Color) | Color;
 		getLineColor?: ((x: SolidPolygonLayerDatum) => Color) | Color;
-		getPolygon?: (x: SolidPolygonLayerDatum) => Polygon;		
+		getPolygon?: (x: SolidPolygonLayerDatum) => Polygon;
 	}
 	import { LayerProps } from '@deck.gl/core/lib/layer';
 	export default class SolidPolygonLayer extends Layer {
