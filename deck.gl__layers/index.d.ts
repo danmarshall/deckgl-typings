@@ -550,6 +550,7 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { Color } from '@deck.gl/core/utils/color';
 	import { Polygon } from '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer';
+	export { Polygon };
 	export interface PolygonLayerDatum {
 		polygon?: Polygon;
 		elevation?: number;
