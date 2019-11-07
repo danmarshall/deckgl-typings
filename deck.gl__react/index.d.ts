@@ -6,7 +6,7 @@ declare module '@deck.gl/react/utils/inherits-from' {
 declare module '@deck.gl/react/deckgl' {
 	import { DeckProps } from '@deck.gl/core/lib/deck';
 	import * as React from 'react';
-	export default class DeckGL extends React.Component {
+	export default class DeckGL extends React.Component<DeckProps, {}> {
 		constructor(props: DeckProps);
 		componentDidMount(): void;
 		shouldComponentUpdate(nextProps: any): boolean;
