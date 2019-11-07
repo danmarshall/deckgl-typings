@@ -1612,6 +1612,7 @@ declare module '@deck.gl/core/controllers/map-controller' {
 	import Controller from '@deck.gl/core/controllers/controller';
 	import ViewState from '@deck.gl/core/controllers/view-state';
 	import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
+	import { InteractiveState } from '@deck.gl/core/lib/deck';
 	export const MAPBOX_LIMITS: {
 		minZoom: number;
 		maxZoom: number;
@@ -1669,7 +1670,7 @@ declare module '@deck.gl/core/controllers/map-controller' {
 				startZoom: any;
 			});
 		getViewportProps(): any;
-		getInteractiveState(): any;
+		getInteractiveState(): InteractiveState;
 	    /**
 	     * Start panning
 	     * @param {[Number, Number]} pos - position on screen where the pointer grabs
@@ -2027,9 +2028,6 @@ declare module '@deck.gl/core/lib/deck' {
 
 	export interface InteractiveState {
 		isDragging: boolean;
-		onCube: boolean;
-		onText: boolean;
-		onAxisSelection: boolean;
 	}
 
 	export interface PickInfo {
@@ -2137,9 +2135,7 @@ declare module '@deck.gl/core/lib/deck' {
 		}): void;
 		_onRenderFrame(animationProps: any): void;
 		_onViewStateChange(params: any): void;
-		_onInteractiveStateChange({ isDragging }: {
-			isDragging?: boolean;
-		}): void;
+		_onInteractiveStateChange(interactiveState: InteractiveState): void;
 		_onEvent(event: any): void;
 		_onPointerDown(event: any): void;
 		_getFrameStats(): void;
@@ -2175,6 +2171,7 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 	import Controller from '@deck.gl/core/controllers/controller';
 	import ViewState from '@deck.gl/core/controllers/view-state';
 	import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
+	import { InteractiveState } from '@deck.gl/core/lib/deck';
 	export class OrbitState extends ViewState {
 		constructor({ ViewportType, width, // Width of viewport
 			height, // Height of viewport
@@ -2204,7 +2201,7 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 				startZoom: any;
 			});
 		getViewportProps(): any;
-		getInteractiveState(): any;
+		getInteractiveState(): InteractiveState;
 	    /**
 	     * Start panning
 	     * @param {[Number, Number]} pos - position on screen where the pointer grabs
@@ -2306,7 +2303,7 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 }
 declare module '@deck.gl/core/views/orbit-view' {
 	import View from '@deck.gl/core/views/view';
-	import Viewport from '@deck.gl/core/viewports/viewport'; 
+	import Viewport from '@deck.gl/core/viewports/viewport';
 	export interface OrbitViewState {
 		distance: number;
 		fov: number;
@@ -2314,7 +2311,7 @@ declare module '@deck.gl/core/views/orbit-view' {
 		rotationOrbit: number;
 		rotationX: number;
 		zoom: number;
-	}	
+	}
 	export default class OrbitView extends View {
 		constructor(props: any);
 		readonly controller: any;
