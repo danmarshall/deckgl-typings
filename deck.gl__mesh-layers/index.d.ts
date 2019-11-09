@@ -54,7 +54,22 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-fragmen
 }
 declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
 	import { Layer } from '@deck.gl/core';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface SimpleMeshLayerProps extends LayerProps {
+        mesh: any;
+        texture?: any;
+        sizeScale?: number;
+        wireframe?: boolean;
+        material?: Object;
+        getPosition?: Function;
+        getColor?: Function | Array<any>;
+        getOrientation?: Function | Array<any>;
+        getScale?: Function | Array<any>;
+        getTranslation?: Function | Array<any>;
+        getTransformMatrix?: Function | Array<any>;
+    }
 	export default class SimpleMeshLayer extends Layer {
+    	constructor(props: SimpleMeshLayerProps);
 		getShaders(): any;
 		initializeState(): void;
 		updateState({ props, oldProps, changeFlags }: {
@@ -87,7 +102,24 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-fragment.
 }
 declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 	import { Layer } from '@deck.gl/core';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface ScenegraphLayerProps extends LayerProps {
+        scenegraph: URL | Object | Promise<any>;
+        sizeScale?: number;
+        _animations?: Object;
+        getScene?: Function;
+        getAnimator?: Function;
+        _lighting?: string;
+        _imageBasedLightingEnvironment?: any
+        getPosition?: Function;
+        getColor?: Function | Array<any>;
+        getOrientation?: Function | Array<any>;
+        getScale?: Function | Array<any>;
+        getTranslation?: Function | Array<any>;
+        getTransformMatrix?: Function | Array<any>;
+    }
 	export default class ScenegraphLayer extends Layer {
+    	constructor(props: ScenegraphLayerProps);
 		initializeState(): void;
 		updateState(params: any): void;
 		finalizeState(): void;
