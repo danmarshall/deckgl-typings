@@ -243,6 +243,7 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/get-frame-state' {
 declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface Tile3DLayerProps extends LayerProps, CompositeLayerProps {
         opacity?: number;
         pointSize?: number;

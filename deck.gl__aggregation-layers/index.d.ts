@@ -455,6 +455,7 @@ declare module '@deck.gl/aggregation-layers/utils/cpu-aggregator' {
 declare module '@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface CPUGridLayerProps extends LayerProps, CompositeLayerProps {
         cellSize?: number;
         colorDomain?: Array<any>;
@@ -528,6 +529,7 @@ declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-aggregator' {
 declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface HexagonLayerProps extends LayerProps, CompositeLayerProps {
         radius?: number;
         hexagonAggregator?: Function;
@@ -710,6 +712,7 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer-f
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface GPUGridLayerProps extends LayerProps, CompositeLayerProps {
         cellSize?: number;
         colorRange?: Array<any>;
@@ -780,6 +783,7 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer' {
 declare module '@deck.gl/aggregation-layers/grid-layer/grid-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface GridLayerProps extends LayerProps, CompositeLayerProps {
         cellSize?: number;
         colorDomain?: Array<any>;
@@ -878,6 +882,7 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/max-vs.glsl' {
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer' {
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface HeatmapLayerProps extends LayerProps, CompositeLayerProps {
         radiusPixels?: number;
         colorRange?: Array<any>;

@@ -719,6 +719,7 @@ declare module '@deck.gl/layers/geojson-layer/geojson' {
 declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     export interface GeoJsonLayerProps extends LayerProps, CompositeLayerProps {
         filled?: boolean;
         stroked?: boolean;
