@@ -2421,7 +2421,7 @@ declare module '@deck.gl/core' {
 	export { default as _SunLight } from '@deck.gl/core/effects/lighting/sun-light';
 	export { default as PostProcessEffect } from '@deck.gl/core/effects/post-process-effect';
 	export { default as _LayersPass } from '@deck.gl/core/passes/layers-pass';
-	export { default as Deck } from '@deck.gl/core/lib/deck';
+	export { default as Deck, DeckProps } from '@deck.gl/core/lib/deck';
 	export { default as LayerManager } from '@deck.gl/core/lib/layer-manager';
 	export { default as AttributeManager } from '@deck.gl/core/lib/attribute-manager';
 	export { default as Layer } from '@deck.gl/core/lib/layer';

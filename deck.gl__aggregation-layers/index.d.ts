@@ -946,6 +946,7 @@ declare module '@deck.gl/aggregation-layers' {
 	export { AGGREGATION_OPERATION } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
 	export { default as HeatmapLayer } from '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer';
 	export { default as _GPUGridAggregator } from '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/gpu-grid-aggregator';
+	export { DeckGLColor, ColorDomain, ColorRange } from '@deck.gl/aggregation-layers/utils/color-utils';
 	import { default as BinSorter } from '@deck.gl/aggregation-layers/utils/bin-sorter';
 	import { linearScale, getLinearScale, quantizeScale, getQuantizeScale, getQuantileScale, getOrdinalScale } from '@deck.gl/aggregation-layers/utils/scale-utils';
 	export const experimental: {
