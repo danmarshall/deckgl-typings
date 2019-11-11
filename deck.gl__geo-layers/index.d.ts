@@ -105,17 +105,17 @@ declare module '@deck.gl/geo-layers/tile-layer/utils/tile-cache' {
 declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface TileLayerProps extends LayerProps {
+    export interface TileLayerProps<D> extends LayerProps<D> {
         maxZoom?: number | null;
         minZoom?: number;
         maxCacheSize?: number | null;
-        onViewportLoaded?: Function;
+        onViewportLoaded?: (data: D[]) => void;
         getTileData?: Function;
         onTileError?: Function;
         renderSubLayers?: Function;
     }
-	export default class TileLayer extends CompositeLayer {
-    	constructor(props: TileLayerProps);
+	export default class TileLayer<D> extends CompositeLayer<D> {
+    	constructor(props: TileLayerProps<D>);
 		initializeState(): void;
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;
@@ -139,16 +139,15 @@ declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
 }
 declare module '@deck.gl/geo-layers/trips-layer/trips-layer' {
 	import { PathLayer } from '@deck.gl/layers';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { PathLayerProps } from "@deck.gl/layers/path-layer/path-layer";
-    export interface TripsLayerProps extends PathLayerProps, LayerProps {
+    import { LayerPath, PathLayerProps } from "@deck.gl/layers/path-layer/path-layer";
+    export interface TripsLayerProps<D> extends PathLayerProps<D> {
         currentTime?: number;
         trailLength?: number;
-        getPath?: Function;
+        getPath?: (d: D) => LayerPath;
         getTimestamps?: Function;
     }
-	export default class TripsLayer extends PathLayer {
-		constructor(props: TripsLayerProps);
+	export default class TripsLayer<D> extends PathLayer<D> {
+		constructor(props: TripsLayerProps<D>);
 		getShaders(): any;
 		initializeState(params: any): void;
 		draw(params: any): void;
@@ -242,23 +241,23 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/get-frame-state' {
 }
 declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    export interface Tile3DLayerProps extends LayerProps, CompositeLayerProps {
+    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    export interface Tile3DLayerProps<D> extends CompositeLayerProps<D> {
         opacity?: number;
         pointSize?: number;
         data?: string;
         _ionAssetId?: number | string;
         _ionAccessToken?: string;
         loadOptions?: Object;
-        getPointColor?: Function | Array<any>;
-        onTilesetLoad?: Function;
-        onTileLoad?: Function;
-        onTileUnload?: Function;
-        onTileLoadFail?: Function;
+        getPointColor?: ((tileData: Object) => DeckGLColor) | DeckGLColor;
+        onTilesetLoad?: (tileData: Object) => void;
+        onTileLoad?: (tileHeader: Object) => void;
+        onTileUnload?: (tileHeader: Object) => void;
+        onTileLoadFail?: (tileHeader: Object, url: string, message: string) => void;
     }
-	export default class Tile3DLayer extends CompositeLayer {
-    	constructor(props: Tile3DLayerProps);
+	export default class Tile3DLayer<D> extends CompositeLayer<D> {
+    	constructor(props: Tile3DLayerProps<D>);
 		initializeState(): void;
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;

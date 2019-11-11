@@ -937,8 +937,8 @@ declare module '@deck.gl/core/lib/layer' {
 	import AttributeManager from '@deck.gl/core/lib/attribute-manager';
 	import Component from '@deck.gl/core/lifecycle/component';
 	import { PickInfo } from '@deck.gl/core/lib/deck';
-	import { Color } from '@deck.gl/core/utils/color';
 	import * as hammerjs from 'hammerjs';
+    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export interface TransitionTiming {
 		duration?: number;
 		easing?: (t: number) => number;
@@ -954,19 +954,23 @@ declare module '@deck.gl/core/lib/layer' {
 	export interface LayerInputHandler {
 		(o: PickInfo, e: HammerInput): void;
 	}
-	export interface LayerProps {
+	export type DataSet<D> = Iterable<D>;
+		// | AsyncIterable ToDo: Add AsyncIterable
+		// | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
+	export interface LayerProps<D> {
 		coordinateSystem?: number;
 		id?: string;
+		data?: DataSet<D> | Promise<DataSet<D>> | string;
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
 		autoHighlight?: boolean;
-		highlightColor?: Color;
+		highlightColor?: DeckGLColor;
 		onClick?: LayerInputHandler;
 		onHover?: LayerInputHandler;
 		lightSettings?: LightSettings;
 	}
-	export default class Layer extends Component {
-		constructor(props: LayerProps);
+	export default class Layer<D> extends Component {
+		constructor(props: LayerProps<D>);
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
@@ -991,8 +995,8 @@ declare module '@deck.gl/core/lib/layer' {
 		use64bitPositions(): boolean;
 		onHover(info: any, pickingEvent: any): any;
 		onClick(info: any, pickingEvent: any): any;
-		nullPickingColor(): Color;
-		encodePickingColor(i: any, target?: any[]): Color;
+		nullPickingColor(): DeckGLColor;
+		encodePickingColor(i: any, target?: any[]): DeckGLColor;
 		decodePickingColor(color: any): number;
 		initializeState(): void;
 		getShaders(shaders: any): any;
@@ -1065,11 +1069,11 @@ declare module '@deck.gl/core/lib/layer' {
 }
 declare module '@deck.gl/core/lib/composite-layer' {
 	import Layer, { LayerProps } from '@deck.gl/core/lib/layer';
-	export interface CompositeLayerProps extends LayerProps {
+	export interface CompositeLayerProps<D> extends LayerProps<D> {
         _subLayerProps: Object,
 	}
-	export default class CompositeLayer extends Layer {
-		constructor(props: CompositeLayerProps);
+	export default class CompositeLayer<D> extends Layer<D> {
+		constructor(props: CompositeLayerProps<D>);
 		readonly isComposite: boolean;
 		getSubLayers(): any;
 		initializeState(): void;

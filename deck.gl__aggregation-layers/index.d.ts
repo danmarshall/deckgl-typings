@@ -2,7 +2,9 @@
 declare module '@deck.gl/aggregation-layers/utils/color-utils' {
 	export const defaultColorRange: number[][];
 	export function colorRangeToFlatArray(colorRange: any, normalize?: boolean, ArrayType?: Float32ArrayConstructor): any;
-
+    export type DeckGLColor = [number, number, number, number?];
+    export type ColorDomain = [number, number];
+    export type ColorRange = [DeckGLColor, DeckGLColor, DeckGLColor, DeckGLColor, DeckGLColor, DeckGLColor]
 }
 declare module '@deck.gl/aggregation-layers/utils/aggregation-operation-utils' {
 	export const AGGREGATION_OPERATION: {
@@ -176,20 +178,21 @@ declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer-
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface ScreenGridLayerProps extends LayerProps {
+    import { ColorDomain, ColorRange, DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    export interface ScreenGridLayerProps<D> extends LayerProps<D> {
         cellSizePixels?: number;
         cellMarginPixels?: number;
-        minColor?: number;
-        maxColor?: number;
-        colorDomain?: Array<any>;
-        colorRange?: Array<any>;
+        minColor?: DeckGLColor;
+        maxColor?: DeckGLColor;
+        colorDomain?: ColorDomain;
+        colorRange?: ColorRange;
         gpuAggregation?: boolean;
         aggregation?: string;
-        getPosition?: Function;
-        getWeight?: Function;
+        getPosition?: (d: D) => [number, number];
+        getWeight?: (d: D) => number;
     }
-	export default class ScreenGridLayer extends Layer {
-        constructor(props: ScreenGridLayerProps);
+	export default class ScreenGridLayer<D> extends Layer<D> {
+        constructor(props: ScreenGridLayerProps<D>);
 		getShaders(): any;
 		initializeState(): void;
 		shouldUpdateState({ changeFlags }: {
@@ -454,15 +457,16 @@ declare module '@deck.gl/aggregation-layers/utils/cpu-aggregator' {
 }
 declare module '@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    export interface CPUGridLayerProps extends LayerProps, CompositeLayerProps {
+    import { ColorDomain, ColorRange } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { ElevationDomain, ElevationRange } from "@deck.gl/layers/elevation";
+    export interface CPUGridLayerProps<D> extends CompositeLayerProps<D> {
         cellSize?: number;
-        colorDomain?: Array<any>;
-        colorRange?: Array<any>;
+        colorDomain?: ColorDomain;
+        colorRange?: ColorRange;
         coverage?: number;
-        elevationDomain?: Array<any>;
-        elevationRange?: Array<any>;
+        elevationDomain?: ElevationDomain;
+        elevationRange?: ElevationRange;
         elevationScale?: number;
         extruded?: boolean;
         upperPercentile?: number;
@@ -471,18 +475,18 @@ declare module '@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer' {
         elevationLowerPercentile?: number;
         colorScaleType?: string;
         material?: Object;
-        getPosition?: Function;
-        getColorValue?: Function;
-        getColorWeight?: Function;
+        getPosition?: (d: D) => [number, number];
+        getColorValue?: (d: D[]) => number;
+        getColorWeight?: (d: D) => number;
         colorAggregation?: string;
-        getElevationValue?: Function;
-        getElevationWeight?: Function;
+        getElevationValue?: (points: D[]) => number;
+        getElevationWeight?: (d: D) => number;
         elevationAggregation?: string;
-        onSetColorDomain?: Function;
-        onSetElevationDomain?: Function;
+        onSetColorDomain?: () => void;
+        onSetElevationDomain?: () => void;
     }
-	export default class CPUGridLayer extends CompositeLayer {
-    	constructor(props: CPUGridLayerProps);
+	export default class CPUGridLayer<D> extends CompositeLayer<D> {
+    	constructor(props: CPUGridLayerProps<D>);
 		initializeState(): void;
 		updateState({ oldProps, props, changeFlags }: {
 			oldProps: any;
@@ -528,9 +532,8 @@ declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-aggregator' {
 }
 declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    export interface HexagonLayerProps extends LayerProps, CompositeLayerProps {
+    export interface HexagonLayerProps<D> extends CompositeLayerProps<D> {
         radius?: number;
         hexagonAggregator?: Function;
         colorDomain?: Array<any>;
@@ -545,18 +548,18 @@ declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer' {
         elevationUpperPercentile?: number;
         elevationLowerPercentile?: number;
         material?: Object;
-        getPosition?: Function;
-        getColorValue?: Function;
-        getColorWeight?: Function;
+        getPosition?: (d: D) => [number, number];
+        getColorValue?: (d: D) => any;
+        getColorWeight?: (d: D) => any;
         colorAggregation?: string;
-        getElevationValue?: Function;
-        getElevationWeight?: Function;
+        getElevationValue?: (d: D) => any;
+        getElevationWeight?: (d: D) => any;
         elevationAggregation?: string;
         onSetColorDomain?: Function;
         onSetElevationDomain?: Function;
     }
-	export default class HexagonLayer extends CompositeLayer {
-		constructor(props: HexagonLayerProps);
+	export default class HexagonLayer<D> extends CompositeLayer<D> {
+		constructor(props: HexagonLayerProps<D>);
 		initializeState(): void;
 		updateState({ oldProps, props, changeFlags }: {
 			oldProps: any;
@@ -660,14 +663,14 @@ declare module '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/grid-aggr
 declare module '@deck.gl/aggregation-layers/contour-layer/contour-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface ContourLayerProps extends LayerProps {
+    export interface ContourLayerProps<D> extends LayerProps<D> {
         cellSize?: number;
         gpuAggregation?: boolean;
         contours?: Array<any>;
         zOffset?: number;
         fp64?: boolean;
-        getPosition?: Function;
-        getWeight?: Function;
+        getPosition?: (d: D) => [number, number];
+        getWeight?: (d: D) => number;
     }
 	export default class ContourLayer extends CompositeLayer {
     	constructor(props: ContourLayerProps);
@@ -711,27 +714,29 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer-f
 }
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer' {
 	import { Layer } from '@deck.gl/core';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    export interface GPUGridLayerProps extends LayerProps, CompositeLayerProps {
+    import { ColorRange } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { ElevationDomain, ElevationRange } from "@deck.gl/layers/elevation";
+    import PhongMaterial from "@luma.gl/core/materials/phong-material";
+    export interface GPUGridLayerProps<D> extends CompositeLayerProps<D> {
         cellSize?: number;
-        colorRange?: Array<any>;
+        colorRange?: ColorRange;
         coverage?: number;
-        elevationDomain?: Array<any>;
-        elevationRange?: Array<any>;
+        elevationDomain?: ElevationDomain;
+        elevationRange?: ElevationRange;
         elevationScale?: number;
         extruded?: boolean;
         fp64?: boolean;
         gpuAggregation?: boolean;
-        material?: Object;
-        getPosition?: Function;
-        getColorWeight?: Function;
+        material?: PhongMaterial;
+        getPosition?: (d: D) => [number, number];
+        getColorWeight?: (d: D) => number;
         colorAggregation?: string;
-        getElevationWeight?: Function;
+        getElevationWeight?: (d: D) => number;
         elevationAggregation?: string;
     }
-    export default class GPUGridCellLayer extends Layer {
-    	constructor(props: GPUGridLayerProps);
+    export default class GPUGridCellLayer<D> extends Layer<D> {
+    	constructor(props: GPUGridLayerProps<D>);
 		getShaders(): any;
 		initializeState(): void;
 		_getModel(gl: any): any;
@@ -782,15 +787,17 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer' {
 }
 declare module '@deck.gl/aggregation-layers/grid-layer/grid-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    export interface GridLayerProps extends LayerProps, CompositeLayerProps {
+    import { ColorDomain, ColorRange } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { ElevationDomain, ElevationRange } from "@deck.gl/layers/elevation";
+    import PhongMaterial from "@luma.gl/core/materials/phong-material";
+    export interface GridLayerProps<D> extends CompositeLayerProps<D> {
         cellSize?: number;
-        colorDomain?: Array<any>;
-        colorRange?: Array<any>;
+        colorDomain?: ColorDomain;
+        colorRange?: ColorRange;
         coverage?: number;
-        elevationDomain?: Array<any>;
-        elevationRange?: Array<any>;
+        elevationDomain?: ElevationDomain;
+        elevationRange?: ElevationRange;
         elevationScale?: number;
         extruded?: boolean;
         upperPercentile?: number;
@@ -800,19 +807,19 @@ declare module '@deck.gl/aggregation-layers/grid-layer/grid-layer' {
         colorScaleType?: string;
         fp64?: boolean;
         gpuAggregation?: boolean;
-        material?: Object;
-        getPosition?: Function;
-        getColorValue?: Function;
-        getColorWeight?: Function;
+        material?: PhongMaterial;
+        getPosition?: (d: D) => [number, number];
+        getColorValue?: (points: D[]) => number;
+        getColorWeight?: (d: D) => number;
         colorAggregation?: string;
-        getElevationValue?: Function;
-        getElevationWeight?: Function;
+        getElevationValue?: (points: D[]) => number;
+        getElevationWeight?: (d: D) => number;
         elevationAggregation?: string;
-        onSetColorDomain?: Function;
-        onSetElevationDomain?: Function;
+        onSetColorDomain?: () => void;
+        onSetElevationDomain?: () => void;
     }
-	export default class GridLayer extends CompositeLayer {
-    	constructor(props: GridLayerProps);
+	export default class GridLayer<D> extends CompositeLayer<D> {
+    	constructor(props: GridLayerProps<D>);
 		initializeState(): void;
 		updateState({ oldProps, props, changeFlags }: {
 			oldProps: any;
@@ -881,20 +888,20 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/max-vs.glsl' {
 
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer' {
-    import { LayerProps } from "@deck.gl/core/lib/layer";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    export interface HeatmapLayerProps extends LayerProps, CompositeLayerProps {
+    export interface HeatmapLayerProps<D> extends CompositeLayerProps<D> {
         radiusPixels?: number;
-        colorRange?: Array<any>;
+        colorRange?: ColorRange;
         intensity?: number;
         threshold?: number;
-        colorDomain?: Array<any>;
-        getPosition?: Function;
-        getWeight?: Function;
+        colorDomain?: ColorDomain;
+        getPosition?: (d: D) => [number, number];
+        getWeight?: (d: D) => number;
     }
 	import { CompositeLayer } from '@deck.gl/core';
-	export default class HeatmapLayer extends CompositeLayer {
-		constructor(props: HeatmapLayerProps);
+    import { ColorDomain, ColorRange } from "@deck.gl/aggregation-layers/utils/color-utils";
+	export default class HeatmapLayer<D> extends CompositeLayer<D> {
+		constructor(props: HeatmapLayerProps<D>);
 		initializeState(): void;
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;
