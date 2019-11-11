@@ -6,7 +6,7 @@ declare module '@deck.gl/geo-layers/great-circle-layer/great-circle-vertex.glsl'
 }
 declare module '@deck.gl/geo-layers/great-circle-layer/great-circle-layer' {
 	import { ArcLayer } from '@deck.gl/layers';
-	export default class GreatCircleLayer extends ArcLayer {
+	export default class GreatCircleLayer<D> extends ArcLayer<D> {
 		getShaders(): any;
 	}
 
@@ -25,7 +25,7 @@ declare module '@deck.gl/geo-layers/s2-layer/s2-utils' {
 }
 declare module '@deck.gl/geo-layers/s2-layer/s2-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-	export default class S2Layer extends CompositeLayer {
+	export default class S2Layer<D> extends CompositeLayer<D> {
 		renderLayers(): any;
 	}
 
@@ -160,7 +160,7 @@ declare module '@deck.gl/geo-layers/trips-layer/trips-layer' {
 }
 declare module '@deck.gl/geo-layers/h3-layers/h3-cluster-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-	export default class H3ClusterLayer extends CompositeLayer {
+	export default class H3ClusterLayer<D> extends CompositeLayer<D> {
 		updateState({ props, oldProps, changeFlags }: {
 			props: any;
 			oldProps: any;
@@ -185,7 +185,7 @@ declare module '@deck.gl/geo-layers/h3-layers/h3-hexagon-layer' {
 	 * even when no corresponding hexagon is in the data set. You can check
 	 * index !== -1 to see if picking matches an actual object.
 	 */
-	export default class H3HexagonLayer extends CompositeLayer {
+	export default class H3HexagonLayer<D> extends CompositeLayer<D> {
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;
 		}): any;

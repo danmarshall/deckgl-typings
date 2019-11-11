@@ -398,7 +398,6 @@ declare module '@deck.gl/layers/column-layer/column-layer' {
         coverage?: number;
         elevationScale?: number;
         filled?: boolean;
-        filled?: boolean;
         stroked?: boolean;
         extruded?: boolean;
         wireframe?: boolean;
@@ -755,7 +754,7 @@ declare module '@deck.gl/layers/text-layer/multi-icon-layer/multi-icon-layer-fra
 }
 declare module '@deck.gl/layers/text-layer/multi-icon-layer/multi-icon-layer' {
 	import IconLayer from '@deck.gl/layers/icon-layer/icon-layer';
-	export default class MultiIconLayer extends IconLayer {
+	export default class MultiIconLayer<D> extends IconLayer<D> {
 		getShaders(): any;
 		initializeState(): void;
 		updateState(updateParams: any): void;

@@ -672,8 +672,8 @@ declare module '@deck.gl/aggregation-layers/contour-layer/contour-layer' {
         getPosition?: (d: D) => [number, number];
         getWeight?: (d: D) => number;
     }
-	export default class ContourLayer extends CompositeLayer {
-    	constructor(props: ContourLayerProps);
+	export default class ContourLayer<D> extends CompositeLayer<D> {
+    	constructor(props: ContourLayerProps<D>);
 		initializeState(): void;
 		updateState({ oldProps, props, changeFlags }: {
 			oldProps: any;
@@ -760,7 +760,9 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer' 
 }
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-	export default class GPUGridLayer extends CompositeLayer {
+    import { GPUGridLayerProps } from "@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer";
+	export default class GPUGridLayer<D> extends CompositeLayer<D> {
+		constructor(props: GPUGridLayerProps<D>)
 		initializeState(): void;
 		updateState(opts: any): void;
 		finalizeState(): void;
@@ -858,7 +860,9 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/triangle-layer-fragmen
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/triangle-layer' {
 	import { Layer } from '@deck.gl/core';
-	export default class TriangleLayer extends Layer {
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+	export default class TriangleLayer<D> extends Layer<D> {
+		constructor(props: LayerProps<D>)
 		getShaders(): {
 			vs: string;
 			fs: string;

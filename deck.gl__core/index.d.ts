@@ -952,7 +952,7 @@ declare module '@deck.gl/core/lib/layer' {
 		numberOfLights?: number
 	}
 	export interface LayerInputHandler {
-		(o: PickInfo, e: HammerInput): void;
+		(o: PickInfo<any>, e: HammerInput): void;
 	}
 	export type DataSet<D> = Iterable<D>;
 		// | AsyncIterable ToDo: Add AsyncIterable
@@ -2038,8 +2038,8 @@ declare module '@deck.gl/core/lib/deck' {
 		isDragging: boolean;
 	}
 
-	export interface PickInfo {
-		layer: Layer,
+	export interface PickInfo<D> {
+		layer: Layer<D>,
 		index: number;
 		object: object;
 		x: number;
@@ -2058,8 +2058,8 @@ declare module '@deck.gl/core/lib/deck' {
 		height: number | string;
 
 		// layer/view/controller settings
-		layers: Layer[];
-		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
+		layers: Layer<any>[];
+		layerFilter?: (x: { layer: Layer<any>, viewport: Viewport, isPicking: boolean }) => boolean;
 		views?: View[];
 		initialViewState?: any;
 		viewState?: any;
@@ -2080,8 +2080,8 @@ declare module '@deck.gl/core/lib/deck' {
 		onViewStateChange?: (viewState: any) => any;
 		onBeforeRender?: () => any;
 		onAfterRender?: () => any;
-		onClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
-		onHover?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
+		onClick?: <D>(info: PickInfo<D>, pickedInfos: PickInfo<D>[], e: MouseEvent) => any;
+		onHover?: <D>(info: PickInfo<D>, pickedInfos: PickInfo<D>[], e: MouseEvent) => any;
 		onLoad?: () => any;
 
 		// Debug settings
