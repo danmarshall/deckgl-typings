@@ -1070,7 +1070,7 @@ declare module '@deck.gl/core/lib/layer' {
 declare module '@deck.gl/core/lib/composite-layer' {
 	import Layer, { LayerProps } from '@deck.gl/core/lib/layer';
 	export interface CompositeLayerProps<D> extends LayerProps<D> {
-        _subLayerProps: Object,
+        _subLayerProps?: Object,
 	}
 	export default class CompositeLayer<D> extends Layer<D> {
 		constructor(props: CompositeLayerProps<D>);
