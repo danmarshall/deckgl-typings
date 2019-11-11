@@ -10,8 +10,23 @@ declare module '@deck.gl/layers/arc-layer/arc-layer-fragment.glsl' {
 
 }
 declare module '@deck.gl/layers/arc-layer/arc-layer' {
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface ArcLayerProps extends LayerProps {
+        widthUnits?: string;
+        widthScale?: number;
+        widthMinPixels?: number;
+        widthMaxPixels?: number;
+        getSourcePosition?: Function;
+        getTargetPosition?: Function;
+        getSourceColor?: Function | Array<any>;
+        getTargetColor?: Function | Array<any>;
+        getWidth?: Function | number;
+        getHeight?: Function | number;
+        getTilt?: Function | number;
+    }
 	import { Layer } from '@deck.gl/core';
 	export default class ArcLayer extends Layer {
+		constructor(props: ArcLayerProps)
 		getShaders(): any;
 		initializeState(): void;
 		updateState({ props, oldProps, changeFlags }: {
@@ -42,7 +57,16 @@ declare module '@deck.gl/layers/bitmap-layer/bitmap-layer-fragment' {
 }
 declare module '@deck.gl/layers/bitmap-layer/bitmap-layer' {
 	import { Layer } from '@deck.gl/core';
+    export interface BitmapLayerProps extends LayerProps {
+        bitmap: any
+        bounds: Array<any>
+        desaturate: number
+        transparentColor: Array<any>
+        tintColor: Array<any>
+    }
+    import { LayerProps } from "@deck.gl/core/lib/layer";
 	export default class BitmapLayer extends Layer {
+		constructor(props: BitmapLayerProps)
 		getShaders(): any;
 		initializeState(): void;
 		updateState({ props, oldProps, changeFlags }: {
@@ -281,7 +305,17 @@ declare module '@deck.gl/layers/point-cloud-layer/point-cloud-layer-fragment.gls
 }
 declare module '@deck.gl/layers/point-cloud-layer/point-cloud-layer' {
 	import { Layer } from '@deck.gl/core';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface PointCloudLayerProps extends LayerProps {
+        sizeUnits?: string;
+        pointSize?: number;
+        material?: Object;
+        getPosition?: Function;
+        getNormal?: Function | Array<any>;
+        getColor?: Function | Array<any>;
+    }
 	export default class PointCloudLayer extends Layer {
+    	constructor(props: PointCloudLayerProps);
 		getShaders(id: any): any;
 		initializeState(): void;
 		updateState({ props, oldProps, changeFlags }: {
@@ -308,7 +342,26 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer-fragment.gls
 }
 declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
 	import { Layer } from '@deck.gl/core';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface ScatterplotLayerProps extends LayerProps {
+        radiusScale?: number;
+        lineWidthUnits?: string;
+        lineWidthScale?: number;
+        stroked?: boolean;
+        filled?: boolean;
+        radiusMinPixels?: number;
+        radiusMaxPixels?: number;
+        lineWidthMinPixels?: number;
+        lineWidthMaxPixels?: number;
+        getPosition?: Function;
+        getRadius?: Function | number;
+        getColor?: Function | Array<any>;
+        getFillColor?: Function | Array<any>;
+        getLineColor?: Function | Array<any>;
+        getLineWidth?: Function | Array<any>;
+    }
 	export default class ScatterplotLayer extends Layer {
+    	constructor(props: ScatterplotLayerProps);
 		getShaders(id: any): any;
 		initializeState(): void;
 		updateState({ props, oldProps, changeFlags }: {
@@ -343,7 +396,33 @@ declare module '@deck.gl/layers/column-layer/column-layer-fragment.glsl' {
 declare module '@deck.gl/layers/column-layer/column-layer' {
 	import { Layer } from '@deck.gl/core';
 	import ColumnGeometry from '@deck.gl/layers/column-layer/column-geometry';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+	export interface ColumnLayerProps extends LayerProps {
+        diskResolution?: number;
+        radius?: number;
+        angle?: number;
+        vertices?: Array<any>;
+        offset?: number;
+        coverage?: number;
+        elevationScale?: number;
+        filled?: boolean;
+        filled?: boolean;
+        stroked?: boolean;
+        extruded?: boolean;
+        wireframe?: boolean;
+        lineWidthUnits?: string;
+        lineWidthScale?: boolean;
+        lineWidthMinPixels?: number;
+        lineWidthMaxPixels?: number;
+        material?: Object;
+        getPosition?: Function;
+        getFillColor?: Function | Array<any>;
+        getLineColor?: Function | Array<any>;
+        getElevation?: Function | number;
+        getLineWidth?: Function | number;
+    }
 	export default class ColumnLayer extends Layer {
+		constructor(props: ColumnLayerProps);
 		getShaders(): any;
 	    /**
 	     * DeckGL calls initializeState when GL context is available
@@ -369,7 +448,19 @@ declare module '@deck.gl/layers/column-layer/column-layer' {
 }
 declare module '@deck.gl/layers/column-layer/grid-cell-layer' {
 	import ColumnLayer from '@deck.gl/layers/column-layer/column-layer';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface GridCellLayerProps extends LayerProps {
+        cellSize?: number;
+        coverage?: number;
+        elevationScale?: number;
+        extruded?: boolean;
+        material?: Object;
+        getPosition?: Function;
+        getColor?: Function | Array<any>;
+        getElevation?: Function | number;
+    }
 	export default class GridCellLayer extends ColumnLayer {
+    	constructor(props: GridCellLayerProps);
 		getGeometry(diskResolution: any): any;
 		draw({ uniforms }: {
 			uniforms: any;
@@ -407,7 +498,23 @@ declare module '@deck.gl/layers/path-layer/path-layer-fragment.glsl' {
 }
 declare module '@deck.gl/layers/path-layer/path-layer' {
 	import { Layer } from '@deck.gl/core';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    export interface PathLayerProps extends LayerProps {
+        widthUnits?: string;
+        widthScale?: number;
+        widthMinPixels?: number;
+        widthMaxPixels?: number;
+        rounded?: boolean;
+        billboard?: boolean;
+        miterLimit?: number;
+        dashJustified?: boolean;
+        getPath?: Function;
+        getColor?: Function | Array<any>;
+        getWidth?: Function | number;
+        getDashArray?: Function | Array<any>;
+    }
 	export default class PathLayer extends Layer {
+    	constructor(props: PathLayerProps);
 		getShaders(): any;
 		initializeState(params?: any): void;
 		updateState({ oldProps, props, changeFlags }: {
@@ -611,7 +718,34 @@ declare module '@deck.gl/layers/geojson-layer/geojson' {
 }
 declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
+    import { LayerProps } from "@deck.gl/core/lib/layer";
+    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+    export interface GeoJsonLayerProps extends LayerProps, CompositeLayerProps {
+        filled?: boolean;
+        stroked?: boolean;
+        extruded?: boolean;
+        wireframe?: boolean;
+        lineWidthUnits?: string;
+        lineWidthScale?: number;
+        lineWidthMinPixels?: number;
+        lineWidthMaxPixels?: number;
+        lineJointRounded?: boolean;
+        lineMiterLimit?: number;
+        elevationScale?: number;
+        pointRadiusScale?: number;
+        pointRadiusMinPixels?: number;
+        pointRadiusMaxPixels?: number;
+        lineDashJustified?: boolean;
+        material?: Object;
+        getLineColor?: Function | Array<any>;
+        getFillColor?: Function | Array<any>;
+        getRadius?: Function | number;
+        getLineWidth?: Function | number;
+        getElevation?: Function | number;
+        getLineDashArray?: Function | Array<any>;
+    }
 	export default class GeoJsonLayer extends CompositeLayer {
+    	constructor(props: GeoJsonLayerProps);
 		initializeState(): void;
 		updateState({ props, changeFlags }: {
 			props: any;
