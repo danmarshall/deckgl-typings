@@ -406,7 +406,6 @@ declare module '@deck.gl/layers/column-layer/column-layer' {
         coverage?: number;
         elevationScale?: number;
         filled?: boolean;
-        filled?: boolean;
         stroked?: boolean;
         extruded?: boolean;
         wireframe?: boolean;
