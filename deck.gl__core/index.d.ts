@@ -962,7 +962,30 @@ declare module '@deck.gl/core/lib/layer' {
 
 	export interface LayerProps {
 		coordinateSystem?: number;
+		/**
+		 * The id must be unique among all your layers at a given time.
+		 */
 		id?: string;
+		/**
+		 * The data to be supplied to render the layer.
+		 * 
+		 * Deck.gl layers typically expect data to be one of the following types:
+		 * - Array: a JavaScript array of data objects.
+		 * - An object that implements the iterable protocol, for example Map 
+		 *   and Set. Represents a collection of data objects.
+		 * - Any non-iterable object that contains a length field. deck.gl will 
+		 *   not attempt to interpret its format, but simply call each accessor 
+		 *   length times. (See remark below)
+		 * - String: an URL pointing to the data source. deck.gl will attempt to 
+		 *   fetch the remote content and parse it as JSON. The resulting object 
+		 *   is then used as the value of the data prop.
+		 * - Promise: the resolved value will be used as the value of the data 
+		 *   prop.
+		 * - AsyncIterable: an async iterable object that yields data in batches.
+		 *   The default implementation expects each batch to be an array of data 
+		 *   objects; one may change this behavior by supplying a custom 
+		 *   dataTransform callback.
+		 */
 		data: LayerData;
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
@@ -971,6 +994,22 @@ declare module '@deck.gl/core/lib/layer' {
 		onClick?: LayerInputHandler;
 		onHover?: LayerInputHandler;
 		lightSettings?: LightSettings;
+		/**
+		 * Whether the layer is visible.
+		 */
+		visible?: boolean;
+		/**
+		 * The opacity of the layer.
+		 * 
+		 * Remarks:
+		 * - deck.gl automatically applies gamma to the opacity in an attempt 
+		 *   to make opacity changes appear linear (i.e. the perceived opacity 
+		 *   is visually proportional to the value of the prop).
+		 * - While it is a recommended convention that all deck.gl layers 
+		 *   should support the opacity prop, it is up to each layer's fragment 
+		 *   shader to properly implement support for opacity.
+		 */
+		opacity: number;
 	}
 	export default class Layer extends Component {
 		constructor(props: LayerProps);
