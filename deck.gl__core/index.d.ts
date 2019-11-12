@@ -954,9 +954,16 @@ declare module '@deck.gl/core/lib/layer' {
 	export interface LayerInputHandler {
 		(o: PickInfo, e: HammerInput): void;
 	}
+
+	/**
+	 * https://github.com/uber/deck.gl/blob/master/docs/api-reference/layer.md#data-iterable--string--promise--asynciterable--object-optional
+	 */
+	export type LayerData = Iterable<any> | String | Promise<any> | AsyncIterable<any> | String | Object | undefined;
+
 	export interface LayerProps {
 		coordinateSystem?: number;
 		id?: string;
+		data: LayerData;
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
 		autoHighlight?: boolean;
