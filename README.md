@@ -1,5 +1,5 @@
 # deckgl-typings
-TypeScript declaration files for deck.gl
+TypeScript declaration files for [deck.gl](https://deck.gl/#/documentation/)
 
 This is a work in progress - see the [issues list](https://github.com/danmarshall/deckgl-typings/issues)
 
