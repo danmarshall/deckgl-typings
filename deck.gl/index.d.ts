@@ -44,7 +44,8 @@ declare module 'deck.gl' {
 		DirectionalLight,
 		LayerExtension,
 		fp64LowPart,
-		createIterable
+		createIterable,
+        DeckProps,
 	} from '@deck.gl/core';
 	export {
 		ArcLayer,
@@ -69,7 +70,10 @@ declare module 'deck.gl' {
 		GridLayer,
 		GPUGridLayer,
 		AGGREGATION_OPERATION,
-		HeatmapLayer
+		HeatmapLayer,
+        RGBAColor,
+		ColorDomain,
+		ColorRange,
 	} from '@deck.gl/aggregation-layers';
 	export {
 		GreatCircleLayer,

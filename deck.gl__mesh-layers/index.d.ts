@@ -55,21 +55,30 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-fragmen
 declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface SimpleMeshLayerProps extends LayerProps {
-        mesh: any;
-        texture?: any;
+    import Texture2D from "@luma.gl/webgl/classes/texture-2d";
+    import PhongMaterial from "@luma.gl/core/materials/phong-material";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    export interface SimpleMesh {
+        positions: Float32Array;
+        normals: Float32Array;
+        texCoords: Float32Array;
+	}
+	type Coordinates = [number, number, number]
+    export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
+        mesh: SimpleMesh;
+        texture?: Texture2D | HTMLImageElement | string;
         sizeScale?: number;
         wireframe?: boolean;
-        material?: Object;
-        getPosition?: Function;
-        getColor?: Function | Array<any>;
-        getOrientation?: Function | Array<any>;
-        getScale?: Function | Array<any>;
-        getTranslation?: Function | Array<any>;
-        getTransformMatrix?: Function | Array<any>;
+        material?: PhongMaterial;
+        getPosition?: (d: D) => [number, number];
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getOrientation?: ((d: D) => Coordinates) | Coordinates;
+        getScale?: ((d: D) => Coordinates) | Coordinates;
+        getTranslation?: ((d: D) => Coordinates) | Coordinates;
+        getTransformMatrix?: ((d: D) => number[][]) | number[][];
     }
-	export default class SimpleMeshLayer extends Layer {
-    	constructor(props: SimpleMeshLayerProps);
+	export default class SimpleMeshLayer<D> extends Layer<D> {
+    	constructor(props: SimpleMeshLayerProps<D>);
 		getShaders(): any;
 		initializeState(): void;
 		updateState({ props, oldProps, changeFlags }: {
@@ -103,8 +112,11 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-fragment.
 declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface ScenegraphLayerProps extends LayerProps {
-        scenegraph: URL | Object | Promise<any>;
+    import ScenegraphNode from "@luma.gl/core/scenegraph/nodes/scenegraph-node";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    type Coordinates = [number, number, number]
+    export interface ScenegraphLayerProps<D> extends LayerProps<D> {
+        scenegraph: URL | ScenegraphNode | Promise<ScenegraphNode>;
         sizeScale?: number;
         _animations?: Object;
         getScene?: Function;
@@ -112,14 +124,14 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
         _lighting?: string;
         _imageBasedLightingEnvironment?: any
         getPosition?: Function;
-        getColor?: Function | Array<any>;
-        getOrientation?: Function | Array<any>;
-        getScale?: Function | Array<any>;
-        getTranslation?: Function | Array<any>;
-        getTransformMatrix?: Function | Array<any>;
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getOrientation?: ((d: D) => Coordinates) | Coordinates;
+        getScale?: ((d: D) => Coordinates) | Coordinates;
+        getTranslation?: ((d: D) => Coordinates) | Coordinates;
+        getTransformMatrix?: ((d: D) => number[][]) | number[][];
     }
-	export default class ScenegraphLayer extends Layer {
-    	constructor(props: ScenegraphLayerProps);
+	export default class ScenegraphLayer<D> extends Layer<D> {
+    	constructor(props: ScenegraphLayerProps<D>);
 		initializeState(): void;
 		updateState(params: any): void;
 		finalizeState(): void;
