@@ -880,7 +880,7 @@ declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
 	}
 
     export interface GeoJsonLayerProps extends LayerProps, CompositeLayerProps {
-		data: LayerData | GeoJSON;
+		data: LayerData | GeoJSON | Array<Feature>;
         filled?: boolean;
         stroked?: boolean;
         extruded?: boolean;
