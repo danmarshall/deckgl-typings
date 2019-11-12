@@ -71,10 +71,10 @@ declare module '@deck.gl/core/lib/constants' {
 }
 declare module '@deck.gl/core/utils/memoize' {
 	/**
-	 * Speed up consecutive function calls by caching the result of calls with identical input
-	 * https://en.wikipedia.org/wiki/Memoization
-	 * @param {function} compute - the function to be memoized
-	 */
+	* Speed up consecutive function calls by caching the result of calls with identical input
+	* https://en.wikipedia.org/wiki/Memoization
+	* @param {function} compute - the function to be memoized
+	*/
 	export default function memoize(compute: any): (args: any) => any;
 
 }
@@ -85,14 +85,14 @@ declare module '@deck.gl/core/utils/assert' {
 declare module '@deck.gl/core/shaderlib/project/viewport-uniforms' {
 	export const LNGLAT_AUTO_OFFSET_ZOOM_THRESHOLD = 12;
 	/**
-	 * Returns uniforms for shaders based on current projection
-	 * includes: projection matrix suitable for shaders
-	 *
-	 * TODO - Ensure this works with any viewport, not just WebMercatorViewports
-	 *
-	 * @param {WebMercatorViewport} viewport -
-	 * @return {Float32Array} - 4x4 projection matrix that can be used in shaders
-	 */
+	* Returns uniforms for shaders based on current projection
+	* includes: projection matrix suitable for shaders
+	*
+	* TODO - Ensure this works with any viewport, not just WebMercatorViewports
+	*
+	* @param {WebMercatorViewport} viewport -
+	* @return {Float32Array} - 4x4 projection matrix that can be used in shaders
+	*/
 	export function getUniformsFromViewport({ viewport, devicePixelRatio, modelMatrix, coordinateSystem, coordinateOrigin, wrapLongitude, projectionMode, positionOrigin }?: {
 		viewport: any;
 		devicePixelRatio?: number;
@@ -326,22 +326,22 @@ declare module '@deck.gl/core/shaderlib/project/project-functions' {
 		offsetMode: any;
 	}): any;
 	/**
-	 * Equivalent to project_position in project.glsl
-	 * projects a user supplied position to world position directly with or without
-	 * a reference coordinate system
-	 * @param {array} position - [x, y, z]
-	 * @param {object} params
-	 * @param {Viewport} params.viewport - the current viewport
-	 * @param {number} params.coordinateSystem - the reference coordinate system used
-	 *   align world position
-	 * @param {array} params.coordinateOrigin - the reference coordinate origin used
-	 *   to align world position
-	 * @param {Matrix4} [params.modelMatrix] - the model matrix of the supplied position
-	 * @param {number} [params.fromCoordinateSystem] - the coordinate system that the
-	 *   supplied position is in. Default to the same as `coordinateSystem`.
-	 * @param {array} [params.fromCoordinateOrigin] - the coordinate origin that the
-	 *   supplied position is in. Default to the same as `coordinateOrigin`.
-	 */
+	* Equivalent to project_position in project.glsl
+	* projects a user supplied position to world position directly with or without
+	* a reference coordinate system
+	* @param {array} position - [x, y, z]
+	* @param {object} params
+	* @param {Viewport} params.viewport - the current viewport
+	* @param {number} params.coordinateSystem - the reference coordinate system used
+	*   align world position
+	* @param {array} params.coordinateOrigin - the reference coordinate origin used
+	*   to align world position
+	* @param {Matrix4} [params.modelMatrix] - the model matrix of the supplied position
+	* @param {number} [params.fromCoordinateSystem] - the coordinate system that the
+	*   supplied position is in. Default to the same as `coordinateSystem`.
+	* @param {array} [params.fromCoordinateOrigin] - the coordinate origin that the
+	*   supplied position is in. Default to the same as `coordinateOrigin`.
+	*/
 	export function projectPosition(position: any, params: any): any;
 
 }
@@ -359,17 +359,17 @@ declare module '@deck.gl/core/utils/iterable-utils' {
 }
 declare module '@deck.gl/core/utils/flatten' {
 	/**
-	 * Flattens a nested array into a single level array,
-	 * or a single value into an array with one value
-	 * @example flatten([[1, [2]], [3], 4]) => [1, 2, 3, 4]
-	 * @example flatten(1) => [1]
-	 * @param {Array} array The array to flatten.
-	 * @param {Function} filter= - Optional predicate called on each `value` to
-	 *   determine if it should be included (pushed onto) the resulting array.
-	 * @param {Function} map= - Optional transform applied to each array elements.
-	 * @param {Array} result=[] - Optional array to push value into
-	 * @return {Array} Returns the new flattened array (new array or `result` if provided)
-	 */
+	* Flattens a nested array into a single level array,
+	* or a single value into an array with one value
+	* @example flatten([[1, [2]], [3], 4]) => [1, 2, 3, 4]
+	* @example flatten(1) => [1]
+	* @param {Array} array The array to flatten.
+	* @param {Function} filter= - Optional predicate called on each `value` to
+	*   determine if it should be included (pushed onto) the resulting array.
+	* @param {Function} map= - Optional transform applied to each array elements.
+	* @param {Array} result=[] - Optional array to push value into
+	* @return {Array} Returns the new flattened array (new array or `result` if provided)
+	*/
 	export function flatten(array: any, { filter, map, result }?: {
 		filter?: () => boolean;
 		map?: (x: any) => any;
@@ -457,20 +457,20 @@ declare module '@deck.gl/core/utils/math-utils' {
 		};
 	};
 	/**
-	 * Calculate the low part of a WebGL 64 bit float
-	 * @param x {number} - the input float number
-	 * @returns {number} - the lower 32 bit of the number
-	 */
+	* Calculate the low part of a WebGL 64 bit float
+	* @param x {number} - the input float number
+	* @returns {number} - the lower 32 bit of the number
+	*/
 	export function fp64LowPart(x: any): number;
 	/**
-	 * Split a Float64Array into a double-length Float32Array
-	 * @param typedArray {Float64Array}
-	 * @param size {Number} - per attribute size
-	 * @param [startIndex] {Number} - start index in the source array
-	 * @param [endIndex] {Number} - end index in the source array
-	 * @returns {Float32Array} - high part, low part for each attribute:
-		[1xHi, 1yHi, 1zHi, 1xLow, 1yLow, 1zLow, 2xHi, ...]
-	 */
+	* Split a Float64Array into a double-length Float32Array
+	* @param typedArray {Float64Array}
+	* @param size {Number} - per attribute size
+	* @param [startIndex] {Number} - start index in the source array
+	* @param [endIndex] {Number} - end index in the source array
+	* @returns {Float32Array} - high part, low part for each attribute:
+	[1xHi, 1yHi, 1zHi, 1xLow, 1yLow, 1zLow, 2xHi, ...]
+	*/
 	export function toDoublePrecisionArray(typedArray: any, { size, startIndex, endIndex }: {
 		size?: number;
 		startIndex?: number;
@@ -557,26 +557,26 @@ declare module '@deck.gl/core/lib/attribute' {
 declare module '@deck.gl/core/transitions/transition' {
 	export default class Transition {
 		/**
-		 * @params timeline {Timeline}
-		 */
+		* @params timeline {Timeline}
+		*/
 		constructor(timeline: any);
 		readonly inProgress: any;
 		/**
-		 * (re)start this transition.
-		 * @params props {object} - optional overriding props. see constructor
-		 */
+		* (re)start this transition.
+		* @params props {object} - optional overriding props. see constructor
+		*/
 		start(props: any): void;
 		/**
-		 * end this transition if it is in progress.
-		 */
+		* end this transition if it is in progress.
+		*/
 		end(): void;
 		/**
-		 * cancel this transition if it is in progress.
-		 */
+		* cancel this transition if it is in progress.
+		*/
 		cancel(): void;
 		/**
-		 * update this transition. Returns `true` if updated.
-		 */
+		* update this transition. Returns `true` if updated.
+		*/
 		update(): boolean;
 		_onUpdate(): void;
 	}
@@ -634,19 +634,19 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 	import Attribute from '@deck.gl/core/lib/attribute';
 	export default class AttributeManager {
 		/**
-		 * Sets log functions to help trace or time attribute updates.
-		 * Default logging uses deck logger.
-		 *
-		 * `onLog` is called for each attribute.
-		 *
-		 * To enable detailed control of timming and e.g. hierarchical logging,
-		 * hooks are also provided for update start and end.
-		 *
-		 * @param {Object} [opts]
-		 * @param {String} [onLog=] - called to print
-		 * @param {String} [onUpdateStart=] - called before update() starts
-		 * @param {String} [onUpdateEnd=] - called after update() ends
-		 */
+		* Sets log functions to help trace or time attribute updates.
+		* Default logging uses deck logger.
+		*
+		* `onLog` is called for each attribute.
+		*
+		* To enable detailed control of timming and e.g. hierarchical logging,
+		* hooks are also provided for update start and end.
+		*
+		* @param {Object} [opts]
+		* @param {String} [onLog=] - called to print
+		* @param {String} [onUpdateStart=] - called before update() starts
+		* @param {String} [onUpdateEnd=] - called after update() ends
+		*/
 		static setDefaultLogFunctions({ onLog, onUpdateStart, onUpdate, onUpdateEnd }?: {
 			onLog: any;
 			onUpdateStart: any;
@@ -654,28 +654,28 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 			onUpdateEnd: any;
 		}): void;
 		/**
-		 * @classdesc
-		 * Automated attribute generation and management. Suitable when a set of
-		 * vertex shader attributes are generated by iteration over a data array,
-		 * and updates to these attributes are needed either when the data itself
-		 * changes, or when other data relevant to the calculations change.
-		 *
-		 * - First the application registers descriptions of its dynamic vertex
-		 *   attributes using AttributeManager.add().
-		 * - Then, when any change that affects attributes is detected by the
-		 *   application, the app will call AttributeManager.invalidate().
-		 * - Finally before it renders, it calls AttributeManager.update() to
-		 *   ensure that attributes are automatically rebuilt if anything has been
-		 *   invalidated.
-		 *
-		 * The application provided update functions describe how attributes
-		 * should be updated from a data array and are expected to traverse
-		 * that data array (or iterable) and fill in the attribute's typed array.
-		 *
-		 * Note that the attribute manager intentionally does not do advanced
-		 * change detection, but instead makes it easy to build such detection
-		 * by offering the ability to "invalidate" each attribute separately.
-		 */
+		* @classdesc
+		* Automated attribute generation and management. Suitable when a set of
+		* vertex shader attributes are generated by iteration over a data array,
+		* and updates to these attributes are needed either when the data itself
+		* changes, or when other data relevant to the calculations change.
+		*
+		* - First the application registers descriptions of its dynamic vertex
+		*   attributes using AttributeManager.add().
+		* - Then, when any change that affects attributes is detected by the
+		*   application, the app will call AttributeManager.invalidate().
+		* - Finally before it renders, it calls AttributeManager.update() to
+		*   ensure that attributes are automatically rebuilt if anything has been
+		*   invalidated.
+		*
+		* The application provided update functions describe how attributes
+		* should be updated from a data array and are expected to traverse
+		* that data array (or iterable) and fill in the attribute's typed array.
+		*
+		* Note that the attribute manager intentionally does not do advanced
+		* change detection, but instead makes it easy to build such detection
+		* by offering the ability to "invalidate" each attribute separately.
+		*/
 		constructor(gl: any, { id, stats, timeline }?: {
 			id?: string;
 			stats: any;
@@ -689,15 +689,15 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 		add(attributes: any, updaters: any): void;
 		addInstanced(attributes: any, updaters: any): void;
 		/**
-		 * Removes attributes
-		 * Takes an array of attribute names and delete them from
-		 * the attribute map if they exists
-		 *
-		 * @example
-		 * attributeManager.remove(['position']);
-		 *
-		 * @param {Object} attributeNameArray - attribute name array (see above)
-		 */
+		* Removes attributes
+		* Takes an array of attribute names and delete them from
+		* the attribute map if they exists
+		*
+		* @example
+		* attributeManager.remove(['position']);
+		*
+		* @param {Object} attributeNameArray - attribute name array (see above)
+		*/
 		remove(attributeNameArray: any): void;
 		invalidate(triggerName: any, dataRange: any): void;
 		invalidateAll(dataRange: any): void;
@@ -712,16 +712,16 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 		}): void;
 		updateTransition(): any;
 		/**
-		 * Returns all attribute descriptors
-		 * Note: Format matches luma.gl Model/Program.setAttributes()
-		 * @return {Object} attributes - descriptors
-		 */
+		* Returns all attribute descriptors
+		* Note: Format matches luma.gl Model/Program.setAttributes()
+		* @return {Object} attributes - descriptors
+		*/
 		getAttributes(): any;
 		/**
-		 * Returns changed attribute descriptors
-		 * This indicates which WebGLBuffers need to be updated
-		 * @return {Object} attributes - descriptors
-		 */
+		* Returns changed attribute descriptors
+		* This indicates which WebGLBuffers need to be updated
+		* @return {Object} attributes - descriptors
+		*/
 		getChangedAttributes(opts?: {
 			clearChangedFlags: boolean;
 		}): any;
@@ -736,31 +736,31 @@ declare module '@deck.gl/core/lib/attribute-manager' {
 }
 declare module '@deck.gl/core/lib/seer-integration' {
 	/**
-	 * Create an override on the specify layer, indexed by a valuePath array.
-	 * Do nothing in case Seer as not been initialized to prevent any preformance drawback.
-	 */
+	* Create an override on the specify layer, indexed by a valuePath array.
+	* Do nothing in case Seer as not been initialized to prevent any preformance drawback.
+	*/
 	export const setPropOverrides: (id: any, valuePath: any, value: any) => void;
 	/**
-	 * Get the props overrides of a specific layer if Seer as been initialized
-	 * Invalidates the data to be sure new ones are always picked up.
-	 */
+	* Get the props overrides of a specific layer if Seer as been initialized
+	* Invalidates the data to be sure new ones are always picked up.
+	*/
 	export const applyPropOverrides: (props: any) => void;
 	/**
-	 * Listen for deck.gl edit events
-	 */
+	* Listen for deck.gl edit events
+	*/
 	export const layerEditListener: (cb: any) => void;
 	/**
-	 * Listen for seer init events to resend data
-	 */
+	* Listen for seer init events to resend data
+	*/
 	export const seerInitListener: (cb: any) => void;
 	export const initLayerInSeer: (layer: any) => void;
 	/**
-	 * Log layer's properties to Seer
-	 */
+	* Log layer's properties to Seer
+	*/
 	export const updateLayerInSeer: (layer: any) => void;
 	/**
-	 * On finalize of a specify layer, remove it from seer
-	 */
+	* On finalize of a specify layer, remove it from seer
+	*/
 	export const removeLayerInSeer: (id: any) => void;
 
 }
@@ -801,14 +801,14 @@ declare module '@deck.gl/core/lifecycle/props' {
 		transitionsChanged: {};
 	};
 	/**
-	 * Performs equality by iterating through keys on an object and returning false
-	 * when any key has values which are not strictly equal between the arguments.
-	 * @param {Object} opt.oldProps - object with old key/value pairs
-	 * @param {Object} opt.newProps - object with new key/value pairs
-	 * @param {Object} opt.ignoreProps={} - object, keys that should not be compared
-	 * @returns {null|String} - null when values of all keys are strictly equal.
-	 *   if unequal, returns a string explaining what changed.
-	 */
+	* Performs equality by iterating through keys on an object and returning false
+	* when any key has values which are not strictly equal between the arguments.
+	* @param {Object} opt.oldProps - object with old key/value pairs
+	* @param {Object} opt.newProps - object with new key/value pairs
+	* @param {Object} opt.ignoreProps={} - object, keys that should not be compared
+	* @returns {null|String} - null when values of all keys are strictly equal.
+	*   if unequal, returns a string explaining what changed.
+	*/
 	export function compareProps({ newProps, oldProps, ignoreProps, propTypes, triggerName }?: {
 		newProps: any;
 		oldProps: any;
@@ -820,12 +820,12 @@ declare module '@deck.gl/core/lifecycle/props' {
 }
 declare module '@deck.gl/core/utils/count' {
 	/**
-	 * Deduces numer of elements in a JavaScript container.
-	 * - Auto-deduction for ES6 containers that define a count() method
-	 * - Auto-deduction for ES6 containers that define a size member
-	 * - Auto-deduction for Classic Arrays via the built-in length attribute
-	 * - Also handles objects, although note that this an O(N) operation
-	 */
+	* Deduces numer of elements in a JavaScript container.
+	* - Auto-deduction for ES6 containers that define a count() method
+	* - Auto-deduction for ES6 containers that define a size member
+	* - Auto-deduction for Classic Arrays via the built-in length attribute
+	* - Also handles objects, although note that this an O(N) operation
+	*/
 	export function count(container: any): any;
 
 }
@@ -889,33 +889,33 @@ declare module '@deck.gl/core/lifecycle/component' {
 		props: any;
 
 		/**	
-		 * The layer's id, used for matching with layers from last render cycle	
-		 */
+		* The layer's id, used for matching with layers from last render cycle	
+		*/
 		id: string;
 
 		/**	
-		 * Keep track of how many layer instances you are generating	
-		 */
+		* Keep track of how many layer instances you are generating	
+		*/
 		count: number;
 
 		/**	
-		 * Helps track and debug the life cycle of the layers	
-		 */
+		* Helps track and debug the life cycle of the layers	
+		*/
 		lifecycle: string;
 
 		/**	
-		 * reference to the composite layer parent that rendered this layer	
-		 */
+		* reference to the composite layer parent that rendered this layer	
+		*/
 		parent: Component;
 
 		/**	
-		 * Will reference layer manager's context, contains state shared by layers	
-		 */
+		* Will reference layer manager's context, contains state shared by layers	
+		*/
 		context: { gl: WebGLRenderingContext, shaderCache: ShaderCache };
 
 		/**	
-		 * Will be set to the shared layer state object during layer matching	
-		 */
+		* Will be set to the shared layer state object during layer matching	
+		*/
 		state: any;
 
 		internalState: any;
@@ -966,30 +966,30 @@ declare module '@deck.gl/core/lib/layer' {
 	export interface LayerProps<D> {
 		coordinateSystem?: number;
 		/**
-		 * The id must be unique among all your layers at a given time.
-		 */
+		* The id must be unique among all your layers at a given time.
+		*/
 		id?: string;
 		/**
-		 * The data to be supplied to render the layer.
-		 * https://github.com/uber/deck.gl/blob/master/docs/api-reference/layer.md#data-iterable--string--promise--asynciterable--object-optional
-		 * 
-		 * Deck.gl layers typically expect data to be one of the following types:
-		 * - Array: a JavaScript array of data objects.
-		 * - An object that implements the iterable protocol, for example Map 
-		 *   and Set. Represents a collection of data objects.
-		 * - Any non-iterable object that contains a length field. deck.gl will 
-		 *   not attempt to interpret its format, but simply call each accessor 
-		 *   length times. (See remark below)
-		 * - String: an URL pointing to the data source. deck.gl will attempt to 
-		 *   fetch the remote content and parse it as JSON. The resulting object 
-		 *   is then used as the value of the data prop.
-		 * - Promise: the resolved value will be used as the value of the data 
-		 *   prop.
-		 * - AsyncIterable: an async iterable object that yields data in batches.
-		 *   The default implementation expects each batch to be an array of data 
-		 *   objects; one may change this behavior by supplying a custom 
-		 *   dataTransform callback.
-		 */
+		* The data to be supplied to render the layer.
+		* https://github.com/uber/deck.gl/blob/master/docs/api-reference/layer.md#data-iterable--string--promise--asynciterable--object-optional
+		* 
+		* Deck.gl layers typically expect data to be one of the following types:
+		* - Array: a JavaScript array of data objects.
+		* - An object that implements the iterable protocol, for example Map 
+		*   and Set. Represents a collection of data objects.
+		* - Any non-iterable object that contains a length field. deck.gl will 
+		*   not attempt to interpret its format, but simply call each accessor 
+		*   length times. (See remark below)
+		* - String: an URL pointing to the data source. deck.gl will attempt to 
+		*   fetch the remote content and parse it as JSON. The resulting object 
+		*   is then used as the value of the data prop.
+		* - Promise: the resolved value will be used as the value of the data 
+		*   prop.
+		* - AsyncIterable: an async iterable object that yields data in batches.
+		*   The default implementation expects each batch to be an array of data 
+		*   objects; one may change this behavior by supplying a custom 
+		*   dataTransform callback.
+		*/
 		data?: LayerData<D> | IterableLayerData<D> | AsyncIterable<D> | String;
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
@@ -999,20 +999,20 @@ declare module '@deck.gl/core/lib/layer' {
 		onHover?: LayerInputHandler;
 		lightSettings?: LightSettings;
 		/**
-		 * Whether the layer is visible.
-		 */
+		* Whether the layer is visible.
+		*/
 		visible?: boolean;
 		/**
-		 * The opacity of the layer, the default is 0.8.
-		 * 
-		 * Remarks:
-		 * - deck.gl automatically applies gamma to the opacity in an attempt 
-		 *   to make opacity changes appear linear (i.e. the perceived opacity 
-		 *   is visually proportional to the value of the prop).
-		 * - While it is a recommended convention that all deck.gl layers 
-		 *   should support the opacity prop, it is up to each layer's fragment 
-		 *   shader to properly implement support for opacity.
-		 */
+		* The opacity of the layer, the default is 0.8.
+		* 
+		* Remarks:
+		* - deck.gl automatically applies gamma to the opacity in an attempt 
+		*   to make opacity changes appear linear (i.e. the perceived opacity 
+		*   is visually proportional to the value of the prop).
+		* - While it is a recommended convention that all deck.gl layers 
+		*   should support the opacity prop, it is up to each layer's fragment 
+		*   shader to properly implement support for opacity.
+		*/
 		opacity?: number;
 	}
 	export default class Layer<D> extends Component {
@@ -1156,39 +1156,39 @@ declare module '@deck.gl/core/lib/composite-layer' {
 declare module '@deck.gl/core/viewports/viewport' {
 	export default class Viewport {
 		/**
-		 * @classdesc
-		 * Manages coordinate system transformations for deck.gl.
-		 *
-		 * Note: The Viewport is immutable in the sense that it only has accessors.
-		 * A new viewport instance should be created if any parameters have changed.
-		 */
+		* @classdesc
+		* Manages coordinate system transformations for deck.gl.
+		*
+		* Note: The Viewport is immutable in the sense that it only has accessors.
+		* A new viewport instance should be created if any parameters have changed.
+		*/
 		constructor(opts?: {});
 		equals(viewport: any): any;
 		/**
-		 * Projects xyz (possibly latitude and longitude) to pixel coordinates in window
-		 * using viewport projection parameters
-		 * - [longitude, latitude] to [x, y]
-		 * - [longitude, latitude, Z] => [x, y, z]
-		 * Note: By default, returns top-left coordinates for canvas/SVG type render
-		 *
-		 * @param {Array} lngLatZ - [lng, lat] or [lng, lat, Z]
-		 * @param {Object} opts - options
-		 * @param {Object} opts.topLeft=true - Whether projected coords are top left
-		 * @return {Array} - [x, y] or [x, y, z] in top left coords
-		 */
+		* Projects xyz (possibly latitude and longitude) to pixel coordinates in window
+		* using viewport projection parameters
+		* - [longitude, latitude] to [x, y]
+		* - [longitude, latitude, Z] => [x, y, z]
+		* Note: By default, returns top-left coordinates for canvas/SVG type render
+		*
+		* @param {Array} lngLatZ - [lng, lat] or [lng, lat, Z]
+		* @param {Object} opts - options
+		* @param {Object} opts.topLeft=true - Whether projected coords are top left
+		* @return {Array} - [x, y] or [x, y, z] in top left coords
+		*/
 		project(xyz: any, { topLeft }?: {
 			topLeft?: boolean;
 		}): any[];
 		/**
-		 * Unproject pixel coordinates on screen onto world coordinates,
-		 * (possibly [lon, lat]) on map.
-		 * - [x, y] => [lng, lat]
-		 * - [x, y, z] => [lng, lat, Z]
-		 * @param {Array} xyz -
-		 * @param {Object} opts - options
-		 * @param {Object} opts.topLeft=true - Whether origin is top left
-		 * @return {Array|null} - [lng, lat, Z] or [X, Y, Z]
-		 */
+		* Unproject pixel coordinates on screen onto world coordinates,
+		* (possibly [lon, lat]) on map.
+		* - [x, y] => [lng, lat]
+		* - [x, y, z] => [lng, lat, Z]
+		* @param {Array} xyz -
+		* @param {Object} opts - options
+		* @param {Object} opts.topLeft=true - Whether origin is top left
+		* @return {Array|null} - [lng, lat, Z] or [X, Y, Z]
+		*/
 		unproject(xyz: any, { topLeft, targetZ }?: {
 			topLeft?: boolean;
 			targetZ: any;
@@ -1196,23 +1196,23 @@ declare module '@deck.gl/core/viewports/viewport' {
 		projectPosition(xyz: any): any[];
 		unprojectPosition(xyz: any): any[];
 		/**
-		 * Project [lng,lat] on sphere onto [x,y] on 512*512 Mercator Zoom 0 tile.
-		 * Performs the nonlinear part of the web mercator projection.
-		 * Remaining projection is done with 4x4 matrices which also handles
-		 * perspective.
-		 * @param {Array} lngLat - [lng, lat] coordinates
-		 *   Specifies a point on the sphere to project onto the map.
-		 * @return {Array} [x,y] coordinates.
-		 */
+		* Project [lng,lat] on sphere onto [x,y] on 512*512 Mercator Zoom 0 tile.
+		* Performs the nonlinear part of the web mercator projection.
+		* Remaining projection is done with 4x4 matrices which also handles
+		* perspective.
+		* @param {Array} lngLat - [lng, lat] coordinates
+		*   Specifies a point on the sphere to project onto the map.
+		* @return {Array} [x,y] coordinates.
+		*/
 		projectFlat(xyz: any, scale?: any): any;
 		/**
-		 * Unproject world point [x,y] on map onto {lat, lon} on sphere
-		 * @param {object|Vector} xy - object with {x,y} members
-		 *  representing point on projected map plane
-		 * @return {GeoCoordinates} - object with {lat,lon} of point on sphere.
-		 *   Has toArray method if you need a GeoJSON Array.
-		 *   Per cartographic tradition, lat and lon are specified as degrees.
-		 */
+		* Unproject world point [x,y] on map onto {lat, lon} on sphere
+		* @param {object|Vector} xy - object with {x,y} members
+		*  representing point on projected map plane
+		* @return {GeoCoordinates} - object with {lat,lon} of point on sphere.
+		*   Has toArray method if you need a GeoJSON Array.
+		*   Per cartographic tradition, lat and lon are specified as degrees.
+		*/
 		unprojectFlat(xyz: any, scale?: any): any;
 		getDistanceScales(coordinateOrigin?: any): any;
 		getMatrices({ modelMatrix }?: {
@@ -1287,12 +1287,12 @@ declare module '@deck.gl/core/lib/layer-manager' {
 		_updateLayer(layer: any): any;
 		_finalizeLayer(layer: any): any;
 		/**
-		 * Called upon Seer initialization, manually sends layers data.
-		 */
+		* Called upon Seer initialization, manually sends layers data.
+		*/
 		_initSeer(): void;
 		/**
-		 * On Seer property edition, set override and update layers.
-		 */
+		* On Seer property edition, set override and update layers.
+		*/
 		_editSeer(payload: any): void;
 	}
 
@@ -1353,11 +1353,11 @@ declare module '@deck.gl/core/passes/screen-pass' {
 		delete(): void;
 		_getModel(gl: any, module: any, fs: any, id: any, userProps: any): any;
 		/**
-		 * Renders the pass.
-		 * This is an abstract method that should be overridden.
-		 * @param {Framebuffer} inputBuffer - Frame buffer that contains the result of the previous pass
-		 * @param {Framebuffer} outputBuffer - Frame buffer that serves as the output render target
-		 */
+		* Renders the pass.
+		* This is an abstract method that should be overridden.
+		* @param {Framebuffer} inputBuffer - Frame buffer that contains the result of the previous pass
+		* @param {Framebuffer} outputBuffer - Frame buffer that serves as the output render target
+		*/
 		_renderPass(gl: any, { inputBuffer, outputBuffer }: {
 			inputBuffer: any;
 			outputBuffer: any;
@@ -1432,27 +1432,27 @@ declare module '@deck.gl/core/lib/view-manager' {
 		setNeedsUpdate(reason: any): void;
 		updateViewStates(): void;
 		/** Get a set of viewports for a given width and height
-		 * TODO - Intention is for deck.gl to autodeduce width and height and drop the need for props
-		 * @param rect (object, optional) - filter the viewports
-		 *   + not provided - return all viewports
-		 *   + {x, y} - only return viewports that contain this pixel
-		 *   + {x, y, width, height} - only return viewports that overlap with this rectangle
-		 */
+		* TODO - Intention is for deck.gl to autodeduce width and height and drop the need for props
+		* @param rect (object, optional) - filter the viewports
+		*   + not provided - return all viewports
+		*   + {x, y} - only return viewports that contain this pixel
+		*   + {x, y, width, height} - only return viewports that overlap with this rectangle
+		*/
 		getViewports(rect: any): any;
 		getViews(): {};
 		getView(viewOrViewId: any): any;
 		getViewState(viewId: any): any;
 		getViewport(viewId: any): any;
 		/**
-		 * Unproject pixel coordinates on screen onto world coordinates,
-		 * (possibly [lon, lat]) on map.
-		 * - [x, y] => [lng, lat]
-		 * - [x, y, z] => [lng, lat, Z]
-		 * @param {Array} xyz -
-		 * @param {Object} opts - options
-		 * @param {Object} opts.topLeft=true - Whether origin is top left
-		 * @return {Array|null} - [lng, lat, Z] or [X, Y, Z]
-		 */
+		* Unproject pixel coordinates on screen onto world coordinates,
+		* (possibly [lon, lat]) on map.
+		* - [x, y] => [lng, lat]
+		* - [x, y, z] => [lng, lat, Z]
+		* @param {Array} xyz -
+		* @param {Object} opts - options
+		* @param {Object} opts.topLeft=true - Whether origin is top left
+		* @return {Array|null} - [lng, lat, Z] or [X, Y, Z]
+		*/
 		unproject(xyz: any, opts: any): any;
 		setProps(props: any): void;
 		_update(): void;
@@ -1472,53 +1472,53 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 	import Viewport from '@deck.gl/core/viewports/viewport';
 	export default class WebMercatorViewport extends Viewport {
 		/**
-		 * @classdesc
-		 * Creates view/projection matrices from mercator params
-		 * Note: The Viewport is immutable in the sense that it only has accessors.
-		 * A new viewport instance should be created if any parameters have changed.
-		 */
+		* @classdesc
+		* Creates view/projection matrices from mercator params
+		* Note: The Viewport is immutable in the sense that it only has accessors.
+		* A new viewport instance should be created if any parameters have changed.
+		*/
 		constructor(opts?: {});
 		/**
-		 * Converts a meter offset to a lnglat offset
-		 *
-		 * Note: Uses simple linear approximation around the viewport center
-		 * Error increases with size of offset (roughly 1% per 100km)
-		 *
-		 * @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
-		 * @return {[Number,Number]|[Number,Number,Number]) - array of [lng,lat,z] deltas
-		 */
+		* Converts a meter offset to a lnglat offset
+		*
+		* Note: Uses simple linear approximation around the viewport center
+		* Error increases with size of offset (roughly 1% per 100km)
+		*
+		* @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
+		* @return {[Number,Number]|[Number,Number,Number]) - array of [lng,lat,z] deltas
+		*/
 		metersToLngLatDelta(xyz: any): any[];
 		/**
-		 * Converts a lnglat offset to a meter offset
-		 *
-		 * Note: Uses simple linear approximation around the viewport center
-		 * Error increases with size of offset (roughly 1% per 100km)
-		 *
-		 * @param {[Number,Number]|[Number,Number,Number]) deltaLngLatZ - array of [lng,lat,z] deltas
-		 * @return {[Number,Number]|[Number,Number,Number]) - array of meter deltas
-		 */
+		* Converts a lnglat offset to a meter offset
+		*
+		* Note: Uses simple linear approximation around the viewport center
+		* Error increases with size of offset (roughly 1% per 100km)
+		*
+		* @param {[Number,Number]|[Number,Number,Number]) deltaLngLatZ - array of [lng,lat,z] deltas
+		* @return {[Number,Number]|[Number,Number,Number]) - array of meter deltas
+		*/
 		lngLatDeltaToMeters(deltaLngLatZ: any): any[];
 		/**
-		 * Add a meter delta to a base lnglat coordinate, returning a new lnglat array
-		 *
-		 * Note: Uses simple linear approximation around the viewport center
-		 * Error increases with size of offset (roughly 1% per 100km)
-		 *
-		 * @param {[Number,Number]|[Number,Number,Number]) lngLatZ - base coordinate
-		 * @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
-		 * @return {[Number,Number]|[Number,Number,Number]) array of [lng,lat,z] deltas
-		 */
+		* Add a meter delta to a base lnglat coordinate, returning a new lnglat array
+		*
+		* Note: Uses simple linear approximation around the viewport center
+		* Error increases with size of offset (roughly 1% per 100km)
+		*
+		* @param {[Number,Number]|[Number,Number,Number]) lngLatZ - base coordinate
+		* @param {[Number,Number]|[Number,Number,Number]) xyz - array of meter deltas
+		* @return {[Number,Number]|[Number,Number,Number]) array of [lng,lat,z] deltas
+		*/
 		addMetersToLngLat(lngLatZ: any, xyz: any): any;
 		/**
-		 * Get the map center that place a given [lng, lat] coordinate at screen
-		 * point [x, y]
-		 *
-		 * @param {Array} lngLat - [lng,lat] coordinates
-		 *   Specifies a point on the sphere.
-		 * @param {Array} pos - [x,y] coordinates
-		 *   Specifies a point on the screen.
-		 * @return {Array} [lng,lat] new map center.
-		 */
+		* Get the map center that place a given [lng, lat] coordinate at screen
+		* point [x, y]
+		*
+		* @param {Array} lngLat - [lng,lat] coordinates
+		*   Specifies a point on the sphere.
+		* @param {Array} pos - [x,y] coordinates
+		*   Specifies a point on the screen.
+		* @return {Array} [lng,lat] new map center.
+		*/
 		getMapCenterByLngLatPosition({ lngLat, pos }: {
 			lngLat: any;
 			pos: any;
@@ -1528,14 +1528,14 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 			pos: any;
 		}): any;
 		/**
-		 * Returns a new viewport that fit around the given rectangle.
-		 * Only supports non-perspective mode.
-		 * @param {Array} bounds - [[lon, lat], [lon, lat]]
-		 * @param {Number} [options.padding] - The amount of padding in pixels to add to the given bounds.
-		 * @param {Array} [options.offset] - The center of the given bounds relative to the map's center,
-		 *    [x, y] measured in pixels.
-		 * @returns {WebMercatorViewport}
-		 */
+		* Returns a new viewport that fit around the given rectangle.
+		* Only supports non-perspective mode.
+		* @param {Array} bounds - [[lon, lat], [lon, lat]]
+		* @param {Number} [options.padding] - The amount of padding in pixels to add to the given bounds.
+		* @param {Array} [options.offset] - The center of the given bounds relative to the map's center,
+		*    [x, y] measured in pixels.
+		* @returns {WebMercatorViewport}
+		*/
 		fitBounds(bounds: any, options?: {}): WebMercatorViewport;
 	}
 
@@ -1543,35 +1543,35 @@ declare module '@deck.gl/core/viewports/web-mercator-viewport' {
 declare module '@deck.gl/core/transitions/transition-interpolator' {
 	export default class TransitionInterpolator {
 		/**
-		 * @param opts {array|object}
-		 * @param opts.compare {array} - prop names used in equality check
-		 * @param opts.extract {array} - prop names needed for interpolation
-		 * @param opts.required {array} - prop names that must be supplied
-		 * alternatively, supply one list of prop names as `opts` if all of the above are the same.
-		 */
+		* @param opts {array|object}
+		* @param opts.compare {array} - prop names used in equality check
+		* @param opts.extract {array} - prop names needed for interpolation
+		* @param opts.required {array} - prop names that must be supplied
+		* alternatively, supply one list of prop names as `opts` if all of the above are the same.
+		*/
 		constructor(opts?: {});
 		/**
-		 * Checks if two sets of props need transition in between
-		 * @param currentProps {object} - a list of viewport props
-		 * @param nextProps {object} - a list of viewport props
-		 * @returns {bool} - true if two props are equivalent
-		 */
+		* Checks if two sets of props need transition in between
+		* @param currentProps {object} - a list of viewport props
+		* @param nextProps {object} - a list of viewport props
+		* @returns {bool} - true if two props are equivalent
+		*/
 		arePropsEqual(currentProps: any, nextProps: any): boolean;
 		/**
-		 * Called before transition starts to validate/pre-process start and end props
-		 * @param startProps {object} - a list of starting viewport props
-		 * @param endProps {object} - a list of target viewport props
-		 * @returns {Object} {start, end} - start and end props to be passed
-		 *   to `interpolateProps`
-		 */
+		* Called before transition starts to validate/pre-process start and end props
+		* @param startProps {object} - a list of starting viewport props
+		* @param endProps {object} - a list of target viewport props
+		* @returns {Object} {start, end} - start and end props to be passed
+		*   to `interpolateProps`
+		*/
 		initializeProps(startProps: any, endProps: any): any;
 		/**
-		 * Returns viewport props in transition
-		 * @param startProps {object} - a list of starting viewport props
-		 * @param endProps {object} - a list of target viewport props
-		 * @param t {number} - a time factor between [0, 1]
-		 * @returns {object} - a list of interpolated viewport props
-		 */
+		* Returns viewport props in transition
+		* @param startProps {object} - a list of starting viewport props
+		* @param endProps {object} - a list of target viewport props
+		* @param t {number} - a time factor between [0, 1]
+		* @returns {object} - a list of interpolated viewport props
+		*/
 		interpolateProps(startProps: any, endProps: any, t: any): void;
 		_checkRequiredProps(props: any): void;
 	}
@@ -1580,12 +1580,12 @@ declare module '@deck.gl/core/transitions/transition-interpolator' {
 declare module '@deck.gl/core/transitions/linear-interpolator' {
 	import TransitionInterpolator from '@deck.gl/core/transitions/transition-interpolator';
 	/**
-	 * Performs linear interpolation of two view states.
-	 */
+	* Performs linear interpolation of two view states.
+	*/
 	export default class LinearInterpolator extends TransitionInterpolator {
 		/**
-		 * @param {Array} transitionProps - list of props to apply linear transition to.
-		 */
+		* @param {Array} transitionProps - list of props to apply linear transition to.
+		*/
 		constructor(transitionProps?: string[]);
 		interpolateProps(startProps: any, endProps: any, t: any): {};
 	}
@@ -1618,17 +1618,17 @@ declare module '@deck.gl/core/controllers/controller' {
 		constructor(ControllerState: any, options?: ControllerOptions);
 		finalize(): void;
 		/**
-		 * Callback for events
-		 * @param {hammer.Event} event
-		 */
+		* Callback for events
+		* @param {hammer.Event} event
+		*/
 		handleEvent(event: any): boolean;
 		getCenter(event: any): number[];
 		isPointInBounds(pos: any, event: any): boolean;
 		isFunctionKeyPressed(event: any): boolean;
 		isDragging(): any;
 		/**
-		 * Extract interactivity options
-		 */
+		* Extract interactivity options
+		*/
 		setProps(props: any): void;
 		updateTransition(): void;
 		toggleEvents(eventNames: any, enabled: any): void;
@@ -1690,10 +1690,10 @@ declare module '@deck.gl/core/controllers/map-controller' {
 			/** The pitch of the viewport in degrees */
 			pitch,
 			/**
-			 * Specify the altitude of the viewport camera
-			 * Unit: map heights, default 1.5
-			 * Non-public API, see https://github.com/mapbox/mapbox-gl-js/issues/1137
-			 */
+			* Specify the altitude of the viewport camera
+			* Unit: map heights, default 1.5
+			* Non-public API, see https://github.com/mapbox/mapbox-gl-js/issues/1137
+			*/
 			altitude,
 			/** Viewport constraints */
 			maxZoom, minZoom, maxPitch, minPitch,
@@ -1726,74 +1726,74 @@ declare module '@deck.gl/core/controllers/map-controller' {
 		getViewportProps(): any;
 		getInteractiveState(): InteractiveState;
 		/**
-		 * Start panning
-		 * @param {[Number, Number]} pos - position on screen where the pointer grabs
-		 */
+		* Start panning
+		* @param {[Number, Number]} pos - position on screen where the pointer grabs
+		*/
 		panStart({ pos }: {
 			pos: any;
 		}): MapState;
 		/**
-		 * Pan
-		 * @param {[Number, Number]} pos - position on screen where the pointer is
-		 * @param {[Number, Number], optional} startPos - where the pointer grabbed at
-		 *   the start of the operation. Must be supplied of `panStart()` was not called
-		 */
+		* Pan
+		* @param {[Number, Number]} pos - position on screen where the pointer is
+		* @param {[Number, Number], optional} startPos - where the pointer grabbed at
+		*   the start of the operation. Must be supplied of `panStart()` was not called
+		*/
 		pan({ pos, startPos }: {
 			pos: any;
 			startPos: any;
 		}): MapState;
 		/**
-		 * End panning
-		 * Must call if `panStart()` was called
-		 */
+		* End panning
+		* Must call if `panStart()` was called
+		*/
 		panEnd(): MapState;
 		/**
-		 * Start rotating
-		 * @param {[Number, Number]} pos - position on screen where the center is
-		 */
+		* Start rotating
+		* @param {[Number, Number]} pos - position on screen where the center is
+		*/
 		rotateStart({ pos }: {
 			pos: any;
 		}): MapState;
 		/**
-		 * Rotate
-		 * @param {Number} deltaScaleX - a number between [-1, 1] specifying the
-		 *   change to bearing.
-		 * @param {Number} deltaScaleY - a number between [-1, 1] specifying the
-		 *   change to pitch. -1 sets to minPitch and 1 sets to maxPitch.
-		 */
+		* Rotate
+		* @param {Number} deltaScaleX - a number between [-1, 1] specifying the
+		*   change to bearing.
+		* @param {Number} deltaScaleY - a number between [-1, 1] specifying the
+		*   change to pitch. -1 sets to minPitch and 1 sets to maxPitch.
+		*/
 		rotate({ deltaScaleX, deltaScaleY }: {
 			deltaScaleX?: number;
 			deltaScaleY?: number;
 		}): MapState;
 		/**
-		 * End rotating
-		 * Must call if `rotateStart()` was called
-		 */
+		* End rotating
+		* Must call if `rotateStart()` was called
+		*/
 		rotateEnd(): MapState;
 		/**
-		 * Start zooming
-		 * @param {[Number, Number]} pos - position on screen where the center is
-		 */
+		* Start zooming
+		* @param {[Number, Number]} pos - position on screen where the center is
+		*/
 		zoomStart({ pos }: {
 			pos: any;
 		}): MapState;
 		/**
-		 * Zoom
-		 * @param {[Number, Number]} pos - position on screen where the current center is
-		 * @param {[Number, Number]} startPos - the center position at
-		 *   the start of the operation. Must be supplied of `zoomStart()` was not called
-		 * @param {Number} scale - a number between [0, 1] specifying the accumulated
-		 *   relative scale.
-		 */
+		* Zoom
+		* @param {[Number, Number]} pos - position on screen where the current center is
+		* @param {[Number, Number]} startPos - the center position at
+		*   the start of the operation. Must be supplied of `zoomStart()` was not called
+		* @param {Number} scale - a number between [0, 1] specifying the accumulated
+		*   relative scale.
+		*/
 		zoom({ pos, startPos, scale }: {
 			pos: any;
 			startPos: any;
 			scale: any;
 		}): MapState;
 		/**
-		 * End zooming
-		 * Must call if `zoomStart()` was called
-		 */
+		* End zooming
+		* Must call if `zoomStart()` was called
+		*/
 		zoomEnd(): MapState;
 		zoomIn(): any;
 		zoomOut(): any;
@@ -1873,9 +1873,9 @@ declare module '@deck.gl/core/passes/draw-layers-pass' {
 	export default class DrawLayersPass extends LayersPass {
 		getModuleParameters(layer: any, effects: any, effectProps: any): any;
 		/**
-		 * Returns the picking color of currenlty selected object of the given 'layer'.
-		 * @return {Array} - the picking color or null if layers selected object is invalid.
-		 */
+		* Returns the picking color of currenlty selected object of the given 'layer'.
+		* @return {Array} - the picking color or null if layers selected object is invalid.
+		*/
 		getObjectHighlightParameters(layer: any): {
 			pickingHighlightColor: any[];
 		};
@@ -1939,9 +1939,9 @@ declare module '@deck.gl/core/lib/deck-renderer' {
 }
 declare module '@deck.gl/core/lib/picking/query-object' {
 	/**
-	 * Pick at a specified pixel with a tolerance radius
-	 * Returns the closest object to the pixel in shape `{pickedColor, pickedLayer, pickedObjectIndex}`
-	 */
+	* Pick at a specified pixel with a tolerance radius
+	* Returns the closest object to the pixel in shape `{pickedColor, pickedLayer, pickedObjectIndex}`
+	*/
 	export function getClosestObject({ pickedColors, layers, deviceX, deviceY, deviceRadius, deviceRect }: {
 		pickedColors: any;
 		layers: any;
@@ -1955,9 +1955,9 @@ declare module '@deck.gl/core/lib/picking/query-object' {
 		pickedObjectIndex: any;
 	};
 	/**
-	 * Examines a picking buffer for unique colors
-	 * Returns array of unique objects in shape `{x, y, pickedColor, pickedLayer, pickedObjectIndex}`
-	 */
+	* Examines a picking buffer for unique colors
+	* Returns array of unique objects in shape `{x, y, pickedColor, pickedLayer, pickedObjectIndex}`
+	*/
 	export function getUniqueObjects({ pickedColors, layers }: {
 		pickedColors: any;
 		layers: any;
@@ -2257,70 +2257,70 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
 		getViewportProps(): any;
 		getInteractiveState(): InteractiveState;
 		/**
-		 * Start panning
-		 * @param {[Number, Number]} pos - position on screen where the pointer grabs
-		 */
+		* Start panning
+		* @param {[Number, Number]} pos - position on screen where the pointer grabs
+		*/
 		panStart({ pos }: {
 			pos: any;
 		}): OrbitState;
 		/**
-		 * Pan
-		 * @param {[Number, Number]} pos - position on screen where the pointer is
-		 */
+		* Pan
+		* @param {[Number, Number]} pos - position on screen where the pointer is
+		*/
 		pan({ pos, startPos }: {
 			pos: any;
 			startPos: any;
 		}): OrbitState;
 		/**
-		 * End panning
-		 * Must call if `panStart()` was called
-		 */
+		* End panning
+		* Must call if `panStart()` was called
+		*/
 		panEnd(): OrbitState;
 		/**
-		 * Start rotating
-		 * @param {[Number, Number]} pos - position on screen where the pointer grabs
-		 */
+		* Start rotating
+		* @param {[Number, Number]} pos - position on screen where the pointer grabs
+		*/
 		rotateStart({ pos }: {
 			pos: any;
 		}): OrbitState;
 		/**
-		 * Rotate
-		 * @param {[Number, Number]} pos - position on screen where the pointer is
-		 */
+		* Rotate
+		* @param {[Number, Number]} pos - position on screen where the pointer is
+		*/
 		rotate({ deltaScaleX, deltaScaleY }: {
 			deltaScaleX: any;
 			deltaScaleY: any;
 		}): OrbitState;
 		/**
-		 * End rotating
-		 * Must call if `rotateStart()` was called
-		 */
+		* End rotating
+		* Must call if `rotateStart()` was called
+		*/
 		rotateEnd(): OrbitState;
 		shortestPathFrom(viewState: any): any;
 		/**
-		 * Start zooming
-		 * @param {[Number, Number]} pos - position on screen where the pointer grabs
-		 */
+		* Start zooming
+		* @param {[Number, Number]} pos - position on screen where the pointer grabs
+		*/
 		zoomStart({ pos }: {
 			pos: any;
 		}): OrbitState;
 		/**
-		 * Zoom
-		 * @param {[Number, Number]} pos - position on screen where the current target is
-		 * @param {[Number, Number]} startPos - the target position at
-		 *   the start of the operation. Must be supplied of `zoomStart()` was not called
-		 * @param {Number} scale - a number between [0, 1] specifying the accumulated
-		 *   relative scale.
-		 */
+		* Zoom
+		* @param {[Number, Number]} pos - position on screen where the current target is
+		* @param {[Number, Number]} startPos - the target position at
+		*   the start of the operation. Must be supplied of `zoomStart()` was not called
+		* @param {Number} scale - a number between [0, 1] specifying the accumulated
+		*   relative scale.
+		*/
 		zoom({ pos, startPos, scale }: {
 			pos: any;
 			startPos: any;
 			scale: any;
 		}): OrbitState;
 		/**
-		 * End zooming
-		 * Must call if `zoomStart()` was called
-		 */
+		* End zooming
+		* Must call if `zoomStart()` was called
+		*/
 		zoomEnd(): OrbitState;
 		zoomIn(): OrbitState;
 		zoomOut(): OrbitState;
@@ -2406,12 +2406,12 @@ declare module '@deck.gl/core/views/orthographic-view' {
 declare module '@deck.gl/core/transitions/viewport-fly-to-interpolator' {
 	import TransitionInterpolator from '@deck.gl/core/transitions/transition-interpolator';
 	/**
-	 * This class adapts mapbox-gl-js Map#flyTo animation so it can be used in
-	 * react/redux architecture.
-	 * mapbox-gl-js flyTo : https://www.mapbox.com/mapbox-gl-js/api/#map#flyto.
-	 * It implements “Smooth and efficient zooming and panning.” algorithm by
-	 * "Jarke J. van Wijk and Wim A.A. Nuij"
-	 */
+	* This class adapts mapbox-gl-js Map#flyTo animation so it can be used in
+	* react/redux architecture.
+	* mapbox-gl-js flyTo : https://www.mapbox.com/mapbox-gl-js/api/#map#flyto.
+	* It implements “Smooth and efficient zooming and panning.” algorithm by
+	* "Jarke J. van Wijk and Wim A.A. Nuij"
+	*/
 	export default class FlyToInterpolator extends TransitionInterpolator {
 		constructor();
 		interpolateProps(startProps: any, endProps: any, t: any): any;
@@ -2434,9 +2434,9 @@ declare module '@deck.gl/core/utils/tesselator' {
 		updateGeometryAttributes(geometry: any, startIndex: any, size: any): void;
 		getGeometrySize(geometry: any): void;
 		/**
-		 * Visit all objects
-		 * `data` is expected to be an iterable consistent with the base Layer expectation
-		 */
+		* Visit all objects
+		* `data` is expected to be an iterable consistent with the base Layer expectation
+		*/
 		_forEachGeometry(visitor: any, startRow: any, endRow: any): void;
 		_rebuildGeometry(dataRange: any): void;
 	}
