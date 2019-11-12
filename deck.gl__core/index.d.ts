@@ -937,8 +937,8 @@ declare module '@deck.gl/core/lib/layer' {
 	import AttributeManager from '@deck.gl/core/lib/attribute-manager';
 	import Component from '@deck.gl/core/lifecycle/component';
 	import { PickInfo } from '@deck.gl/core/lib/deck';
-	import { Color } from '@deck.gl/core/utils/color';
 	import * as hammerjs from 'hammerjs';
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export interface TransitionTiming {
 		duration?: number;
 		easing?: (t: number) => number;
@@ -952,21 +952,25 @@ declare module '@deck.gl/core/lib/layer' {
 		numberOfLights?: number
 	}
 	export interface LayerInputHandler {
-		(o: PickInfo, e: HammerInput): void;
+		(o: PickInfo<any>, e: HammerInput): void;
 	}
-	export interface LayerProps {
+	export type DataSet<D> = Iterable<D>;
+		// | AsyncIterable ToDo: Add AsyncIterable
+		// | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
+	export interface LayerProps<D> {
 		coordinateSystem?: number;
 		id?: string;
+		data?: DataSet<D> | Promise<DataSet<D>> | string;
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
 		autoHighlight?: boolean;
-		highlightColor?: Color;
+		highlightColor?: RGBAColor;
 		onClick?: LayerInputHandler;
 		onHover?: LayerInputHandler;
 		lightSettings?: LightSettings;
 	}
-	export default class Layer extends Component {
-		constructor(props: LayerProps);
+	export default class Layer<D> extends Component {
+		constructor(props: LayerProps<D>);
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
@@ -991,8 +995,8 @@ declare module '@deck.gl/core/lib/layer' {
 		use64bitPositions(): boolean;
 		onHover(info: any, pickingEvent: any): any;
 		onClick(info: any, pickingEvent: any): any;
-		nullPickingColor(): Color;
-		encodePickingColor(i: any, target?: any[]): Color;
+		nullPickingColor(): RGBAColor;
+		encodePickingColor(i: any, target?: any[]): RGBAColor;
 		decodePickingColor(color: any): number;
 		initializeState(): void;
 		getShaders(shaders: any): any;
@@ -1065,11 +1069,11 @@ declare module '@deck.gl/core/lib/layer' {
 }
 declare module '@deck.gl/core/lib/composite-layer' {
 	import Layer, { LayerProps } from '@deck.gl/core/lib/layer';
-	export interface CompositeLayerProps extends LayerProps {
-        _subLayerProps: Object,
+	export interface CompositeLayerProps<D> extends LayerProps<D> {
+        _subLayerProps?: Object,
 	}
-	export default class CompositeLayer extends Layer {
-		constructor(props: CompositeLayerProps);
+	export default class CompositeLayer<D> extends Layer<D> {
+		constructor(props: CompositeLayerProps<D>);
 		readonly isComposite: boolean;
 		getSubLayers(): any;
 		initializeState(): void;
@@ -2034,8 +2038,8 @@ declare module '@deck.gl/core/lib/deck' {
 		isDragging: boolean;
 	}
 
-	export interface PickInfo {
-		layer: Layer,
+	export interface PickInfo<D> {
+		layer: Layer<D>,
 		index: number;
 		object: object;
 		x: number;
@@ -2054,8 +2058,8 @@ declare module '@deck.gl/core/lib/deck' {
 		height: number | string;
 
 		// layer/view/controller settings
-		layers: Layer[];
-		layerFilter?: (x: { layer: Layer, viewport: Viewport, isPicking: boolean }) => boolean;
+		layers: Layer<any>[];
+		layerFilter?: (x: { layer: Layer<any>, viewport: Viewport, isPicking: boolean }) => boolean;
 		views?: View[];
 		initialViewState?: any;
 		viewState?: any;
@@ -2076,8 +2080,8 @@ declare module '@deck.gl/core/lib/deck' {
 		onViewStateChange?: (viewState: any) => any;
 		onBeforeRender?: () => any;
 		onAfterRender?: () => any;
-		onClick?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
-		onHover?: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => any;
+		onClick?: <D>(info: PickInfo<D>, pickedInfos: PickInfo<D>[], e: MouseEvent) => any;
+		onHover?: <D>(info: PickInfo<D>, pickedInfos: PickInfo<D>[], e: MouseEvent) => any;
 		onLoad?: () => any;
 
 		// Debug settings
@@ -2417,7 +2421,7 @@ declare module '@deck.gl/core' {
 	export { default as _SunLight } from '@deck.gl/core/effects/lighting/sun-light';
 	export { default as PostProcessEffect } from '@deck.gl/core/effects/post-process-effect';
 	export { default as _LayersPass } from '@deck.gl/core/passes/layers-pass';
-	export { default as Deck } from '@deck.gl/core/lib/deck';
+	export { default as Deck, DeckProps } from '@deck.gl/core/lib/deck';
 	export { default as LayerManager } from '@deck.gl/core/lib/layer-manager';
 	export { default as AttributeManager } from '@deck.gl/core/lib/attribute-manager';
 	export { default as Layer } from '@deck.gl/core/lib/layer';
