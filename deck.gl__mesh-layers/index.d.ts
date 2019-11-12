@@ -57,7 +57,7 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
     import { LayerProps } from "@deck.gl/core/lib/layer";
     import Texture2D from "@luma.gl/webgl/classes/texture-2d";
     import PhongMaterial from "@luma.gl/core/materials/phong-material";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface SimpleMesh {
         positions: Float32Array;
         normals: Float32Array;
@@ -71,7 +71,7 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
         wireframe?: boolean;
         material?: PhongMaterial;
         getPosition?: (d: D) => [number, number];
-        getColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
         getOrientation?: ((d: D) => Coordinates) | Coordinates;
         getScale?: ((d: D) => Coordinates) | Coordinates;
         getTranslation?: ((d: D) => Coordinates) | Coordinates;
@@ -113,7 +113,7 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
     import ScenegraphNode from "@luma.gl/core/scenegraph/nodes/scenegraph-node";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     type Coordinates = [number, number, number]
     export interface ScenegraphLayerProps<D> extends LayerProps<D> {
         scenegraph: URL | ScenegraphNode | Promise<ScenegraphNode>;
@@ -124,7 +124,7 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
         _lighting?: string;
         _imageBasedLightingEnvironment?: any
         getPosition?: Function;
-        getColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
         getOrientation?: ((d: D) => Coordinates) | Coordinates;
         getScale?: ((d: D) => Coordinates) | Coordinates;
         getTranslation?: ((d: D) => Coordinates) | Coordinates;

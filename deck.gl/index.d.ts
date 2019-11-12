@@ -71,7 +71,7 @@ declare module 'deck.gl' {
 		GPUGridLayer,
 		AGGREGATION_OPERATION,
 		HeatmapLayer,
-        DeckGLColor,
+        RGBAColor,
 		ColorDomain,
 		ColorRange,
 	} from '@deck.gl/aggregation-layers';

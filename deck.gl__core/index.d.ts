@@ -938,7 +938,7 @@ declare module '@deck.gl/core/lib/layer' {
 	import Component from '@deck.gl/core/lifecycle/component';
 	import { PickInfo } from '@deck.gl/core/lib/deck';
 	import * as hammerjs from 'hammerjs';
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export interface TransitionTiming {
 		duration?: number;
 		easing?: (t: number) => number;
@@ -964,7 +964,7 @@ declare module '@deck.gl/core/lib/layer' {
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 		pickable?: boolean;
 		autoHighlight?: boolean;
-		highlightColor?: DeckGLColor;
+		highlightColor?: RGBAColor;
 		onClick?: LayerInputHandler;
 		onHover?: LayerInputHandler;
 		lightSettings?: LightSettings;
@@ -995,8 +995,8 @@ declare module '@deck.gl/core/lib/layer' {
 		use64bitPositions(): boolean;
 		onHover(info: any, pickingEvent: any): any;
 		onClick(info: any, pickingEvent: any): any;
-		nullPickingColor(): DeckGLColor;
-		encodePickingColor(i: any, target?: any[]): DeckGLColor;
+		nullPickingColor(): RGBAColor;
+		encodePickingColor(i: any, target?: any[]): RGBAColor;
 		decodePickingColor(color: any): number;
 		initializeState(): void;
 		getShaders(shaders: any): any;

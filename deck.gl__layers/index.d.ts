@@ -11,7 +11,7 @@ declare module '@deck.gl/layers/arc-layer/arc-layer-fragment.glsl' {
 }
 declare module '@deck.gl/layers/arc-layer/arc-layer' {
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface ArcLayerProps<D> extends LayerProps<D> {
         widthUnits?: string;
         widthScale?: number;
@@ -19,8 +19,8 @@ declare module '@deck.gl/layers/arc-layer/arc-layer' {
         widthMaxPixels?: number;
         getSourcePosition?: (d: D) => [number, number];
         getTargetPosition?: (d: D) => [number, number];
-        getSourceColor?: ((d: D) => DeckGLColor) | DeckGLColor;
-        getTargetColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getSourceColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getTargetColor?: ((d: D) => RGBAColor) | RGBAColor;
         getWidth?: ((d: D) => number) | number;
         getHeight?: ((d: D) => number) | number;
         getTilt?: ((d: D) => number) | number;
@@ -63,11 +63,11 @@ declare module '@deck.gl/layers/bitmap-layer/bitmap-layer' {
         bounds: [number, number, number, number]
 			| [[number, number], [number, number], [number, number], [number, number]];
         desaturate: number;
-        transparentColor: DeckGLColor;
+        transparentColor: RGBAColor;
         tintColor: [number, number, number];
     }
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export default class BitmapLayer<D> extends Layer<D> {
 		constructor(props: BitmapLayerProps<D>)
 		getShaders(): any;
@@ -151,7 +151,7 @@ declare module '@deck.gl/layers/icon-layer/icon-layer' {
 	import { LayerProps } from '@deck.gl/core/lib/layer';
 	import { Position } from '@deck.gl/core/utils/positions';
 	import Texture2D from '@luma.gl/webgl/classes/texture-2d';
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 
 	export interface IconDefinition {
 		x: number;
@@ -206,7 +206,7 @@ declare module '@deck.gl/layers/icon-layer/icon-layer' {
 		*  returns color of the icon in [r, g, b, a].
 		*  Only works on icons with mask: true.
 		*/
-		getColor?: ((x: D) => DeckGLColor) | DeckGLColor,
+		getColor?: ((x: D) => RGBAColor) | RGBAColor,
 
 		/*
 		*  returns icon size multiplier as a number
@@ -253,9 +253,9 @@ declare module '@deck.gl/layers/line-layer/line-layer-fragment.glsl' {
 declare module '@deck.gl/layers/line-layer/line-layer' {
 	import { Layer } from '@deck.gl/core';
 	import { LayerProps } from '@deck.gl/core/lib/layer';
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export interface LineLayerProps<D> extends LayerProps<D> {
-		getColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getSourcePosition?: (d: D) => [number, number];
 		getTargetPosition?: (d: D) => [number, number];
 		getWidth?: ((d: D) => number) | number;
@@ -293,7 +293,7 @@ declare module '@deck.gl/layers/point-cloud-layer/point-cloud-layer-fragment.gls
 declare module '@deck.gl/layers/point-cloud-layer/point-cloud-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     import PhongMaterial from "@luma.gl/core/materials/phong-material";
     export interface PointCloudLayerProps<D> extends LayerProps<D> {
         sizeUnits?: string;
@@ -301,7 +301,7 @@ declare module '@deck.gl/layers/point-cloud-layer/point-cloud-layer' {
         material?: PhongMaterial;
         getPosition?: (d: D) => [number, number];
         getNormal?: ((d: D) => [number, number, number]) | [number, number, number];
-        getColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
     }
 	export default class PointCloudLayer<D> extends Layer<D> {
     	constructor(props: PointCloudLayerProps<D>);
@@ -332,7 +332,7 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer-fragment.gls
 declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface ScatterplotLayerProps<D> extends LayerProps<D> {
         radiusScale?: number;
         lineWidthUnits?: string;
@@ -345,10 +345,10 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
         lineWidthMaxPixels?: number;
         getPosition?: (d: D) => [number, number];
         getRadius?: ((d: D) => number) | number;
-        getColor?: ((d: D) => DeckGLColor) | DeckGLColor;
-        getFillColor?: ((d: D) => DeckGLColor) | DeckGLColor;
-        getLineColor?: ((d: D) => DeckGLColor) | DeckGLColor;
-        getLineWidth?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getFillColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getLineWidth?: ((d: D) => RGBAColor) | RGBAColor;
     }
 	export default class ScatterplotLayer<D> extends Layer<D> {
     	constructor(props: ScatterplotLayerProps<D>);
@@ -388,7 +388,7 @@ declare module '@deck.gl/layers/column-layer/column-layer' {
 	import ColumnGeometry from '@deck.gl/layers/column-layer/column-geometry';
     import { LayerProps } from "@deck.gl/core/lib/layer";
     import PhongMaterial from "@luma.gl/core/materials/phong-material";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export interface ColumnLayerProps<D> extends LayerProps<D> {
         diskResolution?: number;
         radius?: number;
@@ -407,8 +407,8 @@ declare module '@deck.gl/layers/column-layer/column-layer' {
         lineWidthMaxPixels?: number;
         material?: PhongMaterial;
         getPosition?: (d: D) => [number, number];
-        getFillColor?: ((d: D) => DeckGLColor) | DeckGLColor;
-        getLineColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getFillColor?: ((d: D) => RGBAColor) | RGBAColor;
+        getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
         getElevation?: ((d: D) => number) | number;
         getLineWidth?: ((d: D) => number) | number;
     }
@@ -441,7 +441,7 @@ declare module '@deck.gl/layers/column-layer/grid-cell-layer' {
 	import ColumnLayer from '@deck.gl/layers/column-layer/column-layer';
     import { LayerProps } from "@deck.gl/core/lib/layer";
     import PhongMaterial from "@luma.gl/core/materials/phong-material";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface GridCellLayerProps<D> extends LayerProps<D> {
         cellSize?: number;
         coverage?: number;
@@ -449,7 +449,7 @@ declare module '@deck.gl/layers/column-layer/grid-cell-layer' {
         extruded?: boolean;
         material?: PhongMaterial;
         getPosition?: (d: D) => [number, number];
-        getColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getColor?: ((d: D) => RGBAColor) | RGBAColor;
         getElevation?: ((d: D) => number) | number;
     }
 	export default class GridCellLayer<D> extends ColumnLayer<D> {
@@ -492,7 +492,7 @@ declare module '@deck.gl/layers/path-layer/path-layer-fragment.glsl' {
 declare module '@deck.gl/layers/path-layer/path-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray
 		| Float32Array | Float64Array;
     type LayerPath = ([number, number, number])[] | TypedArray
@@ -506,7 +506,7 @@ declare module '@deck.gl/layers/path-layer/path-layer' {
         miterLimit?: number;
         dashJustified?: boolean;
         getPath?: (d: D) => LayerPath;
-        getColor?: (d: D) => DeckGLColor | DeckGLColor;
+        getColor?: (d: D) => RGBAColor | RGBAColor;
         getWidth?: (path: LayerPath) => number | number;
         getDashArray?: (path: LayerPath) => [number, number] | [number, number];
     }
@@ -601,7 +601,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 	import { Material } from '@luma.gl/core';
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from '@deck.gl/core/lib/layer';
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
 	export type Polygon = number[][] | number[][][];
 	export interface SolidPolygonLayerProps<D> extends LayerProps<D> {
 		filled?: boolean;
@@ -610,8 +610,8 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 		wireframe?: boolean;
 		elevationScale?: number;
 		getElevation?: ((x: D) => number) | number;
-		getFillColor?: ((x: D) => DeckGLColor) | DeckGLColor;
-		getLineColor?: ((x: D) => DeckGLColor) | DeckGLColor;
+		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
+		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getPolygon?: (x: D) => Polygon;
 	}
 	export default class SolidPolygonLayer<D> extends Layer<D> {
@@ -654,15 +654,15 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { Polygon } from '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer';
 	export { Polygon };
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
 		data: D[];
 		extruded: boolean;
 		stroked: boolean;
 		getElevation?: ((x: D) => number) | number;
-		getFillColor?: ((x: D) => DeckGLColor) | DeckGLColor;
-		getLineColor?: ((x: D) => DeckGLColor) | DeckGLColor;
+		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
+		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getLineWidth?: ((x: D) => number) | number;
 		getPolygon?: (x: D) => Polygon;
 	}
@@ -706,7 +706,7 @@ declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
     import PhongMaterial from "@luma.gl/core/materials/phong-material";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface GeoJsonLayerProps<D> extends CompositeLayerProps<D> {
         filled?: boolean;
         stroked?: boolean;
@@ -724,8 +724,8 @@ declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
         pointRadiusMaxPixels?: number;
         lineDashJustified?: boolean;
         material?: PhongMaterial;
-        getLineColor?:  ((d: D) => DeckGLColor) | DeckGLColor;
-        getFillColor?: ((d: D) => DeckGLColor) | DeckGLColor;
+        getLineColor?:  ((d: D) => RGBAColor) | RGBAColor;
+        getFillColor?: ((d: D) => RGBAColor) | RGBAColor;
         getRadius?: ((d: D) => number) | number;
         getLineWidth?: ((d: D) => number) | number;
         getElevation?: ((d: D) => number) | number;
@@ -889,7 +889,7 @@ declare module '@deck.gl/layers/text-layer/font-atlas-manager' {
 declare module '@deck.gl/layers/text-layer/text-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { FontSettings } from '@deck.gl/layers/text-layer/font-atlas-manager';
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export type TextAnchor = 'start' | 'middle' | 'end';
 	export type AlignmentBaseline = 'top' | 'center' | 'bottom';
@@ -899,7 +899,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
 		fontSettings?: FontSettings;
 		fontWeight?: number | string;
 		fp64?: boolean;
-		getColor?: ((x: D) => DeckGLColor) | DeckGLColor;
+		getColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getText?: (x: D) => string;
 		getPosition?: (x: D) => [number, number];
 		getSize?: ((x: D) => number) | number;

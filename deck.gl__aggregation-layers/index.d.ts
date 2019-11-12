@@ -2,9 +2,9 @@
 declare module '@deck.gl/aggregation-layers/utils/color-utils' {
 	export const defaultColorRange: number[][];
 	export function colorRangeToFlatArray(colorRange: any, normalize?: boolean, ArrayType?: Float32ArrayConstructor): any;
-    export type DeckGLColor = [number, number, number, number?];
+    export type RGBAColor = [number, number, number, number?];
     export type ColorDomain = [number, number];
-    export type ColorRange = [DeckGLColor, DeckGLColor, DeckGLColor, DeckGLColor, DeckGLColor, DeckGLColor]
+    export type ColorRange = [RGBAColor, RGBAColor, RGBAColor, RGBAColor, RGBAColor, RGBAColor]
 }
 declare module '@deck.gl/aggregation-layers/utils/aggregation-operation-utils' {
 	export const AGGREGATION_OPERATION: {
@@ -178,12 +178,12 @@ declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer-
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer' {
 	import { Layer } from '@deck.gl/core';
     import { LayerProps } from "@deck.gl/core/lib/layer";
-    import { ColorDomain, ColorRange, DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { ColorDomain, ColorRange, RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface ScreenGridLayerProps<D> extends LayerProps<D> {
         cellSizePixels?: number;
         cellMarginPixels?: number;
-        minColor?: DeckGLColor;
-        maxColor?: DeckGLColor;
+        minColor?: RGBAColor;
+        maxColor?: RGBAColor;
         colorDomain?: ColorDomain;
         colorRange?: ColorRange;
         gpuAggregation?: boolean;
@@ -946,7 +946,7 @@ declare module '@deck.gl/aggregation-layers' {
 	export { AGGREGATION_OPERATION } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
 	export { default as HeatmapLayer } from '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer';
 	export { default as _GPUGridAggregator } from '@deck.gl/aggregation-layers/utils/gpu-grid-aggregation/gpu-grid-aggregator';
-	export { DeckGLColor, ColorDomain, ColorRange } from '@deck.gl/aggregation-layers/utils/color-utils';
+	export { RGBAColor, ColorDomain, ColorRange } from '@deck.gl/aggregation-layers/utils/color-utils';
 	import { default as BinSorter } from '@deck.gl/aggregation-layers/utils/bin-sorter';
 	import { linearScale, getLinearScale, quantizeScale, getQuantizeScale, getQuantileScale, getOrdinalScale } from '@deck.gl/aggregation-layers/utils/scale-utils';
 	export const experimental: {

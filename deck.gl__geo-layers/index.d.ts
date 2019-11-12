@@ -242,7 +242,7 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/get-frame-state' {
 declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    import { DeckGLColor } from "@deck.gl/aggregation-layers/utils/color-utils";
+    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     export interface Tile3DLayerProps<D> extends CompositeLayerProps<D> {
         opacity?: number;
         pointSize?: number;
@@ -250,7 +250,7 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
         _ionAssetId?: number | string;
         _ionAccessToken?: string;
         loadOptions?: Object;
-        getPointColor?: ((tileData: Object) => DeckGLColor) | DeckGLColor;
+        getPointColor?: ((tileData: Object) => RGBAColor) | RGBAColor;
         onTilesetLoad?: (tileData: Object) => void;
         onTileLoad?: (tileHeader: Object) => void;
         onTileUnload?: (tileHeader: Object) => void;
