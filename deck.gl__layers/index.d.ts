@@ -502,6 +502,7 @@ declare module '@deck.gl/layers/path-layer/path-layer' {
         widthMinPixels?: number;
         widthMaxPixels?: number;
         rounded?: boolean;
+        positionFormat?: "XYZ" | "XY";
         billboard?: boolean;
         miterLimit?: number;
         dashJustified?: boolean;
@@ -607,6 +608,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 		filled?: boolean;
 		extruded?: boolean;
 		material?: Material;
+		positionFormat?: "XYZ" | "XY";
 		wireframe?: boolean;
 		elevationScale?: number;
 		getElevation?: ((x: D) => number) | number;
@@ -659,6 +661,7 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
 		data: D[];
 		extruded: boolean;
+		positionFormat?: "XYZ" | "XY";
 		stroked: boolean;
 		getElevation?: ((x: D) => number) | number;
 		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
