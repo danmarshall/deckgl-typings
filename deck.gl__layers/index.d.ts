@@ -502,6 +502,7 @@ declare module '@deck.gl/layers/path-layer/path-layer' {
         widthMinPixels?: number;
         widthMaxPixels?: number;
         rounded?: boolean;
+        positionFormat?: "XYZ" | "XY";
         billboard?: boolean;
         miterLimit?: number;
         dashJustified?: boolean;
@@ -607,6 +608,7 @@ declare module '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer' {
 		filled?: boolean;
 		extruded?: boolean;
 		material?: Material;
+		positionFormat?: "XYZ" | "XY";
 		wireframe?: boolean;
 		elevationScale?: number;
 		getElevation?: ((x: D) => number) | number;
@@ -654,12 +656,25 @@ declare module '@deck.gl/layers/polygon-layer/polygon-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
 	import { Polygon } from '@deck.gl/layers/solid-polygon-layer/solid-polygon-layer';
 	export { Polygon };
+    import PhongMaterial from "@luma.gl/core/materials/phong-material";
     import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
 		data: D[];
+		elevationScale?: number;
 		extruded: boolean;
+		filled?: boolean;
+		lineDashJustified?: boolean;
+		lineJointRounded?: boolean;
+		lineMiterLimit?: number;
+		lineWidthMaxPixels?: number;
+		lineWidthMinPixels?: number;
+		lineWidthScale?: boolean;
+		lineWidthUnits?: string;
+		material?: PhongMaterial;
+		positionFormat?: "XYZ" | "XY";
 		stroked: boolean;
+		wireframe?: boolean;
 		getElevation?: ((x: D) => number) | number;
 		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
