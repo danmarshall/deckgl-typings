@@ -549,7 +549,7 @@ declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer' {
         elevationLowerPercentile?: number;
         material?: Object;
         getPosition?: (d: D) => [number, number];
-        getColorValue?: (d: D) => any;
+        getColorValue?: (d: D[]) => any;
         getColorWeight?: (d: D) => any;
         colorAggregation?: string;
         getElevationValue?: (d: D) => any;
