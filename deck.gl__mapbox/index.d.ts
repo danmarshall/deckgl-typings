@@ -12,8 +12,30 @@ declare module '@deck.gl/mapbox/deck-utils' {
 
 }
 declare module '@deck.gl/mapbox/mapbox-layer' {
-	export default class MapboxLayer {
-		constructor(props: any);
+	import { Deck, Layer } from 'deck.gl';
+	import { LayerProps } from '@deck.gl/core/lib/layer';
+
+	export type RenderingMode = '2d' | '3d';
+
+	export interface MapboxLayerProps<D> extends LayerProps<D> {
+		id: string;
+		deck?: Deck;
+		renderingMode?: RenderingMode;
+		type?: typeof Layer;
+	}
+
+	export default class MapboxLayer<D> {
+		constructor(props: MapboxLayerProps<D>);
+		id: string;
+
+		/* The layer's type. Must be "custom". See https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface */
+		type: 'custom'
+
+		renderingMode: RenderingMode;
+		map: any;
+		deck: Deck;
+		props: MapboxLayerProps<D>;
+
 		onAdd(map: any, gl: any): void;
 		onRemove(): void;
 		setProps(props: any): void;
