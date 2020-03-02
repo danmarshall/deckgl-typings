@@ -7,7 +7,7 @@ declare module '@deck.gl/react/deckgl' {
 	import { DeckProps } from '@deck.gl/core/lib/deck';
 	import * as React from 'react';
 	type ReactDeckProps = DeckProps & {
-		ContextProvider: React.Provider<any>;
+		ContextProvider?: React.Provider<any>;
 	}
 	export default class DeckGL extends React.Component<ReactDeckProps, {}> {
 		constructor(props: ReactDeckProps);
