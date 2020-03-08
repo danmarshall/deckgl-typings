@@ -495,7 +495,7 @@ declare module '@deck.gl/layers/path-layer/path-layer' {
     import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
     type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray
 		| Float32Array | Float64Array;
-    type LayerPath = ([number, number, number])[] | TypedArray
+    type LayerPath = ([number, number])[] |([number, number, number])[] | TypedArray
     export interface PathLayerProps<D> extends LayerProps<D> {
         widthUnits?: string;
         widthScale?: number;
