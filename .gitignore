@@ -62,3 +62,4 @@ typings/
 
 # ignore for now
 package-lock.json
+yarn.lock

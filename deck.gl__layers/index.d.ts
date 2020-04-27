@@ -348,7 +348,7 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
         getColor?: ((d: D) => RGBAColor) | RGBAColor;
         getFillColor?: ((d: D) => RGBAColor) | RGBAColor;
         getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
-        getLineWidth?: ((d: D) => RGBAColor) | RGBAColor;
+        getLineWidth?: ((d: D) => number) | number;
     }
 	export default class ScatterplotLayer<D> extends Layer<D> {
     	constructor(props: ScatterplotLayerProps<D>);
