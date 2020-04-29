@@ -88,9 +88,24 @@ declare module '@deck.gl/extensions/fp64/fp64' {
 	}
 
 }
+declare module '@deck.gl/extensions/path-style/path-style' {
+	import { LayerExtension } from '@deck.gl/core';
+	export default class PathStyleExtension extends LayerExtension {
+		constructor({ dash, offset }?: {
+			dash?: boolean;
+			offset?: boolean;
+		});
+		isEnabled(layer: any): any;
+		getShaders(extension: any): {};
+		initializeState(context: any, extension: any): void;
+		updateState(params: any, extension: any): void;
+	}
+
+}
 declare module '@deck.gl/extensions' {
 	export { default as BrushingExtension } from '@deck.gl/extensions/brushing/brushing';
 	export { default as DataFilterExtension } from '@deck.gl/extensions/data-filter/data-filter';
 	export { default as Fp64Extension } from '@deck.gl/extensions/fp64/fp64';
-
+	export { default as PathStyleExtension } from '@deck.gl/extensions/path-style/path-style';
+	
 }
