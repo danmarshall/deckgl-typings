@@ -1,137 +1,137 @@
 //typings for @luma.gl/experimental v8.1.2
 declare module '@luma.gl/experimental/webvr/display' {
 	export default class Display {
-	    getViews(options: any): {
-	        params: {
-	            viewport: any[];
-	            scissor: any[];
-	            scissorTest: boolean;
-	        };
-	    }[];
-	    submitFrame(): boolean;
-	    requestAnimationFrame(renderFrame: any): boolean;
-	    delete(): void;
-	    _renderFrame(options: any): boolean;
+		getViews(options: any): {
+			params: {
+				viewport: any[];
+				scissor: any[];
+				scissorTest: boolean;
+			};
+		}[];
+		submitFrame(): boolean;
+		requestAnimationFrame(renderFrame: any): boolean;
+		delete(): void;
+		_renderFrame(options: any): boolean;
 	}
 
 }
 declare module '@luma.gl/experimental/webvr/vr-button' {
 	export function createEnterVRButton({ canvas, title }: {
-	    canvas: any;
-	    title: any;
+		canvas: any;
+		title: any;
 	}): HTMLButtonElement;
 
 }
 declare module '@luma.gl/experimental/webvr/vr-display' {
 	import Display from '@luma.gl/experimental/webvr/display';
 	export default class VRDisplay extends Display {
-	    static isSupported(): boolean;
-	    constructor(props: any);
-	    delete(): void;
-	    getViews(options: any): {
-	        params: {
-	            viewport: any[];
-	            scissor: any[];
-	            scissorTest: boolean;
-	        };
-	    }[] | {
-	        displayEye: string;
-	        projectionMatrix: any;
-	        viewMatrix: any;
-	        params: {
-	            viewport: any[];
-	            scissor: any[];
-	            scissorTest: boolean;
-	        };
-	    }[];
-	    submitFrame(): boolean;
-	    requestAnimationFrame(renderFrame: any): boolean;
-	    _addVRButton(): Promise<void>;
-	    _getCanvas(): any;
-	    _removeVRButton(): void;
-	    _startDisplay(): void;
-	    _vrDisplayPresentChange(): void;
+		static isSupported(): boolean;
+		constructor(props: any);
+		delete(): void;
+		getViews(options: any): {
+			params: {
+				viewport: any[];
+				scissor: any[];
+				scissorTest: boolean;
+			};
+		}[] | {
+			displayEye: string;
+			projectionMatrix: any;
+			viewMatrix: any;
+			params: {
+				viewport: any[];
+				scissor: any[];
+				scissorTest: boolean;
+			};
+		}[];
+		submitFrame(): boolean;
+		requestAnimationFrame(renderFrame: any): boolean;
+		_addVRButton(): Promise<void>;
+		_getCanvas(): any;
+		_removeVRButton(): void;
+		_startDisplay(): void;
+		_vrDisplayPresentChange(): void;
 	}
 
 }
 declare module '@luma.gl/experimental/gltf/gltf-environment' {
 	export default class GLTFEnvironment {
-	    constructor(gl: any, { brdfLutUrl, getTexUrl, specularMipLevels }: {
-	        brdfLutUrl: any;
-	        getTexUrl: any;
-	        specularMipLevels?: number;
-	    });
-	    makeCube({ id, getTextureForFace, parameters }: {
-	        id: any;
-	        getTextureForFace: any;
-	        parameters: any;
-	    }): any;
-	    getDiffuseEnvSampler(): any;
-	    getSpecularEnvSampler(): any;
-	    getBrdfTexture(): any;
-	    delete(): void;
+		constructor(gl: any, { brdfLutUrl, getTexUrl, specularMipLevels }: {
+			brdfLutUrl: any;
+			getTexUrl: any;
+			specularMipLevels?: number;
+		});
+		makeCube({ id, getTextureForFace, parameters }: {
+			id: any;
+			getTextureForFace: any;
+			parameters: any;
+		}): any;
+		getDiffuseEnvSampler(): any;
+		getSpecularEnvSampler(): any;
+		getBrdfTexture(): any;
+		delete(): void;
 	}
 
 }
 declare module '@luma.gl/experimental/scenegraph/nodes/scenegraph-node' {
 	export default class ScenegraphNode {
-	    constructor(props?: {});
-	    delete(): void;
-	    setProps(props: any): this;
-	    toString(): string;
-	    setPosition(position: any): this;
-	    setRotation(rotation: any): this;
-	    setScale(scale: any): this;
-	    setMatrix(matrix: any, copyMatrix?: boolean): void;
-	    setMatrixComponents({ position, rotation, scale, update }: {
-	        position: any;
-	        rotation: any;
-	        scale: any;
-	        update?: boolean;
-	    }): this;
-	    updateMatrix(): this;
-	    update({ position, rotation, scale }?: {
-	        position: any;
-	        rotation: any;
-	        scale: any;
-	    }): this;
-	    getCoordinateUniforms(viewMatrix: any, modelMatrix: any): {
-	        viewMatrix: any;
-	        modelMatrix: any;
-	        objectMatrix: any;
-	        worldMatrix: any;
-	        worldInverseMatrix: any;
-	        worldInverseTransposeMatrix: any;
-	    };
-	    _setScenegraphNodeProps(props: any): void;
+		constructor(props?: {});
+		delete(): void;
+		setProps(props: any): this;
+		toString(): string;
+		setPosition(position: any): this;
+		setRotation(rotation: any): this;
+		setScale(scale: any): this;
+		setMatrix(matrix: any, copyMatrix?: boolean): void;
+		setMatrixComponents({ position, rotation, scale, update }: {
+			position: any;
+			rotation: any;
+			scale: any;
+			update?: boolean;
+		}): this;
+		updateMatrix(): this;
+		update({ position, rotation, scale }?: {
+			position: any;
+			rotation: any;
+			scale: any;
+		}): this;
+		getCoordinateUniforms(viewMatrix: any, modelMatrix: any): {
+			viewMatrix: any;
+			modelMatrix: any;
+			objectMatrix: any;
+			worldMatrix: any;
+			worldInverseMatrix: any;
+			worldInverseTransposeMatrix: any;
+		};
+		_setScenegraphNodeProps(props: any): void;
 	}
 
 }
 declare module '@luma.gl/experimental/scenegraph/nodes/group-node' {
 	import ScenegraphNode from '@luma.gl/experimental/scenegraph/nodes/scenegraph-node';
 	export default class GroupNode extends ScenegraphNode {
-	    constructor(props?: {});
-	    add(...children: any[]): this;
-	    remove(child: any): this;
-	    removeAll(): this;
-	    delete(): void;
-	    traverse(visitor: any, { worldMatrix }?: {
-	        worldMatrix?: any;
-	    }): void;
+		constructor(props?: {});
+		add(...children: any[]): this;
+		remove(child: any): this;
+		removeAll(): this;
+		delete(): void;
+		traverse(visitor: any, { worldMatrix }?: {
+			worldMatrix?: any;
+		}): void;
 	}
 
 }
 declare module '@luma.gl/experimental/scenegraph/nodes/model-node' {
 	import ScenegraphNode from '@luma.gl/experimental/scenegraph/nodes/scenegraph-node';
 	export default class ModelNode extends ScenegraphNode {
-	    constructor(gl: any, props?: {});
-	    setProps(props: any): this;
-	    delete(): void;
-	    draw(...args: any[]): any;
-	    setUniforms(...args: any[]): this;
-	    setAttributes(...args: any[]): this;
-	    updateModuleSettings(...args: any[]): this;
-	    _setModelNodeProps(props: any): void;
+		constructor(gl: any, props?: {});
+		setProps(props: any): this;
+		delete(): void;
+		draw(...args: any[]): any;
+		setUniforms(...args: any[]): this;
+		setAttributes(...args: any[]): this;
+		updateModuleSettings(...args: any[]): this;
+		_setModelNodeProps(props: any): void;
 	}
 
 }
@@ -143,44 +143,44 @@ declare module '@luma.gl/experimental/scenegraph' {
 }
 declare module '@luma.gl/experimental/gltf/gltf-animator' {
 	export const ATTRIBUTE_TYPE_TO_COMPONENTS: {
-	    SCALAR: number;
-	    VEC2: number;
-	    VEC3: number;
-	    VEC4: number;
-	    MAT2: number;
-	    MAT3: number;
-	    MAT4: number;
+		SCALAR: number;
+		VEC2: number;
+		VEC3: number;
+		VEC4: number;
+		MAT2: number;
+		MAT3: number;
+		MAT4: number;
 	};
 	export const ATTRIBUTE_COMPONENT_TYPE_TO_ARRAY: {
-	    5120: Int8ArrayConstructor;
-	    5121: Uint8ArrayConstructor;
-	    5122: Int16ArrayConstructor;
-	    5123: Uint16ArrayConstructor;
-	    5125: Uint32ArrayConstructor;
-	    5126: Float32ArrayConstructor;
+		5120: Int8ArrayConstructor;
+		5121: Uint8ArrayConstructor;
+		5122: Int16ArrayConstructor;
+		5123: Uint16ArrayConstructor;
+		5125: Uint32ArrayConstructor;
+		5126: Float32ArrayConstructor;
 	};
 	export default class GLTFAnimator {
-	    constructor(gltf: any);
-	    animate(time: any): void;
-	    setTime(time: any): void;
-	    getAnimations(): any;
+		constructor(gltf: any);
+		animate(time: any): void;
+		setTime(time: any): void;
+		getAnimations(): any;
 	}
 
 }
 declare module '@luma.gl/experimental/gltf/gltf-material-parser' {
 	export default class GLTFMaterialParser {
-	    constructor(gl: any, { attributes, material, pbrDebug, imageBasedLightingEnvironment, lights, useTangents }: {
-	        attributes: any;
-	        material: any;
-	        pbrDebug: any;
-	        imageBasedLightingEnvironment: any;
-	        lights: any;
-	        useTangents: any;
-	    });
-	    defineIfPresent(value: any, name: any): void;
-	    parseTexture(gltfTexture: any, name: any, define?: any): void;
-	    parsePbrMetallicRoughness(pbrMetallicRoughness: any): void;
-	    parseMaterial(material: any): void;
+		constructor(gl: any, { attributes, material, pbrDebug, imageBasedLightingEnvironment, lights, useTangents }: {
+			attributes: any;
+			material: any;
+			pbrDebug: any;
+			imageBasedLightingEnvironment: any;
+			lights: any;
+			useTangents: any;
+		});
+		defineIfPresent(value: any, name: any): void;
+		parseTexture(gltfTexture: any, name: any, define?: any): void;
+		parsePbrMetallicRoughness(pbrMetallicRoughness: any): void;
+		parseMaterial(material: any): void;
 	}
 
 }
@@ -192,27 +192,29 @@ declare module '@luma.gl/experimental/gltf/create-gltf-model' {
 declare module '@luma.gl/experimental/gltf/gltf-instantiator' {
 	import GroupNode from '@luma.gl/experimental/scenegraph/nodes/group-node';
 	import GLTFAnimator from '@luma.gl/experimental/gltf/gltf-animator';
+	import { ModelNode } from '@luma.gl/experimental/scenegraph';
 	export default class GLTFInstantiator {
-	    constructor(gl: any, options?: {});
-	    instantiate(gltf: any): any;
-	    createAnimator(): GLTFAnimator;
-	    createScene(gltfScene: any): GroupNode;
-	    createNode(gltfNode: any): any;
-	    createMesh(gltfMesh: any): any;
-	    getVertexCount(attributes: any): void;
-	    createPrimitive(gltfPrimitive: any, i: any, gltfMesh: any): import("@luma.gl/experimental/src/scenegraph").ModelNode;
-	    createAttributes(attributes: any, indices: any): {};
-	    createBuffer(attribute: any, target: any): any;
-	    createAccessor(accessor: any, buffer: any): any;
-	    createSampler(gltfSampler: any): any;
-	    needsPOT(): boolean;
+		constructor(gl: any, options?: {});
+		instantiate(gltf: any): any;
+		createAnimator(): GLTFAnimator;
+		createScene(gltfScene: any): GroupNode;
+		createNode(gltfNode: any): any;
+		createMesh(gltfMesh: any): any;
+		getVertexCount(attributes: any): void;
+		createPrimitive(gltfPrimitive: any, i: any, gltfMesh: any): ModelNode;
+		createAttributes(attributes: any, indices: any): {};
+		createBuffer(attribute: any, target: any): any;
+		createAccessor(accessor: any, buffer: any): any;
+		createSampler(gltfSampler: any): any;
+		needsPOT(): boolean;
 	}
 
 }
 declare module '@luma.gl/experimental/gltf/create-gltf-objects' {
+	import GLTFAnimator from '@luma.gl/experimental/gltf/gltf-animator';
 	export default function createGLTFObjects(gl: any, gltf: any, options: any): {
-	    scenes: any;
-	    animator: import("@luma.gl/experimental/src/gltf/gltf-animator").default;
+		scenes: any;
+		animator: GLTFAnimator;
 	};
 
 }
@@ -226,26 +228,26 @@ declare module '@luma.gl/experimental/gpgpu/histopyramid/histopyramid-shaders' {
 }
 declare module '@luma.gl/experimental/gpgpu/histopyramid/histopyramid' {
 	export function buildHistopyramidBaseLevel(gl: any, opts: any): {
-	    textureData: any;
-	    baseTexture: any;
-	    flatPyramidTexture: any;
+		textureData: any;
+		baseTexture: any;
+		flatPyramidTexture: any;
 	};
 	export function getHistoPyramid(gl: any, opts: any): {
-	    pyramidTextures: any[];
-	    flatPyramidTexture: any;
-	    levelCount: number;
-	    topLevelData: any;
+		pyramidTextures: any[];
+		flatPyramidTexture: any;
+		levelCount: number;
+		topLevelData: any;
 	};
 	export function histoPyramidGenerateIndices(gl: any, opts: any): {
-	    locationAndIndexBuffer: any;
+		locationAndIndexBuffer: any;
 	};
 
 }
 declare module '@luma.gl/experimental/gpgpu/point-in-polygon/texture-filter' {
-	 function getUniforms(opts?: {}): {}; const _default: {
-	    name: string;
-	    vs: string;
-	    getUniforms: typeof getUniforms;
+	function getUniforms(opts?: {}): {}; const _default: {
+		name: string;
+		vs: string;
+		getUniforms: typeof getUniforms;
 	};
 	export default _default;
 
@@ -272,26 +274,26 @@ declare module '@luma.gl/experimental/gpgpu/point-in-polygon/polygon' {
 	 * @return {Object} - {positions: <Float64Array>, holeIndices: <Array|null>}
 	 */
 	export function normalize(polygon: any, positionSize: any, vertexCount: any): Float64Array | {
-	    positions: Float64Array;
-	    holeIndices: any[];
+		positions: Float64Array;
+		holeIndices: any[];
 	};
 	export function getSurfaceIndices(normalizedPolygon: any, positionSize: any, preproject: any): any;
 
 }
 declare module '@luma.gl/experimental/gpgpu/point-in-polygon/gpu-point-in-polygon' {
 	export default class GPUPointInPolygon {
-	    constructor(gl: any, opts?: {});
-	    update({ polygons, textureSize }?: {
-	        polygons: any;
-	        textureSize: any;
-	    }): void;
-	    filter({ positionBuffer, filterValueIndexBuffer, count }: {
-	        positionBuffer: any;
-	        filterValueIndexBuffer: any;
-	        count: any;
-	    }): void;
-	    _setupResources(): void;
-	    _updateResources(vertices: any, indices: any, ids: any, vertexCount: any): void;
+		constructor(gl: any, opts?: {});
+		update({ polygons, textureSize }?: {
+			polygons: any;
+			textureSize: any;
+		}): void;
+		filter({ positionBuffer, filterValueIndexBuffer, count }: {
+			positionBuffer: any;
+			filterValueIndexBuffer: any;
+			count: any;
+		}): void;
+		_setupResources(): void;
+		_updateResources(vertices: any, indices: any, ids: any, vertexCount: any): void;
 	}
 
 }
