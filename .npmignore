@@ -1,4 +1,4 @@
-dist
 scripts
 test
+test-out
 tsconfig.json
