@@ -1009,11 +1009,47 @@ declare module "@deck.gl/core/lifecycle/component-state" {
 	}
 }
 declare module "@deck.gl/core/lifecycle/component" {
-	export default class Component {
+	import { Deck } from "@deck.gl/core";
+	import Viewport from "@deck.gl/core/viewports/viewport";
+	export default class Component<P> {
 		constructor();
-		clone(newProps: any): any;
+		clone(newProps: P): any;
 		get stats(): any;
 		_initState(): void;
+
+		props: P;
+
+		/**	
+		 * The layer's id, used for matching with layers from last render cycle	
+		 */
+		id: string;
+
+		/**	
+		 * Keep track of how many layer instances you are generating	
+		 */
+		count: number;
+
+		/**	
+		 * Helps track and debug the life cycle of the layers	
+		 */
+		lifecycle: string;
+
+		/**	
+		 * reference to the composite layer parent that rendered this layer	
+		 */
+		parent: Component<any>;
+
+		/**	
+		 * Will reference layer manager's context, contains state shared by layers	
+		 */
+		context: { gl: WebGLRenderingContext, viewport: Viewport, deck: Deck };
+
+		/**	
+		 * Will be set to the shared layer state object during layer matching	
+		 */
+		state: any;
+
+		internalState: any;
 	}
 }
 declare module "@deck.gl/core/lib/layer-state" {
@@ -1109,7 +1145,7 @@ declare module "@deck.gl/core/lib/layer" {
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 	}
-	export default class Layer<D> extends Component {
+	export default class Layer<D> extends Component<LayerProps<D>> {
 		constructor(props: LayerProps<D>);
 		toString(): string;
 		setState(updateObject: any): void;
