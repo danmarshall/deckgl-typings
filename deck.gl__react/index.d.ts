@@ -21,6 +21,7 @@ declare module "@deck.gl/react/utils/evaluate-children" {
 	export default function evaluateChildren(children: any, childProps: any): any;
 }
 declare module "@deck.gl/react/utils/position-children-under-views" {
+	import { ReactElement } from 'react';
 	export default function positionChildrenUnderViews({
 		children,
 		viewports,
@@ -32,53 +33,7 @@ declare module "@deck.gl/react/utils/position-children-under-views" {
 		deck: any;
 		ContextProvider: any;
 	}): (
-		| import("react").ReactElement<
-		{
-			key: string;
-			id: string;
-			style: {
-				position: string;
-				left: any;
-				top: any;
-				width: any;
-				height: any;
-			};
-		},
-		| string
-		| ((
-			props: any
-		) => import("react").ReactElement<
-			any,
-			| string
-			| any
-			| (new (props: any) => import("react").Component<any, any, any>)
-			>)
-		| (new (props: any) => import("react").Component<any, any, any>)
-		>
-		| import("react").CElement<
-		{
-			key: string;
-			value: {
-				viewport: any;
-				container: any;
-				eventManager: any;
-				onViewStateChange: (params: any) => void;
-			};
-		},
-		import("react").Component<
-		{
-			key: string;
-			value: {
-				viewport: any;
-				container: any;
-				eventManager: any;
-				onViewStateChange: (params: any) => void;
-			};
-		},
-		any,
-		any
-		>
-		>
+		| ReactElement
 	)[];
 }
 declare module "@deck.gl/react/utils/extract-styles" {
@@ -106,6 +61,7 @@ declare module "@deck.gl/react/utils/extract-styles" {
 	};
 }
 declare module "@deck.gl/react/deckgl" {
+	import { ReactElement } from 'react';
 	export default class DeckGL extends React.Component {
 		constructor(props: any);
 		componentDidMount(): void;
@@ -119,23 +75,7 @@ declare module "@deck.gl/react/deckgl" {
 		_customRender(redrawReason: any): void;
 		_parseJSX(props: any): any;
 		_updateFromProps(props: any): void;
-		render(): import("react").ReactElement<
-			{
-				id: string;
-				ref: any;
-				style: any;
-			},
-			| string
-			| ((
-				props: any
-			) => import("react").ReactElement<
-				any,
-				| string
-				| any
-				| (new (props: any) => import("react").Component<any, any, any>)
-				>)
-			| (new (props: any) => import("react").Component<any, any, any>)
-			>;
+		render(): ReactElement;
 	}
 }
 declare module "@deck.gl/react" {
