@@ -1,8 +1,6 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node"
-    },
-    "include": [
-        "index.d.ts"
-    ]
+        "moduleResolution": "node",
+        "outDir": "../test-out"
+    }
 }

@@ -1,6 +1,10 @@
 //typings for @deck.gl/mapbox v8.1.3
-declare module '@deck.gl/mapbox/deck-utils' {
-	export function getDeckInstance({ map, gl, deck }: {
+declare module "@deck.gl/mapbox/deck-utils" {
+	export function getDeckInstance({
+		map,
+		gl,
+		deck,
+	}: {
 		map: any;
 		gl: any;
 		deck: any;
@@ -9,13 +13,12 @@ declare module '@deck.gl/mapbox/deck-utils' {
 	export function removeLayer(deck: any, layer: any): void;
 	export function updateLayer(deck: any, layer: any): void;
 	export function drawLayer(deck: any, map: any, layer: any): void;
-
 }
-declare module '@deck.gl/mapbox/mapbox-layer' {
-	import { Deck, Layer } from 'deck.gl';
-	import { LayerProps } from '@deck.gl/core/lib/layer';
+declare module "@deck.gl/mapbox/mapbox-layer" {
+	import { Deck, Layer } from "deck.gl";
+	import { LayerProps } from "@deck.gl/core/lib/layer";
 
-	export type RenderingMode = '2d' | '3d';
+	export type RenderingMode = "2d" | "3d";
 
 	export interface MapboxLayerProps<D> extends LayerProps<D> {
 		id: string;
@@ -29,7 +32,7 @@ declare module '@deck.gl/mapbox/mapbox-layer' {
 		id: string;
 
 		/* The layer's type. Must be "custom". See https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface */
-		type: 'custom'
+		type: "custom";
 
 		renderingMode: RenderingMode;
 		map: any;
@@ -41,9 +44,7 @@ declare module '@deck.gl/mapbox/mapbox-layer' {
 		setProps(props: any): void;
 		render(gl: any, matrix: any): void;
 	}
-
 }
-declare module '@deck.gl/mapbox' {
-	export { default as MapboxLayer } from '@deck.gl/mapbox/mapbox-layer';
-
+declare module "@deck.gl/mapbox" {
+	export { default as MapboxLayer } from "@deck.gl/mapbox/mapbox-layer";
 }

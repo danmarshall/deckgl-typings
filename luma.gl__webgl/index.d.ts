@@ -140,9 +140,7 @@ declare module "@luma.gl/webgl/classes/resource" {
 		constructor(gl: any, opts?: {});
 		toString(): string;
 		get handle(): any;
-		delete({ deleteChildren }?: { 
-			deleteChildren?: boolean;
-		}): this | void;
+		delete({ deleteChildren }?: { deleteChildren?: boolean }): this | void;
 		bind(funcOrHandle?: any): any;
 		unbind(): void;
 		/**
