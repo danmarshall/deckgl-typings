@@ -21,7 +21,7 @@ declare module "@deck.gl/react/utils/evaluate-children" {
 	export default function evaluateChildren(children: any, childProps: any): any;
 }
 declare module "@deck.gl/react/utils/position-children-under-views" {
-	import { ReactElement } from 'react';
+	import { ReactElement } from "react";
 	export default function positionChildrenUnderViews({
 		children,
 		viewports,
@@ -32,9 +32,7 @@ declare module "@deck.gl/react/utils/position-children-under-views" {
 		viewports: any;
 		deck: any;
 		ContextProvider: any;
-	}): (
-		| ReactElement
-	)[];
+	}): ReactElement[];
 }
 declare module "@deck.gl/react/utils/extract-styles" {
 	export default function extractStyles({
@@ -61,7 +59,7 @@ declare module "@deck.gl/react/utils/extract-styles" {
 	};
 }
 declare module "@deck.gl/react/deckgl" {
-	import { ReactElement } from 'react';
+	import { ReactElement } from "react";
 	export default class DeckGL extends React.Component {
 		constructor(props: any);
 		componentDidMount(): void;

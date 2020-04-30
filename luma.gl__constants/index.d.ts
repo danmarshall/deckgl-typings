@@ -1,5 +1,5 @@
 //typings for @luma.gl/constants v8.1.2
-declare module '@luma.gl/constants' {
+declare module "@luma.gl/constants" {
 	const DEPTH_BUFFER_BIT: number;
 	const STENCIL_BUFFER_BIT: number;
 	const COLOR_BUFFER_BIT: number;

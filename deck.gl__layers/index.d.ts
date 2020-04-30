@@ -10,7 +10,7 @@ declare module "@deck.gl/layers/arc-layer/arc-layer-fragment.glsl" {
 declare module "@deck.gl/layers/arc-layer/arc-layer" {
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
-	import { Position, } from "@deck.gl/core/utils/positions";
+	import { Position } from "@deck.gl/core/utils/positions";
 	export interface ArcLayerProps<D> extends LayerProps<D> {
 		widthUnits?: string;
 		widthScale?: number;
@@ -505,8 +505,16 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { Position } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
-	export type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray
-		| Float32Array | Float64Array;
+	export type TypedArray =
+		| Int8Array
+		| Uint8Array
+		| Int16Array
+		| Uint16Array
+		| Int32Array
+		| Uint32Array
+		| Uint8ClampedArray
+		| Float32Array
+		| Float64Array;
 	export interface PathLayerProps<D> extends LayerProps<D> {
 		widthUnits?: string;
 		widthScale?: number;
@@ -515,10 +523,10 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 		rounded?: boolean;
 		billboard?: boolean;
 		miterLimit?: number;
-		_pathType?: 'loop' | 'open';
+		_pathType?: "loop" | "open";
 
 		//Data Accessors
-		getPath?: (d: D) => (Position[] | TypedArray);
+		getPath?: (d: D) => Position[] | TypedArray;
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getWidth?: ((d: D) => number) | number;
 	}
@@ -639,8 +647,8 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer-fragment
 }
 declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 	import { Layer } from "@deck.gl/core";
-	import { LayerProps } from '@deck.gl/core/lib/layer';
-	import { Position, } from "@deck.gl/core/utils/positions";
+	import { LayerProps } from "@deck.gl/core/lib/layer";
+	import { Position } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	export interface SolidPolygonLayerProps<D> extends LayerProps<D> {
 		filled?: boolean;

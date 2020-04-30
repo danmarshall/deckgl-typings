@@ -1,5 +1,5 @@
 //typings for @deck.gl/mesh-layers v8.1.3
-declare module '@deck.gl/mesh-layers/utils/matrix' {
+declare module "@deck.gl/mesh-layers/utils/matrix" {
 	export const MATRIX_ATTRIBUTES: {
 		size: number;
 		accessor: string[];
@@ -21,26 +21,32 @@ declare module '@deck.gl/mesh-layers/utils/matrix' {
 				elementOffset: number;
 			};
 		};
-		update(attribute: any, { startRow, endRow }: {
-			startRow: any;
-			endRow: any;
-		}): void;
+		update(
+			attribute: any,
+			{
+				startRow,
+				endRow,
+			}: {
+				startRow: any;
+				endRow: any;
+			}
+		): void;
 	};
-	export function shouldComposeModelMatrix(viewport: any, coordinateSystem: any): boolean;
-
+	export function shouldComposeModelMatrix(
+		viewport: any,
+		coordinateSystem: any
+	): boolean;
 }
-declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-vertex.glsl' {
+declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-vertex.glsl" {
 	const _default: string;
 	export default _default;
-
 }
-declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-fragment.glsl' {
+declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-fragment.glsl" {
 	const _default: string;
 	export default _default;
-
 }
-declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
-	import { Layer } from '@deck.gl/core';
+declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
+	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import Texture2D from "@luma.gl/webgl/classes/texture-2d";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
@@ -49,7 +55,7 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
 		normals: Float32Array;
 		texCoords: Float32Array;
 	}
-	type Coordinates = [number, number, number]
+	type Coordinates = [number, number, number];
 	export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
 		mesh: SimpleMesh;
 		texture?: Texture2D | HTMLImageElement | string;
@@ -67,40 +73,37 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
 		constructor(props: SimpleMeshLayerProps<D>);
 		getShaders(): any;
 		initializeState(): void;
-		updateState({ props, oldProps, changeFlags }: {
+		updateState({
+			props,
+			oldProps,
+			changeFlags,
+		}: {
 			props: any;
 			oldProps: any;
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
-		draw({ uniforms }: {
-			uniforms: any;
-		}): void;
+		draw({ uniforms }: { uniforms: any }): void;
 		getModel(mesh: any): any;
 		setTexture(image: any): void;
 	}
-
 }
-declare module '@deck.gl/mesh-layers/scenegraph-layer/gltf-utils' {
+declare module "@deck.gl/mesh-layers/scenegraph-layer/gltf-utils" {
 	export function waitForGLTFAssets(gltfObjects: any): Promise<void>;
-
 }
-declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-vertex.glsl' {
+declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-vertex.glsl" {
 	const _default: string;
 	export default _default;
-
 }
-declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-fragment.glsl' {
+declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-fragment.glsl" {
 	const _default: string;
 	export default _default;
-
 }
-declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
-	import { Layer } from '@deck.gl/core';
+declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
+	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { ScenegraphNode } from "@luma.gl/experimental";
 	export interface ScenegraphLayerProps<D> extends LayerProps<D> {
-
 		//Mesh
 		scenegraph: URL | ScenegraphNode | Promise<ScenegraphNode>;
 
@@ -112,8 +115,7 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 		_lighting?: string;
 
 		//Experimental
-		_imageBasedLightingEnvironment?: any
-
+		_imageBasedLightingEnvironment?: any;
 	}
 	export default class ScenegraphLayer<D> extends Layer<D> {
 		constructor(props: ScenegraphLayerProps<D>);
@@ -122,7 +124,11 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 		finalizeState(): void;
 		_updateScenegraph(props: any): void;
 		_applyAllAttributes(scenegraph: any): void;
-		_applyAnimationsProp(scenegraph: any, animator: any, animationsProp: any): void;
+		_applyAnimationsProp(
+			scenegraph: any,
+			animator: any,
+			animationsProp: any
+		): void;
 		_deleteScenegraph(): void;
 		getLoadOptions(): {
 			gl: any;
@@ -138,16 +144,18 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 			useTangents: boolean;
 		};
 		updateAttributes(changedAttributes: any): void;
-		draw({ moduleParameters, parameters, context }: {
+		draw({
+			moduleParameters,
+			parameters,
+			context,
+		}: {
 			moduleParameters?: any;
 			parameters?: {};
 			context: any;
 		}): void;
 	}
-
 }
-declare module '@deck.gl/mesh-layers' {
-	export { default as SimpleMeshLayer } from '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer';
-	export { default as ScenegraphLayer } from '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer';
-
+declare module "@deck.gl/mesh-layers" {
+	export { default as SimpleMeshLayer } from "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer";
+	export { default as ScenegraphLayer } from "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer";
 }
