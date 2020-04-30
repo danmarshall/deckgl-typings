@@ -1,4 +1,4 @@
-//typings for @deck.gl/json v7.3.3
+//typings for @deck.gl/json v8.1.3
 declare module '@deck.gl/json/utils/assert' {
 	export default function assert(condition: any, message?: string): void;
 
@@ -15,24 +15,24 @@ declare module '@deck.gl/json/utils/get' {
 
 }
 declare module '@deck.gl/json/helpers/parse-expression-string' {
-	export default function parseExpressionString(propValue: any, configuration: any, isAccessor: any): any;
+	export default function parseExpressionString(propValue: any, configuration: any): any;
+
+}
+declare module '@deck.gl/json/syntactic-sugar' {
+	 const FUNCTION_IDENTIFIER = "@@="; const CONSTANT_IDENTIFIER = "@@#"; const TYPE_KEY = "@@type";
+	export { FUNCTION_IDENTIFIER, CONSTANT_IDENTIFIER, TYPE_KEY };
 
 }
 declare module '@deck.gl/json/json-configuration' {
 	export default class JSONConfiguration {
-		constructor(...configurations: any[]);
-		_merge(configuration: any): void;
-		validate(configuration: any): boolean;
+	    constructor(...configurations: any[]);
+	    merge(configuration: any): void;
+	    validate(configuration: any): boolean;
 	}
 
 }
-declare module '@deck.gl/json/helpers/deck-prop-types' {
-	export function getPropTypes(Class: any): any;
-	export function isFunctionProp(propTypes: any, propName: any): any;
-
-}
 declare module '@deck.gl/json/helpers/convert-functions' {
-	export default function convertFunctions(Class: any, props: any, configuration: any): {};
+	export default function convertFunctions(props: any, configuration: any): {};
 
 }
 declare module '@deck.gl/json/helpers/instantiate-class' {
@@ -45,11 +45,12 @@ declare module '@deck.gl/json/helpers/parse-json' {
 }
 declare module '@deck.gl/json/json-converter' {
 	export default class JSONConverter {
-		constructor(props: any);
-		finalize(): void;
-		setProps(props: any): void;
-		convert(json: any): any;
-		convertJson(json: any): any;
+	    constructor(props: any);
+	    finalize(): void;
+	    setProps(props: any): void;
+	    mergeConfiguration(config: any): void;
+	    convert(json: any): any;
+	    convertJson(json: any): any;
 	}
 
 }
@@ -63,6 +64,5 @@ declare module '@deck.gl/json' {
 	export { default as _convertFunctions } from '@deck.gl/json/helpers/convert-functions';
 	export { default as _parseExpressionString } from '@deck.gl/json/helpers/parse-expression-string';
 	export { shallowEqualObjects as _shallowEqualObjects } from '@deck.gl/json/utils/shallow-equal-objects';
-	export { default as _JSONConverter } from '@deck.gl/json/json-converter';
 
 }

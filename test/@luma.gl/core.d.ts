@@ -1,7 +1,7 @@
 /// <reference path="../../luma.gl__core/index.d.ts" />
 
 import {
-    AmbientLight,
+    gouraudLighting,
     CubeGeometry,
     fp64,
     Model
