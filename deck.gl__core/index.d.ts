@@ -350,8 +350,9 @@ declare module "@deck.gl/core/effects/lighting/lighting-effect" {
 	}
 }
 declare module "@deck.gl/core/shaderlib/project/project-functions" {
+	import { Position } from "@deck.gl/core/utils/positions";
 	export function getWorldPosition(
-		position: any,
+		position: Position,
 		{
 			viewport,
 			modelMatrix,
@@ -2606,6 +2607,17 @@ declare module "@deck.gl/core/controllers/orbit-controller" {
 }
 declare module "@deck.gl/core/views/orbit-view" {
 	import View from "@deck.gl/core/views/view";
+	import { Position } from "@deck.gl/core/utils/positions";
+	export interface OrbitViewState {
+		target: Position;
+		rotationOrbit?: number;
+		rotationX?: number;
+		zoom?: number;
+		minZoom?: number;
+		maxZoom?: number;
+		minRotationX?: number;
+		maxRotationX?: number;
+	}
 	export default class OrbitView extends View {
 		constructor(props: any);
 		get controller(): any;
