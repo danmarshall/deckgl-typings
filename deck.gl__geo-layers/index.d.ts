@@ -1,4 +1,4 @@
-//typings for @deck.gl/geo-layers v7.3.3
+//typings for @deck.gl/geo-layers v8.1.3
 declare module '@deck.gl/geo-layers/great-circle-layer/great-circle-vertex.glsl' {
 	const _default: string;
 	export default _default;
@@ -11,8 +11,21 @@ declare module '@deck.gl/geo-layers/great-circle-layer/great-circle-layer' {
 	}
 
 }
+declare module '@deck.gl/geo-layers/s2-layer/s2-geometry' {
+	export function IJToST(ij: any, order: any, offsets: any): number[];
+	export function STToUV(st: any): number[];
+	export function FaceUVToXYZ(face: any, [u, v]: [any, any]): any[];
+	export function XYZToLngLat([x, y, z]: [any, any, any]): number[];
+	export function toHilbertQuadkey(idS: any): string;
+	export function FromHilbertQuadKey(hilbertQuadkey: any): {
+		face: number;
+		ij: number[];
+		level: any;
+	};
+
+}
 declare module '@deck.gl/geo-layers/s2-layer/s2-utils' {
-	export function getS2QuadKey(token: any): any;
+	export function getS2QuadKey(token: any): string;
 	/**
 	 * Get a polygon with corner coordinates for an s2 cell
 	 * @param {*} cell - This can be an S2 key or token
@@ -20,7 +33,7 @@ declare module '@deck.gl/geo-layers/s2-layer/s2-utils' {
 	 *   - each coordinate is an array [lng, lat]
 	 *   - the polygon is closed, i.e. last coordinate is a copy of the first coordinate
 	 */
-	export function getS2Polygon(token: any): any[];
+	export function getS2Polygon(token: any): Float64Array;
 
 }
 declare module '@deck.gl/geo-layers/s2-layer/s2-layer' {
@@ -30,93 +43,157 @@ declare module '@deck.gl/geo-layers/s2-layer/s2-layer' {
 	}
 
 }
-declare module '@deck.gl/geo-layers/tile-layer/utils/tile' {
-	export function tile2latLng(x: any, y: any, z: any): number[];
-	export function tile2boundingBox(x: any, y: any, z: any): {
-		west: number;
-		north: number;
-		east: number;
-		south: number;
-	};
-	export default class Tile {
-		constructor({ getTileData, x, y, z, onTileLoad, onTileError }: {
-			getTileData: any;
+declare module '@deck.gl/geo-layers/tile-layer/tile-2d-header' {
+	export default class Tile2DHeader {
+		constructor({ x, y, z, onTileLoad, onTileError }: {
 			x: any;
 			y: any;
 			z: any;
 			onTileLoad: any;
 			onTileError: any;
 		});
-		readonly data: any;
-		readonly isLoaded: any;
-		_loadData(): Promise<any>;
-		isOverlapped(tile: any): boolean;
+		get data(): any;
+		get isLoaded(): any;
+		get byteLength(): any;
+		loadData(getTileData: any): void;
 	}
 
 }
-declare module '@deck.gl/geo-layers/tile-layer/utils/viewport-util' {
+declare module '@deck.gl/geo-layers/tile-layer/utils' {
+	export const urlType: {
+		type: string;
+		value: string;
+		validate: (value: any) => boolean;
+		equals: (value1: any, value2: any) => boolean;
+	};
+	export function getURLFromTemplate(template: any, properties: any): any;
+	export function tileToBoundingBox(viewport: any, x: any, y: any, z: any, tileSize?: number): {
+		west: number;
+		north: number;
+		east: number;
+		south: number;
+		left?: undefined;
+		top?: undefined;
+		right?: undefined;
+		bottom?: undefined;
+	} | {
+		left: number;
+		top: number;
+		right: number;
+		bottom: number;
+		west?: undefined;
+		north?: undefined;
+		east?: undefined;
+		south?: undefined;
+	};
 	/**
 	 * Returns all tile indices in the current viewport. If the current zoom level is smaller
 	 * than minZoom, return an empty array. If the current zoom level is greater than maxZoom,
 	 * return tiles that are on maxZoom.
 	 */
-	export function getTileIndices(viewport: any, maxZoom: any, minZoom: any): any[];
+	export function getTileIndices(viewport: any, maxZoom: any, minZoom: any, zRange: any, tileSize?: number): any[];
 
 }
-declare module '@deck.gl/geo-layers/tile-layer/utils/tile-cache' {
+declare module '@deck.gl/geo-layers/tile-layer/tileset-2d' {
+	export const STRATEGY_NEVER = "never";
+	export const STRATEGY_REPLACE = "no-overlap";
+	export const STRATEGY_DEFAULT = "best-available";
 	/**
 	 * Manages loading and purging of tiles data. This class caches recently visited tiles
 	 * and only create new tiles if they are present.
 	 */
-	export default class TileCache {
+	export default class Tileset2D {
 	    /**
 	     * Takes in a function that returns tile data, a cache size, and a max and a min zoom level.
 	     * Cache size defaults to 5 * number of tiles in the current viewport
 	     */
-		constructor({ getTileData, maxSize, maxZoom, minZoom, onTileLoad, onTileError }: {
-			getTileData: any;
-			maxSize: any;
-			maxZoom: any;
-			minZoom: any;
-			onTileLoad: any;
-			onTileError: any;
-		});
-		readonly tiles: any;
-	    /**
-	     * Clear the current cache
-	     */
-		finalize(): void;
+		constructor(opts: any);
+		get tiles(): any;
+		get selectedTiles(): any;
+		get isLoaded(): any;
+		setOptions(opts: any): void;
 	    /**
 	     * Update the cache with the given viewport and triggers callback onUpdate.
 	     * @param {*} viewport
 	     * @param {*} onUpdate
 	     */
-		update(viewport: any): void;
+		update(viewport: any, { zRange }?: {
+			zRange: any;
+		}): any;
+		getTileIndices({ viewport, maxZoom, minZoom, zRange }: {
+			viewport: any;
+			maxZoom: any;
+			minZoom: any;
+			zRange: any;
+		}): any[];
+		getTileMetadata({ x, y, z }: {
+			x: any;
+			y: any;
+			z: any;
+		}): {
+			bbox: {
+				west: number;
+				north: number;
+				east: number;
+				south: number;
+				left?: undefined;
+				top?: undefined;
+				right?: undefined;
+				bottom?: undefined;
+			} | {
+				left: number;
+				top: number;
+				right: number;
+				bottom: number;
+				west?: undefined;
+				north?: undefined;
+				east?: undefined;
+				south?: undefined;
+			};
+		};
+		getParentIndex(tileIndex: any): any;
+		updateTileStates(): boolean;
+		_rebuildTree(): void;
+		_updateTileStates(selectedTiles: any): void;
 	    /**
 	     * Clear tiles that are not visible when the cache is full
 	     */
-		_resizeCache(maxSize: any): void;
-		_markOldTiles(): void;
-		_getTile(x: any, y: any, z: any): any;
-		_getTileId(x: any, y: any, z: any): string;
+		_resizeCache(): void;
+		_getTile({ x, y, z }: {
+			x: any;
+			y: any;
+			z: any;
+		}, create: any): any;
+		_getNearestAncestor(x: any, y: any, z: any): any;
 	}
 
 }
 declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
-	import { CompositeLayer } from '@deck.gl/core';
-    import { LayerProps } from "@deck.gl/core/lib/layer";
-    export interface TileLayerProps<D> extends LayerProps<D> {
-        maxZoom?: number | null;
-        minZoom?: number;
-        maxCacheSize?: number | null;
-        onViewportLoaded?: (data: D[]) => void;
-        getTileData?: Function;
-        onTileError?: Function;
-        renderSubLayers?: Function;
-    }
+	import { CompositeLayer, Layer } from '@deck.gl/core';
+	import { LayerProps } from "@deck.gl/core/lib/layer";
+	export interface TileLayerProps<D> extends LayerProps<D> {
+
+		//Data Options
+		getTileData?: (tile: { x: number, y: number, z: number, url: string, bbox: any }) => D[];
+		tileSize?: number;
+		maxZoom?: number | null;
+		minZoom?: number;
+		maxCacheSize?: number;
+		maxCacheByteSize?: number;
+		refinementStrategy?: 'best-available' | 'no-overlap' | 'never';
+
+		//Render Options
+		renderSubLayers?: () => (Layer<any> | Layer<any>[]);
+
+		//Callbacks
+		onViewportLoad?: (data: D[]) => void;
+		onTileLoad?: (tile: D) => void;
+		onTileError?: (error: Error) => void;
+	}
 	export default class TileLayer<D> extends CompositeLayer<D> {
-    	constructor(props: TileLayerProps<D>);
+		constructor(props: TileLayerProps<D>);
 		initializeState(): void;
+		get isLoaded(): any;
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;
 		}): any;
@@ -126,35 +203,37 @@ declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
 			context: any;
 			changeFlags: any;
 		}): void;
-		_onTileLoad(): void;
+		_updateTileset(): void;
+		_onTileLoad(tile: any): void;
 		_onTileError(error: any): void;
+		getTileData(tile: any): any;
+		renderSubLayers(props: any): any;
 		getPickingInfo({ info, sourceLayer }: {
 			info: any;
 			sourceLayer: any;
 		}): any;
-		getLayerZoomLevel(): number;
 		renderLayers(): any;
 	}
 
 }
 declare module '@deck.gl/geo-layers/trips-layer/trips-layer' {
 	import { PathLayer } from '@deck.gl/layers';
-    import { LayerPath, PathLayerProps } from "@deck.gl/layers/path-layer/path-layer";
-    export interface TripsLayerProps<D> extends PathLayerProps<D> {
-        currentTime?: number;
-        trailLength?: number;
-        getPath?: (d: D) => LayerPath;
-        getTimestamps?: Function;
-    }
+	import { Position } from "@deck.gl/core/utils/positions";
+	import LayerPath, { PathLayerProps, TypedArray } from "@deck.gl/layers/path-layer/path-layer";
+	export interface TripsLayerProps<D> extends PathLayerProps<D> {
+		//Render Options
+		currentTime?: number;
+		trailLength?: number;
+
+		//Data Accessors
+		getPath?: (d: D) => (Position[] | TypedArray);
+		getTimestamps?: (d: D) => number[];
+	}
 	export default class TripsLayer<D> extends PathLayer<D> {
 		constructor(props: TripsLayerProps<D>);
 		getShaders(): any;
-		initializeState(params: any): void;
+		initializeState(params?: any): void;
 		draw(params: any): void;
-		calculateInstanceTimestamps(attribute: any, { startRow, endRow }: {
-			startRow: any;
-			endRow: any;
-		}): void;
 	}
 
 }
@@ -225,56 +304,143 @@ declare module '@deck.gl/geo-layers/h3-layers/h3-hexagon-layer' {
 	}
 
 }
-declare module '@deck.gl/geo-layers/tile-3d-layer/get-frame-state' {
-	export function getFrameState(viewport: any, frameNumber: any): {
-		camera: {
-			position: any;
-			direction: any;
-			up: any;
-		};
-		height: any;
-		cullingVolume: any;
-		frameNumber: any;
-		sseDenominator: number;
-	};
-
-}
 declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
 	import { CompositeLayer } from '@deck.gl/core';
-    import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-    import { RGBAColor } from "@deck.gl/aggregation-layers/utils/color-utils";
-    export interface Tile3DLayerProps<D> extends CompositeLayerProps<D> {
-        opacity?: number;
-        pointSize?: number;
-        data?: string;
-        _ionAssetId?: number | string;
-        _ionAccessToken?: string;
-        loadOptions?: Object;
-        getPointColor?: ((tileData: Object) => RGBAColor) | RGBAColor;
-        onTilesetLoad?: (tileData: Object) => void;
-        onTileLoad?: (tileHeader: Object) => void;
-        onTileUnload?: (tileHeader: Object) => void;
-        onTileLoadFail?: (tileHeader: Object, url: string, message: string) => void;
-    }
+	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+	import { RGBAColor } from "@deck.gl/core/utils/color";
+	export interface Tile3DLayerProps<D> extends CompositeLayerProps<D> {
+		//Render Options
+		opacity?: number;
+		pointSize?: number;
+
+		//Data Properties
+		data?: string;
+		loader?: any;
+		pickable?: boolean;
+
+		//Data Accessors
+		getPointColor?: ((tileData: Object) => RGBAColor) | RGBAColor;
+
+		//Callbacks
+		onTilesetLoad?: (tileData: Object) => void;
+		onTileLoad?: (tileHeader: Object) => void;
+		onTileUnload?: (tileHeader: Object) => void;
+		onTileError?: (tileHeader: Object, url: string, message: string) => void;
+	}
 	export default class Tile3DLayer<D> extends CompositeLayer<D> {
-    	constructor(props: Tile3DLayerProps<D>);
+		constructor(props: Tile3DLayerProps<D>);
 		initializeState(): void;
 		shouldUpdateState({ changeFlags }: {
 			changeFlags: any;
 		}): any;
-		updateState({ props, oldProps }: {
-			props: any;
-			oldProps: any;
-		}): Promise<void>;
-		_loadTileset(tilesetUrl: any, fetchOptions: any, ionMetadata: any): Promise<void>;
-		_loadTilesetFromIon(ionAccessToken: any, ionAssetId: any): Promise<void>;
+		updateState({ props, oldProps, changeFlags }: {
+			props: Tile3DLayerProps<D>;
+			oldProps: Tile3DLayerProps<D>;
+			changeFlags: any;
+		}): void;
+		getPickingInfo({ info, sourceLayer }: {
+			info: any;
+			sourceLayer: any;
+		}): any;
+		_loadTileset(tilesetUrl: any): Promise<void>;
+		_onTileLoad(tileHeader: any): void;
+		_onTileUnload(tileHeader: any): void;
 		_updateTileset(tileset3d: any): void;
-		_updateLayerMap(frameNumber: any): void;
-		_selectLayers(frameNumber: any): void;
 		_create3DTileLayer(tileHeader: any): any;
-		_create3DModelTileLayer(tileHeader: any): any;
 		_createPointCloudTileLayer(tileHeader: any): any;
+		_create3DModelTileLayer(tileHeader: any): any;
+		_createSimpleMeshLayer(tileHeader: any): any;
 		renderLayers(): any;
+	}
+
+}
+declare module '@deck.gl/geo-layers/terrain-layer/terrain-layer' {
+	import { CompositeLayer } from '@deck.gl/core';
+	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+	import { RGBAColor } from "@deck.gl/core/utils/color";
+	/**
+	 * state: {
+	 *   isTiled: True renders TileLayer of many SimpleMeshLayers, false renders one SimpleMeshLayer
+	 *   terrain: Mesh object. Only  defined when isTiled is false.
+	 * }
+	 */
+
+	export interface TerrainLayerProps<D> extends CompositeLayerProps<D> {
+		//Data Options
+		elevationData: string | string[];
+		texture?: string | null;
+		meshMaxError?: number;
+		elevationDecoder?: {
+			rScale: number;
+			gScale: number;
+			bScale: number;
+			offset: number;
+		};
+		bounds?: number[];
+		workerUrl?: string;
+
+		//Render Options
+		color?: RGBAColor;
+		wireframe?: boolean;
+		material?: any;
+	}
+	export default class TerrainLayer<D> extends CompositeLayer<D> {
+		constructor(props: TerrainLayerProps<D>);
+		updateState({ props, oldProps }: {
+			props: TerrainLayerProps<D>;
+			oldProps: TerrainLayerProps<D>;
+		}): void;
+		loadTerrain({ elevationData, bounds, elevationDecoder, meshMaxError, workerUrl }: {
+			elevationData: any;
+			bounds: any;
+			elevationDecoder: any;
+			meshMaxError: any;
+			workerUrl: any;
+		}): any;
+		getTiledTerrainData(tile: any): Promise<[any, any]>;
+		renderSubLayers(props: any): any;
+		onViewportLoad(data: any): void;
+		renderLayers(): any;
+	}
+
+}
+declare module '@deck.gl/geo-layers/mvt-layer/clip-extension' {
+	import { LayerExtension } from '@deck.gl/core';
+	export default class ClipExtension extends LayerExtension {
+		getShaders(opts: any): {
+			modules: {
+				name: string;
+				vs: string;
+			}[];
+			inject: {
+				'vs:#decl': string;
+				'vs:DECKGL_FILTER_GL_POSITION': string;
+				'fs:#decl': string;
+				'fs:DECKGL_FILTER_COLOR': string;
+			};
+		} | {
+			modules: {
+				name: string;
+				fs: string;
+			}[];
+			inject: {
+				'vs:#decl': string;
+				'vs:DECKGL_FILTER_GL_POSITION': string;
+				'fs:#decl': string;
+				'fs:DECKGL_FILTER_COLOR': string;
+			};
+		};
+		draw({ uniforms }: {
+			uniforms: any;
+		}): void;
+	}
+
+}
+declare module '@deck.gl/geo-layers/mvt-layer/mvt-layer' {
+	import TileLayer from '@deck.gl/geo-layers/tile-layer/tile-layer';
+	export default class MVTLayer<D> extends TileLayer<D> {
+		getTileData(tile: any): any;
+		renderSubLayers(props: any): any;
 	}
 
 }
@@ -286,5 +452,7 @@ declare module '@deck.gl/geo-layers' {
 	export { default as H3ClusterLayer } from '@deck.gl/geo-layers/h3-layers/h3-cluster-layer';
 	export { default as H3HexagonLayer } from '@deck.gl/geo-layers/h3-layers/h3-hexagon-layer';
 	export { default as Tile3DLayer } from '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer';
+	export { default as TerrainLayer } from '@deck.gl/geo-layers/terrain-layer/terrain-layer';
+	export { default as MVTLayer } from '@deck.gl/geo-layers/mvt-layer/mvt-layer';
 
 }

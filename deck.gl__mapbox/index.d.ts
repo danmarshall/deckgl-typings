@@ -1,4 +1,4 @@
-//typings for @deck.gl/mapbox v7.3.3
+//typings for @deck.gl/mapbox v8.1.3
 declare module '@deck.gl/mapbox/deck-utils' {
 	export function getDeckInstance({ map, gl, deck }: {
 		map: any;

@@ -98,7 +98,7 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-fragment.
 declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
 	import { Layer } from '@deck.gl/core';
 	import { LayerProps } from "@deck.gl/core/lib/layer";
-	import ScenegraphNode from "@luma.gl/experimental";
+	import { ScenegraphNode } from "@luma.gl/experimental";
 	export interface ScenegraphLayerProps<D> extends LayerProps<D> {
 
 		//Mesh
