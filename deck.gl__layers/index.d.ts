@@ -505,7 +505,7 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { Position } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
-	type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray
+	export type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray
 		| Float32Array | Float64Array;
 	export interface PathLayerProps<D> extends LayerProps<D> {
 		widthUnits?: string;
