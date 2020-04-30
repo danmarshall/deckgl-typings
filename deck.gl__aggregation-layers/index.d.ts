@@ -320,7 +320,12 @@ declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer-
 }
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-cell-layer' {
 	import { Layer } from '@deck.gl/core';
+	import { LayerProps } from "@deck.gl/core/lib/layer";
+	export interface ScreenGridCellLayerProps<D> extends LayerProps<D> {
+
+	}
 	export default class ScreenGridCellLayer<D> extends Layer<D> {
+		constructor(props: ScreenGridCellLayerProps<D>);
 		static isSupported(gl: any): any;
 		getShaders(): {
 			vs: string;
@@ -332,8 +337,8 @@ declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-cell-l
 			changeFlags: any;
 		}): any;
 		updateState({ oldProps, props, changeFlags }: {
-			oldProps: any;
-			props: any;
+			oldProps: ScreenGridCellLayerProps<D>;
+			props: ScreenGridCellLayerProps<D>;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: {
