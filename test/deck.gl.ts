@@ -11,3 +11,12 @@ import {
     PolygonLayer,
     TextLayer
 } from 'deck.gl';
+
+interface P {
+    foo: string;
+}
+
+var layer1: Layer<P>;
+
+var x = layer1.props.data as P[];
+x[0].foo;
