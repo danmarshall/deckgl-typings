@@ -64,7 +64,11 @@ var list = [
     //make convert:false if you need to manually edit the .ts files in node_modules
 
     { name: 'math.gl', convert: true },
+    { name: '@luma.gl/constants', out: 'luma.gl__constants', convert: true },
     { name: '@math.gl/core', out: 'math.gl__core', convert: true },
+    { name: '@luma.gl/engine', out: 'luma.gl__engine', convert: true },
+    { name: '@luma.gl/experimental', out: 'luma.gl__experimental', convert: true },
+    { name: '@luma.gl/gltools', out: 'luma.gl__gltools', convert: true },
     { name: '@luma.gl/webgl', out: 'luma.gl__webgl', convert: true },
     { name: '@luma.gl/webgl-state-tracker', out: 'luma.gl__webgl-state-tracker', convert: true },
     { name: '@luma.gl/core', out: 'luma.gl__core', convert: true },
