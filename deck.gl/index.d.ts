@@ -16,6 +16,7 @@ declare module "deck.gl" {
     MapView,
     FirstPersonView,
     OrbitView,
+    OrbitViewState,
     OrthographicView,
     Viewport,
     WebMercatorViewport,
