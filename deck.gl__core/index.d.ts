@@ -2745,6 +2745,7 @@ declare module "@deck.gl/core" {
 	export { mergeShaders as _mergeShaders } from "@deck.gl/core/utils/shader";
 	export { compareProps as _compareProps } from "@deck.gl/core/lifecycle/props";
 	export { RGBAColor } from "@deck.gl/core/utils/color";
+	export { Position, Position2D, Position3D } from "@deck.gl/core/utils/positions";
 }
 declare module "@deck.gl/core/utils/color" {
 	export type RGBAColor = [number, number, number, number?];
