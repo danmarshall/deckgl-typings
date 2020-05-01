@@ -2744,6 +2744,7 @@ declare module "@deck.gl/core" {
 	export { default as _memoize } from "@deck.gl/core/utils/memoize";
 	export { mergeShaders as _mergeShaders } from "@deck.gl/core/utils/shader";
 	export { compareProps as _compareProps } from "@deck.gl/core/lifecycle/props";
+	export { RGBAColor } from "@deck.gl/core/utils/color";
 }
 declare module "@deck.gl/core/utils/color" {
 	export type RGBAColor = [number, number, number, number?];

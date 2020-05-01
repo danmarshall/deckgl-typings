@@ -48,6 +48,7 @@ declare module "deck.gl" {
     Tesselator,
     fp64LowPart,
     createIterable,
+    RGBAColor
   } from "@deck.gl/core";
   export {
     ArcLayer,
