@@ -1020,33 +1020,33 @@ declare module "@deck.gl/core/lifecycle/component" {
 
 		props: P;
 
-		/**	
-		 * The layer's id, used for matching with layers from last render cycle	
+		/**
+		 * The layer's id, used for matching with layers from last render cycle
 		 */
 		id: string;
 
-		/**	
-		 * Keep track of how many layer instances you are generating	
+		/**
+		 * Keep track of how many layer instances you are generating
 		 */
 		count: number;
 
-		/**	
-		 * Helps track and debug the life cycle of the layers	
+		/**
+		 * Helps track and debug the life cycle of the layers
 		 */
 		lifecycle: string;
 
-		/**	
-		 * reference to the composite layer parent that rendered this layer	
+		/**
+		 * reference to the composite layer parent that rendered this layer
 		 */
 		parent: Component<any>;
 
-		/**	
-		 * Will reference layer manager's context, contains state shared by layers	
+		/**
+		 * Will reference layer manager's context, contains state shared by layers
 		 */
 		context: { gl: WebGLRenderingContext, viewport: Viewport, deck: Deck };
 
-		/**	
-		 * Will be set to the shared layer state object during layer matching	
+		/**
+		 * Will be set to the shared layer state object during layer matching
 		 */
 		state: any;
 
@@ -2214,9 +2214,9 @@ declare module "@deck.gl/core/lib/deck" {
 
 	export interface DeckProps {
 		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
-
-		width: number;
-		height: number;
+		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
+		width: string | number;
+		height: string | number;
 		layers: Layer<any>[];
 		layerFilter?: (args: {
 			layer: Layer<any>;
