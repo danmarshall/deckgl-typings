@@ -8,6 +8,7 @@
 
 declare module "deck.gl" {
   export {
+    _CameraLight,
     COORDINATE_SYSTEM,
     Deck,
     Layer,
