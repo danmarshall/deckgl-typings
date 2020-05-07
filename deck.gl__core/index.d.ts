@@ -1115,7 +1115,7 @@ declare module "@deck.gl/core/lib/layer" {
 		onDragStart?: LayerInputHandler;
 		onDrag?: LayerInputHandler;
 		onDragEnd?: LayerInputHandler;
-		highlightColor?: RGBAColor | (<D>(pickInfo: PickInfo<D>) => RGBAColor);
+		highlightColor?: RGBAColor | ((pickInfo: PickInfo<D>) => RGBAColor);
 		highlightedObjectIndex?: number;
 		autoHighlight?: boolean;
 
