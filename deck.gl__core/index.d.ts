@@ -2272,14 +2272,15 @@ declare module "@deck.gl/core/lib/deck" {
 		onDragEnd?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
 		onLoad?: () => void;
 		onResize?: (size: { height: number; width: number }) => void;
-		onBeforeRender?: (gl: WebGLRenderingContext) => void;
-		onAfterRender?: (gl: WebGLRenderingContext) => void;
+		onBeforeRender?: ({ gl: WebGLRenderingContext }) => void;
+		onAfterRender?: ({ gl: WebGLRenderingContext }) => void;
 		onError?: (error: Error, source: any) => void;
 		_onMetrics?: (metrics: any) => void;
 	}
 
 	export default class Deck {
 		constructor(props: DeckProps);
+		canvas: HTMLCanvasElement;
 		viewState: any;
 		finalize(): void;
 		props: DeckProps;
