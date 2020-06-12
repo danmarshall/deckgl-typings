@@ -95,4 +95,6 @@ declare module "deck.gl" {
     ScenegraphLayer,
   } from "@deck.gl/mesh-layers";
   export { default, DeckGL } from "@deck.gl/react";
+  export { DeckProps, PickInfo } from '@deck.gl/core/lib/deck';
+  export { LayerInputHandler } from '@deck.gl/core/lib/layer';
 }
