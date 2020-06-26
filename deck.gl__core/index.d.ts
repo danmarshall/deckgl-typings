@@ -2272,8 +2272,8 @@ declare module "@deck.gl/core/lib/deck" {
 		onDragEnd?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
 		onLoad?: () => void;
 		onResize?: (size: { height: number; width: number }) => void;
-		onBeforeRender?: ({ gl: WebGLRenderingContext }) => void;
-		onAfterRender?: ({ gl: WebGLRenderingContext }) => void;
+		onBeforeRender?: (args: { gl: WebGLRenderingContext }) => void;
+		onAfterRender?: (args: { gl: WebGLRenderingContext }) => void;
 		onError?: (error: Error, source: any) => void;
 		_onMetrics?: (metrics: any) => void;
 	}
