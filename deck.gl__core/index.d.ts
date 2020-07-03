@@ -1093,8 +1093,8 @@ declare module "@deck.gl/core/lib/layer" {
 	export type TransitionTiming =
 		| InterpolationTransitionTiming
 		| SpringTransitionTiming;
-	export interface LayerInputHandler {
-		(o: PickInfo<any>, e: HammerInput): void;
+	export interface LayerInputHandler<D=any> {
+		(o: PickInfo<D>, e: HammerInput): any;
 	}
 	export type DataSet<D> = Iterable<D>;
 	// | AsyncIterable ToDo: Add AsyncIterable
@@ -1110,11 +1110,11 @@ declare module "@deck.gl/core/lib/layer" {
 
 		//Interaction Properties
 		pickable?: boolean;
-		onHover?: LayerInputHandler;
-		onClick?: LayerInputHandler;
-		onDragStart?: LayerInputHandler;
-		onDrag?: LayerInputHandler;
-		onDragEnd?: LayerInputHandler;
+		onHover?: LayerInputHandler<D>;
+		onClick?: LayerInputHandler<D>;
+		onDragStart?: LayerInputHandler<D>;
+		onDrag?: LayerInputHandler<D>;
+		onDragEnd?: LayerInputHandler<D>;
 		highlightColor?: RGBAColor | ((pickInfo: PickInfo<D>) => RGBAColor);
 		highlightedObjectIndex?: number;
 		autoHighlight?: boolean;
