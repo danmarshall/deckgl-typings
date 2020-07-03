@@ -271,7 +271,13 @@ declare module "@deck.gl/geo-layers/trips-layer/trips-layer" {
 
 		//Data Accessors
 		getPath?: (d: D) => Position[] | TypedArray;
-		getTimestamps?: (d: D) => number[];
+		getTimestamps?: (
+			d: D, 
+			info?: {
+				data: D[], 
+				index:number, 
+				target:number[]
+			}) => number[];
 	}
 	export default class TripsLayer<D> extends PathLayer<D> {
 		constructor(props: TripsLayerProps<D>);
