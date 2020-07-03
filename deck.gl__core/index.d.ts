@@ -2221,6 +2221,11 @@ declare module "@deck.gl/core/lib/deck" {
 		zoom?: number;
 		bearing?: number;
 		pitch?: number;
+		altitude?: number;
+		maxPitch?: number;
+		maxZoom?: number;
+		minPitch?: number;
+		minZoom?: number;	  
 	}
 
 	// https://github.com/visgl/deck.gl/blob/master/docs/developer-guide/view-state-transitions.md
