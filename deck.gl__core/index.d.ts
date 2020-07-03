@@ -2198,6 +2198,8 @@ declare module "@deck.gl/core/lib/deck" {
 	import Layer from "@deck.gl/core/lib/layer";
 	import View from "@deck.gl/core/views/view";
 	import Viewport from "@deck.gl/core/viewports/viewport";
+	import TransitionInterpolator from "@deck.gl/core/transitions/transition-interpolator";
+	import { TRANSITION_EVENTS } from "@deck.gl/core/controllers/transition-manager";
 
 	export interface InteractiveState {
 		isDragging: boolean;
@@ -2213,12 +2215,23 @@ declare module "@deck.gl/core/lib/deck" {
 	}
 
 	// https://deck.gl/docs/api-reference/core/deck#viewstate
-	export interface ViewStateProps {
+	export interface InitialViewStateProps {
 		latitude?: number;
 		longitude?: number;
 		zoom?: number;
 		bearing?: number;
 		pitch?: number;
+	}
+
+	// https://github.com/visgl/deck.gl/blob/master/docs/developer-guide/view-state-transitions.md
+	export interface ViewStateProps extends InitialViewStateProps {
+		transitionDuration?: number | string;
+		transitionEasing?: (x: number)=> number;
+		transitionInterpolator: TransitionInterpolator;
+		transitionInterruption: typeof TRANSITION_EVENTS;
+		onTransitionStart: () => void;
+		onTransitionInterrupt: () => void;
+		onTransitionEnd: () => void;
 	}
 
 	export interface DeckProps {
@@ -2236,7 +2249,7 @@ declare module "@deck.gl/core/lib/deck" {
 		getCursor?: (interactiveState: InteractiveState) => string;
 		views?: View[];
 		viewState?: ViewStateProps;
-		initialViewState?: ViewStateProps;
+		initialViewState?: InitialViewStateProps;
 		controller?: null | Controller | ControllerOptions | boolean;
 		effects: Effect[];
 
