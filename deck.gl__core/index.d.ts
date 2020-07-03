@@ -2212,6 +2212,15 @@ declare module "@deck.gl/core/lib/deck" {
 		coordinate?: {};
 	}
 
+	// https://deck.gl/docs/api-reference/core/deck#viewstate
+	export interface ViewStateProps {
+		latitude?: number;
+		longitude?: number;
+		zoom?: number;
+		bearing?: number;
+		pitch?: number;
+	}
+
 	export interface DeckProps {
 		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
 		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
@@ -2226,8 +2235,8 @@ declare module "@deck.gl/core/lib/deck" {
 		}) => boolean;
 		getCursor?: (interactiveState: InteractiveState) => string;
 		views?: View[];
-		viewState?: any;
-		initialViewState?: any;
+		viewState?: ViewStateProps;
+		initialViewState?: ViewStateProps;
 		controller?: null | Controller | ControllerOptions | boolean;
 		effects: Effect[];
 
