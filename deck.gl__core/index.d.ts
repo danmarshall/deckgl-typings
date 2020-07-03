@@ -2227,11 +2227,11 @@ declare module "@deck.gl/core/lib/deck" {
 	export interface ViewStateProps extends InitialViewStateProps {
 		transitionDuration?: number | string;
 		transitionEasing?: (x: number)=> number;
-		transitionInterpolator: TransitionInterpolator;
-		transitionInterruption: typeof TRANSITION_EVENTS;
-		onTransitionStart: () => void;
-		onTransitionInterrupt: () => void;
-		onTransitionEnd: () => void;
+		transitionInterpolator?: TransitionInterpolator;
+		transitionInterruption?: typeof TRANSITION_EVENTS;
+		onTransitionStart?: () => void;
+		onTransitionInterrupt?: () => void;
+		onTransitionEnd?: () => void;
 	}
 
 	export interface DeckProps {
