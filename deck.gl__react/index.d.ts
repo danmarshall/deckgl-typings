@@ -60,9 +60,11 @@ declare module "@deck.gl/react/utils/extract-styles" {
 }
 declare module "@deck.gl/react/deckgl" {
 	import { DeckProps } from '@deck.gl/core/lib/deck';
+	type propsNowOptional = 'width'|'height'|'effects'|'layers';
+	export type DeckGLProps = Omit<DeckProps, propsNowOptional> & Partial<Pick<DeckProps, propsNowOptional>>;
 	import { ReactElement } from "react";
-	export default class DeckGL extends React.Component<DeckProps> {
-		constructor(props: DeckProps);
+	export default class DeckGL extends React.Component<DeckGLProps> {
+		constructor(props: DeckGLProps);
 		componentDidMount(): void;
 		shouldComponentUpdate(nextProps: any): boolean;
 		componentDidUpdate(): void;
