@@ -36,7 +36,12 @@ declare module "@deck.gl/geo-layers/s2-layer/s2-utils" {
 }
 declare module "@deck.gl/geo-layers/s2-layer/s2-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
+	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+	export interface S2LayerProps<D> extends CompositeLayerProps<D> {
+		getS2Token: (d:D)=> any;
+	}	
 	export default class S2Layer<D> extends CompositeLayer<D> {
+		constructor(props: S2LayerProps<D>);
 		renderLayers(): any;
 	}
 }
