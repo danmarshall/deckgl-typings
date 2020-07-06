@@ -356,6 +356,7 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 		radiusMaxPixels?: number;
 		lineWidthMinPixels?: number;
 		lineWidthMaxPixels?: number;
+		radiusUnits?: 'meters' | 'pixels';
 
 		//Data Accessors
 		getPosition?: (d: D) => Position;
