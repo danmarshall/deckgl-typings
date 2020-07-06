@@ -223,9 +223,12 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 		maxCacheSize?: number;
 		maxCacheByteSize?: number;
 		refinementStrategy?: "best-available" | "no-overlap" | "never";
+		maxRequests?: number;
+		extent?: [number, number, number, number];
 
 		//Render Options
 		renderSubLayers?: () => Layer<any> | Layer<any>[];
+		zRange?: [number, number];
 
 		//Callbacks
 		onViewportLoad?: (data: D[]) => void;
