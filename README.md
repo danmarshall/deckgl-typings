@@ -29,7 +29,6 @@ These typings are now v4 which targets deck.gl v8. The following issues are chan
 - [ ] ArcLayer supports drawing arcs between two 3D positions
 - [ ] TextLayer adds a new prop backgroundColor
 - [ ] TextLayer adds maxWidth and wordBreak props to support text wrapping
-- [ ] ScenegraphLayer adds props sizeMinPixels and sizeMaxPixels.
 - [ ] 64-bit positions are now 3D instead of 2D
 - [ ] FirstPersonView now supports pitch
 - [ ] FlyToInterpolator now supports duration: 'auto'.
