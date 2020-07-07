@@ -50,23 +50,23 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import Texture2D from "@luma.gl/webgl/classes/texture-2d";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { Position3D } from "@deck.gl/core/utils/positions";
 	export interface SimpleMesh {
 		positions: Float32Array;
 		normals: Float32Array;
 		texCoords: Float32Array;
 	}
-	type Coordinates = [number, number, number];
 	export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
 		mesh: SimpleMesh;
 		texture?: Texture2D | HTMLImageElement | string;
 		sizeScale?: number;
 		wireframe?: boolean;
 		material?: any;
-		getPosition?: (d: D) => [number, number];
+		getPosition?: (d: D) => Position3D;
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
-		getOrientation?: ((d: D) => Coordinates) | Coordinates;
-		getScale?: ((d: D) => Coordinates) | Coordinates;
-		getTranslation?: ((d: D) => Coordinates) | Coordinates;
+		getOrientation?: ((d: D) => Coordinates) | Position3D;
+		getScale?: ((d: D) => Position3D) | Position3D;
+		getTranslation?: ((d: D) => Position3D) | Position3D;
 		getTransformMatrix?: ((d: D) => number[][]) | number[][];
 	}
 	export default class SimpleMeshLayer<D> extends Layer<D> {
@@ -103,6 +103,8 @@ declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
 	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { ScenegraphNode } from "@luma.gl/experimental";
+	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { Position3D } from "@deck.gl/core/utils/positions";
 	export interface ScenegraphLayerProps<D> extends LayerProps<D> {
 		//Mesh
 		scenegraph: URL | ScenegraphNode | Promise<ScenegraphNode>;
@@ -114,6 +116,16 @@ declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
 		getAnimator?: (scenegraph: ScenegraphNode) => any;
 		_lighting?: string;
 
+		//Data Accessors
+		getPosition?: (d: D) => Position3D;
+		getColor?: ((d: D) => RGBAColor) | RGBAColor;
+		getOrientation?: ((d: D) => Coordinates) | Coordinates;
+		getScale?: ((d: D) => Coordinates) | Coordinates;
+		getTranslation?: ((d: D) => Coordinates) | Coordinates;
+		getTransformMatrix?: ((d: D) => number[][]) | number[][];
+		sizeMinPixels?: number;
+		sizeMaxPixels?: number;
+ 
 		//Experimental
 		_imageBasedLightingEnvironment?: any;
 	}

@@ -27,7 +27,6 @@ These typings are now v4 which targets deck.gl v8. The following issues are chan
 - [ ] [Optional specifying the _framebuffer prop of Deck.](https://github.com/uber/deck.gl/blob/master/docs/whats-new.md#other-new-features-and-improvements)
 - [ ] [Pick a 3d surface point in the scene](https://github.com/uber/deck.gl/blob/master/docs/whats-new.md#other-new-features-and-improvements) by passing unproject3D: true to deck.pickObject or deck.pickMultipleObjects.
 - [ ] ArcLayer supports drawing arcs between two 3D positions
-- [ ] ScenegraphLayer adds props sizeMinPixels and sizeMaxPixels.
 - [ ] 64-bit positions are now 3D instead of 2D
 - [ ] FirstPersonView now supports pitch
 - [ ] FlyToInterpolator now supports duration: 'auto'.
