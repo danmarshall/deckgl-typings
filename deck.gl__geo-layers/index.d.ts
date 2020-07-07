@@ -288,14 +288,19 @@ declare module "@deck.gl/geo-layers/trips-layer/trips-layer" {
 }
 declare module "@deck.gl/geo-layers/h3-layers/h3-cluster-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
+	import { PolygonLayerProps } from "@deck.gl/layers/polygon-layer/polygon-layer";
+	export interface H3ClusterLayerProps<D> extends PolygonLayerProps<D> { 
+		getHexagons?: (d: D) => string[];
+	}
 	export default class H3ClusterLayer<D> extends CompositeLayer<D> {
+		constructor(props: H3ClusterLayerProps<D>);
 		updateState({
 			props,
 			oldProps,
 			changeFlags,
 		}: {
-			props: any;
-			oldProps: any;
+			props: H3ClusterLayerProps<D>;
+			oldProps: H3ClusterLayerProps<D>;
 			changeFlags: any;
 		}): void;
 		renderLayers(): any;
@@ -303,8 +308,15 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-cluster-layer" {
 }
 declare module "@deck.gl/geo-layers/h3-layers/h3-hexagon-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
+	import { PolygonLayerProps } from "@deck.gl/layers/polygon-layer/polygon-layer";
 	export function normalizeLongitudes(vertices: any, refLng: any): void;
 	export function scalePolygon(hexId: any, vertices: any, factor: any): void;
+	export interface H3HexagonLayerProps<D> extends PolygonLayerProps<D> { 
+		highPrecision?: boolean;
+		coverage?: number;
+		getHexagon?: (d: D) => string;
+	}
+
 	/**
 	 * A subclass of HexagonLayer that uses H3 hexagonIds in data objects
 	 * rather than centroid lat/longs. The shape of each hexagon is determined
@@ -317,6 +329,7 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-hexagon-layer" {
 	 * index !== -1 to see if picking matches an actual object.
 	 */
 	export default class H3HexagonLayer<D> extends CompositeLayer<D> {
+		constructor(props: H3HexagonLayerProps<D>);
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
 		updateState({
 			props,
