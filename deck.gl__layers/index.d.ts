@@ -308,11 +308,12 @@ declare module "@deck.gl/layers/point-cloud-layer/point-cloud-layer" {
 	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { Position } from "@deck.gl/core/utils/positions";
 	export interface PointCloudLayerProps<D> extends LayerProps<D> {
 		sizeUnits?: string;
 		pointSize?: number;
 		material?: any;
-		getPosition?: (d: D) => [number, number];
+		getPosition?: (d: D) => Position;
 		getNormal?: ((d: D) => [number, number, number]) | [number, number, number];
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 	}
