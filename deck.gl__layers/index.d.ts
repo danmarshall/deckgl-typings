@@ -1020,9 +1020,9 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 		getAngle?: ((x: D) => number) | number;
 
 		//Text Alignment Options
-		getTextAnchor?: (x: D) => TextAnchor;
-		getAlignmentBaseline?: (x: D) => AlignmentBaseline;
-		getPixelOffset?: (x: D) => number[];
+		getTextAnchor?: ((x: D) => TextAnchor) | TextAnchor;
+		getAlignmentBaseline?: ((x: D) => AlignmentBaseline) | AlignmentBaseline;
+		getPixelOffset?: ((x: D) => number[]) | number[];
 	}
 	export default class TextLayer<D> extends CompositeLayer<D> {
 		constructor(props: TextLayerProps<D>);
