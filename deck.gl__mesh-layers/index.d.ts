@@ -69,8 +69,7 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 		getTranslation?: ((d: D) => Position3D) | Position3D;
 		getTransformMatrix?: ((d: D) => number[][]) | number[][];
 	}
-	export default class SimpleMeshLayer<D> extends Layer<D> {
-		constructor(props: SimpleMeshLayerProps<D>);
+	export default class SimpleMeshLayer<D,P=SimpleMeshLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(): void;
 		updateState({
@@ -78,8 +77,8 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: any;
-			oldProps: any;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
@@ -129,8 +128,7 @@ declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
 		//Experimental
 		_imageBasedLightingEnvironment?: any;
 	}
-	export default class ScenegraphLayer<D> extends Layer<D> {
-		constructor(props: ScenegraphLayerProps<D>);
+	export default class ScenegraphLayer<D,P=ScenegraphLayerProps<D>> extends Layer<D,P> {
 		initializeState(): void;
 		updateState(params: any): void;
 		finalizeState(): void;

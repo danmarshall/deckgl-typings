@@ -350,8 +350,7 @@ declare module "@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-cell-l
 	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	export interface ScreenGridCellLayerProps<D> extends LayerProps<D> { }
-	export default class ScreenGridCellLayer<D> extends Layer<D> {
-		constructor(props: ScreenGridCellLayerProps<D>);
+	export default class ScreenGridCellLayer<D,P=ScreenGridCellLayerProps<D>> extends Layer<D,P> {
 		static isSupported(gl: any): any;
 		getShaders(): {
 			vs: string;
@@ -837,8 +836,7 @@ declare module "@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer" 
 		getElevationWeight?: (d: D) => number;
 		elevationAggregation?: AggregationOperation;
 	}
-	export default class GPUGridCellLayer<D> extends Layer<D> {
-		constructor(props: GPUGridCellLayerProps<D>);
+	export default class GPUGridCellLayer<D,P=GPUGridCellLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(): void;
 		_getModel(gl: any): any;

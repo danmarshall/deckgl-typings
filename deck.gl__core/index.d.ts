@@ -1013,7 +1013,7 @@ declare module "@deck.gl/core/lifecycle/component" {
 	import { Deck } from "@deck.gl/core";
 	import Viewport from "@deck.gl/core/viewports/viewport";
 	export default class Component<P> {
-		constructor();
+		constructor(props:P);
 		clone(newProps: P): any;
 		get stats(): any;
 		_initState(): void;
@@ -1146,8 +1146,7 @@ declare module "@deck.gl/core/lib/layer" {
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 	}
-	export default class Layer<D> extends Component<LayerProps<D>> {
-		constructor(props: LayerProps<D>);
+	export default class Layer<D,P=LayerProps<D>> extends Component<P> {
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
@@ -1253,7 +1252,7 @@ declare module "@deck.gl/core/lib/composite-layer" {
 	export interface CompositeLayerProps<D> extends LayerProps<D> {
 		_subLayerProps?: Object;
 	}
-	export default class CompositeLayer<D> extends Layer<D> {
+	export default class CompositeLayer<D,P=CompositeLayerProps<D>> extends Layer<D,P> {
 		get isComposite(): boolean;
 		get isLoaded(): any;
 		getSubLayers(): any;

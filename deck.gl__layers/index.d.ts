@@ -27,8 +27,7 @@ declare module "@deck.gl/layers/arc-layer/arc-layer" {
 		getTilt?: ((d: D) => number) | number;
 	}
 	import { Layer } from "@deck.gl/core";
-	export default class ArcLayer<D> extends Layer<D> {
-		constructor(props: ArcLayerProps<D>);
+	export default class ArcLayer<D,P=ArcLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(): void;
 		updateState({
@@ -36,8 +35,8 @@ declare module "@deck.gl/layers/arc-layer/arc-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: ArcLayerProps<D>;
-			oldProps: ArcLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -73,7 +72,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 		transparentColor: RGBAColor;
 		tintColor: [number, number, number];
 	}
-	export default class BitmapLayer<D> extends Layer<D> {
+	export default class BitmapLayer<D,P=BitmapLayerProps<D>> extends Layer<D,P> {
 		constructor(props: BitmapLayerProps<D>);
 		getShaders(): any;
 		initializeState(): void;
@@ -82,8 +81,8 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: any;
-			oldProps: any;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
@@ -231,8 +230,8 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 		getPixelOffset?: ((x: D) => Position2D) | Position2D;
 	}
 
-	export default class IconLayer<D> extends Layer<D> {
-		constructor(props: IconLayerProps<D>);
+	export default class IconLayer<D,P=IconLayerProps<D>> extends Layer<D,P> {
+		constructor(props: P);
 		getShaders(): any;
 		initializeState(): void;
 		updateState({
@@ -240,8 +239,8 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 			props,
 			changeFlags,
 		}: {
-			oldProps: IconLayerProps<D>;
-			props: IconLayerProps<D>;
+			oldProps: P;
+			props: P;
 			changeFlags: any;
 		}): void;
 		get isLoaded(): any;
@@ -279,8 +278,7 @@ declare module "@deck.gl/layers/line-layer/line-layer" {
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getWidth?: ((d: D) => number) | number;
 	}
-	export default class LineLayer<D> extends Layer<D> {
-		constructor(props: LineLayerProps<D>);
+	export default class LineLayer<D,P=LineLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(): void;
 		updateState({
@@ -288,8 +286,8 @@ declare module "@deck.gl/layers/line-layer/line-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: LineLayerProps<D>;
-			oldProps: LineLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -317,8 +315,7 @@ declare module "@deck.gl/layers/point-cloud-layer/point-cloud-layer" {
 		getNormal?: ((d: D) => [number, number, number]) | [number, number, number];
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 	}
-	export default class PointCloudLayer<D> extends Layer<D> {
-		constructor(props: PointCloudLayerProps<D>);
+	export default class PointCloudLayer<D,P=PointCloudLayerProps<D>> extends Layer<D,P> {
 		getShaders(id: any): any;
 		initializeState(): void;
 		updateState({
@@ -326,8 +323,8 @@ declare module "@deck.gl/layers/point-cloud-layer/point-cloud-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: PointCloudLayerProps<D>;
-			oldProps: PointCloudLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -367,8 +364,7 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 		getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getLineWidth?: ((d: D) => number) | number;
 	}
-	export default class ScatterplotLayer<D> extends Layer<D> {
-		constructor(props: ScatterplotLayerProps<D>);
+	export default class ScatterplotLayer<D,P=ScatterplotLayerProps<D>> extends Layer<D,P> {
 		getShaders(id: any): any;
 		initializeState(): void;
 		updateState({
@@ -376,8 +372,8 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: ScatterplotLayerProps<D>;
-			oldProps: ScatterplotLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -427,8 +423,7 @@ declare module "@deck.gl/layers/column-layer/column-layer" {
 		getElevation?: ((d: D) => number) | number;
 		getLineWidth?: ((d: D) => number) | number;
 	}
-	export default class ColumnLayer<D> extends Layer<D> {
-		constructor(props: ColumnLayerProps<D>);
+	export default class ColumnLayer<D,P=ColumnLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		/**
 		 * DeckGL calls initializeState when GL context is available
@@ -440,8 +435,8 @@ declare module "@deck.gl/layers/column-layer/column-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: ColumnLayerProps<D>;
-			oldProps: ColumnLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		getGeometry(diskResolution: any, vertices: any): ColumnGeometry;
@@ -532,8 +527,7 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getWidth?: ((d: D) => number) | number;
 	}
-	export default class PathLayer<D> extends Layer<D> {
-		constructor(props: PathLayerProps<D>);
+	export default class PathLayer<D,P=PathLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(): void;
 		updateState({
@@ -541,8 +535,8 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 			props,
 			changeFlags,
 		}: {
-			oldProps: PathLayerProps<D>;
-			props: PathLayerProps<D>;
+			oldProps: P;
+			props: P;
 			changeFlags: any;
 		}): void;
 		getPickingInfo(params: any): any;
@@ -666,8 +660,7 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getElevation?: ((x: D) => number) | number;
 	}
-	export default class SolidPolygonLayer<D> extends Layer<D> {
-		constructor(props: SolidPolygonLayerProps<D>);
+	export default class SolidPolygonLayer<D,P=SolidPolygonLayerProps<D>> extends Layer<D,P> {
 		getShaders(vs: any): any;
 		initializeState(): void;
 		getPickingInfo(params: any): any;
@@ -678,8 +671,8 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: SolidPolygonLayerProps<D>;
-			oldProps: SolidPolygonLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		_getModels(
