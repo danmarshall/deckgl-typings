@@ -1146,7 +1146,7 @@ declare module "@deck.gl/core/lib/layer" {
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 	}
-	export default class Layer<D,P=LayerProps<D>> extends Component<P> {
+	export default class Layer<D,P extends LayerProps<D> = LayerProps<D>> extends Component<P> {
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
@@ -1252,7 +1252,7 @@ declare module "@deck.gl/core/lib/composite-layer" {
 	export interface CompositeLayerProps<D> extends LayerProps<D> {
 		_subLayerProps?: Object;
 	}
-	export default class CompositeLayer<D,P=CompositeLayerProps<D>> extends Layer<D,P> {
+	export default class CompositeLayer<D,P extends CompositeLayerProps<D> = CompositeLayerProps<D>> extends Layer<D,P> {
 		get isComposite(): boolean;
 		get isLoaded(): any;
 		getSubLayers(): any;
