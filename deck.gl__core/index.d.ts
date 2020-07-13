@@ -1255,7 +1255,7 @@ declare module "@deck.gl/core/lib/layer" {
 		_transferState(oldLayer: any): void;
 		_onAsyncPropUpdated(): void;
 		static layerName: string;
-		static defaultProps?: Record<string, DefaultPropType & Record<string, any>>;
+		static defaultProps?: Record<string, DefaultPropType | Record<string, any> | any>; // DefaultPropType is a hint
 	}
 }
 declare module "@deck.gl/core/lib/composite-layer" {
