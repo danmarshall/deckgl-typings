@@ -242,7 +242,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 	}
 	export default class TileLayer<D> extends CompositeLayer<D> {
 		constructor(props: TileLayerProps<D>);
-		initializeState(): void;
+		initializeState(context: any): void;
 		get isLoaded(): any;
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
 		updateState({
@@ -403,7 +403,7 @@ declare module "@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer" {
 	}
 	export default class Tile3DLayer<D> extends CompositeLayer<D> {
 		constructor(props: Tile3DLayerProps<D>);
-		initializeState(): void;
+		initializeState(context: any): void;
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
 		updateState({
 			props,
