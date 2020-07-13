@@ -1041,18 +1041,18 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 	}
 }
 declare module "@deck.gl/layers" {
-	export { default as ArcLayer } from "@deck.gl/layers/arc-layer/arc-layer";
-	export { default as BitmapLayer } from "@deck.gl/layers/bitmap-layer/bitmap-layer";
-	export { default as IconLayer } from "@deck.gl/layers/icon-layer/icon-layer";
-	export { default as LineLayer } from "@deck.gl/layers/line-layer/line-layer";
-	export { default as PointCloudLayer } from "@deck.gl/layers/point-cloud-layer/point-cloud-layer";
-	export { default as ScatterplotLayer } from "@deck.gl/layers/scatterplot-layer/scatterplot-layer";
-	export { default as ColumnLayer } from "@deck.gl/layers/column-layer/column-layer";
-	export { default as GridCellLayer } from "@deck.gl/layers/column-layer/grid-cell-layer";
-	export { default as PathLayer } from "@deck.gl/layers/path-layer/path-layer";
-	export { default as PolygonLayer } from "@deck.gl/layers/polygon-layer/polygon-layer";
-	export { default as GeoJsonLayer } from "@deck.gl/layers/geojson-layer/geojson-layer";
-	export { default as TextLayer } from "@deck.gl/layers/text-layer/text-layer";
-	export { default as SolidPolygonLayer } from "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer";
+	export { default as ArcLayer, ArcLayerProps } from "@deck.gl/layers/arc-layer/arc-layer";
+	export { default as BitmapLayer, BitmapLayerProps } from "@deck.gl/layers/bitmap-layer/bitmap-layer";
+	export { default as IconLayer, IconLayerProps } from "@deck.gl/layers/icon-layer/icon-layer";
+	export { default as LineLayer, LineLayerProps } from "@deck.gl/layers/line-layer/line-layer";
+	export { default as PointCloudLayer, PointCloudLayerProps } from "@deck.gl/layers/point-cloud-layer/point-cloud-layer";
+	export { default as ScatterplotLayer, ScatterplotLayerProps } from "@deck.gl/layers/scatterplot-layer/scatterplot-layer";
+	export { default as ColumnLayer, ColumnLayerProps } from "@deck.gl/layers/column-layer/column-layer";
+	export { default as GridCellLayer, GridCellLayerProps } from "@deck.gl/layers/column-layer/grid-cell-layer";
+	export { default as PathLayer, PathLayerProps } from "@deck.gl/layers/path-layer/path-layer";
+	export { default as PolygonLayer, PolygonLayerProps } from "@deck.gl/layers/polygon-layer/polygon-layer";
+	export { default as GeoJsonLayer, GeoJsonLayerProps } from "@deck.gl/layers/geojson-layer/geojson-layer";
+	export { default as TextLayer, TextLayerProps } from "@deck.gl/layers/text-layer/text-layer";
+	export { default as SolidPolygonLayer, SolidPolygonLayerProps } from "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer";
 	export { default as _MultiIconLayer } from "@deck.gl/layers/text-layer/multi-icon-layer/multi-icon-layer";
 }
