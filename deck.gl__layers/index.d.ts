@@ -30,7 +30,7 @@ declare module "@deck.gl/layers/arc-layer/arc-layer" {
 	export default class ArcLayer<D> extends Layer<D> {
 		constructor(props: ArcLayerProps<D>);
 		getShaders(): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -76,7 +76,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 	export default class BitmapLayer<D> extends Layer<D> {
 		constructor(props: BitmapLayerProps<D>);
 		getShaders(): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -234,7 +234,7 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 	export default class IconLayer<D> extends Layer<D> {
 		constructor(props: IconLayerProps<D>);
 		getShaders(): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			oldProps,
 			props,
@@ -282,7 +282,7 @@ declare module "@deck.gl/layers/line-layer/line-layer" {
 	export default class LineLayer<D> extends Layer<D> {
 		constructor(props: LineLayerProps<D>);
 		getShaders(): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -320,7 +320,7 @@ declare module "@deck.gl/layers/point-cloud-layer/point-cloud-layer" {
 	export default class PointCloudLayer<D> extends Layer<D> {
 		constructor(props: PointCloudLayerProps<D>);
 		getShaders(id: any): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -370,7 +370,7 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 	export default class ScatterplotLayer<D> extends Layer<D> {
 		constructor(props: ScatterplotLayerProps<D>);
 		getShaders(id: any): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -434,7 +434,7 @@ declare module "@deck.gl/layers/column-layer/column-layer" {
 		 * DeckGL calls initializeState when GL context is available
 		 * Essentially a deferred constructor
 		 */
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -535,7 +535,7 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 	export default class PathLayer<D> extends Layer<D> {
 		constructor(props: PathLayerProps<D>);
 		getShaders(): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			oldProps,
 			props,
@@ -669,7 +669,7 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 	export default class SolidPolygonLayer<D> extends Layer<D> {
 		constructor(props: SolidPolygonLayerProps<D>);
 		getShaders(vs: any): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		getPickingInfo(params: any): any;
 		draw({ uniforms }: { uniforms: any }): void;
 		updateState(updateParams: any): void;
@@ -739,7 +739,7 @@ declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 	}
 	export default class PolygonLayer<D> extends CompositeLayer<D> {
 		constructor(props: PolygonLayerProps<D>);
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			oldProps,
 			props,
@@ -810,7 +810,7 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 	}
 	export default class GeoJsonLayer<D> extends CompositeLayer<D> {
 		constructor(props: GeoJsonLayerProps<D>);
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({ props, changeFlags }: { props: any; changeFlags: any }): void;
 		renderLayers(): any[];
 		_getHighlightedIndex(data: any): any;
@@ -824,7 +824,7 @@ declare module "@deck.gl/layers/text-layer/multi-icon-layer/multi-icon-layer" {
 	import IconLayer from "@deck.gl/layers/icon-layer/icon-layer";
 	export default class MultiIconLayer<D> extends IconLayer<D> {
 		getShaders(): any;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState(updateParams: any): void;
 		draw({ uniforms }: { uniforms: any }): void;
 		getInstanceOffset(icons: any): any[];
@@ -1028,7 +1028,7 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 	}
 	export default class TextLayer<D> extends CompositeLayer<D> {
 		constructor(props: TextLayerProps<D>);
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,

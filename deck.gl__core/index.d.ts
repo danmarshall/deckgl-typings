@@ -1182,7 +1182,7 @@ declare module "@deck.gl/core/lib/layer" {
 		nullPickingColor(): RGBAColor;
 		encodePickingColor(i: any, target?: any[]): RGBAColor;
 		decodePickingColor(color: any): number;
-		initializeState(context: any): void;
+		initializeState(params: any): void;
 		getShaders(shaders: any): any;
 		shouldUpdateState({
 			oldProps,
