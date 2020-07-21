@@ -4,8 +4,10 @@ declare module "@deck.gl/geo-layers/great-circle-layer/great-circle-vertex.glsl"
 	export default _default;
 }
 declare module "@deck.gl/geo-layers/great-circle-layer/great-circle-layer" {
+	import { ArcLayerProps } from "@deck.gl/layers/arc-layer/arc-layer";
+	export interface GreatCircleLayerProps<D> extends ArcLayerProps<D> {}
 	import { ArcLayer } from "@deck.gl/layers";
-	export default class GreatCircleLayer<D> extends ArcLayer<D> {
+	export default class GreatCircleLayer<D, P extends GreatCircleLayerProps<D> = GreatCircleLayerProps<D>> extends ArcLayer<D, P> {
 		getShaders(): any;
 	}
 }

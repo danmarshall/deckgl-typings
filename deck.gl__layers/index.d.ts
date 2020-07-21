@@ -27,8 +27,7 @@ declare module "@deck.gl/layers/arc-layer/arc-layer" {
 		getTilt?: ((d: D) => number) | number;
 	}
 	import { Layer } from "@deck.gl/core";
-	export default class ArcLayer<D> extends Layer<D> {
-		constructor(props: ArcLayerProps<D>);
+	export default class ArcLayer<D,P extends ArcLayerProps<D> = ArcLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(params: any): void;
 		updateState({
@@ -36,8 +35,8 @@ declare module "@deck.gl/layers/arc-layer/arc-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: ArcLayerProps<D>;
-			oldProps: ArcLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -73,7 +72,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 		transparentColor: RGBAColor;
 		tintColor: [number, number, number];
 	}
-	export default class BitmapLayer<D> extends Layer<D> {
+	export default class BitmapLayer<D,P extends BitmapLayerProps<D> = BitmapLayerProps<D>> extends Layer<D,P> {
 		constructor(props: BitmapLayerProps<D>);
 		getShaders(): any;
 		initializeState(params: any): void;
@@ -82,8 +81,8 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: any;
-			oldProps: any;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
@@ -231,8 +230,8 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 		getPixelOffset?: ((x: D) => Position2D) | Position2D;
 	}
 
-	export default class IconLayer<D> extends Layer<D> {
-		constructor(props: IconLayerProps<D>);
+	export default class IconLayer<D,P extends IconLayerProps<D> = IconLayerProps<D>> extends Layer<D,P> {
+		constructor(props: P);
 		getShaders(): any;
 		initializeState(params: any): void;
 		updateState({
@@ -240,8 +239,8 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 			props,
 			changeFlags,
 		}: {
-			oldProps: IconLayerProps<D>;
-			props: IconLayerProps<D>;
+			oldProps: P;
+			props: P;
 			changeFlags: any;
 		}): void;
 		get isLoaded(): any;
@@ -279,8 +278,7 @@ declare module "@deck.gl/layers/line-layer/line-layer" {
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getWidth?: ((d: D) => number) | number;
 	}
-	export default class LineLayer<D> extends Layer<D> {
-		constructor(props: LineLayerProps<D>);
+	export default class LineLayer<D,P extends LineLayerProps<D> = LineLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(params: any): void;
 		updateState({
@@ -288,8 +286,8 @@ declare module "@deck.gl/layers/line-layer/line-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: LineLayerProps<D>;
-			oldProps: LineLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -317,8 +315,7 @@ declare module "@deck.gl/layers/point-cloud-layer/point-cloud-layer" {
 		getNormal?: ((d: D) => [number, number, number]) | [number, number, number];
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 	}
-	export default class PointCloudLayer<D> extends Layer<D> {
-		constructor(props: PointCloudLayerProps<D>);
+	export default class PointCloudLayer<D,P extends PointCloudLayerProps<D> = PointCloudLayerProps<D>> extends Layer<D,P> {
 		getShaders(id: any): any;
 		initializeState(params: any): void;
 		updateState({
@@ -326,8 +323,8 @@ declare module "@deck.gl/layers/point-cloud-layer/point-cloud-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: PointCloudLayerProps<D>;
-			oldProps: PointCloudLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -367,8 +364,7 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 		getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getLineWidth?: ((d: D) => number) | number;
 	}
-	export default class ScatterplotLayer<D> extends Layer<D> {
-		constructor(props: ScatterplotLayerProps<D>);
+	export default class ScatterplotLayer<D,P extends ScatterplotLayerProps<D> = ScatterplotLayerProps<D>> extends Layer<D,P> {
 		getShaders(id: any): any;
 		initializeState(params: any): void;
 		updateState({
@@ -376,8 +372,8 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: ScatterplotLayerProps<D>;
-			oldProps: ScatterplotLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -427,8 +423,7 @@ declare module "@deck.gl/layers/column-layer/column-layer" {
 		getElevation?: ((d: D) => number) | number;
 		getLineWidth?: ((d: D) => number) | number;
 	}
-	export default class ColumnLayer<D> extends Layer<D> {
-		constructor(props: ColumnLayerProps<D>);
+	export default class ColumnLayer<D,P extends ColumnLayerProps<D> = ColumnLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		/**
 		 * DeckGL calls initializeState when GL context is available
@@ -440,8 +435,8 @@ declare module "@deck.gl/layers/column-layer/column-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: ColumnLayerProps<D>;
-			oldProps: ColumnLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		getGeometry(diskResolution: any, vertices: any): ColumnGeometry;
@@ -532,8 +527,7 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getWidth?: ((d: D) => number) | number;
 	}
-	export default class PathLayer<D> extends Layer<D> {
-		constructor(props: PathLayerProps<D>);
+	export default class PathLayer<D,P extends PathLayerProps<D> = PathLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(params: any): void;
 		updateState({
@@ -541,8 +535,8 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 			props,
 			changeFlags,
 		}: {
-			oldProps: PathLayerProps<D>;
-			props: PathLayerProps<D>;
+			oldProps: P;
+			props: P;
 			changeFlags: any;
 		}): void;
 		getPickingInfo(params: any): any;
@@ -666,8 +660,7 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getElevation?: ((x: D) => number) | number;
 	}
-	export default class SolidPolygonLayer<D> extends Layer<D> {
-		constructor(props: SolidPolygonLayerProps<D>);
+	export default class SolidPolygonLayer<D,P extends SolidPolygonLayerProps<D> = SolidPolygonLayerProps<D>> extends Layer<D,P> {
 		getShaders(vs: any): any;
 		initializeState(params: any): void;
 		getPickingInfo(params: any): any;
@@ -678,8 +671,8 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 			oldProps,
 			changeFlags,
 		}: {
-			props: SolidPolygonLayerProps<D>;
-			oldProps: SolidPolygonLayerProps<D>;
+			props: P;
+			oldProps: P;
 			changeFlags: any;
 		}): void;
 		_getModels(
@@ -1048,18 +1041,18 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 	}
 }
 declare module "@deck.gl/layers" {
-	export { default as ArcLayer } from "@deck.gl/layers/arc-layer/arc-layer";
-	export { default as BitmapLayer } from "@deck.gl/layers/bitmap-layer/bitmap-layer";
-	export { default as IconLayer } from "@deck.gl/layers/icon-layer/icon-layer";
-	export { default as LineLayer } from "@deck.gl/layers/line-layer/line-layer";
-	export { default as PointCloudLayer } from "@deck.gl/layers/point-cloud-layer/point-cloud-layer";
-	export { default as ScatterplotLayer } from "@deck.gl/layers/scatterplot-layer/scatterplot-layer";
-	export { default as ColumnLayer } from "@deck.gl/layers/column-layer/column-layer";
-	export { default as GridCellLayer } from "@deck.gl/layers/column-layer/grid-cell-layer";
-	export { default as PathLayer } from "@deck.gl/layers/path-layer/path-layer";
-	export { default as PolygonLayer } from "@deck.gl/layers/polygon-layer/polygon-layer";
-	export { default as GeoJsonLayer } from "@deck.gl/layers/geojson-layer/geojson-layer";
-	export { default as TextLayer } from "@deck.gl/layers/text-layer/text-layer";
-	export { default as SolidPolygonLayer } from "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer";
+	export { default as ArcLayer, ArcLayerProps } from "@deck.gl/layers/arc-layer/arc-layer";
+	export { default as BitmapLayer, BitmapLayerProps } from "@deck.gl/layers/bitmap-layer/bitmap-layer";
+	export { default as IconLayer, IconLayerProps } from "@deck.gl/layers/icon-layer/icon-layer";
+	export { default as LineLayer, LineLayerProps } from "@deck.gl/layers/line-layer/line-layer";
+	export { default as PointCloudLayer, PointCloudLayerProps } from "@deck.gl/layers/point-cloud-layer/point-cloud-layer";
+	export { default as ScatterplotLayer, ScatterplotLayerProps } from "@deck.gl/layers/scatterplot-layer/scatterplot-layer";
+	export { default as ColumnLayer, ColumnLayerProps } from "@deck.gl/layers/column-layer/column-layer";
+	export { default as GridCellLayer, GridCellLayerProps } from "@deck.gl/layers/column-layer/grid-cell-layer";
+	export { default as PathLayer, PathLayerProps } from "@deck.gl/layers/path-layer/path-layer";
+	export { default as PolygonLayer, PolygonLayerProps } from "@deck.gl/layers/polygon-layer/polygon-layer";
+	export { default as GeoJsonLayer, GeoJsonLayerProps } from "@deck.gl/layers/geojson-layer/geojson-layer";
+	export { default as TextLayer, TextLayerProps } from "@deck.gl/layers/text-layer/text-layer";
+	export { default as SolidPolygonLayer, SolidPolygonLayerProps } from "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer";
 	export { default as _MultiIconLayer } from "@deck.gl/layers/text-layer/multi-icon-layer/multi-icon-layer";
 }
