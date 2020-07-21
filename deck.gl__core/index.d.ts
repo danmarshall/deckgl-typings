@@ -1012,6 +1012,18 @@ declare module "@deck.gl/core/lifecycle/component-state" {
 declare module "@deck.gl/core/lifecycle/component" {
 	import { Deck } from "@deck.gl/core";
 	import Viewport from "@deck.gl/core/viewports/viewport";
+	import LayerManager from "@deck.gl/core/lib/layer-manager"
+	export interface LayerContext {
+		layerManager: LayerManager;
+		deck: Deck;
+		viewport: Viewport;
+
+  		// General resources
+  		mousePosition: [number,number] | null;
+  		
+		// GL Resources
+		gl: WebGL2RenderingContext;
+	}
 	export default class Component<P> {
 		constructor();
 		clone(newProps: P): any;
@@ -1038,12 +1050,12 @@ declare module "@deck.gl/core/lifecycle/component" {
 		/**
 		 * reference to the composite layer parent that rendered this layer
 		 */
-		parent: Component<any>;
+		parent: Component<P>;
 
 		/**
 		 * Will reference layer manager's context, contains state shared by layers
 		 */
-		context: { gl: WebGLRenderingContext, viewport: Viewport, deck: Deck };
+		context: LayerContext;
 
 		/**
 		 * Will be set to the shared layer state object during layer matching
@@ -1170,7 +1182,7 @@ declare module "@deck.gl/core/lib/layer" {
 		nullPickingColor(): RGBAColor;
 		encodePickingColor(i: any, target?: any[]): RGBAColor;
 		decodePickingColor(color: any): number;
-		initializeState(): void;
+		initializeState(params: any): void;
 		getShaders(shaders: any): any;
 		shouldUpdateState({
 			oldProps,

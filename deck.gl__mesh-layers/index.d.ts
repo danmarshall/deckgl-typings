@@ -72,7 +72,7 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 	export default class SimpleMeshLayer<D> extends Layer<D> {
 		constructor(props: SimpleMeshLayerProps<D>);
 		getShaders(): any;
-		initializeState(): void;
+		initializeState(params: any): void;
 		updateState({
 			props,
 			oldProps,
@@ -131,7 +131,7 @@ declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
 	}
 	export default class ScenegraphLayer<D> extends Layer<D> {
 		constructor(props: ScenegraphLayerProps<D>);
-		initializeState(): void;
+		initializeState(params: any): void;
 		updateState(params: any): void;
 		finalizeState(): void;
 		_updateScenegraph(props: any): void;
