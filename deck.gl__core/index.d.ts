@@ -1106,9 +1106,7 @@ declare module "@deck.gl/core/lib/layer" {
 	export type TransitionTiming =
 		| InterpolationTransitionTiming
 		| SpringTransitionTiming;
-	export interface LayerInputHandler<D=any> {
-		(o: PickInfo<D>, e: HammerInput): any;
-	}
+	export type LayerInputHandler<D=any> = (o: PickInfo<D>, e: HammerInput) => any;
 	export type DataSet<D> = Iterable<D>;
 	// | AsyncIterable ToDo: Add AsyncIterable
 	// | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
