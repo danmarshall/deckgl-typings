@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node ./scripts/convert.js",
     "test": "tsc -p ./test",
-    "postinstall": "indefinitely-typed --folder deck.gl__aggregation-layers --folder deck.gl__core --folder deck.gl__layers --folder deck.gl__google-maps --folder deck.gl__json --folder deck.gl__mapbox --folder deck.gl__mesh-layers --folder deck.gl__geo-layers --folder deck.gl__extensions --folder deck.gl__react --folder deck.gl --folder luma.gl__webgl-state-tracker --folder luma.gl__webgl --folder luma.gl__shadertools --folder luma.gl__core --folder math.gl"
+    "postinstall": "indefinitely-typed --folder deck.gl__aggregation-layers --folder deck.gl__core --folder deck.gl__extensions --folder deck.gl__geo-layers --folder deck.gl__google-maps --folder deck.gl__json --folder deck.gl__layers --folder deck.gl__mapbox --folder deck.gl__mesh-layers --folder deck.gl__react --folder deck.gl --folder luma.gl__constants --folder luma.gl__core --folder luma.gl__engine --folder luma.gl__experimental --folder luma.gl__gltools --folder luma.gl__shadertools --folder luma.gl__webgl-state-tracker --folder luma.gl__webgl --folder math.gl__core --folder math.gl"
   },
   "repository": {
     "type": "git",
