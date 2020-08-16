@@ -223,7 +223,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 			z: number;
 			url: string;
 			bbox: any;
-		}) => D[];
+		}) => D[] | Promise<D[]>;
 		tileSize?: number;
 		maxZoom?: number | null;
 		minZoom?: number;
