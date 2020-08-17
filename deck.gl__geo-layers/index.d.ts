@@ -445,9 +445,9 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 		texture?: string | null;
 		meshMaxError?: number;
 		elevationDecoder?: {
-			rScale: number;
-			gScale: number;
-			bScale: number;
+			rScaler: number;
+			gScaler: number;
+			bScaler: number;
 			offset: number;
 		};
 		bounds?: number[];
