@@ -1168,7 +1168,7 @@ declare module "@deck.gl/core/lib/layer" {
 		deprecatedFor?: string | string[];
 	}
 	export default class Layer<D,P extends LayerProps<D> = LayerProps<D>> extends Component<P> {
-		constructor(props: LayerProps<D>);
+		constructor(props: P);
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
