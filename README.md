@@ -4,10 +4,20 @@ TypeScript declaration files for [deck.gl](https://deck.gl/#/documentation/)
 This is a work in progress - see the [issues list](https://github.com/danmarshall/deckgl-typings/issues)
 
 ```
-npm install
+npm install @danmarshall/deckgl-typings
+```
+These will automatically appear in your projects `node_modules/@types` folder, thanks to [indefinitely-typed](https://github.com/danmarshall/indefinitely-typed#readme).
+
+Then it is poossible to link the mappings in your project so typescript can find them (since the project is not in @types yet). 
+
+deck.d.ts:
+```
+import * as DeckTypings from "@danmarshall/deckgl-typings"
+declare module "deck.gl" {
+    export namespace DeckTypings {}
+}
 ```
 
-These will automatically appear in your projects `node_modules/@types` folder, thanks to [indefinitely-typed](https://github.com/danmarshall/indefinitely-typed#readme).
 
 ## Version mapping
 
