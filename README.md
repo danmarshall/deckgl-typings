@@ -8,7 +8,7 @@ npm install @danmarshall/deckgl-typings
 ```
 These will automatically appear in your projects `node_modules/@types` folder, thanks to [indefinitely-typed](https://github.com/danmarshall/indefinitely-typed#readme).
 
-Then it is poossible to link the mappings in your project so typescript can find them (since the project is not in @types yet). 
+Then it is possible to link the mappings in your project so typescript can find them (since the project is not in @types yet). 
 
 deck.d.ts:
 ```
