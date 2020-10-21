@@ -1309,6 +1309,7 @@ declare module "@deck.gl/core/lib/composite-layer" {
 	}
 }
 declare module "@deck.gl/core/viewports/viewport" {
+	import { Position } from "@deck.gl/core/utils/positions";
 	export default class Viewport {
 		/**
 		 * @classdesc
@@ -1318,6 +1319,15 @@ declare module "@deck.gl/core/viewports/viewport" {
 		 * A new viewport instance should be created if any parameters have changed.
 		 */
 		constructor(opts?: {});
+		id?: string;
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+		isGeospatial: boolean;
+		zoom: number;
+		scale: number;
+		position: Position;
 		get metersPerPixel(): number;
 		get projectionMode(): number;
 		equals(viewport: any): any;
