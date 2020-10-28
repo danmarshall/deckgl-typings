@@ -1288,22 +1288,7 @@ declare module "@deck.gl/core/lib/composite-layer" {
 		getSubLayerClass(id: any, DefaultLayerClass: any): any;
 		getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
 		getSubLayerAccessor(accessor: any): any;
-		getSubLayerProps(sublayerProps?: {}): {
-			opacity: any;
-			pickable: any;
-			visible: any;
-			parameters: any;
-			getPolygonOffset: any;
-			highlightedObjectIndex: any;
-			autoHighlight: any;
-			highlightColor: any;
-			coordinateSystem: any;
-			coordinateOrigin: any;
-			wrapLongitude: any;
-			positionFormat: any;
-			modelMatrix: any;
-			extensions: any;
-		};
+		getSubLayerProps<SD, SP extends LayerProps<SD> = LayerProps<SD>>(sublayerProps?: {}): SP;
 		_getAttributeManager(): any;
 		_renderLayers(): void;
 	}
