@@ -6,7 +6,7 @@ declare module "@deck.gl/aggregation-layers/aggregation-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export interface AggregationLayerProps<D> extends CompositeLayerProps<D> { }
-	export default class AggregationLayer<D> extends CompositeLayer<D> {
+	export default class AggregationLayer<D, P extends AggregationLayerProps<D> = AggregationLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: AggregationLayerProps<D>);
 		initializeState(dimensions: any): void;
 		updateState(opts: any): void;
@@ -306,7 +306,7 @@ declare module "@deck.gl/aggregation-layers/grid-aggregation-layer" {
 	} from "@deck.gl/aggregation-layers/aggregation-layer";
 	export interface GridAggregationLayerProps<D>
 		extends AggregationLayerProps<D> { }
-	export default class GridAggregationLayer<D> extends AggregationLayer<D> {
+	export default class GridAggregationLayer<D, P extends GridAggregationLayerProps<D> = GridAggregationLayerProps<D>> extends AggregationLayer<D, P> {
 		constructor(props: GridAggregationLayerProps<D>);
 		initializeState({ dimensions }: { dimensions: any }): void;
 		updateState(opts: any): void;
@@ -400,7 +400,7 @@ declare module "@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer"
 		getPosition?: (d: D) => Position;
 		getWeight?: (d: D) => number;
 	}
-	export default class ScreenGridLayer<D> extends GridAggregationLayer<D> {
+	export default class ScreenGridLayer<D, P extends ScreenGridLayerProps<D> = ScreenGridLayerProps<D>> extends GridAggregationLayer<D, P> {
 		constructor(props: ScreenGridLayerProps<D>);
 		initializeState(params: any): void;
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
@@ -611,7 +611,7 @@ declare module "@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer" {
 		onSetColorDomain?: () => void;
 		onSetElevationDomain?: () => void;
 	}
-	export default class CPUGridLayer<D> extends AggregationLayer<D> {
+	export default class CPUGridLayer<D, P extends CPUGridLayerProps<D> = CPUGridLayerProps<D>> extends AggregationLayer<D, P> {
 		constructor(props: CPUGridLayerProps<D>);
 		initializeState(params: any): void;
 		updateState(opts: any): void;
@@ -692,7 +692,7 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		onSetColorDomain?: Function;
 		onSetElevationDomain?: Function;
 	}
-	export default class HexagonLayer<D> extends AggregationLayer<D> {
+	export default class HexagonLayer<D, P extends HexagonLayerProps<D> = HexagonLayerProps<D>> extends AggregationLayer<D, P> {
 		constructor(props: HexagonLayerProps<D>);
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
 		initializeState(params: any): void;
@@ -792,7 +792,7 @@ declare module "@deck.gl/aggregation-layers/contour-layer/contour-layer" {
 		getPosition?: (d: D) => Position;
 		getWeight?: (d: D) => number;
 	}
-	export default class ContourLayer<D> extends GridAggregationLayer<D> {
+	export default class ContourLayer<D, P extends ContourLayerProps<D> = ContourLayerProps<D>> extends GridAggregationLayer<D, P> {
 		constructor(props: ContourLayerProps<D>);
 		initializeState(params: any): void;
 		updateState(opts: any): void;
@@ -878,7 +878,7 @@ declare module "@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer" {
 		getElevationWeight?: (d: D) => number;
 		elevationAggregation?: AggregationOperation;
 	}
-	export default class GPUGridLayer<D> extends GridAggregationLayer<D> {
+	export default class GPUGridLayer<D, P extends GPUGridLayerProps<D> = GPUGridLayerProps<D>> extends GridAggregationLayer<D, P> {
 		constructor(props: GPUGridLayerProps<D>);
 		initializeState(params: any): void;
 		updateState(opts: any): void;
@@ -927,7 +927,7 @@ declare module "@deck.gl/aggregation-layers/grid-layer/grid-layer" {
 		onSetColorDomain?: () => void;
 		onSetElevationDomain?: () => void;
 	}
-	export default class GridLayer<D> extends CompositeLayer<D> {
+	export default class GridLayer<D, P extends GridLayerProps<D> = GridLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: GridLayerProps<D>);
 		initializeState(params: any): void;
 		updateState({
@@ -1015,7 +1015,7 @@ declare module "@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer" {
 		getPosition?: (d: D) => Position;
 		getWeight?: (d: D) => number;
 	}
-	export default class HeatmapLayer<D> extends AggregationLayer<D> {
+	export default class HeatmapLayer<D, P extends HeatmapLayerProps<D> = HeatmapLayerProps<D>> extends AggregationLayer<D, P> {
 		constructor(props: HeatmapLayerProps<D>);
 		initializeState(params: any): void;
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;

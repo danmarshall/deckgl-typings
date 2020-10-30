@@ -42,7 +42,7 @@ declare module "@deck.gl/geo-layers/s2-layer/s2-layer" {
 	export interface S2LayerProps<D> extends CompositeLayerProps<D> {
 		getS2Token: (d:D)=> any;
 	}	
-	export default class S2Layer<D> extends CompositeLayer<D> {
+	export default class S2Layer<D, P extends S2LayerProps<D> = S2LayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: S2LayerProps<D>);
 		renderLayers(): any;
 	}
@@ -242,7 +242,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 		onTileLoad?: (tile: D) => void;
 		onTileError?: (error: Error) => void;
 	}
-	export default class TileLayer<D> extends CompositeLayer<D> {
+	export default class TileLayer<D, P extends TileLayerProps<D> = TileLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TileLayerProps<D>);
 		initializeState(params: any): void;
 		get isLoaded(): any;
@@ -289,7 +289,7 @@ declare module "@deck.gl/geo-layers/trips-layer/trips-layer" {
 				target:number[]
 			}) => number[];
 	}
-	export default class TripsLayer<D> extends PathLayer<D> {
+	export default class TripsLayer<D, P extends TripsLayerProps<D> = TripsLayerProps<D>> extends PathLayer<D, P> {
 		constructor(props: TripsLayerProps<D>);
 		getShaders(): any;
 		initializeState(params?: any): void;
@@ -302,7 +302,7 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-cluster-layer" {
 	export interface H3ClusterLayerProps<D> extends PolygonLayerProps<D> { 
 		getHexagons?: (d: D) => string[];
 	}
-	export default class H3ClusterLayer<D> extends CompositeLayer<D> {
+	export default class H3ClusterLayer<D, P extends H3ClusterLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: H3ClusterLayerProps<D>);
 		updateState({
 			props,
@@ -338,7 +338,7 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-hexagon-layer" {
 	 * even when no corresponding hexagon is in the data set. You can check
 	 * index !== -1 to see if picking matches an actual object.
 	 */
-	export default class H3HexagonLayer<D> extends CompositeLayer<D> {
+	export default class H3HexagonLayer<D, P extends H3HexagonLayerProps<D> = H3HexagonLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: H3HexagonLayerProps<D>);
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
 		updateState({
@@ -403,7 +403,7 @@ declare module "@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer" {
 		onTileUnload?: (tileHeader: Object) => void;
 		onTileError?: (tileHeader: Object, url: string, message: string) => void;
 	}
-	export default class Tile3DLayer<D> extends CompositeLayer<D> {
+	export default class Tile3DLayer<D, P extends Tile3DLayerProps<D> = Tile3DLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: Tile3DLayerProps<D>);
 		initializeState(params: any): void;
 		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
@@ -458,7 +458,7 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 		wireframe?: boolean;
 		material?: any;
 	}
-	export default class TerrainLayer<D> extends CompositeLayer<D> {
+	export default class TerrainLayer<D, P extends TerrainLayerProps<D> = TerrainLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TerrainLayerProps<D>);
 		updateState({
 			props,
@@ -520,8 +520,8 @@ declare module "@deck.gl/geo-layers/mvt-layer/clip-extension" {
 	}
 }
 declare module "@deck.gl/geo-layers/mvt-layer/mvt-layer" {
-	import TileLayer from "@deck.gl/geo-layers/tile-layer/tile-layer";
-	export default class MVTLayer<D> extends TileLayer<D> {
+	import TileLayer, { TileLayerProps } from "@deck.gl/geo-layers/tile-layer/tile-layer";
+	export default class MVTLayer<D, P extends TileLayerProps<D> = TileLayerProps<D>> extends TileLayer<D, P> {
 		getTileData(tile: any): any;
 		renderSubLayers(props: any): any;
 	}
