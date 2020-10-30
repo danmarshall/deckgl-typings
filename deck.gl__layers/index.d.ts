@@ -468,7 +468,7 @@ declare module "@deck.gl/layers/column-layer/grid-cell-layer" {
 		getColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getElevation?: ((d: D) => number) | number;
 	}
-	export default class GridCellLayer<D> extends ColumnLayer<D> {
+	export default class GridCellLayer<D, P extends GridCellLayerProps<D> = GridCellLayerProps<D>> extends ColumnLayer<D, P> {
 		constructor(props: GridCellLayerProps<D>);
 		getGeometry(diskResolution: any): any;
 		draw({ uniforms }: { uniforms: any }): void;
@@ -730,7 +730,7 @@ declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 		getLineWidth?: ((x: D) => number) | number;
 		getElevation?: ((x: D) => number) | number;
 	}
-	export default class PolygonLayer<D> extends CompositeLayer<D> {
+	export default class PolygonLayer<D, P extends PolygonLayerProps<D> = PolygonLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: PolygonLayerProps<D>);
 		initializeState(params: any): void;
 		updateState({
@@ -802,7 +802,7 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 		getLineWidth?: ((d: D) => number) | number;
 		getElevation?: ((d: D) => number) | number;
 	}
-	export default class GeoJsonLayer<D> extends CompositeLayer<D> {
+	export default class GeoJsonLayer<D, P extends GeoJsonLayerProps<D> = GeoJsonLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: GeoJsonLayerProps<D>);
 		initializeState(params: any): void;
 		updateState({ props, changeFlags }: { props: any; changeFlags: any }): void;
@@ -1020,7 +1020,7 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 		getAlignmentBaseline?: ((x: D) => AlignmentBaseline) | AlignmentBaseline;
 		getPixelOffset?: ((x: D) => number[]) | number[];
 	}
-	export default class TextLayer<D> extends CompositeLayer<D> {
+	export default class TextLayer<D, P extends TextLayerProps<D> = TextLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TextLayerProps<D>);
 		initializeState(params: any): void;
 		updateState({
