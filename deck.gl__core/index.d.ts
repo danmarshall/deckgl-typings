@@ -2332,6 +2332,8 @@ declare module "@deck.gl/core/lib/deck" {
 		onAfterRender?: (args: { gl: WebGLRenderingContext }) => void;
 		onError?: (error: Error, source: any) => void;
 		_onMetrics?: (metrics: any) => void;
+
+		ContextProvider?: React.Provider<any>
 	}
 
 	export default class Deck {
