@@ -164,7 +164,11 @@ declare module "@deck.gl/extensions/path-style/shaders.glsl" {
 declare module "@deck.gl/extensions/path-style/path-style" {
 	import { LayerExtension } from "@deck.gl/core";
 	export default class PathStyleExtension extends LayerExtension {
-		constructor({ dash, offset }?: { dash?: boolean; offset?: boolean });
+		constructor({ dash, highPrecisionDash, offset }?: { 
+			dash?: boolean; 
+			highPrecisionDash?: boolean; 
+			offset?: boolean 
+		});
 		isEnabled(layer: any): any;
 		getShaders(extension: any): {};
 		initializeState(context: any, extension: any): void;
