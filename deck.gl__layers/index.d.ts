@@ -710,12 +710,12 @@ declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
 		filled?: boolean;
-		stroked: boolean;
-		extruded: boolean;
+		stroked?: boolean;
+		extruded?: boolean;
 		wireframe?: boolean;
 		elevationScale?: number;
-		lineWidthUnits?: string;
-		lineWidthScale?: boolean;
+		lineWidthUnits?: "meters" | "pixels";
+		lineWidthScale?: number;
 		lineWidthMinPixels?: number;
 		lineWidthMaxPixels?: number;
 		lineJointRounded?: boolean;
