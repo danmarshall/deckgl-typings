@@ -1110,6 +1110,8 @@ declare module "@deck.gl/core/lib/layer" {
 		(o: PickInfo<D>, e: HammerInput): any;
 	}
 	export type DataSet<D> = Iterable<D>;
+	export type WidthUnits = "meters" | "pixels";
+
 	// | AsyncIterable ToDo: Add AsyncIterable
 	// | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
 
