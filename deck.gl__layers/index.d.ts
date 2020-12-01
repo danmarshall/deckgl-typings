@@ -706,7 +706,7 @@ declare module "@deck.gl/layers/utils" {
 declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-	import { WidthUnits } from '@deck.gl/core/lib/layer'
+	import { WidthUnits } from '@deck.gl/core/lib/layer';
 	import { Position } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
@@ -777,7 +777,7 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
-	import { WidthUnits } from "@deck.gl/core/lib/layer"
+	import { WidthUnits } from "@deck.gl/core/lib/layer";
 	export interface GeoJsonLayerProps<D> extends CompositeLayerProps<D> {
 		//Render Options
 		filled?: boolean;
