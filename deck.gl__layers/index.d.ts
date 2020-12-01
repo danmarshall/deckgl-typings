@@ -172,7 +172,7 @@ declare module "@deck.gl/layers/icon-layer/icon-manager" {
 }
 declare module "@deck.gl/layers/icon-layer/icon-layer" {
 	import { Layer } from "@deck.gl/core";
-	import { LayerProps } from "@deck.gl/core/lib/layer";
+	import { LayerProps, WidthUnits } from "@deck.gl/core/lib/layer";
 	import { Position, Position2D } from "@deck.gl/core/utils/positions";
 	import Texture2D from "@luma.gl/webgl/classes/texture-2d";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
@@ -213,7 +213,7 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 		iconAtlas?: Texture2D | string;
 		iconMapping?: IconMapping;
 		sizeScale?: number;
-		sizeUnits?: "meters" | "pixels";
+		sizeUnits?: WidthUnits;
 		sizeMinPixels?: number;
 		sizeMaxPixels?: number;
 		billboard?: boolean;
@@ -263,11 +263,11 @@ declare module "@deck.gl/layers/line-layer/line-layer-fragment.glsl" {
 }
 declare module "@deck.gl/layers/line-layer/line-layer" {
 	import { Layer } from "@deck.gl/core";
-	import { LayerProps } from "@deck.gl/core/lib/layer";
+	import { LayerProps, WidthUnits } from "@deck.gl/core/lib/layer";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	import { Position } from "@deck.gl/core/utils/positions";
 	export interface LineLayerProps<D> extends LayerProps<D> {
-		widthUnits?: "meters" | "pixels";
+		widthUnits?: WidthUnits;
 		widthScale?: number;
 		widthMinPixels?: number;
 		widthMaxPixels?: number;
@@ -341,12 +341,12 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer-fragment.gls
 }
 declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 	import { Layer } from "@deck.gl/core";
-	import { LayerProps } from "@deck.gl/core/lib/layer";
+	import { LayerProps, WidthUnits } from "@deck.gl/core/lib/layer";
 	import { Position } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	export interface ScatterplotLayerProps<D> extends LayerProps<D> {
 		radiusScale?: number;
-		lineWidthUnits?: string;
+		lineWidthUnits?: WidthUnits;
 		lineWidthScale?: number;
 		stroked?: boolean;
 		filled?: boolean;
@@ -397,7 +397,7 @@ declare module "@deck.gl/layers/column-layer/column-layer-fragment.glsl" {
 declare module "@deck.gl/layers/column-layer/column-layer" {
 	import { Layer } from "@deck.gl/core";
 	import ColumnGeometry from "@deck.gl/layers/column-layer/column-geometry";
-	import { LayerProps } from "@deck.gl/core/lib/layer";
+	import { LayerProps, WidthUnits } from "@deck.gl/core/lib/layer";
 	import { Position, Position2D } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	export interface ColumnLayerProps<D> extends LayerProps<D> {
@@ -412,7 +412,7 @@ declare module "@deck.gl/layers/column-layer/column-layer" {
 		stroked?: boolean;
 		extruded?: boolean;
 		wireframe?: boolean;
-		lineWidthUnits?: string;
+		lineWidthUnits?: WidthUnits;
 		lineWidthScale?: boolean;
 		lineWidthMinPixels?: number;
 		lineWidthMaxPixels?: number;
@@ -706,6 +706,7 @@ declare module "@deck.gl/layers/utils" {
 declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+	import { WidthUnits } from '@deck.gl/core/lib/layer'
 	import { Position } from "@deck.gl/core/utils/positions";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	export interface PolygonLayerProps<D> extends CompositeLayerProps<D> {
@@ -714,7 +715,7 @@ declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 		extruded?: boolean;
 		wireframe?: boolean;
 		elevationScale?: number;
-		lineWidthUnits?: "meters" | "pixels";
+		lineWidthUnits?: WidthUnits;
 		lineWidthScale?: number;
 		lineWidthMinPixels?: number;
 		lineWidthMaxPixels?: number;
@@ -776,13 +777,14 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { WidthUnits } from "@deck.gl/core/lib/layer"
 	export interface GeoJsonLayerProps<D> extends CompositeLayerProps<D> {
 		//Render Options
 		filled?: boolean;
 		stroked?: boolean;
 		extruded?: boolean;
 		wireframe?: boolean;
-		lineWidthUnits?: string;
+		lineWidthUnits?: WidthUnits;
 		lineWidthScale?: number;
 		lineWidthMinPixels?: number;
 		lineWidthMaxPixels?: number;
@@ -991,11 +993,12 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 	import { FontSettings } from "@deck.gl/layers/text-layer/font-atlas-manager";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+	import { WidthUnits } from "@deck.gl/core/lib/layer";
 	export type TextAnchor = "start" | "middle" | "end";
 	export type AlignmentBaseline = "top" | "center" | "bottom";
 	export interface TextLayerProps<D> extends CompositeLayerProps<D> {
 		sizeScale?: number;
-		sizeUnits?: "meters" | "pixels";
+		sizeUnits?: WidthUnits;
 		sizeMinPixels?: number;
 		sizeMaxPixels?: number;
 		billboard?: boolean;
