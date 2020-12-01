@@ -1170,7 +1170,7 @@ declare module "@deck.gl/core/lib/layer" {
 	export default class Layer<D,P extends LayerProps<D> = LayerProps<D>> extends Component<P> {
 		constructor(props: P);
 		toString(): string;
-		setState(updateObject: any): void;
+		setState<S extends Record<string, any>>(updateObject: S): void;
 		setNeedsRedraw(redraw?: boolean): void;
 		setNeedsUpdate(): void;
 		getNeedsRedraw(opts?: { clearRedrawFlags: boolean }): boolean;
@@ -1280,8 +1280,6 @@ declare module "@deck.gl/core/lib/composite-layer" {
 		get isComposite(): boolean;
 		get isLoaded(): any;
 		getSubLayers(): any;
-		initializeState(params?: any): void;
-		setState(updateObject: any): void;
 		getPickingInfo({ info }: { info: any }): any;
 		renderLayers(): any;
 		shouldRenderSubLayer(id: any, data: any): any;
