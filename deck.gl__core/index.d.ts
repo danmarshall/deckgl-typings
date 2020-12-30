@@ -1112,6 +1112,19 @@ declare module "@deck.gl/core/lib/layer" {
 	export type DataSet<D> = Iterable<D>;
 	export type WidthUnits = "meters" | "pixels";
 
+	export interface ObjectInfo<D,T> {
+		// the index of the current iteration
+		index: number;
+		// the value of the 'data' prop on the layer.
+		data: DataSet<D> | Promise<DataSet<D>> | string;
+		// a pre-allocated array.
+		// the accessor function can optionally fill data into this array and
+		// return it, instead of creating a new array for every object.
+		// In some browsers this improves performance significantly by
+		// reducing garbage collection.
+		target: T[];
+	}
+
 	// | AsyncIterable ToDo: Add AsyncIterable
 	// | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
 
