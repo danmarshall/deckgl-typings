@@ -2355,6 +2355,8 @@ declare module "@deck.gl/core/lib/deck" {
 		constructor(props: DeckProps);
 		canvas: HTMLCanvasElement;
 		viewState: any;
+		width: number;
+		height: number;
 		finalize(): void;
 		props: DeckProps;
 		setProps(props: Partial<DeckProps>): void;

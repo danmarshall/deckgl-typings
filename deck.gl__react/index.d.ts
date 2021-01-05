@@ -59,7 +59,7 @@ declare module "@deck.gl/react/utils/extract-styles" {
 	};
 }
 declare module "@deck.gl/react/deckgl" {
-	import { DeckProps } from '@deck.gl/core/lib/deck';
+	import Deck, { DeckProps } from '@deck.gl/core/lib/deck';
 	type propsNowOptional = 'width'|'height'|'effects'|'layers';
 	export type DeckGLProps = Omit<DeckProps, propsNowOptional> & Partial<Pick<DeckProps, propsNowOptional>>;
 	import { ReactElement } from "react";
@@ -77,6 +77,7 @@ declare module "@deck.gl/react/deckgl" {
 		_parseJSX(props: any): any;
 		_updateFromProps(props: any): void;
 		render(): ReactElement;
+		deck: Deck;
 	}
 }
 declare module "@deck.gl/react" {
