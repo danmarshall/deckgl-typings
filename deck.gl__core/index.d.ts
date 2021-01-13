@@ -43,10 +43,6 @@ declare module "@deck.gl/core/debug/loggers" {
 		) => void;
 	};
 }
-declare module "debug" {
-	export function register(handlers: any): void;
-	export default function debug(eventType: any): void;
-}
 declare module "@deck.gl/core/utils/json-loader" {
 	function isJSON(text: any): boolean;
 	const _default: {
