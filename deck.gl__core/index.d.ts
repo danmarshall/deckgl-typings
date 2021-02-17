@@ -2306,6 +2306,10 @@ declare module "@deck.gl/core/lib/deck" {
 		initialViewState?: InitialViewStateProps;
 		controller?: null | Controller | ControllerOptions | boolean;
 		effects: Effect[];
+		_typedArrayManagerProps?: {
+			overAlloc?: number;
+			poolSize?: number;
+		};
 
 		//Configuration Properties
 		id?: string;
