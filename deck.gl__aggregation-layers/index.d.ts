@@ -1010,6 +1010,7 @@ declare module "@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer" {
 		intensity?: number;
 		threshold?: number;
 		colorDomain?: ColorDomain;
+		aggregation?: 'SUM' | 'MEAN';
 
 		//Data Accessors
 		getPosition?: (d: D) => Position;
