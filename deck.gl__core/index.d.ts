@@ -1707,13 +1707,23 @@ declare module "@deck.gl/core/controllers/transition-manager" {
 //https://github.com/visgl/deck.gl/blob/master/docs/api-reference/core/controller.md
 declare module "@deck.gl/core/controllers/controller" {
 	export interface ControllerOptions {
-		scrollZoom?:boolean;
+		scrollZoom?:boolean | {
+			speed?: number;
+			smooth?: boolean;
+		};
 		dragPan?: boolean;
 		dragRotate?:boolean;
 		doubleClickZoom?: boolean;
 		touchZoom?: boolean;
 		touchRotate?: boolean;
-		keyboard?: boolean;
+		keyboard?: boolean | {
+			zoomSpeed?: number;
+			moveSpeed?: number;
+			rotateSpeedX?: number;
+			rotateSpeedY?: number;
+		};
+		dragMode?: 'pan' | 'rotate';
+		inertia?: boolean | number
 	}
 	export default class Controller {
 		constructor(ControllerState: any, options?: ControllerOptions);
