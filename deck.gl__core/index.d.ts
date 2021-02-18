@@ -2288,6 +2288,23 @@ declare module "@deck.gl/core/lib/deck" {
 		onTransitionEnd?: () => void;
 	}
 
+	export interface MetricsPayload {
+		bufferMemory: number;
+    		cpuTime: number;
+    		cpuTimePerFrame: number;
+    		fps: number;
+    		framesRedrawn: number;
+    		gpuMemory: number;
+    		gpuTime: number;
+    		gpuTimePerFrame: number;
+    		pickCount: number;
+    		pickTime: number;
+    		renderbufferMemory: number;
+    		setPropsTime: number;
+    		textureMemory: number;
+    		updateAttributesTime: number;
+	}
+	
 	export interface DeckProps {
 		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
 		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
@@ -2356,7 +2373,7 @@ declare module "@deck.gl/core/lib/deck" {
 		onBeforeRender?: (args: { gl: WebGLRenderingContext }) => void;
 		onAfterRender?: (args: { gl: WebGLRenderingContext }) => void;
 		onError?: (error: Error, source: any) => void;
-		_onMetrics?: (metrics: any) => void;
+		_onMetrics?: (metrics: MetricsPayload) => void;
 
 		ContextProvider?: React.Provider<any>
 	}
