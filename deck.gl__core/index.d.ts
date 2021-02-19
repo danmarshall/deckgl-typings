@@ -2290,19 +2290,19 @@ declare module "@deck.gl/core/lib/deck" {
 
 	export interface MetricsPayload {
 		bufferMemory: number;
-    		cpuTime: number;
-    		cpuTimePerFrame: number;
-    		fps: number;
-    		framesRedrawn: number;
-    		gpuMemory: number;
-    		gpuTime: number;
-    		gpuTimePerFrame: number;
-    		pickCount: number;
-    		pickTime: number;
-    		renderbufferMemory: number;
-    		setPropsTime: number;
-    		textureMemory: number;
-    		updateAttributesTime: number;
+		cpuTime: number;
+		cpuTimePerFrame: number;
+		fps: number;
+		framesRedrawn: number;
+		gpuMemory: number;
+		gpuTime: number;
+		gpuTimePerFrame: number;
+		pickCount: number;
+		pickTime: number;
+		renderbufferMemory: number;
+		setPropsTime: number;
+		textureMemory: number;
+		updateAttributesTime: number;
 	}
 
 	export interface ContextProviderValue {
