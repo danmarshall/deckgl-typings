@@ -1078,7 +1078,7 @@ declare module "@deck.gl/core/lib/layer" {
 
   		// General resources
   		mousePosition: [number,number] | null;
-  		
+
 		// GL Resources
 		gl: WebGL2RenderingContext;
 	}
@@ -2274,7 +2274,7 @@ declare module "@deck.gl/core/lib/deck" {
 		maxPitch?: number;
 		maxZoom?: number;
 		minPitch?: number;
-		minZoom?: number;	  
+		minZoom?: number;
 	}
 
 	// https://github.com/visgl/deck.gl/blob/master/docs/developer-guide/view-state-transitions.md
@@ -2290,21 +2290,28 @@ declare module "@deck.gl/core/lib/deck" {
 
 	export interface MetricsPayload {
 		bufferMemory: number;
-    		cpuTime: number;
-    		cpuTimePerFrame: number;
-    		fps: number;
-    		framesRedrawn: number;
-    		gpuMemory: number;
-    		gpuTime: number;
-    		gpuTimePerFrame: number;
-    		pickCount: number;
-    		pickTime: number;
-    		renderbufferMemory: number;
-    		setPropsTime: number;
-    		textureMemory: number;
-    		updateAttributesTime: number;
+		cpuTime: number;
+		cpuTimePerFrame: number;
+		fps: number;
+		framesRedrawn: number;
+		gpuMemory: number;
+		gpuTime: number;
+		gpuTimePerFrame: number;
+		pickCount: number;
+		pickTime: number;
+		renderbufferMemory: number;
+		setPropsTime: number;
+		textureMemory: number;
+		updateAttributesTime: number;
 	}
-	
+
+	export interface ContextProviderValue {
+		viewport: Viewport;
+		container: HTMLElement;
+		// @TODO: mjolnir.js types
+		eventManager: object;
+	}
+
 	export interface DeckProps {
 		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
 		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
@@ -2375,7 +2382,7 @@ declare module "@deck.gl/core/lib/deck" {
 		onError?: (error: Error, source: any) => void;
 		_onMetrics?: (metrics: MetricsPayload) => void;
 
-		ContextProvider?: React.Provider<any>
+		ContextProvider?: React.Provider<ContextProviderValue>
 	}
 
 	export default class Deck {
