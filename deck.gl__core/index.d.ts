@@ -1535,8 +1535,34 @@ declare module "@deck.gl/core/utils/positions" {
 	export function getPosition(position: any, extent: any): any;
 }
 declare module "@deck.gl/core/views/view" {
+
+	export interface ViewProps {
+		id?: string;
+
+		// The position and extent of the view on the canvas
+		x?: number | string; // A relative (e.g. `'50%'`) or absolute position. Default `0`.
+		y?: number | string; // A relative (e.g. `'50%'`) or absolute position. Default `0`.
+		height?: number | string; // A relative (e.g. `'50%'`) or absolute extent. Default `'100%'`.
+		width?: number | string; // A relative (e.g. `'50%'`) or absolute extent. Default `'100%'`.
+
+		controller?: boolean | object; // Options for viewport interactivity.
+
+		// Viewport Options
+		projectionMatrix?: number[]; // 4x4 Projection matrix - Array[16]
+
+		// Perspective projection parameters, used if projectionMatrix not supplied
+		fovy?: number; // Field of view covered by camera, in the perspective case. In degrees. Default `50`.
+		aspect?: number; // Aspect ratio. Defaults to the Viewport's `width/height` ratio.
+		near?: number; // Distance of near clipping plane. Default `0.1`. (Note that in geospatial viewports, this actual distance used is scaled by the height of the screen).
+		far?: number; // Distance of far clipping plane. Default `1000`. (Note that in geospatial viewports, this actual distance used is scaled by the height of the screen).
+
+		focalDistance?: number; // Modifier of viewport scale. Corresponds to the number of pixels per meter. Default `1`.
+
+		modelMatrix?: number[]; // A model matrix to be applied to position, to match the layer props API
+	}
+
 	export default class View {
-		constructor(props?: {});
+		constructor(props?: ViewProps);
 		equals(view: any): any;
 		makeViewport({
 			width,
