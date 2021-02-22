@@ -450,7 +450,7 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 			bScaler: number;
 			offset: number;
 		};
-		bounds?: number[];
+		bounds?: [number, number, number, number];
 		workerUrl?: string;
 
 		//Render Options
