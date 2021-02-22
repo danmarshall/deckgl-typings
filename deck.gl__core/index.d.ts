@@ -1070,6 +1070,7 @@ declare module "@deck.gl/core/lib/layer" {
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	import LayerManager from "@deck.gl/core/lib/layer-manager"
 	import Viewport from "@deck.gl/core/viewports/viewport";
+	import { Position } from "@deck.gl/core/utils/positions";
 
 	export interface LayerContext {
 		layerManager: LayerManager;
@@ -1145,7 +1146,7 @@ declare module "@deck.gl/core/lib/layer" {
 
 		//Coordinate System Properties
 		coordinateSystem?: number;
-		coordinateOrigin?: [number, number] | [number, number, number];
+		coordinateOrigin?: Position;
 		wrapLongitude?: boolean;
 		modelMatrix?: number;
 
