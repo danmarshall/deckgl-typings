@@ -1145,7 +1145,7 @@ declare module "@deck.gl/core/lib/layer" {
 
 		//Coordinate System Properties
 		coordinateSystem?: number;
-		coordinateOrigin?: [number, number];
+		coordinateOrigin?: [number, number] | [number, number, number];
 		wrapLongitude?: boolean;
 		modelMatrix?: number;
 
@@ -1227,7 +1227,7 @@ declare module "@deck.gl/core/lib/layer" {
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
-		draw(opts: any): void;
+		draw(opts: { moduleParameters: any, uniforms: any, parameters: any, context: WebGLRenderingContext }): void;
 		getPickingInfo({ info, mode }: { info: any; mode: any }): any;
 		invalidateAttribute(name?: string, diffReason?: string): void;
 		updateAttributes(changedAttributes: any): void;
