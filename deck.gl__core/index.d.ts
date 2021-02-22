@@ -1145,7 +1145,7 @@ declare module "@deck.gl/core/lib/layer" {
 
 		//Coordinate System Properties
 		coordinateSystem?: number;
-		coordinateOrigin?: [number, number] | [number, number, number];
+		coordinateOrigin?: [number, number];
 		wrapLongitude?: boolean;
 		modelMatrix?: number;
 
