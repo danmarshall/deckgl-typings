@@ -457,6 +457,14 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 		color?: RGBAColor;
 		wireframe?: boolean;
 		material?: any;
+
+		//Tile options
+		maxRequests?: number;
+		refinementStrategy?: "best-available" | "no-overlap" | "never";
+		minZoom?: number;
+		maxZoom?: number | null;
+		tileSize?: number;
+		extent?: [number, number, number, number];
 	}
 	export default class TerrainLayer<D, P extends TerrainLayerProps<D> = TerrainLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TerrainLayerProps<D>);
