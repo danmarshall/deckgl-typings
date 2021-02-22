@@ -1171,6 +1171,22 @@ declare module "@deck.gl/core/lib/layer" {
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 	}
+	export interface LayerChangeFlags {
+		dataChanged: boolean | string | null;
+		propsChanged: boolean | string | null;
+		updateTriggersChanged: boolean | string | null;
+		viewportChanged: boolean | string | null;
+		stateChanged: boolean | string | null;
+		extensionsChanged: boolean | string | null;
+		propsOrDataChanged: boolean | string | null;
+		somethingChanged: boolean | string | null;
+	}
+	export interface UpdateStateInfo<P> {
+		oldProps: P;
+		props: P;
+		context: LayerContext;
+		changeFlags: LayerChangeFlags;
+	}
 	export interface DefaultPropType {
 		name: string;
 		value: any;
@@ -1210,23 +1226,13 @@ declare module "@deck.gl/core/lib/layer" {
 			props,
 			context,
 			changeFlags,
-		}: {
-			oldProps: any;
-			props: any;
-			context: any;
-			changeFlags: any;
-		}): any;
+		}: UpdateStateInfo<P>): any;
 		updateState({
 			oldProps,
 			props,
 			context,
 			changeFlags,
-		}: {
-			oldProps: any;
-			props: any;
-			context: any;
-			changeFlags: any;
-		}): void;
+		}: UpdateStateInfo<P>): void;
 		finalizeState(): void;
 		draw(opts: { moduleParameters: any, uniforms: any, parameters: any, context: WebGLRenderingContext }): void;
 		getPickingInfo({ info, mode }: { info: any; mode: any }): any;
