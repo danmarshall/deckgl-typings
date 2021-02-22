@@ -1228,7 +1228,7 @@ declare module "@deck.gl/core/lib/layer" {
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
-		draw(opts: any): void;
+		draw(opts: { moduleParameters: any, uniforms: any, parameters: any, context: WebGLRenderingContext }): void;
 		getPickingInfo({ info, mode }: { info: any; mode: any }): any;
 		invalidateAttribute(name?: string, diffReason?: string): void;
 		updateAttributes(changedAttributes: any): void;
