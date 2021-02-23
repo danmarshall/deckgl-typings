@@ -68,10 +68,14 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 			Position
 		];
 
+		loadOptions?: any;
+		textureParameters?: any;
+		_imageCoordinateSystem?: number;
+
 		//Render Options
-		desaturate: number;
-		transparentColor: RGBAColor;
-		tintColor: [number, number, number];
+		desaturate?: number;
+		transparentColor?: RGBAColor;
+		tintColor?: [number, number, number];
 	}
 	export default class BitmapLayer<D, P extends BitmapLayerProps<D> = BitmapLayerProps<D>> extends Layer<D, P> {
 		constructor(props: BitmapLayerProps<D>);
