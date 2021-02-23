@@ -54,7 +54,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer-fragment" {
 declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
-	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { RGBAColor, RGBColor } from "@deck.gl/core/utils/color";
 	import { Position, ExtentsLeftBottomRightTop } from "@deck.gl/core/utils/positions";
 	export interface BitmapLayerProps<D> extends LayerProps<D> {
 		//Data
