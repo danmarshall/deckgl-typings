@@ -55,22 +55,27 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
 	import { RGBAColor, RGBColor } from "@deck.gl/core/utils/color";
+	import { Position, ExtentsLeftBottomRightTop } from "@deck.gl/core/utils/positions";
 	export interface BitmapLayerProps<D> extends LayerProps<D> {
 		//Data
 		image: any;
 		bounds:
-		| [number, number, number, number]
+		| ExtentsLeftBottomRightTop
 		| [
-			[number, number],
-			[number, number],
-			[number, number],
-			[number, number]
+			Position,
+			Position,
+			Position,
+			Position
 		];
 
+		loadOptions?: any;
+		textureParameters?: any;
+		_imageCoordinateSystem?: number;
+
 		//Render Options
-		desaturate: number;
-		transparentColor: RGBAColor;
-		tintColor: RGBColor;
+		desaturate?: number;
+		transparentColor?: RGBAColor;
+		tintColor?: [number, number, number];
 	}
 	export default class BitmapLayer<D, P extends BitmapLayerProps<D> = BitmapLayerProps<D>> extends Layer<D, P> {
 		constructor(props: BitmapLayerProps<D>);
