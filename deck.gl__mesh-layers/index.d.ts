@@ -58,6 +58,7 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 	}
 	export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
 		mesh: SimpleMesh;
+		_instanced?: boolean; // _instanced is a hack to use world position instead of meter offsets in mesh
 		texture?: Texture2D | HTMLImageElement | string;
 		sizeScale?: number;
 		wireframe?: boolean;
