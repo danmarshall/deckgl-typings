@@ -1540,6 +1540,11 @@ declare module "@deck.gl/core/utils/positions" {
 		relative: boolean;
 	};
 	export function getPosition(position: any, extent: any): any;
+
+	export type ExtentsLeftBottomRightTop = [number, number, number, number]; // [left, bottom, right, top] or [minX, minY, maxX, maxY]
+	export type ScaleXYZ = [number, number, number];
+	export type TranslationXYZ = [number, number, number];
+	export type PitchYawRoll = [number, number, number]; // [pitch, yaw, roll]
 }
 declare module "@deck.gl/core/views/view" {
 

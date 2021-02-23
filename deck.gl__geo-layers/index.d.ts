@@ -215,6 +215,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tileset-2d" {
 declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 	import { CompositeLayer, Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
+	import { ExtentsLeftBottomRightTop } from "@deck.gl/core/utils/positions";
 	export interface TileLayerProps<D> extends LayerProps<D> {
 		//Data Options
 		getTileData?: (tile: {
@@ -231,7 +232,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 		maxCacheByteSize?: number;
 		refinementStrategy?: "best-available" | "no-overlap" | "never";
 		maxRequests?: number;
-		extent?: [number, number, number, number];
+		extent?: ExtentsLeftBottomRightTop;
 
 		//Render Options
 		renderSubLayers?: (props: any) => Layer<any> | Layer<any>[];
@@ -432,6 +433,7 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { ExtentsLeftBottomRightTop } from "@deck.gl/core/utils/positions";
 	/**
 	 * state: {
 	 *   isTiled: True renders TileLayer of many SimpleMeshLayers, false renders one SimpleMeshLayer
@@ -450,13 +452,21 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 			bScaler: number;
 			offset: number;
 		};
-		bounds?: number[];
+		bounds?: ExtentsLeftBottomRightTop;
 		workerUrl?: string;
 
 		//Render Options
 		color?: RGBAColor;
 		wireframe?: boolean;
 		material?: any;
+
+		//Tile options
+		maxRequests?: number;
+		refinementStrategy?: "best-available" | "no-overlap" | "never";
+		minZoom?: number;
+		maxZoom?: number | null;
+		tileSize?: number;
+		extent?: ExtentsLeftBottomRightTop;
 	}
 	export default class TerrainLayer<D, P extends TerrainLayerProps<D> = TerrainLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TerrainLayerProps<D>);
