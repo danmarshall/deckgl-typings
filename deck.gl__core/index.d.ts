@@ -1067,7 +1067,7 @@ declare module "@deck.gl/core/lib/layer" {
 	import Component from "@deck.gl/core/lifecycle/component";
 	import Deck, { PickInfo } from "@deck.gl/core/lib/deck";
 	import * as hammerjs from "hammerjs";
-	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { RGBColor, RGBAColor } from "@deck.gl/core/utils/color";
 	import LayerManager from "@deck.gl/core/lib/layer-manager"
 	import Viewport from "@deck.gl/core/viewports/viewport";
 	import { Position } from "@deck.gl/core/utils/positions";
@@ -1216,9 +1216,9 @@ declare module "@deck.gl/core/lib/layer" {
 		use64bitPositions(): boolean;
 		onHover(info: any, pickingEvent: any): any;
 		onClick(info: any, pickingEvent: any): any;
-		nullPickingColor(): RGBAColor;
-		encodePickingColor(i: any, target?: any[]): RGBAColor;
-		decodePickingColor(color: any): number;
+		nullPickingColor(): RGBColor;
+		encodePickingColor(i: any, target?: any[]): RGBColor;
+		decodePickingColor(color: RGBColor): number;
 		initializeState(params: any): void;
 		getShaders(shaders: any): any;
 		shouldUpdateState({
@@ -2894,6 +2894,7 @@ declare module "@deck.gl/core" {
 	export { Position, Position2D, Position3D } from "@deck.gl/core/utils/positions";
 }
 declare module "@deck.gl/core/utils/color" {
+	export type RGBColor = [number, number, number];
 	export type RGBAColor = [number, number, number, number?];
 	export type ColorDomain = [number, number];
 	export type ColorRange = [

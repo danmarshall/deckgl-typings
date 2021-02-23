@@ -54,7 +54,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer-fragment" {
 declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 	import { Layer } from "@deck.gl/core";
 	import { LayerProps } from "@deck.gl/core/lib/layer";
-	import { RGBAColor } from "@deck.gl/core/utils/color";
+	import { RGBAColor, RGBColor } from "@deck.gl/core/utils/color";
 	export interface BitmapLayerProps<D> extends LayerProps<D> {
 		//Data
 		image: any;
@@ -70,7 +70,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 		//Render Options
 		desaturate: number;
 		transparentColor: RGBAColor;
-		tintColor: [number, number, number];
+		tintColor: RGBColor;
 	}
 	export default class BitmapLayer<D, P extends BitmapLayerProps<D> = BitmapLayerProps<D>> extends Layer<D, P> {
 		constructor(props: BitmapLayerProps<D>);
