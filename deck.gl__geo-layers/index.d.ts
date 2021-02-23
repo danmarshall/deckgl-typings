@@ -263,7 +263,6 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 		_onTileError(error: any): void;
 		getTileData(tile: any): any;
 		renderSubLayers(props: any): any;
-		getPickingInfo({ info, sourceLayer }: { info: any; sourceLayer: any }): any;
 		renderLayers(): any;
 	}
 }
@@ -416,7 +415,6 @@ declare module "@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer" {
 			oldProps: Tile3DLayerProps<D>;
 			changeFlags: any;
 		}): void;
-		getPickingInfo({ info, sourceLayer }: { info: any; sourceLayer: any }): any;
 		_loadTileset(tilesetUrl: any): Promise<void>;
 		_onTileLoad(tileHeader: any): void;
 		_onTileUnload(tileHeader: any): void;

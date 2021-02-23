@@ -407,7 +407,6 @@ declare module "@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer"
 		updateState(opts: any): void;
 		renderLayers(): any;
 		finalizeState(): void;
-		getPickingInfo({ info, mode }: { info: any; mode: any }): any;
 		updateResults({
 			aggregationData,
 			maxData,
@@ -575,7 +574,6 @@ declare module "@deck.gl/aggregation-layers/utils/cpu-aggregator" {
 		getDimensionScale(props: any, dimensionUpdater: any): void;
 		getSubLayerDimensionAttribute(key: any, nullValue: any): (cell: any) => any;
 		getSubLayerAccessors(props: any): {};
-		getPickingInfo({ info }: { info: any }): any;
 		getAccessor(dimensionKey: any): any;
 	}
 }
@@ -615,7 +613,6 @@ declare module "@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer" {
 		constructor(props: CPUGridLayerProps<D>);
 		initializeState(params: any): void;
 		updateState(opts: any): void;
-		getPickingInfo({ info }: { info: any }): any;
 		_onGetSublayerColor(cell: any): any;
 		_onGetSublayerElevation(cell: any): any;
 		_getSublayerUpdateTriggers(): any;
@@ -699,7 +696,6 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		updateState(opts: any): void;
 		updateRadiusAngle(vertices: any): void;
 		convertLatLngToMeterOffset(hexagonVertices: any): number[][];
-		getPickingInfo({ info }: { info: any }): any;
 		_onGetSublayerColor(cell: any): any;
 		_onGetSublayerElevation(cell: any): any;
 		_getSublayerUpdateTriggers(): any;
@@ -884,7 +880,6 @@ declare module "@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer" {
 		updateState(opts: any): void;
 		getHashKeyForIndex(index: any): string;
 		getPositionForIndex(index: any): any[];
-		getPickingInfo({ info, mode }: { info: any; mode: any }): any;
 		renderLayers(): any;
 		finalizeState(): void;
 		updateAggregationState(opts: any): void;
