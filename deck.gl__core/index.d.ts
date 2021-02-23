@@ -1546,6 +1546,7 @@ declare module "@deck.gl/core/utils/positions" {
 	export type PitchYawRoll = [number, number, number]; // [pitch, yaw, roll]
 }
 declare module "@deck.gl/core/views/view" {
+	import Viewport from "@deck.gl/core/viewports/viewport";
 
 	export interface ViewProps {
 		id?: string;
@@ -1570,6 +1571,8 @@ declare module "@deck.gl/core/views/view" {
 		focalDistance?: number; // Modifier of viewport scale. Corresponds to the number of pixels per meter. Default `1`.
 
 		modelMatrix?: number[]; // A model matrix to be applied to position, to match the layer props API
+
+        type?: typeof Viewport; // Internal: Viewport Type
 	}
 
 	export default class View {
