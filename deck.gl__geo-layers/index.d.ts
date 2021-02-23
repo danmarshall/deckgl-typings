@@ -247,18 +247,6 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 		constructor(props: TileLayerProps<D>);
 		initializeState(params: any): void;
 		get isLoaded(): any;
-		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
-		updateState({
-			props,
-			oldProps,
-			context,
-			changeFlags,
-		}: {
-			props: any;
-			oldProps: any;
-			context: any;
-			changeFlags: any;
-		}): void;
 		_updateTileset(): void;
 		_onTileLoad(tile: any): void;
 		_onTileError(error: any): void;
@@ -302,17 +290,8 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-cluster-layer" {
 	export interface H3ClusterLayerProps<D> extends PolygonLayerProps<D> { 
 		getHexagons?: (d: D) => string[];
 	}
-	export default class H3ClusterLayer<D, P extends H3ClusterLayerProps<D>> extends CompositeLayer<D, P> {
+	export default class H3ClusterLayer<D, P extends H3ClusterLayerProps<D> = H3ClusterLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: H3ClusterLayerProps<D>);
-		updateState({
-			props,
-			oldProps,
-			changeFlags,
-		}: {
-			props: H3ClusterLayerProps<D>;
-			oldProps: H3ClusterLayerProps<D>;
-			changeFlags: any;
-		}): void;
 		renderLayers(): any;
 	}
 }
@@ -340,16 +319,6 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-hexagon-layer" {
 	 */
 	export default class H3HexagonLayer<D, P extends H3HexagonLayerProps<D> = H3HexagonLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: H3HexagonLayerProps<D>);
-		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
-		updateState({
-			props,
-			oldProps,
-			changeFlags,
-		}: {
-			props: any;
-			oldProps: any;
-			changeFlags: any;
-		}): void;
 		_shouldUseHighPrecision(): any;
 		_updateVertices(viewport: any): void;
 		renderLayers(): any;
@@ -406,16 +375,6 @@ declare module "@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer" {
 	export default class Tile3DLayer<D, P extends Tile3DLayerProps<D> = Tile3DLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: Tile3DLayerProps<D>);
 		initializeState(params: any): void;
-		shouldUpdateState({ changeFlags }: { changeFlags: any }): any;
-		updateState({
-			props,
-			oldProps,
-			changeFlags,
-		}: {
-			props: Tile3DLayerProps<D>;
-			oldProps: Tile3DLayerProps<D>;
-			changeFlags: any;
-		}): void;
 		_loadTileset(tilesetUrl: any): Promise<void>;
 		_onTileLoad(tileHeader: any): void;
 		_onTileUnload(tileHeader: any): void;
@@ -468,13 +427,6 @@ declare module "@deck.gl/geo-layers/terrain-layer/terrain-layer" {
 	}
 	export default class TerrainLayer<D, P extends TerrainLayerProps<D> = TerrainLayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(props: TerrainLayerProps<D>);
-		updateState({
-			props,
-			oldProps,
-		}: {
-			props: TerrainLayerProps<D>;
-			oldProps: TerrainLayerProps<D>;
-		}): void;
 		loadTerrain({
 			elevationData,
 			bounds,

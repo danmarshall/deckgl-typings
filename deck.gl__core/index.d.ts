@@ -1274,12 +1274,7 @@ declare module "@deck.gl/core/lib/layer" {
 		validateProps(): void;
 		setModuleParameters(moduleParameters: any): void;
 		_updateModules({ props, oldProps }: { props: any; oldProps: any }): void;
-		_getUpdateParams(): {
-			props: any;
-			oldProps: any;
-			context: any;
-			changeFlags: any;
-		};
+		_getUpdateParams(): UpdateStateInfo<P>;
 		_getNeedsRedraw(opts: any): boolean;
 		_getAttributeManager(): AttributeManager;
 		_initState(): void;
