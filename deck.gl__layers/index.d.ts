@@ -544,7 +544,6 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 			props: P;
 			changeFlags: any;
 		}): void;
-		getPickingInfo(params: any): any;
 		draw({ uniforms }: { uniforms: any }): void;
 		_getModel(gl: any): any;
 		calculatePositions(attribute: any): void;
@@ -668,7 +667,6 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 	export default class SolidPolygonLayer<D, P extends SolidPolygonLayerProps<D> = SolidPolygonLayerProps<D>> extends Layer<D, P> {
 		getShaders(vs: any): any;
 		initializeState(params: any): void;
-		getPickingInfo(params: any): any;
 		draw({ uniforms }: { uniforms: any }): void;
 		updateState(updateParams: any): void;
 		updateGeometry({
@@ -1042,7 +1040,6 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 			changeFlags: any;
 		}): void;
 		finalizeState(): void;
-		getPickingInfo({ info }: { info: any }): any;
 		_updateFontAtlas(oldProps: any, props: any): void;
 		_fontChanged(oldProps: any, props: any): boolean;
 		_updateText(): void;

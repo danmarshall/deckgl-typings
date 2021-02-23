@@ -1065,7 +1065,7 @@ declare module "@deck.gl/core/lib/layer-state" {
 declare module "@deck.gl/core/lib/layer" {
 	import AttributeManager from "@deck.gl/core/lib/attribute/attribute-manager";
 	import Component from "@deck.gl/core/lifecycle/component";
-	import Deck, { PickInfo } from "@deck.gl/core/lib/deck";
+	import Deck, { PickInfo, PickMode } from "@deck.gl/core/lib/deck";
 	import * as hammerjs from "hammerjs";
 	import { RGBColor, RGBAColor } from "@deck.gl/core/utils/color";
 	import LayerManager from "@deck.gl/core/lib/layer-manager"
@@ -1235,7 +1235,7 @@ declare module "@deck.gl/core/lib/layer" {
 		}: UpdateStateInfo<P>): void;
 		finalizeState(): void;
 		draw(opts: { moduleParameters: any, uniforms: any, parameters: any, context: WebGLRenderingContext }): void;
-		getPickingInfo({ info, mode }: { info: any; mode: any }): any;
+		getPickingInfo({ info, mode, sourceLayer }: { info: PickInfo<D>; mode: PickMode, sourceLayer: Layer<any> }): PickInfo<D>;
 		invalidateAttribute(name?: string, diffReason?: string): void;
 		updateAttributes(changedAttributes: any): void;
 		_updateAttributes(props: any): void;
@@ -1300,7 +1300,6 @@ declare module "@deck.gl/core/lib/composite-layer" {
 		getSubLayers(): any;
 		initializeState(params?: any): void;
 		setState(updateObject: any): void;
-		getPickingInfo({ info }: { info: any }): any;
 		renderLayers(): any;
 		shouldRenderSubLayer(id: any, data: any): any;
 		getSubLayerClass(id: any, DefaultLayerClass: any): any;
@@ -2287,6 +2286,7 @@ declare module "@deck.gl/core/lib/deck" {
 	import Viewport from "@deck.gl/core/viewports/viewport";
 	import TransitionInterpolator from "@deck.gl/core/transitions/transition-interpolator";
 	import { TRANSITION_EVENTS } from "@deck.gl/core/controllers/transition-manager";
+	import { Position } from "@deck.gl/core/utils/positions";
 
 	export interface InteractiveState {
 		isDragging: boolean;
@@ -2298,8 +2298,11 @@ declare module "@deck.gl/core/lib/deck" {
 		object: D;
 		x: number;
 		y: number;
-		coordinate?: {};
+		coordinate?: Position;
+		picked?: boolean;
 	}
+
+	export type PickMode = "hover" | "click";
 
 	// https://deck.gl/docs/api-reference/core/deck#viewstate
 	export interface InitialViewStateProps {
