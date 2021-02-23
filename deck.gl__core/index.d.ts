@@ -2742,7 +2742,7 @@ declare module "@deck.gl/core/controllers/orbit-controller" {
 	}
 }
 declare module "@deck.gl/core/views/orbit-view" {
-	import { View, ViewProps } from "@deck.gl/core/views/view";
+	import View, { ViewProps } from "@deck.gl/core/views/view";
 	import { Position } from "@deck.gl/core/utils/positions";
 	export interface OrbitViewProps extends ViewProps {
 		orbitAxis?: "Z" | "Y"; // Axis with 360 degrees rotating freedom, either `'Y'` or `'Z'`, default to `'Z'`.
