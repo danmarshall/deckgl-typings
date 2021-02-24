@@ -73,15 +73,6 @@ declare module "@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer" {
 	export default class SimpleMeshLayer<D,P extends SimpleMeshLayerProps<D> = SimpleMeshLayerProps<D>> extends Layer<D,P> {
 		getShaders(): any;
 		initializeState(params: any): void;
-		updateState({
-			props,
-			oldProps,
-			changeFlags,
-		}: {
-			props: P;
-			oldProps: P;
-			changeFlags: any;
-		}): void;
 		finalizeState(): void;
 		draw({ uniforms }: { uniforms: any }): void;
 		getModel(mesh: any): any;
@@ -132,7 +123,6 @@ declare module "@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer" {
 	export default class ScenegraphLayer <D,P extends ScenegraphLayerProps<D> = ScenegraphLayerProps<D>> extends Layer<D,P> {
 		constructor(props: ScenegraphLayerProps<D>);
 		initializeState(params: any): void;
-		updateState(params: any): void;
 		finalizeState(): void;
 		_updateScenegraph(props: any): void;
 		_applyAllAttributes(scenegraph: any): void;
