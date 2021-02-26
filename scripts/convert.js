@@ -83,7 +83,9 @@ var list = [
     { name: '@deck.gl/mapbox', out: 'deck.gl__mapbox', convert: true },
     { name: '@deck.gl/mesh-layers', out: 'deck.gl__mesh-layers', convert: true },
     { name: '@deck.gl/layers', out: 'deck.gl__layers', convert: true },
-    { name: '@deck.gl/react', out: 'deck.gl__react', convert: true }
+    { name: '@deck.gl/react', out: 'deck.gl__react', convert: true },
+    { name: '@deck.gl/arcgis', out: 'deck.gl__arcgis', convert: true },
+    { name: '@deck.gl/carto', out: 'deck.gl__carto', convert: true },
 ];
 
 list.forEach(genProcess);
