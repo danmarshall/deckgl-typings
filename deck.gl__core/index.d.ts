@@ -2382,7 +2382,7 @@ declare module "@deck.gl/core/lib/deck" {
 		pickingRadius?: number;
 		getTooltip?: <D>(
 			info: PickInfo<D>
-		) => null | {
+		) => null | string | {
 			text?: string;
 			html?: string;
 			className?: string;
