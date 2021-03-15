@@ -69,7 +69,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 		tintColor?: [number, number, number];
 	}
 	export default class BitmapLayer<D, P extends BitmapLayerProps<D> = BitmapLayerProps<D>> extends Layer<D, P> {
-		constructor(props: BitmapLayerProps<D>);
+		constructor(...props: BitmapLayerProps<D>[]);
 		getShaders(): any;
 		initializeState(params: any): void;
 		finalizeState(): void;
@@ -218,7 +218,7 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 	}
 
 	export default class IconLayer<D, P extends IconLayerProps<D> = IconLayerProps<D>> extends Layer<D, P> {
-		constructor(props: P);
+		constructor(...props: P[]);
 		getShaders(): any;
 		initializeState(params: any): void;
 		get isLoaded(): any;
@@ -411,7 +411,7 @@ declare module "@deck.gl/layers/column-layer/grid-cell-layer" {
 		getElevation?: ((d: D) => number) | number;
 	}
 	export default class GridCellLayer<D, P extends GridCellLayerProps<D> = GridCellLayerProps<D>> extends ColumnLayer<D, P> {
-		constructor(props: GridCellLayerProps<D>);
+		constructor(...props: GridCellLayerProps<D>[]);
 		getGeometry(diskResolution: any): any;
 		draw({ uniforms }: { uniforms: any }): void;
 	}
@@ -662,7 +662,7 @@ declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 		getElevation?: ((x: D) => number) | number;
 	}
 	export default class PolygonLayer<D, P extends PolygonLayerProps<D> = PolygonLayerProps<D>> extends CompositeLayer<D, P> {
-		constructor(props: PolygonLayerProps<D>);
+		constructor(...props: PolygonLayerProps<D>[]);
 		initializeState(params: any): void;
 		_getPaths(dataRange?: {}): any[];
 		renderLayers(): any[];
@@ -726,7 +726,7 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 		getElevation?: ((d: D) => number) | number;
 	}
 	export default class GeoJsonLayer<D, P extends GeoJsonLayerProps<D> = GeoJsonLayerProps<D>> extends CompositeLayer<D, P> {
-		constructor(props: GeoJsonLayerProps<D>);
+		constructor(...props: GeoJsonLayerProps<D>[]);
 		initializeState(params: any): void;
 		renderLayers(): any[];
 		_getHighlightedIndex(data: any): any;
@@ -944,7 +944,7 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 		getPixelOffset?: ((x: D) => number[]) | number[];
 	}
 	export default class TextLayer<D, P extends TextLayerProps<D> = TextLayerProps<D>> extends CompositeLayer<D, P> {
-		constructor(props: TextLayerProps<D>);
+		constructor(...props: TextLayerProps<D>[]);
 		initializeState(params: any): void;
 		finalizeState(): void;
 		_updateFontAtlas(oldProps: any, props: any): void;
