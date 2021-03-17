@@ -2396,6 +2396,7 @@ declare module "@deck.gl/core/lib/deck" {
 		parameters?: object;
 		debug?: boolean;
 		_animate?: boolean;
+		_pickable?: boolean;
 
 		//Event Callbacks
 		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
