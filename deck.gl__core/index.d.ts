@@ -2377,6 +2377,7 @@ declare module "@deck.gl/core/lib/deck" {
 		//Configuration Properties
 		id?: string;
 		style?: {};
+		parent?: HTMLElement;
 		canvas?: HTMLCanvasElement;
 		touchAction?: string;
 		pickingRadius?: number;
