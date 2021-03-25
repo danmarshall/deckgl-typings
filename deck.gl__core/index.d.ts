@@ -1132,6 +1132,7 @@ declare module "@deck.gl/core/lib/layer" {
 		visible?: boolean;
 		opacity?: number;
 		extensions?: any[];
+		loaders?: any[];
 
 		//Interaction Properties
 		pickable?: boolean;
