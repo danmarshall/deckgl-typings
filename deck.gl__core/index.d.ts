@@ -1132,7 +1132,6 @@ declare module "@deck.gl/core/lib/layer" {
 		visible?: boolean;
 		opacity?: number;
 		extensions?: any[];
-		loaders?: any[];
 
 		//Interaction Properties
 		pickable?: boolean;
@@ -1162,6 +1161,7 @@ declare module "@deck.gl/core/lib/layer" {
 		colorFormat?: "RGBA" | "RGB";
 		numInstances?: number;
 		updateTriggers?: any;
+		loaders?: any;
 		onDataLoad?: (
 			value: D[] | Iterable<D>,
 			context: { layer: Layer<D> }
