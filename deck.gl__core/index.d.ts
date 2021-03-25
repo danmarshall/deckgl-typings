@@ -1161,7 +1161,7 @@ declare module "@deck.gl/core/lib/layer" {
 		colorFormat?: "RGBA" | "RGB";
 		numInstances?: number;
 		updateTriggers?: any;
-		loaders?: any;
+		loaders?: any[];
 		onDataLoad?: (
 			value: D[] | Iterable<D>,
 			context: { layer: Layer<D> }
