@@ -2344,13 +2344,6 @@ declare module "@deck.gl/core/lib/deck" {
 		updateAttributesTime: number;
 	}
 
-	export interface ContextProviderValue {
-		viewport: Viewport;
-		container: HTMLElement;
-		// @TODO: mjolnir.js types
-		eventManager: object;
-	}
-
 	export interface DeckProps {
 		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
 		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
@@ -2421,7 +2414,7 @@ declare module "@deck.gl/core/lib/deck" {
 		onError?: (error: Error, source: any) => void;
 		_onMetrics?: (metrics: MetricsPayload) => void;
 
-		ContextProvider?: React.Provider<ContextProviderValue>
+		ContextProvider?: React.Provider<any>
 	}
 
 	export default class Deck {
