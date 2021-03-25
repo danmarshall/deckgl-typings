@@ -1128,7 +1128,7 @@ declare module "@deck.gl/core/lib/layer" {
 	export interface LayerProps<D> {
 		//https://deck.gl/#/documentation/deckgl-api-reference/layers/layer?section=properties
 		id?: string;
-		data?: DataSet<D> | Promise<DataSet<D>> | string;
+		data?: D | DataSet<D> | Promise<DataSet<D>> | string;
 		visible?: boolean;
 		opacity?: number;
 		extensions?: any[];
