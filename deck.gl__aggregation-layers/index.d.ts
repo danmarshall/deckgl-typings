@@ -652,6 +652,7 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		hexagonAggregator?: Function;
 		colorDomain?: ColorDomain;
 		colorRange?: ColorRange;
+		colorScaleType?: string;
 		coverage?: number;
 		elevationDomain?: [number, number];
 		elevationRange?: [number, number];
