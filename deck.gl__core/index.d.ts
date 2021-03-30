@@ -2353,20 +2353,20 @@ declare module "@deck.gl/core/lib/deck" {
 
 	export interface DeckProps {
 		//https://deck.gl/docs/api-reference/core/deck#properties
-		width?: string | number;
-		height?: string | number;
+		width: string | number;
+		height: string | number;
 		layers: Layer<any>[];
-		layerFilter?: (args: {
+		layerFilter: (args: {
 			layer: Layer<any>;
 			viewport: Viewport;
 			isPicking: boolean;
 			renderPass: string;
 		}) => boolean;
-		getCursor?: (interactiveState: InteractiveState) => string;
-		views?: View[];
-		viewState?: ViewStateProps;
-		initialViewState?: InitialViewStateProps;
-		controller?: null | Controller | ControllerOptions | boolean;
+		getCursor: (interactiveState: InteractiveState) => string;
+		views: View[];
+		viewState: ViewStateProps;
+		initialViewState: InitialViewStateProps;
+		controller: null | Controller | ControllerOptions | boolean;
 		effects: Effect[];
 		_typedArrayManagerProps?: {
 			overAlloc?: number;
@@ -2374,13 +2374,13 @@ declare module "@deck.gl/core/lib/deck" {
 		};
 
 		//Configuration Properties
-		id?: string;
-		style?: {};
-		parent?: HTMLElement;
-		canvas?: HTMLCanvasElement;
-		touchAction?: string;
-		pickingRadius?: number;
-		getTooltip?: <D>(
+		id: string;
+		style: {};
+		parent: HTMLElement;
+		canvas: HTMLCanvasElement;
+		touchAction: string;
+		pickingRadius: number;
+		getTooltip: <D>(
 			info: PickInfo<D>
 		) => null | string | {
 			text?: string;
@@ -2388,18 +2388,18 @@ declare module "@deck.gl/core/lib/deck" {
 			className?: string;
 			style?: {};
 		};
-		useDevicePixels?: boolean | number;
-		gl?: WebGLRenderingContext;
-		glOptions?: WebGLContextAttributes;
-		_framebuffer?: any;
-		parameters?: object;
-		debug?: boolean;
-		_animate?: boolean;
-		_pickable?: boolean;
+		useDevicePixels: boolean | number;
+		gl: WebGLRenderingContext;
+		glOptions: WebGLContextAttributes;
+		_framebuffer: any;
+		parameters: object;
+		debug: boolean;
+		_animate: boolean;
+		_pickable: boolean;
 
 		//Event Callbacks
-		onWebGLInitialized?: (gl: WebGLRenderingContext) => any;
-		onViewStateChange?: (args: {
+		onWebGLInitialized: (gl: WebGLRenderingContext) => any;
+		onViewStateChange: (args: {
 			viewState: any;
 			interactionState: {
 				inTransition?: boolean;
@@ -2410,23 +2410,23 @@ declare module "@deck.gl/core/lib/deck" {
 			};
 			oldViewState: any;
 		}) => any;
-		onHover?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-		onClick?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-		onDragStart?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-		onDrag?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-		onDragEnd?: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-		onLoad?: () => void;
-		onResize?: (size: { height: number; width: number }) => void;
-		onBeforeRender?: (args: { gl: WebGLRenderingContext }) => void;
-		onAfterRender?: (args: { gl: WebGLRenderingContext }) => void;
-		onError?: (error: Error, source: any) => void;
-		_onMetrics?: (metrics: MetricsPayload) => void;
+		onHover: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+		onClick: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+		onDragStart: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+		onDrag: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+		onDragEnd: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+		onLoad: () => void;
+		onResize: (size: { height: number; width: number }) => void;
+		onBeforeRender: (args: { gl: WebGLRenderingContext }) => void;
+		onAfterRender: (args: { gl: WebGLRenderingContext }) => void;
+		onError: (error: Error, source: any) => void;
+		_onMetrics: (metrics: MetricsPayload) => void;
 
-		ContextProvider?: React.Provider<ContextProviderValue>
+		ContextProvider: React.Provider<ContextProviderValue>
 	}
 
 	export default class Deck {
-		constructor(props: DeckProps);
+		constructor(props: Partial<DeckProps>);
 		canvas: HTMLCanvasElement;
 		viewState: any;
 		width: number;
