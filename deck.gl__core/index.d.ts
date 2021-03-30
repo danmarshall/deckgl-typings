@@ -2352,8 +2352,7 @@ declare module "@deck.gl/core/lib/deck" {
 	}
 
 	export interface DeckProps {
-		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
-		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
+		//https://deck.gl/docs/api-reference/core/deck#properties
 		width?: string | number;
 		height?: string | number;
 		layers: Layer<any>[];
