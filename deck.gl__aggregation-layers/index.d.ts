@@ -669,7 +669,7 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		getColorValue?: (d: D[]) => any;
 		getColorWeight?: (d: D) => any;
 		colorAggregation?: string;
-		getElevationValue?: (d: D) => any;
+		getElevationValue?: (d: D[]) => any;
 		getElevationWeight?: (d: D) => any;
 		elevationAggregation?: AggregationOperation;
 		onSetColorDomain?: Function;
