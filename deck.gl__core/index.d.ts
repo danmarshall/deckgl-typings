@@ -2904,14 +2904,7 @@ declare module "@deck.gl/core/utils/color" {
 	export type RGBColor = [number, number, number];
 	export type RGBAColor = [number, number, number, number?];
 	export type ColorDomain = [number, number];
-	export type ColorRange = [
-		RGBAColor,
-		RGBAColor,
-		RGBAColor,
-		RGBAColor,
-		RGBAColor,
-		RGBAColor
-	];
+	export type ColorRange = RGBAColor[];
 	function parseColor(color: any, target: any, index?: number): any;
 	function applyOpacity(color: any, opacity?: number): any[];
 	const _default: {
