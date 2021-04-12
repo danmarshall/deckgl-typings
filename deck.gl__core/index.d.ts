@@ -2344,7 +2344,14 @@ declare module "@deck.gl/core/lib/deck" {
 		updateAttributesTime: number;
 	}
 
-	export interface DeckProps {
+	export interface ContextProviderValue {
+		viewport: Viewport;
+		container: HTMLElement;
+		// @TODO: mjolnir.js types
+		eventManager: object;
+	}
+
+	export interface DeckProps<T=ContextProviderValue> {
 		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
 		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
 		width: string | number;
@@ -2414,18 +2421,18 @@ declare module "@deck.gl/core/lib/deck" {
 		onError?: (error: Error, source: any) => void;
 		_onMetrics?: (metrics: MetricsPayload) => void;
 
-		ContextProvider?: React.Provider<any>
+		ContextProvider?: React.Provider<T>
 	}
 
-	export default class Deck {
-		constructor(props: DeckProps);
+	export default class Deck<T=ContextProviderValue> {
+		constructor(props: DeckProps<T>);
 		canvas: HTMLCanvasElement;
 		viewState: any;
 		width: number;
 		height: number;
 		finalize(): void;
-		props: DeckProps;
-		setProps(props: Partial<DeckProps>): void;
+		props: DeckProps<T>;
+		setProps(props: Partial<DeckProps<T>>): void;
 		needsRedraw(opts?: { clearRedrawFlags: boolean }): any;
 		redraw(force: any): void;
 		getViews(): any;
