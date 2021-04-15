@@ -652,6 +652,7 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		hexagonAggregator?: Function;
 		colorDomain?: ColorDomain;
 		colorRange?: ColorRange;
+		colorScaleType?: string;
 		coverage?: number;
 		elevationDomain?: [number, number];
 		elevationRange?: [number, number];
@@ -668,7 +669,7 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		getColorValue?: (d: D[]) => any;
 		getColorWeight?: (d: D) => any;
 		colorAggregation?: string;
-		getElevationValue?: (d: D) => any;
+		getElevationValue?: (d: D[]) => any;
 		getElevationWeight?: (d: D) => any;
 		elevationAggregation?: AggregationOperation;
 		onSetColorDomain?: Function;

@@ -1128,7 +1128,7 @@ declare module "@deck.gl/core/lib/layer" {
 	export interface LayerProps<D> {
 		//https://deck.gl/#/documentation/deckgl-api-reference/layers/layer?section=properties
 		id?: string;
-		data?: DataSet<D> | Promise<DataSet<D>> | string;
+		data?: D | DataSet<D> | Promise<DataSet<D>> | string;
 		visible?: boolean;
 		opacity?: number;
 		extensions?: any[];
@@ -1161,6 +1161,7 @@ declare module "@deck.gl/core/lib/layer" {
 		colorFormat?: "RGBA" | "RGB";
 		numInstances?: number;
 		updateTriggers?: any;
+		loaders?: any[];
 		onDataLoad?: (
 			value: D[] | Iterable<D>,
 			context: { layer: Layer<D> }
@@ -2351,8 +2352,9 @@ declare module "@deck.gl/core/lib/deck" {
 		eventManager: object;
 	}
 
-	export interface DeckProps {
-		//https://deck.gl/docs/api-reference/core/deck#properties
+	export interface DeckProps<T=ContextProviderValue> {
+		//https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
+		// https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
 		width: string | number;
 		height: string | number;
 		layers: Layer<any>[];
@@ -2422,18 +2424,18 @@ declare module "@deck.gl/core/lib/deck" {
 		onError: (error: Error, source: any) => void;
 		_onMetrics: (metrics: MetricsPayload) => void;
 
-		ContextProvider: React.Provider<ContextProviderValue>
+		ContextProvider?: React.Provider<T>
 	}
 
-	export default class Deck {
-		constructor(props: Partial<DeckProps>);
+	export default class Deck<T=ContextProviderValue> {
+		constructor(props: Partial<DeckProps<T>>);
 		canvas: HTMLCanvasElement;
 		viewState: any;
 		width: number;
 		height: number;
 		finalize(): void;
-		props: DeckProps;
-		setProps(props: Partial<DeckProps>): void;
+		props: DeckProps<T>;
+		setProps(props: Partial<DeckProps<T>>): void;
 		needsRedraw(opts?: { clearRedrawFlags: boolean }): any;
 		redraw(force: any): void;
 		getViews(): any;
@@ -2904,14 +2906,7 @@ declare module "@deck.gl/core/utils/color" {
 	export type RGBColor = [number, number, number];
 	export type RGBAColor = [number, number, number, number?];
 	export type ColorDomain = [number, number];
-	export type ColorRange = [
-		RGBAColor,
-		RGBAColor,
-		RGBAColor,
-		RGBAColor,
-		RGBAColor,
-		RGBAColor
-	];
+	export type ColorRange = RGBAColor[];
 	function parseColor(color: any, target: any, index?: number): any;
 	function applyOpacity(color: any, opacity?: number): any[];
 	const _default: {
