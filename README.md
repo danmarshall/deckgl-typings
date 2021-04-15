@@ -10,7 +10,7 @@ These will automatically appear in your projects `node_modules/@types` folder, t
 
 Then it is possible to link the mappings in your project so typescript can find them (since the project is not in @types yet). 
 
-deck.d.ts:
+Create a new file like `deckgl.d.ts` (although it could be named anything ending in `.d.ts`) in your `src/` directory with the following code:
 ```
 import * as DeckTypings from "@danmarshall/deckgl-typings"
 declare module "deck.gl" {
