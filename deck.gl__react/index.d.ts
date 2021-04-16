@@ -60,8 +60,7 @@ declare module "@deck.gl/react/utils/extract-styles" {
 }
 declare module "@deck.gl/react/deckgl" {
 	import Deck, { ContextProviderValue, DeckProps } from '@deck.gl/core/lib/deck';
-	type propsNowOptional = 'width'|'height'|'effects'|'layers';
-	export type DeckGLProps<T=ContextProviderValue> = Omit<DeckProps<T>, propsNowOptional> & Partial<Pick<DeckProps<T>, propsNowOptional>>;
+	export type DeckGLProps<T=ContextProviderValue> = Partial<DeckProps<T>>;
 	import { ReactElement } from "react";
 	export default class DeckGL<T=ContextProviderValue> extends React.Component<DeckGLProps<T>> {
 		constructor(props: DeckGLProps<T>);
