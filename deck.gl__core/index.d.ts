@@ -1008,7 +1008,7 @@ declare module "@deck.gl/core/lifecycle/component-state" {
 declare module "@deck.gl/core/lifecycle/component" {
 	import { LayerContext } from "@deck.gl/core/lib/layer";
 	export default class Component<P> {
-		constructor(props:P);
+		constructor(...props: P[]);
 		clone(newProps: P): any;
 		get stats(): any;
 		_initState(): void;
@@ -1197,7 +1197,7 @@ declare module "@deck.gl/core/lib/layer" {
 		deprecatedFor?: string | string[];
 	}
 	export default class Layer<D,P extends LayerProps<D> = LayerProps<D>> extends Component<P> {
-		constructor(props: P);
+		constructor(...props: P[]);
 		toString(): string;
 		setState(updateObject: any): void;
 		setNeedsRedraw(redraw?: boolean): void;
