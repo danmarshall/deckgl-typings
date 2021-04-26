@@ -42,6 +42,12 @@ import {
 interface Datum { }
 
 export const testLayersArray: Layer<Datum>[] = [
+    // @ts-expect-error - Should have at least one prop object to constructor
+    new Layer<Datum>(),
+    // Single prop object to constructor
+    new Layer<Datum>({}),
+    // Multiple prop objects to constructor
+    new Layer<Datum>({}, {}, {}, {}, {}),
     new ArcLayer<Datum>({}),
     new BitmapLayer<Datum>({
         image: null,
