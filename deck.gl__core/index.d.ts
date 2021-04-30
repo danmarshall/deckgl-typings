@@ -1162,6 +1162,7 @@ declare module "@deck.gl/core/lib/layer" {
 		numInstances?: number;
 		updateTriggers?: any;
 		loaders?: any[];
+		loadOptions?: any;
 		onDataLoad?: (
 			value: D[] | Iterable<D>,
 			context: { layer: Layer<D> }
