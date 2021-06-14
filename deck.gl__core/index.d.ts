@@ -2380,7 +2380,7 @@ declare module "@deck.gl/core/lib/deck" {
 		id: string;
 		style: {};
 		parent: HTMLElement;
-		canvas: HTMLCanvasElement;
+		canvas?: HTMLCanvasElement | string;
 		touchAction: string;
 		pickingRadius: number;
 		getTooltip: <D>(
