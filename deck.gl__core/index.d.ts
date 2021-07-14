@@ -1169,7 +1169,7 @@ declare module "@deck.gl/core/lib/layer" {
 		) => void;
 
 		//Render Properties
-		parameters?: () => any;
+		parameters?: any;
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
 	}
