@@ -467,6 +467,7 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 		getWidth?: ((d: D) => number) | number;
 	}
 	export default class PathLayer<D, P extends PathLayerProps<D> = PathLayerProps<D>> extends Layer<D, P> {
+		constructor(props: PathLayerProps<D>);
 		getShaders(): any;
 		initializeState(params: any): void;
 		draw({ uniforms }: { uniforms: any }): void;
