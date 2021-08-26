@@ -158,7 +158,7 @@ declare module "@deck.gl/layers/icon-layer/icon-manager" {
 }
 declare module "@deck.gl/layers/icon-layer/icon-layer" {
 	import { Layer } from "@deck.gl/core";
-	import { ObjectInfo, LayerProps, WidthUnits } from "@deck.gl/core/lib/layer";
+	import { LayerProps, WidthUnits } from "@deck.gl/core/lib/layer";
 	import { Position, Position2D } from "@deck.gl/core/utils/positions";
 	import Texture2D from "@luma.gl/webgl/classes/texture-2d";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
@@ -209,11 +209,11 @@ declare module "@deck.gl/layers/icon-layer/icon-layer" {
 		getIcon?: (
 			x: D
 		) => string | ({ url: string; id?: string } & IconDefinitionBase);
-		getPosition?: (x: D, objectInfo: ObjectInfo<D, Position>) => Position;
-		getSize?: ((x: D, objectInfo: ObjectInfo<D, number>) => number) | number;
-		getColor?: ((x: D, objectInfo: ObjectInfo<D, RGBAColor>) => RGBAColor) | RGBAColor;
-		getAngle?: ((x: D, objectInfo: ObjectInfo<D, number>) => number) | number;
-		getPixelOffset?: ((x: D, objectInfo: ObjectInfo<D, Position2D>) => Position2D) | Position2D;
+		getPosition?: (x: D) => Position;
+		getSize?: ((x: D) => number) | number;
+		getColor?: ((x: D) => RGBAColor) | RGBAColor;
+		getAngle?: ((x: D) => number) | number;
+		getPixelOffset?: ((x: D) => Position2D) | Position2D;
 	}
 
 	export default class IconLayer<D, P extends IconLayerProps<D> = IconLayerProps<D>> extends Layer<D, P> {
@@ -908,7 +908,7 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 	import { FontSettings } from "@deck.gl/layers/text-layer/font-atlas-manager";
 	import { RGBAColor } from "@deck.gl/core/utils/color";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
-	import { ObjectInfo, WidthUnits } from "@deck.gl/core/lib/layer";
+	import { WidthUnits } from "@deck.gl/core/lib/layer";
 	export type TextAnchor = "start" | "middle" | "end";
 	export type AlignmentBaseline = "top" | "center" | "bottom";
 
@@ -928,11 +928,11 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 		maxWidth?: number;
 
 		//Data Accessors
-		getText?: (x: D, objectInfo: ObjectInfo<D, string>) => string;
-		getPosition?: (x: D, objectInfo: ObjectInfo<D, [number, number]>) => [number, number];
-		getSize?: ((x: D, objectInfo: ObjectInfo<D, number>) => number) | number;
-		getColor?: ((x: D, objectInfo: ObjectInfo<D, RGBAColor>) => RGBAColor) | RGBAColor;
-		getAngle?: ((x: D, objectInfo: ObjectInfo<D, number>) => number) | number;
+		getText?: (x: D) => string;
+		getPosition?: (x: D) => [number, number];
+		getSize?: ((x: D) => number) | number;
+		getColor?: ((x: D) => RGBAColor) | RGBAColor;
+		getAngle?: ((x: D) => number) | number;
 
 		//Text Alignment Options
 		getTextAnchor?: ((x: D) => TextAnchor) | TextAnchor;
