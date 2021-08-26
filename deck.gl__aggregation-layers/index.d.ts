@@ -568,6 +568,7 @@ declare module "@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer" {
 		AggregationLayerProps,
 	} from "@deck.gl/aggregation-layers/aggregation-layer";
 	import { AggregationOperation } from "@deck.gl/aggregation-layers/utils/aggregation-operation-utils";
+	import { ObjectInfo } from "@deck.gl/core/lib/layer";
 	import { ColorDomain, ColorRange } from "@deck.gl/core/utils/color";
 	import { Position } from "@deck.gl/core/utils/positions";
 	export interface CPUGridLayerProps<D> extends AggregationLayerProps<D> {
@@ -586,10 +587,10 @@ declare module "@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer" {
 		colorScaleType?: string;
 		material?: Object;
 		getPosition?: (d: D) => Position;
-		getColorValue?: (d: D[]) => number;
+		getColorValue?: (d: D[], objectInfo: ObjectInfo<D, number>) => number;
 		getColorWeight?: (d: D) => number;
 		colorAggregation?: string;
-		getElevationValue?: (points: D[]) => number;
+		getElevationValue?: (points: D[], objectInfo: ObjectInfo<D, number>) => number;
 		getElevationWeight?: (d: D) => number;
 		elevationAggregation?: AggregationOperation;
 		onSetColorDomain?: () => void;
@@ -644,6 +645,7 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 		AggregationLayerProps,
 	} from "@deck.gl/aggregation-layers/aggregation-layer";
 	import { AggregationOperation } from "@deck.gl/aggregation-layers/utils/aggregation-operation-utils";
+	import { ObjectInfo } from "@deck.gl/core/lib/layer";
 	import { ColorDomain, ColorRange } from "@deck.gl/core/utils/color";
 	import { Position } from "@deck.gl/core/utils/positions";
 	export interface HexagonLayerProps<D> extends AggregationLayerProps<D> {
@@ -666,10 +668,10 @@ declare module "@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer" {
 
 		//Data Accessors
 		getPosition?: (d: D) => Position;
-		getColorValue?: (d: D[]) => any;
+		getColorValue?: (d: D[], objectInfo: ObjectInfo<D, any>) => any;
 		getColorWeight?: (d: D) => any;
 		colorAggregation?: string;
-		getElevationValue?: (d: D[]) => any;
+		getElevationValue?: (d: D[], objectInfo: ObjectInfo<D, any>) => any;
 		getElevationWeight?: (d: D) => any;
 		elevationAggregation?: AggregationOperation;
 		onSetColorDomain?: Function;
@@ -871,6 +873,7 @@ declare module "@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer" {
 declare module "@deck.gl/aggregation-layers/grid-layer/grid-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
+	import { ObjectInfo } from "@deck.gl/core/lib/layer";
 	import { ColorDomain, ColorRange } from "@deck.gl/core/utils/color";
 	import { Position } from "@deck.gl/core/utils/positions";
 	import { AggregationOperation } from "@deck.gl/aggregation-layers/utils/aggregation-operation-utils";
@@ -895,10 +898,10 @@ declare module "@deck.gl/aggregation-layers/grid-layer/grid-layer" {
 
 		//Data Accessors
 		getPosition?: (d: D) => Position;
-		getColorValue?: (points: D[]) => number;
+		getColorValue?: (points: D[], objectInfo: ObjectInfo<D, number>) => number;
 		getColorWeight?: (d: D) => number;
 		colorAggregation?: string;
-		getElevationValue?: (points: D[]) => number;
+		getElevationValue?: (points: D[], objectInfo: ObjectInfo<D, number>) => number;
 		getElevationWeight?: (d: D) => number;
 		elevationAggregation?: AggregationOperation;
 		onSetColorDomain?: () => void;
