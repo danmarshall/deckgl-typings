@@ -1148,7 +1148,7 @@ declare module "@deck.gl/core/lib/layer" {
 		coordinateSystem?: number;
 		coordinateOrigin?: Position;
 		wrapLongitude?: boolean;
-		modelMatrix?: number;
+		modelMatrix?: number[];
 
 		//Data Properties
 		dataComparator?: (newData: D, oldData: D) => boolean;
