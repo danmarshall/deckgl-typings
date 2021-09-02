@@ -2437,7 +2437,9 @@ declare module "@deck.gl/core/lib/deck" {
 		onError: (error: Error, source: any) => void;
 		_onMetrics: (metrics: MetricsPayload) => void;
 
-		ContextProvider?: React.Provider<T>
+		ContextProvider?: React.Provider<T>;
+
+		userData: any;
 	}
 
 	export default class Deck<T=ContextProviderValue> {
