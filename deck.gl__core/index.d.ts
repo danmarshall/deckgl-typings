@@ -1288,6 +1288,7 @@ declare module "@deck.gl/core/lib/layer" {
 }
 declare module "@deck.gl/core/lib/composite-layer" {
 	import Layer, { LayerProps } from "@deck.gl/core/lib/layer";
+	import Viewport from "@deck.gl/core/viewports/viewport";
 	export interface CompositeLayerProps<D> extends LayerProps<D> {
 		_subLayerProps?: Object;
 	}
@@ -1298,6 +1299,17 @@ declare module "@deck.gl/core/lib/composite-layer" {
 		initializeState(params?: any): void;
 		setState(updateObject: any): void;
 		renderLayers(): any;
+		filterSubLayer({
+			layer,
+			viewport,
+			isPicking,
+			renderPass
+		}: {
+			layer: Layer<any>,
+			viewport: Viewport,
+			isPicking: boolean,
+			renderPass: string
+		}): boolean;
 		shouldRenderSubLayer(id: any, data: any): any;
 		getSubLayerClass(id: any, DefaultLayerClass: any): any;
 		getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
