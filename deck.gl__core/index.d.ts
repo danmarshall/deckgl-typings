@@ -1310,7 +1310,7 @@ declare module "@deck.gl/core/lib/composite-layer" {
 			isPicking: boolean,
 			renderPass: string
 		}): boolean;
-		shouldRenderSubLayer(id: any, data: any): any;
+		shouldRenderSubLayer(id: any, data: any): boolean;
 		getSubLayerClass(id: any, DefaultLayerClass: any): any;
 		getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
 		getSubLayerAccessor(accessor: any): any;
