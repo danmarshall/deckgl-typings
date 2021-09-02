@@ -586,7 +586,7 @@ declare module "@deck.gl/layers/solid-polygon-layer/solid-polygon-layer" {
 		_normalize?: boolean;
 
 		//Data Accessors
-		getPolygon?: (x: D) => Position[];
+		getPolygon?: (x: D) => Position[] | Position[][];
 		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getElevation?: ((x: D) => number) | number;
@@ -654,7 +654,7 @@ declare module "@deck.gl/layers/polygon-layer/polygon-layer" {
 		_normalize?: boolean;
 
 		//Data Accessors
-		getPolygon?: (x: D) => Position[];
+		getPolygon?: (x: D) => Position[] | Position[][];
 		getFillColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getLineColor?: ((x: D) => RGBAColor) | RGBAColor;
 		getLineWidth?: ((x: D) => number) | number;
