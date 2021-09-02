@@ -1148,7 +1148,7 @@ declare module "@deck.gl/core/lib/layer" {
 		coordinateSystem?: number;
 		coordinateOrigin?: Position;
 		wrapLongitude?: boolean;
-		modelMatrix?: number;
+		modelMatrix?: number[];
 
 		//Data Properties
 		dataComparator?: (newData: D, oldData: D) => boolean;
@@ -1236,7 +1236,7 @@ declare module "@deck.gl/core/lib/layer" {
 			changeFlags,
 		}: UpdateStateInfo<P>): void;
 		finalizeState(): void;
-		draw(opts: { moduleParameters: any, uniforms: any, parameters: any, context: WebGLRenderingContext }): void;
+		draw(opts: { moduleParameters?: any, uniforms?: any, parameters?: any, context?: WebGLRenderingContext }): void;
 		getPickingInfo({ info, mode, sourceLayer }: { info: PickInfo<D>; mode: PickMode, sourceLayer: Layer<any> }): PickInfo<D>;
 		invalidateAttribute(name?: string, diffReason?: string): void;
 		updateAttributes(changedAttributes: any): void;
@@ -1288,6 +1288,7 @@ declare module "@deck.gl/core/lib/layer" {
 }
 declare module "@deck.gl/core/lib/composite-layer" {
 	import Layer, { LayerProps } from "@deck.gl/core/lib/layer";
+	import Viewport from "@deck.gl/core/viewports/viewport";
 	export interface CompositeLayerProps<D> extends LayerProps<D> {
 		_subLayerProps?: Object;
 	}
@@ -1298,7 +1299,18 @@ declare module "@deck.gl/core/lib/composite-layer" {
 		initializeState(params?: any): void;
 		setState(updateObject: any): void;
 		renderLayers(): any;
-		shouldRenderSubLayer(id: any, data: any): any;
+		filterSubLayer({
+			layer,
+			viewport,
+			isPicking,
+			renderPass
+		}: {
+			layer: Layer<any>,
+			viewport: Viewport,
+			isPicking: boolean,
+			renderPass: string
+		}): boolean;
+		shouldRenderSubLayer(id: any, data: any): boolean;
 		getSubLayerClass(id: any, DefaultLayerClass: any): any;
 		getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
 		getSubLayerAccessor(accessor: any): any;
@@ -2425,7 +2437,9 @@ declare module "@deck.gl/core/lib/deck" {
 		onError: (error: Error, source: any) => void;
 		_onMetrics: (metrics: MetricsPayload) => void;
 
-		ContextProvider?: React.Provider<T>
+		ContextProvider?: React.Provider<T>;
+
+		userData: any;
 	}
 
 	export default class Deck<T=ContextProviderValue> {
