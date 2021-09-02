@@ -323,7 +323,7 @@ declare module "@deck.gl/layers/scatterplot-layer/scatterplot-layer" {
 		getLineWidth?: ((d: D) => number) | number;
 	}
 	export default class ScatterplotLayer<D, P extends ScatterplotLayerProps<D> = ScatterplotLayerProps<D>> extends Layer<D, P> {
-		getShaders(id: any): any;
+		getShaders(): any;
 		initializeState(params: any): void;
 		draw({ uniforms }: { uniforms: any }): void;
 		_getModel(gl: any): any;
