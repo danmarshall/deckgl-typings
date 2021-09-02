@@ -456,7 +456,8 @@ declare module "@deck.gl/layers/path-layer/path-layer" {
 		widthScale?: number;
 		widthMinPixels?: number;
 		widthMaxPixels?: number;
-		rounded?: boolean;
+		capRounded?: boolean;
+		jointRounded?: boolean;
 		billboard?: boolean;
 		miterLimit?: number;
 		_pathType?: "loop" | "open";
