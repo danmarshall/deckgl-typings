@@ -2302,6 +2302,7 @@ declare module "@deck.gl/core/lib/deck" {
 
 	export interface InteractiveState {
 		isDragging: boolean;
+		isHovering: boolean;
 	}
 
 	export interface PickInfo<D> {
