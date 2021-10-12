@@ -2380,7 +2380,7 @@ declare module "@deck.gl/core/lib/deck" {
 		}) => boolean;
 		getCursor: (interactiveState: InteractiveState) => string;
 		views: View[];
-		viewState: ViewStateProps;
+		viewState: ViewStateProps | { [key: string]: ViewStateProps };
 		initialViewState: InitialViewStateProps;
 		controller: null | Controller | ControllerOptions | boolean;
 		effects: Effect[];
