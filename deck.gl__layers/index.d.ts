@@ -719,7 +719,7 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 		//Data Accessors
 		getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
 		getFillColor?: ((d: D) => RGBAColor) | RGBAColor;
-		getRadius?: ((d: D) => number) | number;
+		getPointRadius?: ((d: D) => number) | number;
 		getLineWidth?: ((d: D) => number) | number;
 		getElevation?: ((d: D) => number) | number;
 	}
