@@ -722,6 +722,9 @@ declare module "@deck.gl/layers/geojson-layer/geojson-layer" {
 		getPointRadius?: ((d: D) => number) | number;
 		getLineWidth?: ((d: D) => number) | number;
 		getElevation?: ((d: D) => number) | number;
+
+		// getRadius is deprecated since deck.gl v8.5, use getPointRadius instead
+		getRadius?: ((d: D) => number) | number;
 	}
 	export default class GeoJsonLayer<D, P extends GeoJsonLayerProps<D> = GeoJsonLayerProps<D>> extends CompositeLayer<D, P> {
 		initializeState(params: any): void;
