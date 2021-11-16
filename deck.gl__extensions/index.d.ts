@@ -175,10 +175,25 @@ declare module "@deck.gl/extensions/path-style/path-style" {
 		updateState(params: any, extension: any): void;
 	}
 }
+declare module "@deck.gl/extensions/fill-style/fill-style" {
+	import { LayerExtension } from "@deck.gl/core";
+	export default class FillStyleExtension extends LayerExtension {
+		constructor({ pattern }?: { 
+			pattern?: boolean; 
+		});
+		isEnabled(layer: any): any;
+		getShaders(extension: any): {};
+		initializeState(context: any, extension: any): void;
+		updateState(params: any, extension: any): void;
+		draw(params: any, extension: any): void;
+		finalizeState(): void;
+	}
+}
 declare module "@deck.gl/extensions" {
 	export { default as BrushingExtension } from "@deck.gl/extensions/brushing/brushing";
 	export { default as DataFilterExtension } from "@deck.gl/extensions/data-filter/data-filter";
 	export { default as Fp64Extension } from "@deck.gl/extensions/fp64/fp64";
 	export { default as PathStyleExtension } from "@deck.gl/extensions/path-style/path-style";
 	export { default as project64 } from "@deck.gl/extensions/fp64/project64";
+	export { default as FillStyleExtension } from "@deck.gl/extensions/fill-style/fill-style";
 }
