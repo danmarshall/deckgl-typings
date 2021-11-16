@@ -942,6 +942,8 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 		getTextAnchor?: ((x: D) => TextAnchor) | TextAnchor;
 		getAlignmentBaseline?: ((x: D) => AlignmentBaseline) | AlignmentBaseline;
 		getPixelOffset?: ((x: D) => number[]) | number[];
+		outlineColor?: [number, number, number, number],
+		outlineWidth?: number,
 	}
 	export default class TextLayer<D, P extends TextLayerProps<D> = TextLayerProps<D>> extends CompositeLayer<D, P> {
 		initializeState(params: any): void;
