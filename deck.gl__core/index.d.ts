@@ -1172,6 +1172,9 @@ declare module "@deck.gl/core/lib/layer" {
 		parameters?: any;
 		getPolygonOffset?: (uniform: any) => [number, number];
 		transitions?: { [attributeGetter: string]: TransitionTiming };
+		filterEnabled?: boolean,
+		filterTransformSize?: boolean,
+		filterTransformColor?: boolean,
 	}
 	export interface LayerChangeFlags {
 		dataChanged: boolean | string | null;
