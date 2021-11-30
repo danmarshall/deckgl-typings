@@ -7,7 +7,7 @@
 /// <reference path="../deck.gl__react/index.d.ts" />
 /// <reference path="../deck.gl__extensions/index.d.ts" />
 
-declare module "deck.gl" {
+declare module 'deck.gl' {
   export {
     _CameraLight,
     COORDINATE_SYSTEM,
@@ -53,8 +53,8 @@ declare module "deck.gl" {
     RGBAColor,
     Position,
     Position2D,
-    Position3D
-  } from "@deck.gl/core";
+    Position3D,
+  } from '@deck.gl/core';
   export {
     ArcLayer,
     BitmapLayer,
@@ -69,7 +69,7 @@ declare module "deck.gl" {
     SolidPolygonLayer,
     GeoJsonLayer,
     TextLayer,
-  } from "@deck.gl/layers";
+  } from '@deck.gl/layers';
   export {
     ScreenGridLayer,
     CPUGridLayer,
@@ -79,7 +79,7 @@ declare module "deck.gl" {
     GPUGridLayer,
     AGGREGATION_OPERATION,
     HeatmapLayer,
-  } from "@deck.gl/aggregation-layers";
+  } from '@deck.gl/aggregation-layers';
   export {
     GreatCircleLayer,
     S2Layer,
@@ -90,12 +90,9 @@ declare module "deck.gl" {
     Tile3DLayer,
     TerrainLayer,
     MVTLayer,
-  } from "@deck.gl/geo-layers";
-  export {
-    SimpleMeshLayer,
-    ScenegraphLayer,
-  } from "@deck.gl/mesh-layers";
-  export { default, DeckGL } from "@deck.gl/react";
+  } from '@deck.gl/geo-layers';
+  export { SimpleMeshLayer, ScenegraphLayer } from '@deck.gl/mesh-layers';
+  export { default, DeckGL } from '@deck.gl/react';
   export { DeckProps, PickInfo } from '@deck.gl/core/lib/deck';
   export { LayerInputHandler } from '@deck.gl/core/lib/layer';
 }

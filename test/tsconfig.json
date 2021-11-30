@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node",
-        "outDir": "../test-out"
-    }
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "outDir": "../test-out"
+  }
 }
