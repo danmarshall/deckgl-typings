@@ -483,6 +483,7 @@ declare module "@deck.gl/geo-layers/mvt-layer/clip-extension" {
 declare module "@deck.gl/geo-layers/mvt-layer/mvt-layer" {
 	import TileLayer, { TileLayerProps } from "@deck.gl/geo-layers/tile-layer/tile-layer";
 	export interface MVTLayerProps<D> extends TileLayerProps<D> {
+		uniqueIdProperty?:string
 	}
 	export default class MVTLayer<D, P extends MVTLayerProps<D> = MVTLayerProps<D>> extends TileLayer<D, P> {
 		getTileData(tile: any): any;
