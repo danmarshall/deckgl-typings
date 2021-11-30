@@ -41,7 +41,7 @@ declare module "@deck.gl/geo-layers/s2-layer/s2-layer" {
 	import { CompositeLayerProps } from "@deck.gl/core/lib/composite-layer";
 	export interface S2LayerProps<D> extends CompositeLayerProps<D> {
 		getS2Token: (d:D)=> any;
-	}	
+	}
 	export default class S2Layer<D, P extends S2LayerProps<D> = S2LayerProps<D>> extends CompositeLayer<D, P> {
 		constructor(...props: S2LayerProps<D>[]);
 		renderLayers(): any;
@@ -224,6 +224,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 			z: number;
 			url: string;
 			bbox: any;
+			signal: AbortSignal;
 		}) => D[] | Promise<D[]> | null;
 		tileSize?: number;
 		maxZoom?: number | null;
@@ -270,10 +271,10 @@ declare module "@deck.gl/geo-layers/trips-layer/trips-layer" {
 		//Data Accessors
 		getPath?: (d: D) => Position[] | TypedArray;
 		getTimestamps?: (
-			d: D, 
+			d: D,
 			info?: {
-				data: D[], 
-				index:number, 
+				data: D[],
+				index:number,
 				target:number[]
 			}) => number[];
 	}
@@ -287,7 +288,7 @@ declare module "@deck.gl/geo-layers/trips-layer/trips-layer" {
 declare module "@deck.gl/geo-layers/h3-layers/h3-cluster-layer" {
 	import { CompositeLayer } from "@deck.gl/core";
 	import { PolygonLayerProps } from "@deck.gl/layers/polygon-layer/polygon-layer";
-	export interface H3ClusterLayerProps<D> extends PolygonLayerProps<D> { 
+	export interface H3ClusterLayerProps<D> extends PolygonLayerProps<D> {
 		getHexagons?: (d: D) => string[];
 	}
 	export default class H3ClusterLayer<D, P extends H3ClusterLayerProps<D> = H3ClusterLayerProps<D>> extends CompositeLayer<D, P> {
@@ -300,7 +301,7 @@ declare module "@deck.gl/geo-layers/h3-layers/h3-hexagon-layer" {
 	import { PolygonLayerProps } from "@deck.gl/layers/polygon-layer/polygon-layer";
 	export function normalizeLongitudes(vertices: any, refLng: any): void;
 	export function scalePolygon(hexId: any, vertices: any, factor: any): void;
-	export interface H3HexagonLayerProps<D> extends PolygonLayerProps<D> { 
+	export interface H3HexagonLayerProps<D> extends PolygonLayerProps<D> {
 		highPrecision?: boolean;
 		coverage?: number;
 		getHexagon?: (d: D) => string;
@@ -482,6 +483,7 @@ declare module "@deck.gl/geo-layers/mvt-layer/clip-extension" {
 declare module "@deck.gl/geo-layers/mvt-layer/mvt-layer" {
 	import TileLayer, { TileLayerProps } from "@deck.gl/geo-layers/tile-layer/tile-layer";
 	export interface MVTLayerProps<D> extends TileLayerProps<D> {
+		uniqueIdProperty?:string
 	}
 	export default class MVTLayer<D, P extends MVTLayerProps<D> = MVTLayerProps<D>> extends TileLayer<D, P> {
 		getTileData(tile: any): any;

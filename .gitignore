@@ -64,3 +64,6 @@ typings/
 yarn.lock
 
 test-out
+
+# Editors
+.vscode

@@ -66,7 +66,7 @@ declare module "@deck.gl/layers/bitmap-layer/bitmap-layer" {
 		//Render Options
 		desaturate?: number;
 		transparentColor?: RGBAColor;
-		tintColor?: [number, number, number];
+		tintColor?: RGBColor;
 	}
 	export default class BitmapLayer<D, P extends BitmapLayerProps<D> = BitmapLayerProps<D>> extends Layer<D, P> {
 		getShaders(): any;
@@ -942,7 +942,7 @@ declare module "@deck.gl/layers/text-layer/text-layer" {
 		getTextAnchor?: ((x: D) => TextAnchor) | TextAnchor;
 		getAlignmentBaseline?: ((x: D) => AlignmentBaseline) | AlignmentBaseline;
 		getPixelOffset?: ((x: D) => number[]) | number[];
-		outlineColor?: [number, number, number, number],
+		outlineColor?: RGBAColor,
 		outlineWidth?: number,
 	}
 	export default class TextLayer<D, P extends TextLayerProps<D> = TextLayerProps<D>> extends CompositeLayer<D, P> {
