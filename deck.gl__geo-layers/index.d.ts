@@ -229,6 +229,7 @@ declare module "@deck.gl/geo-layers/tile-layer/tile-layer" {
 		tileSize?: number;
 		maxZoom?: number | null;
 		minZoom?: number;
+		zoomOffset?: number;
 		maxCacheSize?: number;
 		maxCacheByteSize?: number;
 		refinementStrategy?: "best-available" | "no-overlap" | "never";
@@ -484,8 +485,10 @@ declare module "@deck.gl/geo-layers/mvt-layer/mvt-layer" {
 	import TileLayer, { TileLayerProps } from "@deck.gl/geo-layers/tile-layer/tile-layer";
 	export interface MVTLayerProps<D> extends TileLayerProps<D> {
 		uniqueIdProperty?:string
+		binary?: boolean;
 	}
 	export default class MVTLayer<D, P extends MVTLayerProps<D> = MVTLayerProps<D>> extends TileLayer<D, P> {
+		constructor(...props: MVTLayerProps<D>[]);
 		getTileData(tile: any): any;
 		renderSubLayers(props: any): any;
 	}

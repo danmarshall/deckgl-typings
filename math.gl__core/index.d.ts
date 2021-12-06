@@ -18,8 +18,8 @@ declare module "@math.gl/core/lib/common" {
 	export function clone(array: any): any;
 	export function toRadians(degrees: any): any;
 	export function toDegrees(radians: any): any;
-	export function radians(degrees: any, result: any): any;
-	export function degrees(radians: any, result: any): any;
+	export function radians(degrees: any, result?: any): any;
+	export function degrees(radians: any, result?: any): any;
 	export function sin(radians: any): any;
 	export function cos(radians: any): any;
 	export function tan(radians: any): any;
@@ -110,7 +110,7 @@ declare module "@math.gl/core/lib/gl-matrix-extras" {
 declare module "@math.gl/core/classes/vector2" {
 	import Vector from "@math.gl/core/classes/base/vector";
 	export default class Vector2 extends Vector {
-		constructor(x?: number, y?: number);
+		constructor(x?: number | number[], y?: number);
 		set(x: any, y: any, z: any): this;
 		copy(array: any): this;
 		fromObject(object: any): this;
@@ -129,7 +129,7 @@ declare module "@math.gl/core/classes/vector2" {
 declare module "@math.gl/core/classes/vector3" {
 	import Vector from "@math.gl/core/classes/base/vector";
 	export default class Vector3 extends Vector {
-		constructor(x?: number, y?: number, z?: number);
+		constructor(x?: number | number[], y?: number, z?: number);
 		set(x: any, y: any, z: any): this;
 		copy(array: any): this;
 		fromObject(object: any): this;
@@ -153,7 +153,7 @@ declare module "@math.gl/core/classes/vector3" {
 declare module "@math.gl/core/classes/vector4" {
 	import Vector from "@math.gl/core/classes/base/vector";
 	export default class Vector4 extends Vector {
-		constructor(x?: number, y?: number, z?: number, w?: number);
+		constructor(x?: number | number[], y?: number, z?: number, w?: number);
 		set(x: any, y: any, z: any, w: any): this;
 		copy(array: any): this;
 		fromObject(object: any): this;
@@ -199,7 +199,7 @@ declare module "@math.gl/core/classes/matrix3" {
 			COL2ROW1: number;
 			COL2ROW2: number;
 		}>;
-		constructor(array: any);
+		constructor(array?: any);
 		copy(array: any): this;
 		set(
 			m00: any,
@@ -264,7 +264,7 @@ declare module "@math.gl/core/classes/matrix4" {
 		}>;
 		get ELEMENTS(): number;
 		get RANK(): number;
-		constructor(array: any);
+		constructor(array?: any);
 		copy(array: any): this;
 		set(
 			m00: any,
