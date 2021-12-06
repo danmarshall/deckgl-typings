@@ -140,7 +140,7 @@ declare module "@luma.gl/webgl/classes/resource" {
 		id?: string;
 		handle?: any;
 		userData?: {[key: string]: any};
-	}
+	};
 
 	export default class Resource {
 		constructor(gl: any, opts?: {});
