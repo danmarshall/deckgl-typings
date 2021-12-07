@@ -136,6 +136,12 @@ declare module "webgl-utils" {
 	export { cloneTextureFrom } from "@luma.gl/webgl/webgl-utils/texture-utils";
 }
 declare module "@luma.gl/webgl/classes/resource" {
+	export type ResourceProps = {
+		id?: string;
+		handle?: any;
+		userData?: {[key: string]: any};
+	};
+
 	export default class Resource {
 		constructor(gl: any, opts?: {});
 		toString(): string;
@@ -300,7 +306,30 @@ declare module "@luma.gl/webgl/classes/texture-formats" {
 	export function isLinearFilteringSupported(gl: any, format: any): any;
 }
 declare module "@luma.gl/webgl/classes/texture" {
-	import Resource from "@luma.gl/webgl/classes/resource";
+	import Resource, {ResourceProps} from "@luma.gl/webgl/classes/resource";
+
+	export type TextureProps = ResourceProps & {
+		data?: any;
+		width?: number;
+		height?: number;
+		depth?: number;
+	  
+		pixels?: any;
+		format?: number;
+		dataFormat?: number;
+		border?: number;
+		recreate?: boolean;
+		type?: number;
+		compressed?: boolean;
+		mipmaps?: boolean;
+	  
+		parameters?: object;
+		pixelStore?: object;
+		textureUnit?: number;
+	  
+		target?: number;
+	  };
+
 	export default class Texture extends Resource {
 		static isSupported(
 			gl: any,
@@ -412,7 +441,10 @@ declare module "@luma.gl/webgl/utils/load-file" {
 	export function loadImage(url: any, opts: any): Promise<unknown>;
 }
 declare module "@luma.gl/webgl/classes/texture-2d" {
-	import Texture from "@luma.gl/webgl/classes/texture";
+	import Texture, {TextureProps} from "@luma.gl/webgl/classes/texture";
+
+	export type Texture2DProps = TextureProps & {};
+
 	export default class Texture2D extends Texture {
 		static isSupported(gl: any, opts: any): boolean;
 		constructor(gl: any, props?: {});
@@ -1384,7 +1416,7 @@ declare module "@luma.gl/webgl" {
 	export { default as Program } from "@luma.gl/webgl/classes/program";
 	export { default as Framebuffer } from "@luma.gl/webgl/classes/framebuffer";
 	export { default as Renderbuffer } from "@luma.gl/webgl/classes/renderbuffer";
-	export { default as Texture2D } from "@luma.gl/webgl/classes/texture-2d";
+	export { default as Texture2D, Texture2DProps } from "@luma.gl/webgl/classes/texture-2d";
 	export { default as TextureCube } from "@luma.gl/webgl/classes/texture-cube";
 	export { clear, clearBuffer } from "@luma.gl/webgl/classes/clear";
 	export {
