@@ -68,6 +68,7 @@ declare module "@deck.gl/core/shaderlib/misc/geometry" {
 	};
 	export default _default;
 }
+
 declare module "@deck.gl/core/lib/constants" {
 	export const COORDINATE_SYSTEM: {
 		DEFAULT: number;
@@ -78,8 +79,14 @@ declare module "@deck.gl/core/lib/constants" {
 	};
 	export const PROJECTION_MODE: {
 		WEB_MERCATOR: number;
+		GLOBE: number;
 		WEB_MERCATOR_AUTO_OFFSET: number;
 		IDENTITY: number;
+	};
+    export const UNIT: {
+		common: number;
+		meters: number;
+		pixels: number;
 	};
 	export const EVENTS: {
 		click: {
