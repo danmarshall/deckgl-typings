@@ -2542,7 +2542,7 @@ declare module "@deck.gl/core/lib/layer-extension" {
 	}
 }
 declare module "lib" {
-	export { COORDINATE_SYSTEM, UNIT } from "@deck.gl/core/lib/constants";
+	export { COORDINATE_SYSTEM } from "@deck.gl/core/lib/constants";
 	export { default as Deck } from "@deck.gl/core/lib/deck";
 	export { default as DeckRenderer } from "@deck.gl/core/lib/deck-renderer";
 	export { default as Effect } from "@deck.gl/core/lib/effect";
@@ -2872,7 +2872,7 @@ declare module "@deck.gl/core/utils/tesselator" {
 declare module "@deck.gl/core" {
 	import "@deck.gl/core/lib/init";
 	import "@deck.gl/core/shaderlib";
-	export { COORDINATE_SYSTEM } from "@deck.gl/core/lib/constants";
+	export { COORDINATE_SYSTEM, UNIT } from "@deck.gl/core/lib/constants";
 	export { default as LightingEffect } from "@deck.gl/core/effects/lighting/lighting-effect";
 	export { AmbientLight } from "@deck.gl/core/effects/lighting/ambient-light";
 	export { DirectionalLight } from "@deck.gl/core/effects/lighting/directional-light";
