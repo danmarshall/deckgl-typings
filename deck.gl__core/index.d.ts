@@ -78,8 +78,14 @@ declare module "@deck.gl/core/lib/constants" {
 	};
 	export const PROJECTION_MODE: {
 		WEB_MERCATOR: number;
+		GLOBE: number;
 		WEB_MERCATOR_AUTO_OFFSET: number;
 		IDENTITY: number;
+	};
+    export const UNIT: {
+		common: number;
+		meters: number;
+		pixels: number;
 	};
 	export const EVENTS: {
 		click: {
@@ -2866,7 +2872,7 @@ declare module "@deck.gl/core/utils/tesselator" {
 declare module "@deck.gl/core" {
 	import "@deck.gl/core/lib/init";
 	import "@deck.gl/core/shaderlib";
-	export { COORDINATE_SYSTEM } from "@deck.gl/core/lib/constants";
+	export { COORDINATE_SYSTEM, UNIT } from "@deck.gl/core/lib/constants";
 	export { default as LightingEffect } from "@deck.gl/core/effects/lighting/lighting-effect";
 	export { AmbientLight } from "@deck.gl/core/effects/lighting/ambient-light";
 	export { DirectionalLight } from "@deck.gl/core/effects/lighting/directional-light";
