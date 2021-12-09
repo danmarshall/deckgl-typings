@@ -68,7 +68,6 @@ declare module "@deck.gl/core/shaderlib/misc/geometry" {
 	};
 	export default _default;
 }
-
 declare module "@deck.gl/core/lib/constants" {
 	export const COORDINATE_SYSTEM: {
 		DEFAULT: number;
@@ -2543,7 +2542,7 @@ declare module "@deck.gl/core/lib/layer-extension" {
 	}
 }
 declare module "lib" {
-	export { COORDINATE_SYSTEM } from "@deck.gl/core/lib/constants";
+	export { COORDINATE_SYSTEM, UNIT } from "@deck.gl/core/lib/constants";
 	export { default as Deck } from "@deck.gl/core/lib/deck";
 	export { default as DeckRenderer } from "@deck.gl/core/lib/deck-renderer";
 	export { default as Effect } from "@deck.gl/core/lib/effect";
