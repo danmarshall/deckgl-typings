@@ -6,7 +6,12 @@
   "scripts": {
     "build": "node ./scripts/convert.js",
     "test": "tsc -p ./test",
-    "postinstall": "indefinitely-typed --folder deck.gl --folder deck.gl__aggregation-layers --folder deck.gl__arcgis --folder deck.gl__carto --folder deck.gl__core --folder deck.gl__extensions --folder deck.gl__geo-layers --folder deck.gl__google-maps --folder deck.gl__json --folder deck.gl__layers --folder deck.gl__mapbox --folder deck.gl__mesh-layers --folder deck.gl__react --folder luma.gl__constants --folder luma.gl__core --folder luma.gl__gltools --folder luma.gl__webgl --folder luma.gl__webgl-state-tracker --folder math.gl --folder math.gl__core"
+    "lint:format": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,yml,yaml,css,scss,md,mdx,html}\"",
+    "postinstall": "indefinitely-typed --folder deck.gl --folder deck.gl__aggregation-layers --folder deck.gl__arcgis --folder deck.gl__carto --folder deck.gl__core --folder deck.gl__extensions --folder deck.gl__geo-layers --folder deck.gl__google-maps --folder deck.gl__json --folder deck.gl__layers --folder deck.gl__mapbox --folder deck.gl__mesh-layers --folder deck.gl__react --folder luma.gl__constants --folder luma.gl__core --folder luma.gl__gltools --folder luma.gl__webgl --folder luma.gl__webgl-state-tracker --folder math.gl --folder math.gl__core",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,json,yml,yaml,css,scss,md,mdx,html}": "prettier --write"
   },
   "repository": {
     "type": "git",
@@ -32,7 +37,10 @@
     "deck.gl": "*",
     "dts-generator": "^3.0.0",
     "glob": "^7.1.5",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "math.gl": "*",
+    "prettier": "^2.5.0",
     "typescript": "^3.6.4"
   },
   "dependencies": {
