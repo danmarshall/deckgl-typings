@@ -53,19 +53,25 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
     normals: Float32Array;
     texCoords: Float32Array;
   }
+  export interface Material {
+    ambient?: number;
+    diffuse?: number;
+    shininess?: number;
+    specularColor?: [number, number, number];
+  }
   export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
-    mesh: SimpleMesh;
+    mesh: SimpleMesh | null;
     _instanced?: boolean; // _instanced is a hack to use world position instead of meter offsets in mesh
-    texture?: Texture2D | HTMLImageElement | string;
+    texture?: Texture2D | HTMLImageElement | string | null;
     sizeScale?: number;
     wireframe?: boolean;
-    material?: any;
+    material?: Material;
     getPosition?: ((d: D) => Position3D) | Position3D;
     getColor?: ((d: D) => RGBAColor) | RGBAColor;
     getOrientation?: ((d: D) => PitchYawRoll) | PitchYawRoll;
     getScale?: ((d: D) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
     getTranslation?: ((d: D) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
-    getTransformMatrix?: ((d: D) => number[][]) | number[][]; // 4x4 column-major model matrix
+    getTransformMatrix?: ((d: D) => number[][] | null) | number[][] | null; // 4x4 column-major model matrix
   }
   export default class SimpleMeshLayer<D, P extends SimpleMeshLayerProps<D> = SimpleMeshLayerProps<D>> extends Layer<
     D,
