@@ -2141,7 +2141,7 @@ declare module '@deck.gl/core/lib/deck' {
     transitionDuration?: number | string;
     transitionEasing?: (x: number) => number;
     transitionInterpolator?: TransitionInterpolator;
-    transitionInterruption?: typeof TRANSITION_EVENTS;
+    transitionInterruption?: typeof TRANSITION_EVENTS[keyof typeof TRANSITION_EVENTS];
     onTransitionStart?: () => void;
     onTransitionInterrupt?: () => void;
     onTransitionEnd?: () => void;
