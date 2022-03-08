@@ -1608,6 +1608,8 @@ declare module '@deck.gl/core/controllers/transition-manager' {
 
 //https://github.com/visgl/deck.gl/blob/master/docs/api-reference/core/controller.md
 declare module '@deck.gl/core/controllers/controller' {
+  import { InteractionState } from '@deck.gl/core/lib/deck';
+  
   export interface ControllerOptions {
     scrollZoom?:
       | boolean
@@ -1650,7 +1652,7 @@ declare module '@deck.gl/core/controllers/controller' {
     setProps(props: any): void;
     updateTransition(): void;
     toggleEvents(eventNames: any, enabled: any): void;
-    updateViewport(newControllerState: any, extraProps?: {}, interactionState?: {}): void;
+    updateViewport(newControllerState: any, extraProps?: {}, interactionState?: InteractionState): void;
     _onPanStart(event: any): boolean;
     _onPan(event: any): boolean;
     _onPanEnd(event: any): boolean;
@@ -2181,6 +2183,14 @@ declare module '@deck.gl/core/lib/deck' {
     eventManager: object;
   }
 
+	export interface InteractionState {
+		inTransition?: boolean;
+		isDragging?: boolean;
+		isPanning?: boolean;
+		isRotating?: boolean;
+		isZooming?: boolean;
+	}
+
   export interface DeckProps<T = ContextProviderValue> {
     //https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
     // https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
@@ -2228,15 +2238,10 @@ declare module '@deck.gl/core/lib/deck' {
     onWebGLInitialized: (gl: WebGLRenderingContext) => any;
     onViewStateChange: (args: {
       viewState: any;
-      interactionState: {
-        inTransition?: boolean;
-        isDragging?: boolean;
-        isPanning?: boolean;
-        isRotating?: boolean;
-        isZooming?: boolean;
-      };
+      interactionState: InteractionState;
       oldViewState: any;
     }) => any;
+    onInteractionStateChange(interactionState: InteractionState): void;
     onHover: <D>(info: PickInfo<D>, e: MouseEvent) => any;
     onClick: <D>(info: PickInfo<D>, e: MouseEvent) => any;
     onDragStart: <D>(info: PickInfo<D>, e: MouseEvent) => any;
