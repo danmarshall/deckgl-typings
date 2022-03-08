@@ -44,7 +44,7 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer-fragmen
 }
 declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
   import { Layer } from '@deck.gl/core';
-  import { LayerProps } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerDataAccessor, LayerProps, ObjectInfo} from '@deck.gl/core/lib/layer';
   import Texture2D from '@luma.gl/webgl/classes/texture-2d';
   import { RGBAColor } from '@deck.gl/core/utils/color';
   import { Position3D, PitchYawRoll, ScaleXYZ, TranslationXYZ } from '@deck.gl/core/utils/positions';
@@ -59,29 +59,27 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
     shininess?: number;
     specularColor?: [number, number, number];
   }
-  export interface AccessorContext<D> {
-    index: number;
-    data: D;
-    target: Array<number>;
-  }
-  export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
+  export type SimpleMeshLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = LayerProps<D, E> & {
     mesh: SimpleMesh | null;
     _instanced?: boolean; // _instanced is a hack to use world position instead of meter offsets in mesh
     texture?: Texture2D | HTMLImageElement | string | null;
     sizeScale?: number;
     wireframe?: boolean;
     material?: Material;
-    getPosition?: ((d: D, context: AccessorContext<D>) => Position3D) | Position3D;
-    getColor?: ((d: D, context: AccessorContext<D>) => RGBAColor) | RGBAColor;
-    getOrientation?: ((d: D, context: AccessorContext<D>) => PitchYawRoll) | PitchYawRoll;
-    getScale?: ((d: D, context: AccessorContext<D>) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
-    getTranslation?: ((d: D, context: AccessorContext<D>) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
-    getTransformMatrix?: ((d: D, context: AccessorContext<D>) => number[] | null) | number[] | null; // 4x4 column-major model matrix
-  }
-  export default class SimpleMeshLayer<D, P extends SimpleMeshLayerProps<D> = SimpleMeshLayerProps<D>> extends Layer<
-    D,
-    P
-  > {
+    // Data Accessors
+    getPosition?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position3D) | Position3D;
+    getColor?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => RGBAColor) | RGBAColor;
+    getOrientation?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => PitchYawRoll) | PitchYawRoll;
+    getScale?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
+    getTranslation?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
+    getTransformMatrix?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number[] | null) | number[] | null; // 4x4 column-major model matrix
+  };
+  export default class SimpleMeshLayer<
+    D extends LayerData<SimpleMeshLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Layer<D, SimpleMeshLayerProps<D, E> & P, S, E> {
     getShaders(): any;
     initializeState(params: any): void;
     finalizeState(): void;
@@ -103,11 +101,12 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer-fragment.
 }
 declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
   import { Layer } from '@deck.gl/core';
-  import { LayerProps } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerDataAccessor, LayerProps, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ScenegraphNode } from '@luma.gl/experimental';
   import { RGBAColor } from '@deck.gl/core/utils/color';
   import { Position3D, PitchYawRoll, ScaleXYZ, TranslationXYZ } from '@deck.gl/core/utils/positions';
-  export interface ScenegraphLayerProps<D> extends LayerProps<D> {
+
+  export type ScenegraphLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = LayerProps<D, E> & {
     //Mesh
     scenegraph: URL | ScenegraphNode | Promise<ScenegraphNode>;
 
@@ -119,23 +118,24 @@ declare module '@deck.gl/mesh-layers/scenegraph-layer/scenegraph-layer' {
     _lighting?: string;
 
     //Data Accessors
-    getPosition?: ((d: D) => Position3D) | Position3D;
-    getColor?: ((d: D) => RGBAColor) | RGBAColor;
-    getOrientation?: ((d: D) => PitchYawRoll) | PitchYawRoll;
-    getScale?: ((d: D) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
-    getTranslation?: ((d: D) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
-    getTransformMatrix?: ((d: D) => number[][]) | number[][]; // 4x4 column-major model matrix
     sizeMinPixels?: number;
     sizeMaxPixels?: number;
+    getPosition?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position3D) | Position3D;
+    getColor?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => RGBAColor) | RGBAColor;
+    getOrientation?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => PitchYawRoll) | PitchYawRoll;
+    getScale?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
+    getTranslation?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
+    getTransformMatrix?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number[][]) | number[][]; // 4x4 column-major model matrix
 
     //Experimental
     _imageBasedLightingEnvironment?: any;
-  }
-  export default class ScenegraphLayer<D, P extends ScenegraphLayerProps<D> = ScenegraphLayerProps<D>> extends Layer<
-    D,
-    P
-  > {
-    constructor(props: ScenegraphLayerProps<D>);
+  };
+  export default class ScenegraphLayer<
+    D extends LayerData<ScenegraphLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Layer<D, ScenegraphLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     finalizeState(): void;
     _updateScenegraph(props: any): void;

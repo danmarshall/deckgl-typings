@@ -5,12 +5,29 @@ declare module '@deck.gl/aggregation-layers/utils/prop-utils' {
 declare module '@deck.gl/aggregation-layers/aggregation-layer' {
   import { CompositeLayer } from '@deck.gl/core';
   import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
-  export interface AggregationLayerProps<D> extends CompositeLayerProps<D> {}
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
+  import { DataFilterExtension, ExtensionProps } from '@deck.gl/extensions';
+
+  export type AggregationLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = CompositeLayerProps<D> &
+    ExtensionProps<
+      E,
+      DataFilterExtension,
+      {
+        filterRange: [number, number];
+        filterSoftRange?: [number, number];
+        filterTransformColor?: boolean;
+        filterTransformSize?: boolean;
+        getFilterValue: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number | number[];
+        onFilteredItemsChange?: (event: { id: string; count: number }) => void;
+      }
+    >;
+
   export default class AggregationLayer<
-    D,
-    P extends AggregationLayerProps<D> = AggregationLayerProps<D>
-  > extends CompositeLayer<D, P> {
-    constructor(props: AggregationLayerProps<D>);
+    D extends LayerData<AggregationLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, AggregationLayerProps<D, E> & P, S, E> {
     initializeState(dimensions: any): void;
     updateAttributes(changedAttributes: any): void;
     getAttributes(): any;
@@ -282,13 +299,20 @@ declare module '@deck.gl/aggregation-layers/cpu-grid-layer/grid-aggregator' {
   };
 }
 declare module '@deck.gl/aggregation-layers/grid-aggregation-layer' {
+  import { LayerData } from '@deck.gl/core/lib/layer';
   import AggregationLayer, { AggregationLayerProps } from '@deck.gl/aggregation-layers/aggregation-layer';
-  export interface GridAggregationLayerProps<D> extends AggregationLayerProps<D> {}
-  export default class GridAggregationLayer<
+
+  export type GridAggregationLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = AggregationLayerProps<
     D,
-    P extends GridAggregationLayerProps<D> = GridAggregationLayerProps<D>
-  > extends AggregationLayer<D, P> {
-    constructor(props: GridAggregationLayerProps<D>);
+    E
+  >;
+
+  export default class GridAggregationLayer<
+    D extends LayerData<GridAggregationLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends AggregationLayer<D, GridAggregationLayerProps<D, E> & P, S, E> {
     initializeState({ dimensions }: { dimensions: any }): void;
     finalizeState(): void;
     updateShaders(shaders: any): void;
@@ -324,12 +348,16 @@ declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer-
 }
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-cell-layer' {
   import { Layer } from '@deck.gl/core';
-  import { LayerProps } from '@deck.gl/core/lib/layer';
-  export interface ScreenGridCellLayerProps<D> extends LayerProps<D> {}
+  import { LayerData, LayerProps } from '@deck.gl/core/lib/layer';
+
+  export type ScreenGridCellLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = LayerProps<D, E>;
+
   export default class ScreenGridCellLayer<
-    D,
-    P extends ScreenGridCellLayerProps<D> = ScreenGridCellLayerProps<D>
-  > extends Layer<D, P> {
+    D extends LayerData<ScreenGridCellLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Layer<D, ScreenGridCellLayerProps<D, E> & P, S, E> {
     static isSupported(gl: any): any;
     getShaders(): {
       vs: string;
@@ -353,27 +381,30 @@ declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-cell-l
 }
 declare module '@deck.gl/aggregation-layers/screen-grid-layer/screen-grid-layer' {
   import GridAggregationLayer from '@deck.gl/aggregation-layers/grid-aggregation-layer';
-  import { LayerProps } from '@deck.gl/core/lib/layer';
+  import { AggregationLayerProps } from '@deck.gl/aggregation-layers/aggregation-layer';
+  import { LayerData, LayerDataAccessor, LayerProps, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ColorDomain, ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface ScreenGridLayerProps<D> extends LayerProps<D> {
-    //Render Options
-    cellSizePixels?: number;
-    cellMarginPixels?: number;
-    colorDomain?: ColorDomain;
-    colorRange?: ColorRange;
-    gpuAggregation?: boolean;
-    aggregation?: string;
 
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getWeight?: (d: D) => number;
-  }
+  export type ScreenGridLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = LayerProps<D, E> &
+    AggregationLayerProps<D, E> & {
+      //Render Options
+      cellSizePixels?: number;
+      cellMarginPixels?: number;
+      colorDomain?: ColorDomain;
+      colorRange?: ColorRange;
+      gpuAggregation?: boolean;
+      aggregation?: string;
+      // Data Accessors
+      getPosition?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position) | Position;
+      getWeight?: ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number) | number;
+    };
   export default class ScreenGridLayer<
-    D,
-    P extends ScreenGridLayerProps<D> = ScreenGridLayerProps<D>
-  > extends GridAggregationLayer<D, P> {
-    constructor(props: ScreenGridLayerProps<D>);
+    D extends LayerData<ScreenGridLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends GridAggregationLayer<D, ScreenGridLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     renderLayers(): any;
     finalizeState(): void;
@@ -539,10 +570,14 @@ declare module '@deck.gl/aggregation-layers/utils/cpu-aggregator' {
 declare module '@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer' {
   import AggregationLayer, { AggregationLayerProps } from '@deck.gl/aggregation-layers/aggregation-layer';
   import { AggregationOperation } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
-  import { ObjectInfo } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ColorDomain, ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface CPUGridLayerProps<D> extends AggregationLayerProps<D> {
+
+  export type CPUGridLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = AggregationLayerProps<
+    D,
+    E
+  > & {
     cellSize?: number;
     colorDomain?: ColorDomain;
     colorRange?: ColorRange;
@@ -557,21 +592,23 @@ declare module '@deck.gl/aggregation-layers/cpu-grid-layer/cpu-grid-layer' {
     elevationLowerPercentile?: number;
     colorScaleType?: string;
     material?: Object;
-    getPosition?: (d: D) => Position;
-    getColorValue?: (d: D[], objectInfo: ObjectInfo<D, number>) => number;
-    getColorWeight?: (d: D) => number;
     colorAggregation?: string;
-    getElevationValue?: (points: D[], objectInfo: ObjectInfo<D, number>) => number;
-    getElevationWeight?: (d: D) => number;
     elevationAggregation?: AggregationOperation;
     onSetColorDomain?: () => void;
     onSetElevationDomain?: () => void;
-  }
-  export default class CPUGridLayer<D, P extends CPUGridLayerProps<D> = CPUGridLayerProps<D>> extends AggregationLayer<
-    D,
-    P
-  > {
-    constructor(props: CPUGridLayerProps<D>);
+    // Data Accessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getColorValue?: (objects: LayerDataAccessor<D>[], objectInfo: ObjectInfo<D, number>) => number;
+    getColorWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+    getElevationValue?: (objects: LayerDataAccessor<D>[], objectInfo: ObjectInfo<D, number>) => number;
+    getElevationWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
+  export default class CPUGridLayer<
+    D extends LayerData<CPUGridLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends AggregationLayer<D, CPUGridLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     _onGetSublayerColor(cell: any): any;
     _onGetSublayerElevation(cell: any): any;
@@ -613,10 +650,14 @@ declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-aggregator' {
 declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer' {
   import AggregationLayer, { AggregationLayerProps } from '@deck.gl/aggregation-layers/aggregation-layer';
   import { AggregationOperation } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
-  import { ObjectInfo } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ColorDomain, ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface HexagonLayerProps<D> extends AggregationLayerProps<D> {
+
+  export type HexagonLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = AggregationLayerProps<
+    D,
+    E
+  > & {
     //Render Options
     radius?: number;
     hexagonAggregator?: Function;
@@ -633,23 +674,23 @@ declare module '@deck.gl/aggregation-layers/hexagon-layer/hexagon-layer' {
     elevationUpperPercentile?: number;
     elevationLowerPercentile?: number;
     material?: Object;
-
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getColorValue?: (d: D[], objectInfo: ObjectInfo<D, any>) => any;
-    getColorWeight?: (d: D) => any;
     colorAggregation?: string;
-    getElevationValue?: (d: D[], objectInfo: ObjectInfo<D, any>) => any;
-    getElevationWeight?: (d: D) => any;
     elevationAggregation?: AggregationOperation;
     onSetColorDomain?: Function;
     onSetElevationDomain?: Function;
-  }
-  export default class HexagonLayer<D, P extends HexagonLayerProps<D> = HexagonLayerProps<D>> extends AggregationLayer<
-    D,
-    P
-  > {
-    constructor(props: HexagonLayerProps<D>);
+    // Data Accessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getColorValue?: (objects: LayerDataAccessor<D>[], objectInfo: ObjectInfo<D, number>) => number;
+    getColorWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+    getElevationValue?: (objects: LayerDataAccessor<D>[], objectInfo: ObjectInfo<D, number>) => number;
+    getElevationWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
+  export default class HexagonLayer<
+    D extends LayerData<HexagonLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends AggregationLayer<D, HexagonLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     updateRadiusAngle(vertices: any): void;
     convertLatLngToMeterOffset(hexagonVertices: any): number[][];
@@ -728,24 +769,29 @@ declare module '@deck.gl/aggregation-layers/contour-layer/contour-utils' {
 declare module '@deck.gl/aggregation-layers/contour-layer/contour-layer' {
   import GridAggregationLayer, { GridAggregationLayerProps } from '@deck.gl/aggregation-layers/grid-aggregation-layer';
   import { AggregationOperation } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface ContourLayerProps<D> extends GridAggregationLayerProps<D> {
+
+  export type ContourLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = GridAggregationLayerProps<
+    D,
+    E
+  > & {
     //Render Options
     cellSize?: number;
     gpuAggregation?: boolean;
     aggregation?: AggregationOperation;
     contours?: Array<any>;
     zOffset?: number;
-
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getWeight?: (d: D) => number;
-  }
+    // Data Accessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
   export default class ContourLayer<
-    D,
-    P extends ContourLayerProps<D> = ContourLayerProps<D>
-  > extends GridAggregationLayer<D, P> {
-    constructor(props: ContourLayerProps<D>);
+    D extends LayerData<ContourLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends GridAggregationLayer<D, ContourLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     renderLayers(): any[];
     updateAggregationState(opts: any): void;
@@ -765,11 +811,12 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer-f
 }
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer' {
   import { Layer } from '@deck.gl/core';
-  import { LayerProps } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerDataAccessor, LayerProps, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { AggregationOperation } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
   import { ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface GPUGridCellLayerProps<D> extends LayerProps<D> {
+
+  export type GPUGridCellLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = LayerProps<D, E> & {
     //Render Options
     cellSize?: number;
     colorRange?: ColorRange;
@@ -779,18 +826,19 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer' 
     elevationScale?: number;
     extruded?: boolean;
     material?: any;
-
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getColorWeight?: (d: D) => number;
     colorAggregation?: string;
-    getElevationWeight?: (d: D) => number;
     elevationAggregation?: AggregationOperation;
-  }
-  export default class GPUGridCellLayer<D, P extends GPUGridCellLayerProps<D> = GPUGridCellLayerProps<D>> extends Layer<
-    D,
-    P
-  > {
+    // Data Accessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getColorWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+    getElevationWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
+  export default class GPUGridCellLayer<
+    D extends LayerData<GPUGridCellLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Layer<D, GPUGridCellLayerProps<D, E> & P, S, E> {
     getShaders(): any;
     initializeState(params: any): void;
     _getModel(gl: any): any;
@@ -804,9 +852,14 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-cell-layer' 
 declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer' {
   import { AggregationOperation } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
   import GridAggregationLayer, { GridAggregationLayerProps } from '@deck.gl/aggregation-layers/grid-aggregation-layer';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface GPUGridLayerProps<D> extends GridAggregationLayerProps<D> {
+
+  export type GPUGridLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = GridAggregationLayerProps<
+    D,
+    E
+  > & {
     //Render Options
     cellSize?: number;
     colorRange?: ColorRange;
@@ -816,19 +869,19 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer' {
     elevationScale?: number;
     extruded?: boolean;
     material?: any;
-
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getColorWeight?: (d: D) => number;
     colorAggregation?: string;
-    getElevationWeight?: (d: D) => number;
     elevationAggregation?: AggregationOperation;
-  }
+    // Data Acessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getColorWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+    getElevationWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
   export default class GPUGridLayer<
-    D,
-    P extends GPUGridLayerProps<D> = GPUGridLayerProps<D>
-  > extends GridAggregationLayer<D, P> {
-    constructor(props: GPUGridLayerProps<D>);
+    D extends LayerData<GPUGridLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends GridAggregationLayer<D, GPUGridLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     getHashKeyForIndex(index: any): string;
     getPositionForIndex(index: any): any[];
@@ -841,11 +894,12 @@ declare module '@deck.gl/aggregation-layers/gpu-grid-layer/gpu-grid-layer' {
 declare module '@deck.gl/aggregation-layers/grid-layer/grid-layer' {
   import { CompositeLayer } from '@deck.gl/core';
   import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
-  import { ObjectInfo } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ColorDomain, ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
   import { AggregationOperation } from '@deck.gl/aggregation-layers/utils/aggregation-operation-utils';
-  export interface GridLayerProps<D> extends CompositeLayerProps<D> {
+
+  export type GridLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = CompositeLayerProps<D, E> & {
     //Render Options
     cellSize?: number;
     colorDomain?: ColorDomain;
@@ -863,20 +917,23 @@ declare module '@deck.gl/aggregation-layers/grid-layer/grid-layer' {
     fp64?: boolean;
     gpuAggregation?: boolean;
     material?: any;
-
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getColorValue?: (points: D[], objectInfo: ObjectInfo<D, number>) => number;
-    getColorWeight?: (d: D) => number;
     colorAggregation?: string;
-    getElevationValue?: (points: D[], objectInfo: ObjectInfo<D, number>) => number;
-    getElevationWeight?: (d: D) => number;
     elevationAggregation?: AggregationOperation;
     onSetColorDomain?: () => void;
     onSetElevationDomain?: () => void;
-  }
-  export default class GridLayer<D, P extends GridLayerProps<D> = GridLayerProps<D>> extends CompositeLayer<D, P> {
-    constructor(props: GridLayerProps<D>);
+    // Data Acessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getColorValue?: (objects: LayerDataAccessor<D>[], objectInfo: ObjectInfo<D, number>) => number;
+    getColorWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+    getElevationValue?: (objects: LayerDataAccessor<D>[], objectInfo: ObjectInfo<D, number>) => number;
+    getElevationWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
+  export default class GridLayer<
+    D extends LayerData<GridLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, GridLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     renderLayers(): any;
     canUseGPUAggregation(props: any): boolean;
@@ -903,7 +960,13 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/triangle-layer-fragmen
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/triangle-layer' {
   import { Layer } from '@deck.gl/core';
-  export default class TriangleLayer<D> extends Layer<D> {
+  import { LayerData, LayerProps } from '@deck.gl/core/lib/layer';
+  export default class TriangleLayer<
+    D extends LayerData<LayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Layer<D, LayerProps<D> & P, S, E> {
     getShaders(): {
       vs: string;
       fs: string;
@@ -928,9 +991,14 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/max-vs.glsl' {
 }
 declare module '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer' {
   import AggregationLayer, { AggregationLayerProps } from '@deck.gl/aggregation-layers/aggregation-layer';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { ColorDomain, ColorRange } from '@deck.gl/core/utils/color';
   import { Position } from '@deck.gl/core/utils/positions';
-  export interface HeatmapLayerProps<D> extends AggregationLayerProps<D> {
+
+  export type HeatmapLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = AggregationLayerProps<
+    D,
+    E
+  > & {
     //Render Options
     radiusPixels?: number;
     colorRange?: ColorRange;
@@ -938,16 +1006,16 @@ declare module '@deck.gl/aggregation-layers/heatmap-layer/heatmap-layer' {
     threshold?: number;
     colorDomain?: ColorDomain;
     aggregation?: 'SUM' | 'MEAN';
-
-    //Data Accessors
-    getPosition?: (d: D) => Position;
-    getWeight?: (d: D) => number;
-  }
-  export default class HeatmapLayer<D, P extends HeatmapLayerProps<D> = HeatmapLayerProps<D>> extends AggregationLayer<
-    D,
-    P
-  > {
-    constructor(props: HeatmapLayerProps<D>);
+    // Data Accessors
+    getPosition?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position;
+    getWeight?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number;
+  };
+  export default class HeatmapLayer<
+    D extends LayerData<HeatmapLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends AggregationLayer<D, HeatmapLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     renderLayers(): any;
     finalizeState(): void;

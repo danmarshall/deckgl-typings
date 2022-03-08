@@ -17,7 +17,14 @@ declare module '@deck.gl/carto/basemap' {
 }
 declare module '@deck.gl/carto/layers/carto-layer' {
   import { CompositeLayer } from '@deck.gl/core';
-  export default class CartoLayer<D, P> extends CompositeLayer<D, P> {
+  import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
+  import { LayerData } from '@deck.gl/core/lib/layer';
+  export default class CartoLayer<
+    D extends LayerData<CompositeLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, CompositeLayerProps<D, E> & P, S, E> {
     initializeState(): void;
     updateState({ changeFlags }: { changeFlags: any }): void;
     _updateTileJSON(): Promise<void>;
@@ -33,13 +40,27 @@ declare module '@deck.gl/carto/api/maps-api-client' {
 }
 declare module '@deck.gl/carto/layers/carto-sql-layer' {
   import CartoLayer from '@deck.gl/carto/layers/carto-layer';
-  export default class CartoSQLLayer<D, P> extends CartoLayer<D, P> {
+  import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
+  import { LayerData } from '@deck.gl/core/lib/layer';
+  export default class CartoSQLLayer<
+    D extends LayerData<CompositeLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CartoLayer<D, CompositeLayerProps<D, E> & P, S, E> {
     _updateTileJSON(): Promise<void>;
   }
 }
 declare module '@deck.gl/carto/layers/carto-bqtiler-layer' {
   import CartoLayer from '@deck.gl/carto/layers/carto-layer';
-  export default class CartoBQTilerLayer<D, P> extends CartoLayer<D, P> {
+  import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
+  import { LayerData } from '@deck.gl/core/lib/layer';
+  export default class CartoBQTilerLayer<
+    D extends LayerData<CompositeLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CartoLayer<D, CompositeLayerProps<D, E> & P, S, E> {
     _updateTileJSON(): Promise<void>;
   }
 }

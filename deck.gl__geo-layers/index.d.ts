@@ -4,13 +4,18 @@ declare module '@deck.gl/geo-layers/great-circle-layer/great-circle-vertex.glsl'
   export default _default;
 }
 declare module '@deck.gl/geo-layers/great-circle-layer/great-circle-layer' {
+  import { LayerData } from '@deck.gl/core/lib/layer';
   import { ArcLayerProps } from '@deck.gl/layers/arc-layer/arc-layer';
-  export interface GreatCircleLayerProps<D> extends ArcLayerProps<D> {}
+
+  export type GreatCircleLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = ArcLayerProps<D, E>;
+
   import { ArcLayer } from '@deck.gl/layers';
   export default class GreatCircleLayer<
-    D,
-    P extends GreatCircleLayerProps<D> = GreatCircleLayerProps<D>
-  > extends ArcLayer<D, P> {
+    D extends LayerData<GreatCircleLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends ArcLayer<D, GreatCircleLayerProps<D, E> & P, S, E> {
     getShaders(): any;
   }
 }
@@ -39,12 +44,19 @@ declare module '@deck.gl/geo-layers/s2-layer/s2-utils' {
 }
 declare module '@deck.gl/geo-layers/s2-layer/s2-layer' {
   import { CompositeLayer } from '@deck.gl/core';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
-  export interface S2LayerProps<D> extends CompositeLayerProps<D> {
-    getS2Token: (d: D) => any;
-  }
-  export default class S2Layer<D, P extends S2LayerProps<D> = S2LayerProps<D>> extends CompositeLayer<D, P> {
-    constructor(...props: S2LayerProps<D>[]);
+
+  export type S2LayerProps<D extends LayerData, E extends Array<any> = Array<any>> = CompositeLayerProps<D, E> & {
+    // Data Accessors
+    getS2Token: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, any>) => any;
+  };
+  export default class S2Layer<
+    D extends LayerData<S2LayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, S2LayerProps<D, E> & P, S, E> {
     renderLayers(): any;
   }
 }
@@ -191,16 +203,31 @@ declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
   import { CompositeLayer, Layer } from '@deck.gl/core';
   import { LayerProps } from '@deck.gl/core/lib/layer';
   import { ExtentsLeftBottomRightTop } from '@deck.gl/core/utils/positions';
-  export interface TileLayerProps<D> extends LayerProps<D> {
+  import Tile2DHeader from '@deck.gl/geo-layers/tile-layer/tile-2d-header';
+
+  type BBox = {
+    bottom: number;
+    left: number;
+    right: number;
+    top: number;
+  };
+
+  type Tile = {
+    x: number;
+    y: number;
+    z: number;
+    url: string;
+    bbox: BBox;
+    signal: AbortSignal;
+  };
+
+  export type TileLayerProps<
+    D extends string | string[],
+    I extends ImageBitmap | ImageBitmap[],
+    E extends Array<any> = Array<any>
+  > = LayerProps<D, E> & {
     //Data Options
-    getTileData?: (tile: {
-      x: number;
-      y: number;
-      z: number;
-      url: string;
-      bbox: any;
-      signal: AbortSignal;
-    }) => D[] | Promise<D[]> | null;
+    getTileData?: (tile: Tile) => I | Promise<I> | null;
     tileSize?: number;
     maxZoom?: number | null;
     minZoom?: number;
@@ -212,48 +239,52 @@ declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
     extent?: ExtentsLeftBottomRightTop;
 
     //Render Options
-    renderSubLayers?: (props: any) => Layer<any> | Layer<any>[];
+    renderSubLayers?: (props: { data: I; tile: Tile2DHeader & { bbox: BBox } }) => Layer<any, any> | Layer<any, any>[];
     zRange?: [number, number];
 
     //Callbacks
-    onViewportLoad?: (data: D[]) => void;
-    onTileLoad?: (tile: D) => void;
+    onViewportLoad?: (data: D) => void;
+    onTileLoad?: (tile: Tile) => void;
     onTileError?: (error: Error) => void;
-  }
-  export default class TileLayer<D, P extends TileLayerProps<D> = TileLayerProps<D>> extends CompositeLayer<D, P> {
-    constructor(...props: TileLayerProps<D>[]);
+  };
+  export default class TileLayer<
+    D extends string | string[],
+    I extends ImageBitmap | ImageBitmap[],
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, TileLayerProps<D, I, E> & P, S, E> {
+    constructor(props: TileLayerProps<D, I, E> & P, ...additionalProps: Array<TileLayerProps<D, I, E> & P>);
     initializeState(params: any): void;
     get isLoaded(): any;
     _updateTileset(): void;
     _onTileLoad(tile: any): void;
     _onTileError(error: any): void;
-    getTileData(tile: any): any;
-    renderSubLayers(props: any): any;
+    getTileData(tile: Tile): I | Promise<I> | null;
+    renderSubLayers(props: { data: I; tile: Tile2DHeader & { bbox: BBox } }): Layer<any, any> | Layer<any, any>[];
     renderLayers(): any;
   }
 }
 declare module '@deck.gl/geo-layers/trips-layer/trips-layer' {
   import { PathLayer } from '@deck.gl/layers';
+  import { TypedArray } from '@deck.gl/core';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { Position } from '@deck.gl/core/utils/positions';
-  import LayerPath, { PathLayerProps, TypedArray } from '@deck.gl/layers/path-layer/path-layer';
-  export interface TripsLayerProps<D> extends PathLayerProps<D> {
+  import { PathLayerProps } from '@deck.gl/layers/path-layer/path-layer';
+
+  export type TripsLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = PathLayerProps<D, E> & {
     //Render Options
     currentTime?: number;
     trailLength?: number;
-
-    //Data Accessors
-    getPath?: (d: D) => Position[] | TypedArray;
-    getTimestamps?: (
-      d: D,
-      info?: {
-        data: D[];
-        index: number;
-        target: number[];
-      }
-    ) => number[];
-  }
-  export default class TripsLayer<D, P extends TripsLayerProps<D> = TripsLayerProps<D>> extends PathLayer<D, P> {
-    constructor(...props: TripsLayerProps<D>[]);
+    // Data Accessors
+    getPath?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => Position[] | TypedArray;
+    getTimestamps?: (d: LayerDataAccessor<D>, objectInfo?: ObjectInfo<D, number>) => number[];
+  };
+  export default class TripsLayer<
+    D extends LayerData<TripsLayerProps<any, E>>,
+    P = unknown,
+    E extends Array<any> = Array<any>
+  > extends PathLayer<D, TripsLayerProps<D, E> & P, E> {
     getShaders(): any;
     initializeState(params?: any): void;
     draw(params: any): void;
@@ -261,28 +292,35 @@ declare module '@deck.gl/geo-layers/trips-layer/trips-layer' {
 }
 declare module '@deck.gl/geo-layers/h3-layers/h3-cluster-layer' {
   import { CompositeLayer } from '@deck.gl/core';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { PolygonLayerProps } from '@deck.gl/layers/polygon-layer/polygon-layer';
-  export interface H3ClusterLayerProps<D> extends PolygonLayerProps<D> {
-    getHexagons?: (d: D) => string[];
-  }
+
+  export type H3ClusterLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = PolygonLayerProps<D, E> & {
+    // Data Accessors
+    getHexagons?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, string>) => string[];
+  };
   export default class H3ClusterLayer<
-    D,
-    P extends H3ClusterLayerProps<D> = H3ClusterLayerProps<D>
-  > extends CompositeLayer<D, P> {
-    constructor(...props: H3ClusterLayerProps<D>[]);
+    D extends LayerData<H3ClusterLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, H3ClusterLayerProps<D, E> & P, S, E> {
     renderLayers(): any;
   }
 }
 declare module '@deck.gl/geo-layers/h3-layers/h3-hexagon-layer' {
   import { CompositeLayer } from '@deck.gl/core';
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   import { PolygonLayerProps } from '@deck.gl/layers/polygon-layer/polygon-layer';
   export function normalizeLongitudes(vertices: any, refLng: any): void;
   export function scalePolygon(hexId: any, vertices: any, factor: any): void;
-  export interface H3HexagonLayerProps<D> extends PolygonLayerProps<D> {
+
+  export type H3HexagonLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = PolygonLayerProps<D, E> & {
     highPrecision?: boolean;
     coverage?: number;
-    getHexagon?: (d: D) => string;
-  }
+    // Data Accessors
+    getHexagon?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, string>) => string;
+  };
 
   /**
    * A subclass of HexagonLayer that uses H3 hexagonIds in data objects
@@ -296,10 +334,11 @@ declare module '@deck.gl/geo-layers/h3-layers/h3-hexagon-layer' {
    * index !== -1 to see if picking matches an actual object.
    */
   export default class H3HexagonLayer<
-    D,
-    P extends H3HexagonLayerProps<D> = H3HexagonLayerProps<D>
-  > extends CompositeLayer<D, P> {
-    constructor(...props: H3HexagonLayerProps<D>[]);
+    D extends LayerData<H3HexagonLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, H3HexagonLayerProps<D, E> & P, S, E> {
     _shouldUseHighPrecision(): any;
     _updateVertices(viewport: any): void;
     renderLayers(): any;
@@ -334,13 +373,12 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
   import { CompositeLayer } from '@deck.gl/core';
   import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
   import { RGBAColor } from '@deck.gl/core/utils/color';
-  export interface Tile3DLayerProps<D> extends CompositeLayerProps<D> {
+  export type Tile3DLayerProps<D extends string, E extends Array<any> = Array<any>> = CompositeLayerProps<D, E> & {
     //Render Options
     opacity?: number;
     pointSize?: number;
 
     //Data Properties
-    data?: string;
     loader?: any;
     pickable?: boolean;
 
@@ -352,12 +390,13 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
     onTileLoad?: (tileHeader: Object) => void;
     onTileUnload?: (tileHeader: Object) => void;
     onTileError?: (tileHeader: Object, url: string, message: string) => void;
-  }
-  export default class Tile3DLayer<D, P extends Tile3DLayerProps<D> = Tile3DLayerProps<D>> extends CompositeLayer<
-    D,
-    P
-  > {
-    constructor(...props: Tile3DLayerProps<D>[]);
+  };
+  export default class Tile3DLayer<
+    D extends string,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, Tile3DLayerProps<D, E> & P, S, E> {
     initializeState(params: any): void;
     _loadTileset(tilesetUrl: any): Promise<void>;
     _onTileLoad(tileHeader: any): void;
@@ -373,6 +412,7 @@ declare module '@deck.gl/geo-layers/tile-3d-layer/tile-3d-layer' {
 declare module '@deck.gl/geo-layers/terrain-layer/terrain-layer' {
   import { CompositeLayer } from '@deck.gl/core';
   import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
+  import { LayerData } from '@deck.gl/core/lib/layer';
   import { RGBAColor } from '@deck.gl/core/utils/color';
   import { ExtentsLeftBottomRightTop } from '@deck.gl/core/utils/positions';
   /**
@@ -382,7 +422,7 @@ declare module '@deck.gl/geo-layers/terrain-layer/terrain-layer' {
    * }
    */
 
-  export interface TerrainLayerProps<D> extends CompositeLayerProps<D> {
+  export type TerrainLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = CompositeLayerProps<D, E> & {
     //Data Options
     elevationData: string | string[];
     texture?: string | null;
@@ -408,12 +448,13 @@ declare module '@deck.gl/geo-layers/terrain-layer/terrain-layer' {
     maxZoom?: number | null;
     tileSize?: number;
     extent?: ExtentsLeftBottomRightTop;
-  }
-  export default class TerrainLayer<D, P extends TerrainLayerProps<D> = TerrainLayerProps<D>> extends CompositeLayer<
-    D,
-    P
-  > {
-    constructor(...props: TerrainLayerProps<D>[]);
+  };
+  export default class TerrainLayer<
+    D extends LayerData<TerrainLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends CompositeLayer<D, TerrainLayerProps<D, E> & P, S, E> {
     loadTerrain({
       elevationData,
       bounds,
@@ -466,14 +507,41 @@ declare module '@deck.gl/geo-layers/mvt-layer/clip-extension' {
 }
 declare module '@deck.gl/geo-layers/mvt-layer/mvt-layer' {
   import TileLayer, { TileLayerProps } from '@deck.gl/geo-layers/tile-layer/tile-layer';
-  export interface MVTLayerProps<D> extends TileLayerProps<D> {
+
+  type TileJson = {
+    tilejson: string;
+    name?: string;
+    description?: string;
+    version?: string;
+    attribution?: string;
+    template?: string;
+    legend?: string;
+    scheme?: string;
+    tiles: string[];
+    grid?: string[];
+    data?: string[];
+    minzoom?: number;
+    maxzoom?: number;
+    bounds?: [number, number, number, number];
+    center?: [number, number, number];
+  };
+
+  export type MVTLayerProps<
+    D extends string | string[] | TileJson,
+    I extends ImageBitmap | ImageBitmap[],
+    E extends Array<any> = Array<any>
+  > = Omit<TileLayerProps<Exclude<D, TileJson>, I, E>, 'data'> & {
+    data?: D;
     uniqueIdProperty?: string;
     binary?: boolean;
-  }
-  export default class MVTLayer<D, P extends MVTLayerProps<D> = MVTLayerProps<D>> extends TileLayer<D, P> {
-    constructor(...props: MVTLayerProps<D>[]);
-    getTileData(tile: any): any;
-    renderSubLayers(props: any): any;
+  };
+  export default class MVTLayer<
+    D extends string | string[] | TileJson,
+    I extends ImageBitmap | ImageBitmap[],
+    P = unknown,
+    E extends Array<any> = Array<any>
+  > extends TileLayer<Exclude<D, TileJson>, I, MVTLayerProps<D, I, E> & P, E> {
+    constructor(props: MVTLayerProps<D, I, E> & P);
   }
 }
 declare module '@deck.gl/geo-layers' {

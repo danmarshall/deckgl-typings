@@ -1,4 +1,5 @@
 import { Layer } from 'deck.gl';
+import { LayerData } from '@deck.gl/core/lib/layer';
 import {
   ArcLayer,
   BitmapLayer,
@@ -35,7 +36,7 @@ import {
 } from '@deck.gl/geo-layers';
 import { SimpleMeshLayer, ScenegraphLayer } from '@deck.gl/mesh-layers';
 
-interface Datum {}
+type Datum = LayerData;
 
 export const testLayersArray: Layer<Datum>[] = [
   // @ts-expect-error - Should have at least one prop object to constructor
@@ -45,7 +46,7 @@ export const testLayersArray: Layer<Datum>[] = [
   // Multiple prop objects to constructor
   new Layer<Datum>({}, {}, {}, {}, {}),
   new ArcLayer<Datum>({}),
-  new BitmapLayer<Datum>({
+  new BitmapLayer({
     image: null,
     bounds: [0, 0, 0, 0],
   }),
@@ -74,11 +75,11 @@ export const testLayersArray: Layer<Datum>[] = [
   new H3ClusterLayer<Datum>({}),
   new H3HexagonLayer<Datum>({}),
   new TripsLayer<Datum>({}),
-  new Tile3DLayer<Datum>({}),
+  new Tile3DLayer<string>({}),
   new TerrainLayer<Datum>({
     elevationData: '',
   }),
-  new MVTLayer<Datum>({}),
+  new MVTLayer({}),
   new SimpleMeshLayer<Datum>({
     mesh: {
       positions: new Float32Array(),
