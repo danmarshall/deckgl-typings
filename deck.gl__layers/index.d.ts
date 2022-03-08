@@ -320,7 +320,7 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
     D,
     P
   > {
-    getShaders(): any;
+    getShaders(id: any): any;
     initializeState(params: any): void;
     draw({ uniforms }: { uniforms: any }): void;
     _getModel(gl: any): any;
