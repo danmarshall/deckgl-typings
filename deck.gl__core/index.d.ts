@@ -987,7 +987,7 @@ declare module '@deck.gl/core/lib/layer' {
   import { UNIT } from '@deck.gl/core/lib/constants';
   import { Buffer as LumaBuffer } from '@luma.gl/core';
 
-  interface DataAttribute {
+  export interface DataAttribute {
     buffer?: LumaBuffer;
     normalized?: boolean;
     offset?: number;
@@ -1002,6 +1002,7 @@ declare module '@deck.gl/core/lib/layer' {
      */
     type?: 0x1400 | 0x1401 | 0x1402 | 0x1403 | 0x1406 | 0x140b;
     value?: TypedArray;
+    [k: string]: any;
   }
 
   type NonIterableData<T extends string> = {
