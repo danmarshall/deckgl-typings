@@ -2110,6 +2110,7 @@ declare module '@deck.gl/core/lib/deck' {
   import TransitionInterpolator from '@deck.gl/core/transitions/transition-interpolator';
   import { TRANSITION_EVENTS } from '@deck.gl/core/controllers/transition-manager';
   import { Position } from '@deck.gl/core/utils/positions';
+  import { AnimationLoop } from "@luma.gl/core";
 
   export interface InteractiveState {
     isDragging: boolean;
@@ -2252,6 +2253,7 @@ declare module '@deck.gl/core/lib/deck' {
 
   export default class Deck<T = ContextProviderValue> {
     constructor(props: Partial<DeckProps<T>>);
+		animationLoop: AnimationLoop;
     canvas: HTMLCanvasElement;
     viewState: any;
     width: number;
