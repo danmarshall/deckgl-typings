@@ -1335,6 +1335,7 @@ declare module '@deck.gl/core/viewports/viewport' {
   }
 }
 declare module '@deck.gl/core/lib/layer-manager' {
+  import { Layer } from '@deck.gl/core';
   export default class LayerManager {
     constructor(
       gl: any,
@@ -1355,7 +1356,7 @@ declare module '@deck.gl/core/lib/layer-manager' {
     needsUpdate(): any;
     setNeedsRedraw(reason: any): void;
     setNeedsUpdate(reason: any): void;
-    getLayers({ layerIds }?: { layerIds?: any }): any;
+    getLayers({ layerIds }?: { layerIds?: any }): Layer<any, any>[];
     setProps(props: any): void;
     setLayers(newLayers: any, forceUpdate?: boolean): this;
     updateLayers(): void;
@@ -1368,6 +1369,7 @@ declare module '@deck.gl/core/lib/layer-manager' {
     _transferLayerState(oldLayer: any, newLayer: any): void;
     _updateLayer(layer: any): void;
     _finalizeLayer(layer: any): void;
+    layers: Layer<any, any>[];
   }
 }
 declare module '@deck.gl/core/utils/deep-equal' {
