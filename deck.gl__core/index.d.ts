@@ -991,16 +991,9 @@ declare module '@deck.gl/core/lib/layer' {
     buffer?: LumaBuffer;
     normalized?: boolean;
     offset?: number;
-    size?: 1 | 2 | 3 | 4;
+    size?: number;
     stride?: number;
-    /**
-     * type GLCONSTANTS = typeof import('@luma.gl/constants/src/index').default
-     * type?:
-     * 	| GLCONSTANTS['BYTE'] | GLCONSTANTS['SHORT'] | GLCONSTANTS['UNSIGNED_BYTE']
-     * 	| GLCONSTANTS['UNSIGNED_SHORT'] | GLCONSTANTS['FLOAT'] | GLCONSTANTS['HALF_FLOAT']
-     *  ^ these are all typed as number, so replacing with their values here
-     */
-    type?: 0x1400 | 0x1401 | 0x1402 | 0x1403 | 0x1406 | 0x140b;
+    type?: number;
     value?: TypedArray;
     [k: string]: any;
   }
