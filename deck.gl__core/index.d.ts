@@ -1118,7 +1118,7 @@ declare module '@deck.gl/core/lib/layer' {
     getAttributeManager(): any;
     getCurrentLayer(): any;
     getLoadOptions(): any;
-    project(xyz: any): any[];
+    project(xyz: [number, number, number]): [number, number, number];
     unproject(xy: any): any;
     projectPosition(xyz: any): any;
     use64bitPositions(): boolean;
