@@ -2097,6 +2097,7 @@ declare module '@deck.gl/core/lib/deck-picker' {
 declare module '@deck.gl/core/lib/tooltip' {
   export default class Tooltip {
     constructor(canvas: any);
+    el: HTMLElement;
     setTooltip(displayInfo: any, x: any, y: any): void;
     remove(): void;
   }
