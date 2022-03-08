@@ -2105,6 +2105,8 @@ declare module '@deck.gl/core/lib/deck' {
   import Controller, { ControllerOptions } from '@deck.gl/core/controllers/controller';
   import Effect from '@deck.gl/core/lib/effect';
   import Layer from '@deck.gl/core/lib/layer';
+  import LayerManager from "@deck.gl/core/lib/layer-manager";
+	import Tooltip from "@deck.gl/core/lib/tooltip";
   import View from '@deck.gl/core/views/view';
   import Viewport from '@deck.gl/core/viewports/viewport';
   import TransitionInterpolator from '@deck.gl/core/transitions/transition-interpolator';
@@ -2255,6 +2257,9 @@ declare module '@deck.gl/core/lib/deck' {
     constructor(props: Partial<DeckProps<T>>);
 		animationLoop: AnimationLoop;
     canvas: HTMLCanvasElement;
+    eventManager: any;
+		layerManager: LayerManager;
+		tooltip: Tooltip;
     viewState: any;
     width: number;
     height: number;
