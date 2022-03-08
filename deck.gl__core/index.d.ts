@@ -1609,7 +1609,7 @@ declare module '@deck.gl/core/controllers/transition-manager' {
 //https://github.com/visgl/deck.gl/blob/master/docs/api-reference/core/controller.md
 declare module '@deck.gl/core/controllers/controller' {
   import { InteractionState } from '@deck.gl/core/lib/deck';
-  
+
   export interface ControllerOptions {
     scrollZoom?:
       | boolean
@@ -2108,14 +2108,14 @@ declare module '@deck.gl/core/lib/deck' {
   import Controller, { ControllerOptions } from '@deck.gl/core/controllers/controller';
   import Effect from '@deck.gl/core/lib/effect';
   import Layer from '@deck.gl/core/lib/layer';
-  import LayerManager from "@deck.gl/core/lib/layer-manager";
-	import Tooltip from "@deck.gl/core/lib/tooltip";
+  import LayerManager from '@deck.gl/core/lib/layer-manager';
+  import Tooltip from '@deck.gl/core/lib/tooltip';
   import View from '@deck.gl/core/views/view';
   import Viewport from '@deck.gl/core/viewports/viewport';
   import TransitionInterpolator from '@deck.gl/core/transitions/transition-interpolator';
   import { TRANSITION_EVENTS } from '@deck.gl/core/controllers/transition-manager';
   import { Position } from '@deck.gl/core/utils/positions';
-  import { AnimationLoop } from "@luma.gl/core";
+  import { AnimationLoop } from '@luma.gl/core';
 
   export interface InteractiveState {
     isDragging: boolean;
@@ -2183,13 +2183,13 @@ declare module '@deck.gl/core/lib/deck' {
     eventManager: object;
   }
 
-	export interface InteractionState {
-		inTransition?: boolean;
-		isDragging?: boolean;
-		isPanning?: boolean;
-		isRotating?: boolean;
-		isZooming?: boolean;
-	}
+  export interface InteractionState {
+    inTransition?: boolean;
+    isDragging?: boolean;
+    isPanning?: boolean;
+    isRotating?: boolean;
+    isZooming?: boolean;
+  }
 
   export interface DeckProps<T = ContextProviderValue> {
     //https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
@@ -2236,11 +2236,7 @@ declare module '@deck.gl/core/lib/deck' {
 
     //Event Callbacks
     onWebGLInitialized: (gl: WebGLRenderingContext) => any;
-    onViewStateChange: (args: {
-      viewState: any;
-      interactionState: InteractionState;
-      oldViewState: any;
-    }) => any;
+    onViewStateChange: (args: { viewState: any; interactionState: InteractionState; oldViewState: any }) => any;
     onInteractionStateChange(interactionState: InteractionState): void;
     onHover: <D>(info: PickInfo<D>, e: MouseEvent) => any;
     onClick: <D>(info: PickInfo<D>, e: MouseEvent) => any;
@@ -2261,11 +2257,11 @@ declare module '@deck.gl/core/lib/deck' {
 
   export default class Deck<T = ContextProviderValue> {
     constructor(props: Partial<DeckProps<T>>);
-		animationLoop: AnimationLoop;
+    animationLoop: AnimationLoop;
     canvas: HTMLCanvasElement;
     eventManager: any;
-		layerManager: LayerManager;
-		tooltip: Tooltip;
+    layerManager: LayerManager;
+    tooltip: Tooltip;
     viewState: any;
     width: number;
     height: number;
