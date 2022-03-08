@@ -94,6 +94,7 @@ declare module '@deck.gl/core/utils/assert' {
   export default function assert(condition: any, message: any): void;
 }
 declare module '@deck.gl/core/shaderlib/project/viewport-uniforms' {
+  import { Matrix4 } from '@math.gl/core';
   export function getOffsetOrigin(
     viewport: any,
     coordinateSystem: any,
@@ -124,7 +125,7 @@ declare module '@deck.gl/core/shaderlib/project/viewport-uniforms' {
   }?: {
     viewport: any;
     devicePixelRatio?: number;
-    modelMatrix?: any;
+    modelMatrix?: Matrix4;
     coordinateSystem?: number;
     coordinateOrigin: number[];
     wrapLongitude?: boolean;
@@ -307,6 +308,7 @@ declare module '@deck.gl/core/effects/lighting/lighting-effect' {
 }
 declare module '@deck.gl/core/shaderlib/project/project-functions' {
   import { Position } from '@deck.gl/core/utils/positions';
+  import { Matrix4 } from '@math.gl/core';
   export function getWorldPosition(
     position: Position,
     {
@@ -317,7 +319,7 @@ declare module '@deck.gl/core/shaderlib/project/project-functions' {
       offsetMode,
     }: {
       viewport: any;
-      modelMatrix: any;
+      modelMatrix: Matrix4;
       coordinateSystem: any;
       coordinateOrigin: any;
       offsetMode: any;
@@ -979,6 +981,7 @@ declare module '@deck.gl/core/lib/layer' {
   import LayerManager from '@deck.gl/core/lib/layer-manager';
   import Viewport from '@deck.gl/core/viewports/viewport';
   import { Position } from '@deck.gl/core/utils/positions';
+  import { Matrix4 } from '@math.gl/core';
 
   export interface LayerContext {
     layerManager: LayerManager;
@@ -1054,7 +1057,7 @@ declare module '@deck.gl/core/lib/layer' {
     coordinateSystem?: number;
     coordinateOrigin?: Position;
     wrapLongitude?: boolean;
-    modelMatrix?: number[];
+    modelMatrix?: Matrix4;
 
     //Data Properties
     dataComparator?: (newData: D, oldData: D) => boolean;
@@ -1435,6 +1438,7 @@ declare module '@deck.gl/core/utils/positions' {
 }
 declare module '@deck.gl/core/views/view' {
   import Viewport from '@deck.gl/core/viewports/viewport';
+  import { Matrix4 } from '@math.gl/core';
 
   export interface ViewProps {
     id?: string;
@@ -1458,7 +1462,7 @@ declare module '@deck.gl/core/views/view' {
 
     focalDistance?: number; // Modifier of viewport scale. Corresponds to the number of pixels per meter. Default `1`.
 
-    modelMatrix?: number[]; // A model matrix to be applied to position, to match the layer props API
+    modelMatrix?: Matrix4; // A model matrix to be applied to position, to match the layer props API
 
     type?: typeof Viewport; // Internal: Viewport Type
   }
