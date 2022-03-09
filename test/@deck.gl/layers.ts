@@ -27,15 +27,6 @@ new TextLayer({
   extensions: [],
 });
 
-// @ts-expect-error -- size must be <= 4
-new TextLayer({
-  data: {
-    attributes: { getPosition: { size: 100, stride: 1, value: new Int8Array() } },
-    length: 4,
-    zExtraAttribute: true,
-  },
-});
-
 new TextLayer({
   data: {
     attributes: { getPosition: { size: 2, stride: 1, value: new Int8Array() } },
