@@ -1585,7 +1585,6 @@ declare module '@deck.gl/core/controllers/transition-manager' {
     SNAP_TO_END = 2,
     IGNORE = 3
   }
-
   export default class TransitionManager {
     constructor(ControllerState: any, props?: {});
     finalize(): void;
