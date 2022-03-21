@@ -59,6 +59,11 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
     shininess?: number;
     specularColor?: [number, number, number];
   }
+  export interface AccessorContext<D> {
+    index: number;
+    data: D;
+    target: Array<number>;
+  }
   export interface SimpleMeshLayerProps<D> extends LayerProps<D> {
     mesh: SimpleMesh | null;
     _instanced?: boolean; // _instanced is a hack to use world position instead of meter offsets in mesh
@@ -66,12 +71,12 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
     sizeScale?: number;
     wireframe?: boolean;
     material?: Material;
-    getPosition?: ((d: D) => Position3D) | Position3D;
-    getColor?: ((d: D) => RGBAColor) | RGBAColor;
-    getOrientation?: ((d: D) => PitchYawRoll) | PitchYawRoll;
-    getScale?: ((d: D) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
-    getTranslation?: ((d: D) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
-    getTransformMatrix?: ((d: D) => number[][] | null) | number[][] | null; // 4x4 column-major model matrix
+    getPosition?: ((d: D, context: AccessorContext<D>) => Position3D) | Position3D;
+    getColor?: ((d: D, context: AccessorContext<D>) => RGBAColor) | RGBAColor;
+    getOrientation?: ((d: D, context: AccessorContext<D>) => PitchYawRoll) | PitchYawRoll;
+    getScale?: ((d: D, context: AccessorContext<D>) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
+    getTranslation?: ((d: D, context: AccessorContext<D>) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
+    getTransformMatrix?: ((d: D, context: AccessorContext<D>) => number[][] | null) | number[][] | null; // 4x4 column-major model matrix
   }
   export default class SimpleMeshLayer<D, P extends SimpleMeshLayerProps<D> = SimpleMeshLayerProps<D>> extends Layer<
     D,
