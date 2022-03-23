@@ -898,6 +898,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
     sizeUnits?: WidthUnits;
     sizeMinPixels?: number;
     sizeMaxPixels?: number;
+    background?: boolean;
     billboard?: boolean;
     backgroundColor?: RGBAColor;
     fontFamily?: string;
