@@ -76,7 +76,7 @@ declare module '@deck.gl/mesh-layers/simple-mesh-layer/simple-mesh-layer' {
     getOrientation?: ((d: D, context: AccessorContext<D>) => PitchYawRoll) | PitchYawRoll;
     getScale?: ((d: D, context: AccessorContext<D>) => ScaleXYZ) | ScaleXYZ; // Scaling factor on the mesh along each axis.
     getTranslation?: ((d: D, context: AccessorContext<D>) => TranslationXYZ) | TranslationXYZ; // Translation of the mesh along each axis. Offset from the center position given by getPosition. [x, y, z] in meters.
-    getTransformMatrix?: ((d: D, context: AccessorContext<D>) => number[][] | null) | number[][] | null; // 4x4 column-major model matrix
+    getTransformMatrix?: ((d: D, context: AccessorContext<D>) => number[] | null) | number[] | null; // 4x4 column-major model matrix
   }
   export default class SimpleMeshLayer<D, P extends SimpleMeshLayerProps<D> = SimpleMeshLayerProps<D>> extends Layer<
     D,
