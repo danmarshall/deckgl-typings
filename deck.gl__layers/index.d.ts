@@ -901,6 +901,7 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
     background?: boolean;
     billboard?: boolean;
     backgroundColor?: RGBAColor;
+    backgroundPadding?: [number, number] | [number, number, number, number];
     fontFamily?: string;
     characterSet?: string | string[];
     fontWeight?: number | string;
