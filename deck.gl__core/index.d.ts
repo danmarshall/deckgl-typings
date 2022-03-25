@@ -1580,11 +1580,11 @@ declare module '@deck.gl/core/transitions/linear-interpolator' {
   }
 }
 declare module '@deck.gl/core/controllers/transition-manager' {
-  export const TRANSITION_EVENTS: {
-    BREAK: number;
-    SNAP_TO_END: number;
-    IGNORE: number;
-  };
+  export enum TRANSITION_EVENTS {
+    BREAK = 1,
+    SNAP_TO_END = 2,
+    IGNORE = 3
+  }
   export default class TransitionManager {
     constructor(ControllerState: any, props?: {});
     finalize(): void;
@@ -1673,6 +1673,7 @@ declare module '@deck.gl/core/controllers/map-controller' {
   import Controller from '@deck.gl/core/controllers/controller';
   import ViewState from '@deck.gl/core/controllers/view-state';
   import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
+  import { TRANSITION_EVENTS } from '@deck.gl/core/controllers/transition-manager';
   export const MAPBOX_LIMITS: {
     minZoom: number;
     maxZoom: number;
@@ -1830,7 +1831,7 @@ declare module '@deck.gl/core/controllers/map-controller' {
       transitionDuration: number;
       transitionEasing: (t: any) => any;
       transitionInterpolator: LinearInterpolator;
-      transitionInterruption: number;
+      transitionInterruption: TRANSITION_EVENTS;
     };
     _onPanRotate(event: any): false | void;
   }
@@ -2141,7 +2142,7 @@ declare module '@deck.gl/core/lib/deck' {
     transitionDuration?: number | string;
     transitionEasing?: (x: number) => number;
     transitionInterpolator?: TransitionInterpolator;
-    transitionInterruption?: typeof TRANSITION_EVENTS[keyof typeof TRANSITION_EVENTS];
+    transitionInterruption?: TRANSITION_EVENTS;
     onTransitionStart?: () => void;
     onTransitionInterrupt?: () => void;
     onTransitionEnd?: () => void;
@@ -2412,6 +2413,7 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
   import Controller from '@deck.gl/core/controllers/controller';
   import ViewState from '@deck.gl/core/controllers/view-state';
   import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
+  import { TRANSITION_EVENTS } from '@deck.gl/core/controllers/transition-manager';
   export class OrbitState extends ViewState {
     constructor({
       ViewportType,
@@ -2526,7 +2528,7 @@ declare module '@deck.gl/core/controllers/orbit-controller' {
       transitionDuration: number;
       transitionEasing: (t: any) => any;
       transitionInterpolator: LinearInterpolator;
-      transitionInterruption: number;
+      transitionInterruption: TRANSITION_EVENTS;
     };
   }
 }
@@ -2554,6 +2556,7 @@ declare module '@deck.gl/core/views/orbit-view' {
 declare module '@deck.gl/core/controllers/orthographic-controller' {
   import Controller from '@deck.gl/core/controllers/controller';
   import LinearInterpolator from '@deck.gl/core/transitions/linear-interpolator';
+  import { TRANSITION_EVENTS } from '@deck.gl/core/controllers/transition-manager';
   export default class OrthographicController extends Controller {
     constructor(props: any);
     _onPanRotate(event: any): boolean | void;
@@ -2561,7 +2564,7 @@ declare module '@deck.gl/core/controllers/orthographic-controller' {
       transitionDuration: number;
       transitionEasing: (t: any) => any;
       transitionInterpolator: LinearInterpolator;
-      transitionInterruption: number;
+      transitionInterruption: TRANSITION_EVENTS;
     };
   }
 }
