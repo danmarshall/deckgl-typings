@@ -1016,7 +1016,7 @@ declare module '@deck.gl/core/lib/layer' {
     (o: PickInfo<D>, e: HammerInput): any;
   }
   export type DataSet<D> = Iterable<D>;
-  export type WidthUnits = 'meters' | 'pixels';
+  export type WidthUnits = 'meters' | 'common' | 'pixels';
 
   export interface ObjectInfo<D, T> {
     // the index of the current iteration
