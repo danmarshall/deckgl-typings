@@ -94,6 +94,7 @@ declare module '@deck.gl/core/utils/assert' {
   export default function assert(condition: any, message: any): void;
 }
 declare module '@deck.gl/core/shaderlib/project/viewport-uniforms' {
+  import { Matrix4 } from '@math.gl/core';
   export function getOffsetOrigin(
     viewport: any,
     coordinateSystem: any,
@@ -124,7 +125,7 @@ declare module '@deck.gl/core/shaderlib/project/viewport-uniforms' {
   }?: {
     viewport: any;
     devicePixelRatio?: number;
-    modelMatrix?: any;
+    modelMatrix?: Matrix4;
     coordinateSystem?: number;
     coordinateOrigin: number[];
     wrapLongitude?: boolean;
@@ -307,6 +308,7 @@ declare module '@deck.gl/core/effects/lighting/lighting-effect' {
 }
 declare module '@deck.gl/core/shaderlib/project/project-functions' {
   import { Position } from '@deck.gl/core/utils/positions';
+  import { Matrix4 } from '@math.gl/core';
   export function getWorldPosition(
     position: Position,
     {
@@ -317,7 +319,7 @@ declare module '@deck.gl/core/shaderlib/project/project-functions' {
       offsetMode,
     }: {
       viewport: any;
-      modelMatrix: any;
+      modelMatrix: Matrix4;
       coordinateSystem: any;
       coordinateOrigin: any;
       offsetMode: any;
@@ -979,6 +981,7 @@ declare module '@deck.gl/core/lib/layer' {
   import LayerManager from '@deck.gl/core/lib/layer-manager';
   import Viewport from '@deck.gl/core/viewports/viewport';
   import { Position } from '@deck.gl/core/utils/positions';
+  import { Matrix4 } from '@math.gl/core';
 
   export interface LayerContext {
     layerManager: LayerManager;
@@ -1054,7 +1057,7 @@ declare module '@deck.gl/core/lib/layer' {
     coordinateSystem?: number;
     coordinateOrigin?: Position;
     wrapLongitude?: boolean;
-    modelMatrix?: number[];
+    modelMatrix?: Matrix4;
 
     //Data Properties
     dataComparator?: (newData: D, oldData: D) => boolean;
@@ -1115,7 +1118,7 @@ declare module '@deck.gl/core/lib/layer' {
     getAttributeManager(): any;
     getCurrentLayer(): any;
     getLoadOptions(): any;
-    project(xyz: any): any[];
+    project(xyz: [number, number, number]): [number, number, number];
     unproject(xy: any): any;
     projectPosition(xyz: any): any;
     use64bitPositions(): boolean;
@@ -1335,6 +1338,7 @@ declare module '@deck.gl/core/viewports/viewport' {
   }
 }
 declare module '@deck.gl/core/lib/layer-manager' {
+  import { Layer } from '@deck.gl/core';
   export default class LayerManager {
     constructor(
       gl: any,
@@ -1355,7 +1359,7 @@ declare module '@deck.gl/core/lib/layer-manager' {
     needsUpdate(): any;
     setNeedsRedraw(reason: any): void;
     setNeedsUpdate(reason: any): void;
-    getLayers({ layerIds }?: { layerIds?: any }): any;
+    getLayers({ layerIds }?: { layerIds?: any }): Layer<any, any>[];
     setProps(props: any): void;
     setLayers(newLayers: any, forceUpdate?: boolean): this;
     updateLayers(): void;
@@ -1368,6 +1372,7 @@ declare module '@deck.gl/core/lib/layer-manager' {
     _transferLayerState(oldLayer: any, newLayer: any): void;
     _updateLayer(layer: any): void;
     _finalizeLayer(layer: any): void;
+    layers: Layer<any, any>[];
   }
 }
 declare module '@deck.gl/core/utils/deep-equal' {
@@ -1433,6 +1438,7 @@ declare module '@deck.gl/core/utils/positions' {
 }
 declare module '@deck.gl/core/views/view' {
   import Viewport from '@deck.gl/core/viewports/viewport';
+  import { Matrix4 } from '@math.gl/core';
 
   export interface ViewProps {
     id?: string;
@@ -1456,7 +1462,7 @@ declare module '@deck.gl/core/views/view' {
 
     focalDistance?: number; // Modifier of viewport scale. Corresponds to the number of pixels per meter. Default `1`.
 
-    modelMatrix?: number[]; // A model matrix to be applied to position, to match the layer props API
+    modelMatrix?: Matrix4; // A model matrix to be applied to position, to match the layer props API
 
     type?: typeof Viewport; // Internal: Viewport Type
   }
@@ -1602,6 +1608,8 @@ declare module '@deck.gl/core/controllers/transition-manager' {
 
 //https://github.com/visgl/deck.gl/blob/master/docs/api-reference/core/controller.md
 declare module '@deck.gl/core/controllers/controller' {
+  import { InteractionState } from '@deck.gl/core/lib/deck';
+
   export interface ControllerOptions {
     scrollZoom?:
       | boolean
@@ -1644,7 +1652,7 @@ declare module '@deck.gl/core/controllers/controller' {
     setProps(props: any): void;
     updateTransition(): void;
     toggleEvents(eventNames: any, enabled: any): void;
-    updateViewport(newControllerState: any, extraProps?: {}, interactionState?: {}): void;
+    updateViewport(newControllerState: any, extraProps?: {}, interactionState?: InteractionState): void;
     _onPanStart(event: any): boolean;
     _onPan(event: any): boolean;
     _onPanEnd(event: any): boolean;
@@ -2092,6 +2100,7 @@ declare module '@deck.gl/core/lib/deck-picker' {
 declare module '@deck.gl/core/lib/tooltip' {
   export default class Tooltip {
     constructor(canvas: any);
+    el: HTMLElement;
     setTooltip(displayInfo: any, x: any, y: any): void;
     remove(): void;
   }
@@ -2100,11 +2109,14 @@ declare module '@deck.gl/core/lib/deck' {
   import Controller, { ControllerOptions } from '@deck.gl/core/controllers/controller';
   import Effect from '@deck.gl/core/lib/effect';
   import Layer from '@deck.gl/core/lib/layer';
+  import LayerManager from '@deck.gl/core/lib/layer-manager';
+  import Tooltip from '@deck.gl/core/lib/tooltip';
   import View from '@deck.gl/core/views/view';
   import Viewport from '@deck.gl/core/viewports/viewport';
   import TransitionInterpolator from '@deck.gl/core/transitions/transition-interpolator';
   import { TRANSITION_EVENTS } from '@deck.gl/core/controllers/transition-manager';
   import { Position } from '@deck.gl/core/utils/positions';
+  import { AnimationLoop } from '@luma.gl/core';
 
   export interface InteractiveState {
     isDragging: boolean;
@@ -2172,6 +2184,14 @@ declare module '@deck.gl/core/lib/deck' {
     eventManager: object;
   }
 
+  export interface InteractionState {
+    inTransition?: boolean;
+    isDragging?: boolean;
+    isPanning?: boolean;
+    isRotating?: boolean;
+    isZooming?: boolean;
+  }
+
   export interface DeckProps<T = ContextProviderValue> {
     //https://deck.gl/#/documentation/deckgl-api-reference/deck?section=properties
     // https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
@@ -2217,17 +2237,8 @@ declare module '@deck.gl/core/lib/deck' {
 
     //Event Callbacks
     onWebGLInitialized: (gl: WebGLRenderingContext) => any;
-    onViewStateChange: (args: {
-      viewState: any;
-      interactionState: {
-        inTransition?: boolean;
-        isDragging?: boolean;
-        isPanning?: boolean;
-        isRotating?: boolean;
-        isZooming?: boolean;
-      };
-      oldViewState: any;
-    }) => any;
+    onViewStateChange: (args: { viewState: any; interactionState: InteractionState; oldViewState: any }) => any;
+    onInteractionStateChange(interactionState: InteractionState): void;
     onHover: <D>(info: PickInfo<D>, e: MouseEvent) => any;
     onClick: <D>(info: PickInfo<D>, e: MouseEvent) => any;
     onDragStart: <D>(info: PickInfo<D>, e: MouseEvent) => any;
@@ -2247,7 +2258,11 @@ declare module '@deck.gl/core/lib/deck' {
 
   export default class Deck<T = ContextProviderValue> {
     constructor(props: Partial<DeckProps<T>>);
+    animationLoop: AnimationLoop;
     canvas: HTMLCanvasElement;
+    eventManager: any;
+    layerManager: LayerManager;
+    tooltip: Tooltip;
     viewState: any;
     width: number;
     height: number;
