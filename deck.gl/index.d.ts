@@ -54,6 +54,7 @@ declare module 'deck.gl' {
     Position,
     Position2D,
     Position3D,
+    UNIT
   } from '@deck.gl/core';
   export {
     ArcLayer,

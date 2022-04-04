@@ -982,6 +982,7 @@ declare module '@deck.gl/core/lib/layer' {
   import Viewport from '@deck.gl/core/viewports/viewport';
   import { Position } from '@deck.gl/core/utils/positions';
   import { Matrix4 } from '@math.gl/core';
+  import { UNIT } from '@deck.gl/core/lib/constants';
 
   export interface LayerContext {
     layerManager: LayerManager;
@@ -1016,7 +1017,7 @@ declare module '@deck.gl/core/lib/layer' {
     (o: PickInfo<D>, e: HammerInput): any;
   }
   export type DataSet<D> = Iterable<D>;
-  export type WidthUnits = 'meters' | 'pixels';
+  export type WidthUnits = keyof typeof UNIT;
 
   export interface ObjectInfo<D, T> {
     // the index of the current iteration
