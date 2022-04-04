@@ -296,7 +296,7 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
   import { LayerProps, WidthUnits } from '@deck.gl/core/lib/layer';
   import { Position } from '@deck.gl/core/utils/positions';
   import { RGBAColor } from '@deck.gl/core/utils/color';
-  export { UNIT } from '@deck.gl/core/lib/constants';
+  import { UNIT } from '@deck.gl/core/lib/constants';
   export interface ScatterplotLayerProps<D> extends LayerProps<D> {
     radiusScale?: number;
     lineWidthUnits?: WidthUnits;
