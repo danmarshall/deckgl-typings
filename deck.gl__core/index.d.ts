@@ -923,7 +923,7 @@ declare module '@deck.gl/core/lifecycle/component-state' {
 }
 declare module '@deck.gl/core/lifecycle/component' {
   import { LayerContext } from '@deck.gl/core/lib/layer';
-  export default class Component<P> {
+  export default class Component<P, S = any> {
     constructor(props: P, ...additionalProps: P[]);
     clone(newProps: P): any;
     get stats(): any;
@@ -959,7 +959,7 @@ declare module '@deck.gl/core/lifecycle/component' {
     /**
      * Will be set to the shared layer state object during layer matching
      */
-    state: any;
+    state: S;
 
     internalState: any;
   }
@@ -973,6 +973,7 @@ declare module '@deck.gl/core/lib/layer-state' {
   }
 }
 declare module '@deck.gl/core/lib/layer' {
+  import { TypedArray } from '@deck.gl/core';
   import AttributeManager from '@deck.gl/core/lib/attribute/attribute-manager';
   import Component from '@deck.gl/core/lifecycle/component';
   import Deck, { PickInfo, PickMode } from '@deck.gl/core/lib/deck';
@@ -981,8 +982,73 @@ declare module '@deck.gl/core/lib/layer' {
   import LayerManager from '@deck.gl/core/lib/layer-manager';
   import Viewport from '@deck.gl/core/viewports/viewport';
   import { Position } from '@deck.gl/core/utils/positions';
+  import { BrushingExtension, ExtensionProps } from '@deck.gl/extensions';
   import { Matrix4 } from '@math.gl/core';
   import { UNIT } from '@deck.gl/core/lib/constants';
+  import { Buffer as LumaBuffer } from '@luma.gl/core';
+
+  export interface DataAttribute {
+    buffer?: LumaBuffer;
+    normalized?: boolean;
+    offset?: number;
+    size?: number;
+    stride?: number;
+    type?: number;
+    value?: TypedArray;
+    [k: string]: any;
+  }
+
+  type NonIterableData<T extends string> = {
+    attributes: {
+      [K in T]?: LumaBuffer | TypedArray | DataAttribute;
+    };
+    length: number;
+    [k: string]: any;
+  };
+
+  type Mutable<T> = { -readonly [K in keyof T]: Mutable<T[K]> };
+
+  export type LayerData<T = any> =
+    | string
+    | NonIterableData<Attributes<T>>
+    | AsyncIterable<any>
+    | Promise<LayerData>
+    | Iterable<any>
+    | Array<any>;
+
+  type _LayerDataAccessor<D> = D extends string
+    ? unknown
+    : D extends NonIterableData<any>
+    ? unknown
+    : D extends AsyncIterable<infer T>
+    ? Mutable<T>
+    : D extends Iterable<infer T>
+    ? Mutable<T>
+    : D extends Array<infer T>
+    ? Mutable<T>
+    : never;
+
+  export type LayerDataAccessor<D> = D extends Promise<infer T> ? _LayerDataAccessor<T> : _LayerDataAccessor<D>;
+
+  type IsAny<T, Y = true, N = false> = 0 extends 1 & T ? Y : N;
+
+  type Attributes<T> = NonNullable<
+    {
+      // bumping to later TS would allow additional check for format `get${infer T}` on K
+      [K in keyof T]: Extract<T[K], (...args: any[]) => any> extends (...args: [infer X, infer Y]) => any
+        ? // only return true if the property value has a second argument of type ObjectInfo
+          IsAny<Y, never, Y extends ObjectInfo<any, any> ? true : never>
+        : never;
+    } extends infer A
+      ? // remove and key with property never
+        keyof Pick<A, { [K in keyof A]: NonNullable<A[K]> extends never ? never : K }[keyof A]>
+      : never
+  >;
+
+  export type ConstructorProps<P, D extends LayerData> = Omit<P, 'data'> & { data?: Exclude<D, { attributes: any }> };
+  export namespace ConstructorProps {
+    export type NonIterable<P> = P extends infer X ? X & Omit<P, 'data'> : never;
+  }
 
   export interface LayerContext {
     layerManager: LayerManager;
@@ -1013,17 +1079,17 @@ declare module '@deck.gl/core/lib/layer' {
     damping: number;
   }
   export type TransitionTiming = InterpolationTransitionTiming | SpringTransitionTiming;
-  export interface LayerInputHandler<D = any> {
+  export interface LayerInputHandler<D extends LayerData = any> {
     (o: PickInfo<D>, e: HammerInput): any;
   }
   export type DataSet<D> = Iterable<D>;
   export type WidthUnits = keyof typeof UNIT;
 
-  export interface ObjectInfo<D, T> {
+  export interface ObjectInfo<D extends LayerData, T> {
     // the index of the current iteration
     index: number;
     // the value of the 'data' prop on the layer.
-    data: DataSet<D> | Promise<DataSet<D>> | string;
+    data: D extends Promise<infer T> ? T : D extends string ? unknown : D;
     // a pre-allocated array.
     // the accessor function can optionally fill data into this array and
     // return it, instead of creating a new array for every object.
@@ -1032,16 +1098,13 @@ declare module '@deck.gl/core/lib/layer' {
     target: T[];
   }
 
-  // | AsyncIterable ToDo: Add AsyncIterable
-  // | { length: number } Todo: Support non-iterable objects, see deck.gl docs: /docs/developer-guide/using-layers.md#accessors
-
-  export interface LayerProps<D> {
+  export type LayerProps<D extends LayerData, E extends Array<any> = Array<any>> = {
     //https://deck.gl/#/documentation/deckgl-api-reference/layers/layer?section=properties
     id?: string;
-    data?: D | DataSet<D> | Promise<DataSet<D>> | string;
+    data?: D;
     visible?: boolean;
     opacity?: number;
-    extensions?: any[];
+    extensions?: E;
 
     //Interaction Properties
     pickable?: boolean;
@@ -1079,7 +1142,17 @@ declare module '@deck.gl/core/lib/layer' {
     filterEnabled?: boolean;
     filterTransformSize?: boolean;
     filterTransformColor?: boolean;
-  }
+  } & ExtensionProps<
+    E,
+    BrushingExtension,
+    {
+      brushingRadius: number;
+      brushingEnabled?: boolean;
+      brushingTarget?: 'source' | 'target' | 'source_target' | 'custom';
+      getBrushingTarget?: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => [number, number];
+    }
+  >;
+
   export interface LayerChangeFlags {
     dataChanged: boolean | string | null;
     propsChanged: boolean | string | null;
@@ -1104,10 +1177,22 @@ declare module '@deck.gl/core/lib/layer' {
     equal?: (value1: any, value2: any) => boolean;
     deprecatedFor?: string | string[];
   }
-  export default class Layer<D, P extends LayerProps<D> = LayerProps<D>> extends Component<P> {
-    constructor(props: P, ...additionalProps: P[]);
+  export default class Layer<
+    D extends LayerData<LayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Component<LayerProps<D, E> & P, S> {
+    constructor(
+      props: ConstructorProps<LayerProps<D, E> & P, D>,
+      ...additionalProps: Array<ConstructorProps<LayerProps<D, E> & P, D>>
+    );
+    constructor(
+      props: ConstructorProps.NonIterable<LayerProps<D, E> & P>,
+      ...additionalProps: Array<ConstructorProps.NonIterable<LayerProps<D, E> & P>>
+    );
     toString(): string;
-    setState(updateObject: any): void;
+    setState(updateObject: S): void;
     setNeedsRedraw(redraw?: boolean): void;
     setNeedsUpdate(): void;
     getNeedsRedraw(opts?: { clearRedrawFlags: boolean }): boolean;
@@ -1141,7 +1226,7 @@ declare module '@deck.gl/core/lib/layer' {
     }: {
       info: PickInfo<D>;
       mode: PickMode;
-      sourceLayer: Layer<any>;
+      sourceLayer: Layer<any, any>;
     }): PickInfo<D>;
     invalidateAttribute(name?: string, diffReason?: string): void;
     updateAttributes(changedAttributes: any): void;
@@ -1192,15 +1277,17 @@ declare module '@deck.gl/core/lib/layer' {
   }
 }
 declare module '@deck.gl/core/lib/composite-layer' {
-  import Layer, { LayerProps } from '@deck.gl/core/lib/layer';
+  import Layer, { LayerData, LayerProps } from '@deck.gl/core/lib/layer';
   import Viewport from '@deck.gl/core/viewports/viewport';
-  export interface CompositeLayerProps<D> extends LayerProps<D> {
+  export type CompositeLayerProps<D extends LayerData, E extends Array<any> = Array<any>> = LayerProps<D, E> & {
     _subLayerProps?: Object;
-  }
-  export default class CompositeLayer<D, P extends CompositeLayerProps<D> = CompositeLayerProps<D>> extends Layer<
-    D,
-    P
-  > {
+  };
+  export default class CompositeLayer<
+    D extends LayerData<CompositeLayerProps<any, E>>,
+    P = unknown,
+    S = any,
+    E extends Array<any> = Array<any>
+  > extends Layer<D, CompositeLayerProps<D, E> & P, S, E> {
     get isComposite(): boolean;
     get isLoaded(): any;
     getSubLayers(): any;
@@ -1222,7 +1309,7 @@ declare module '@deck.gl/core/lib/composite-layer' {
     getSubLayerClass(id: any, DefaultLayerClass: any): any;
     getSubLayerRow(row: any, sourceObject: any, sourceObjectIndex: any): any;
     getSubLayerAccessor(accessor: any): any;
-    getSubLayerProps<SD, SP extends LayerProps<SD> = LayerProps<SD>>(sublayerProps?: {}): SP;
+    getSubLayerProps<SD extends LayerData, SP extends LayerProps<SD> = LayerProps<SD>>(sublayerProps?: {}): SP;
     _getAttributeManager(): any;
     _renderLayers(): void;
   }
@@ -1439,6 +1526,7 @@ declare module '@deck.gl/core/utils/positions' {
 }
 declare module '@deck.gl/core/views/view' {
   import Viewport from '@deck.gl/core/viewports/viewport';
+  import { ViewStateProps } from '@deck.gl/core/lib/deck';
   import { Matrix4 } from '@math.gl/core';
 
   export interface ViewProps {
@@ -1466,6 +1554,8 @@ declare module '@deck.gl/core/views/view' {
     modelMatrix?: Matrix4; // A model matrix to be applied to position, to match the layer props API
 
     type?: typeof Viewport; // Internal: Viewport Type
+
+    viewState?: string | ViewStateProps;
   }
 
   export default class View {
@@ -2109,7 +2199,7 @@ declare module '@deck.gl/core/lib/tooltip' {
 declare module '@deck.gl/core/lib/deck' {
   import Controller, { ControllerOptions } from '@deck.gl/core/controllers/controller';
   import Effect from '@deck.gl/core/lib/effect';
-  import Layer from '@deck.gl/core/lib/layer';
+  import Layer, { LayerData } from '@deck.gl/core/lib/layer';
   import LayerManager from '@deck.gl/core/lib/layer-manager';
   import Tooltip from '@deck.gl/core/lib/tooltip';
   import View from '@deck.gl/core/views/view';
@@ -2124,7 +2214,7 @@ declare module '@deck.gl/core/lib/deck' {
     isHovering: boolean;
   }
 
-  export interface PickInfo<D> {
+  export interface PickInfo<D extends LayerData> {
     layer: Layer<D>;
     index: number;
     object: D;
@@ -2198,8 +2288,13 @@ declare module '@deck.gl/core/lib/deck' {
     // https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
     width: string | number;
     height: string | number;
-    layers: Layer<any>[];
-    layerFilter: (args: { layer: Layer<any>; viewport: Viewport; isPicking: boolean; renderPass: string }) => boolean;
+    layers: Layer<any, any>[];
+    layerFilter: (args: {
+      layer: Layer<any, any>;
+      viewport: Viewport;
+      isPicking: boolean;
+      renderPass: string;
+    }) => boolean;
     getCursor: (interactiveState: InteractiveState) => string;
     views: View[];
     viewState: ViewStateProps;
@@ -2218,7 +2313,9 @@ declare module '@deck.gl/core/lib/deck' {
     canvas?: HTMLCanvasElement | string;
     touchAction: string;
     pickingRadius: number;
-    getTooltip: <D>(info: PickInfo<D>) =>
+    getTooltip: <D extends LayerData>(
+      info: PickInfo<D>
+    ) =>
       | null
       | string
       | {
@@ -2240,11 +2337,11 @@ declare module '@deck.gl/core/lib/deck' {
     onWebGLInitialized: (gl: WebGLRenderingContext) => any;
     onViewStateChange: (args: { viewState: any; interactionState: InteractionState; oldViewState: any }) => any;
     onInteractionStateChange(interactionState: InteractionState): void;
-    onHover: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-    onClick: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-    onDragStart: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-    onDrag: <D>(info: PickInfo<D>, e: MouseEvent) => any;
-    onDragEnd: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+    onHover: <D extends LayerData>(info: PickInfo<D>, e: MouseEvent) => any;
+    onClick: <D extends LayerData>(info: PickInfo<D>, e: MouseEvent) => any;
+    onDragStart: <D extends LayerData>(info: PickInfo<D>, e: MouseEvent) => any;
+    onDrag: <D extends LayerData>(info: PickInfo<D>, e: MouseEvent) => any;
+    onDragEnd: <D extends LayerData>(info: PickInfo<D>, e: MouseEvent) => any;
     onLoad: () => void;
     onResize: (size: { height: number; width: number }) => void;
     onBeforeRender: (args: { gl: WebGLRenderingContext }) => void;
@@ -2585,9 +2682,16 @@ declare module '@deck.gl/core/controllers/orthographic-controller' {
   }
 }
 declare module '@deck.gl/core/views/orthographic-view' {
-  import View from '@deck.gl/core/views/view';
+  import View, { ViewProps } from '@deck.gl/core/views/view';
+
+  interface OrthographicViewProps extends ViewProps {
+    far?: number;
+    flipY?: boolean;
+    near?: number;
+  }
+
   export default class OrthographicView extends View {
-    constructor(props: any);
+    constructor(props: OrthographicViewProps);
     get controller(): any;
   }
 }
@@ -2677,6 +2781,17 @@ declare module '@deck.gl/core' {
   export { compareProps as _compareProps } from '@deck.gl/core/lifecycle/props';
   export { RGBAColor } from '@deck.gl/core/utils/color';
   export { Position, Position2D, Position3D } from '@deck.gl/core/utils/positions';
+
+  export type TypedArray =
+    | Int8Array
+    | Uint8Array
+    | Int16Array
+    | Uint16Array
+    | Int32Array
+    | Uint32Array
+    | Uint8ClampedArray
+    | Float32Array
+    | Float64Array;
 }
 declare module '@deck.gl/core/utils/color' {
   export type RGBColor = [number, number, number];

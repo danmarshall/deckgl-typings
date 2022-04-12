@@ -8,18 +8,18 @@ declare module '@deck.gl/mapbox/deck-utils' {
 }
 declare module '@deck.gl/mapbox/mapbox-layer' {
   import { Deck, Layer } from 'deck.gl';
-  import { LayerProps } from '@deck.gl/core/lib/layer';
+  import { LayerData, LayerProps } from '@deck.gl/core/lib/layer';
 
   export type RenderingMode = '2d' | '3d';
 
-  export interface MapboxLayerProps<D> extends LayerProps<D> {
+  export interface MapboxLayerProps<D extends LayerData> extends LayerProps<D> {
     id: string;
     deck?: Deck;
     renderingMode?: RenderingMode;
     type?: typeof Layer;
   }
 
-  export default class MapboxLayer<D> {
+  export default class MapboxLayer<D extends LayerData> {
     constructor(props: MapboxLayerProps<D>);
     id: string;
 

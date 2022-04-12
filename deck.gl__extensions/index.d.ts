@@ -182,10 +182,32 @@ declare module '@deck.gl/extensions/fill-style/fill-style' {
   }
 }
 declare module '@deck.gl/extensions' {
+  import { LayerData, LayerDataAccessor, ObjectInfo } from '@deck.gl/core/lib/layer';
   export { default as BrushingExtension } from '@deck.gl/extensions/brushing/brushing';
   export { default as DataFilterExtension } from '@deck.gl/extensions/data-filter/data-filter';
   export { default as Fp64Extension } from '@deck.gl/extensions/fp64/fp64';
   export { default as PathStyleExtension } from '@deck.gl/extensions/path-style/path-style';
   export { default as project64 } from '@deck.gl/extensions/fp64/project64';
   export { default as FillStyleExtension } from '@deck.gl/extensions/fill-style/fill-style';
+  import { Texture2D } from '@luma.gl/webgl';
+
+  type IsAny<T, Y = true, N = false> = 0 extends 1 & T ? Y : N;
+
+  type ElementOf<T> = T extends ArrayLike<infer A> ? A : never;
+
+  export type ExtensionProps<Extensions extends Array<any> | undefined, E, T> = ElementOf<Extensions> extends never
+    ? unknown
+    : IsAny<ElementOf<Extensions>, unknown, ElementOf<Extensions> extends E ? T : unknown>;
+
+  export interface FillStyleExtensionProps<D extends LayerData> {
+    fillPatternAtlas: string | Texture2D;
+    fillPatternEnabled?: boolean;
+    fillPatternMapping: Record<string, { height: number; width: number; x: number; y: number }>;
+    fillPatternMask?: boolean;
+    getFillPattern: (d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, string>) => string;
+    getFillPatternScale?: number | ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => number);
+    getFillPatternOffset?:
+      | [number, number]
+      | ((d: LayerDataAccessor<D>, objectInfo: ObjectInfo<D, number>) => [number, number]);
+  }
 }
