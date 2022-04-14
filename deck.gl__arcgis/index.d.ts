@@ -35,7 +35,7 @@ declare module '@deck.gl/arcgis' {
       _preRender(effects: any, opts: any): void;
       _resizeRenderBuffers(): void;
       _postRender(effects: any, opts: any): void;
-    };
+    }
     export class DeckRenderer {
       constructor(gl: any);
       setProps(props: any): void;
@@ -45,5 +45,5 @@ declare module '@deck.gl/arcgis' {
       _preRender(effects: any, opts: any): void;
       _resizeRenderBuffers(): void;
       _postRender(effects: any, opts: any): void;
-    };
+    }
   }
