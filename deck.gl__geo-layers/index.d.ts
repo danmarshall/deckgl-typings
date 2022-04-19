@@ -200,7 +200,7 @@ declare module '@deck.gl/geo-layers/tile-layer/tile-layer' {
       url: string;
       bbox: any;
       signal: AbortSignal;
-    }) => D[] | Promise<D[]> | null;
+    }) => D[] | null | Promise<D[] | null>;
     tileSize?: number;
     maxZoom?: number | null;
     minZoom?: number;
