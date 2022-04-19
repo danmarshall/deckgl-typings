@@ -925,7 +925,7 @@ declare module '@deck.gl/core/lifecycle/component' {
   import { LayerContext } from '@deck.gl/core/lib/layer';
   export default class Component<P> {
     constructor(props: P, ...additionalProps: P[]);
-    clone(newProps: P): any;
+    clone(newProps?: Partial<P>): any;
     get stats(): any;
     _initState(): void;
 
@@ -1590,7 +1590,7 @@ declare module '@deck.gl/core/controllers/transition-manager' {
   export enum TRANSITION_EVENTS {
     BREAK = 1,
     SNAP_TO_END = 2,
-    IGNORE = 3
+    IGNORE = 3,
   }
   export default class TransitionManager {
     constructor(ControllerState: any, props?: {});
@@ -2198,7 +2198,7 @@ declare module '@deck.gl/core/lib/deck' {
     // https://github.com/visgl/deck.gl/blob/e948740f801cf91b541a9d7f3bba143ceac34ab2/modules/react/src/deckgl.js#L71-L72
     width: string | number;
     height: string | number;
-    layers: Layer<any>[];
+    layers: (Layer<any> | undefined | null | false)[];
     layerFilter: (args: { layer: Layer<any>; viewport: Viewport; isPicking: boolean; renderPass: string }) => boolean;
     getCursor: (interactiveState: InteractiveState) => string;
     views: View[];
