@@ -484,14 +484,11 @@ declare module '@deck.gl/layers/solid-polygon-layer/polygon' {
    * Normalize any polygon representation into the "complex flat" format
    * @param {Array|Object} polygon
    * @param {Number} positionSize - size of a position, 2 (xy) or 3 (xyz)
-   * @param {Number} [vertexCount] - pre-computed vertex count in the polygon.
-   *   If provided, will skip counting.
    * @return {Object} - {positions: <Float64Array>, holeIndices: <Array|null>}
    */
   export function normalize(
     polygon: any,
-    positionSize: any,
-    vertexCount: any
+    positionSize: number
   ):
     | Float64Array
     | {
