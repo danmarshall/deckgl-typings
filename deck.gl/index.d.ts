@@ -6,6 +6,7 @@
 /// <reference path="../deck.gl__mesh-layers/index.d.ts" />
 /// <reference path="../deck.gl__react/index.d.ts" />
 /// <reference path="../deck.gl__extensions/index.d.ts" />
+/// <reference path="../deck.gl__google-maps/index.d.ts" />
 
 declare module 'deck.gl' {
   export {
