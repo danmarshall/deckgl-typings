@@ -46,7 +46,7 @@ declare module '@deck.gl/react/deckgl' {
   import Deck, { ContextProviderValue, DeckProps } from '@deck.gl/core/lib/deck';
   export type DeckGLProps<T = ContextProviderValue> = Partial<DeckProps<T>>;
   import { ReactElement, RefObject } from 'react';
-  export default class DeckGL<T = ContextProviderValue> extends React.Component<DeckGLProps<T>> {
+  export default class DeckGL<T = ContextProviderValue> extends React.Component<React.PropsWithChildren<DeckGLProps<T>>> {
     constructor(props: DeckGLProps<T>);
     componentDidMount(): void;
     shouldComponentUpdate(nextProps: any): boolean;
