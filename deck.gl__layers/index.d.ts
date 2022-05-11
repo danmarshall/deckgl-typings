@@ -298,6 +298,7 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
   import { RGBAColor } from '@deck.gl/core/utils/color';
   import { UNIT } from '@deck.gl/core/lib/constants';
   export interface ScatterplotLayerProps<D> extends LayerProps<D> {
+    radiusUnits?: keyof typeof UNIT;
     radiusScale?: number;
     lineWidthUnits?: WidthUnits;
     lineWidthScale?: number;
@@ -307,7 +308,8 @@ declare module '@deck.gl/layers/scatterplot-layer/scatterplot-layer' {
     radiusMaxPixels?: number;
     lineWidthMinPixels?: number;
     lineWidthMaxPixels?: number;
-    radiusUnits?: keyof typeof UNIT;
+    billboard?: boolean;
+    antialiasing?: boolean;
 
     //Data Accessors
     getPosition?: (d: D) => Position;
@@ -680,34 +682,95 @@ declare module '@deck.gl/layers/geojson-layer/geojson-layer' {
   import { CompositeLayerProps } from '@deck.gl/core/lib/composite-layer';
   import { RGBAColor } from '@deck.gl/core/utils/color';
   import { WidthUnits } from '@deck.gl/core/lib/layer';
+  import { ScatterplotLayerProps } from '@deck.gl/layers/scatterplot-layer/scatterplot-layer';
+  import { IconLayerProps } from '@deck.gl/layers/icon-layer/icon-layer';
+  import { TextLayerProps } from '@deck.gl/layers/text-layer/text-layer';
+
   export interface GeoJsonLayerProps<D> extends CompositeLayerProps<D> {
-    //Render Options
+    // Render Options
+    // Fill Options
     filled?: boolean;
+    // Stroke Options
     stroked?: boolean;
-    extruded?: boolean;
-    wireframe?: boolean;
     lineWidthUnits?: WidthUnits;
     lineWidthScale?: number;
     lineWidthMinPixels?: number;
     lineWidthMaxPixels?: number;
+    lineCapRounded?: boolean;
     lineJointRounded?: boolean;
     lineMiterLimit?: number;
+    lineBillboard?: boolean;
+    // 3D Options
+    extruded?: boolean;
+    wireframe?: boolean;
     elevationScale?: number;
-    pointRadiusScale?: number;
-    pointRadiusUnits?: string;
-    pointRadiusMinPixels?: number;
-    pointRadiusMaxPixels?: number;
     material?: any;
 
     //Data Accessors
-    getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
     getFillColor?: ((d: D) => RGBAColor) | RGBAColor;
-    getPointRadius?: ((d: D) => number) | number;
+    getLineColor?: ((d: D) => RGBAColor) | RGBAColor;
     getLineWidth?: ((d: D) => number) | number;
     getElevation?: ((d: D) => number) | number;
 
-    // getRadius is deprecated since deck.gl v8.5, use getPointRadius instead
-    getRadius?: ((d: D) => number) | number;
+    // Point Options
+    pointType?: string;
+
+    // pointType:circle Options (ScatterplotLayer Props)
+    /**
+     * @deprecated
+     * getRadius is deprecated since deck.gl v8.5, use {@link getPointRadius} instead
+     * */
+    getRadius?: ScatterplotLayerProps<D>['getRadius'];
+    getPointRadius?: ScatterplotLayerProps<D>['getRadius'];
+    pointRadiusUnits?: ScatterplotLayerProps<D>['radiusUnits'];
+    pointRadiusScale?: ScatterplotLayerProps<D>['radiusScale'];
+    pointRadiusMinPixels?: ScatterplotLayerProps<D>['radiusMinPixels'];
+    pointRadiusMaxPixels?: ScatterplotLayerProps<D>['radiusMaxPixels'];
+    pointAntialiasing?: ScatterplotLayerProps<D>['antialiasing'];
+    pointBillboard?: ScatterplotLayerProps<D>['billboard'];
+
+    // pointType:icon Options (IconLayer Props)
+    iconAtlas?: IconLayerProps<D>['iconAtlas'];
+    iconMapping?: IconLayerProps<D>['iconMapping'];
+    getIcon?: IconLayerProps<D>['getIcon'];
+    getIconSize?: IconLayerProps<D>['getSize'];
+    getIconColor?: IconLayerProps<D>['getColor'];
+    getIconAngle?: IconLayerProps<D>['getAngle'];
+    getIconPixelOffset?: IconLayerProps<D>['getPixelOffset'];
+    iconSizeUnits?: IconLayerProps<D>['sizeUnits'];
+    iconSizeScale?: IconLayerProps<D>['sizeScale'];
+    iconSizeMinPixels?: IconLayerProps<D>['sizeMinPixels'];
+    iconSizeMaxPixels?: IconLayerProps<D>['sizeMaxPixels'];
+    iconBillboard?: IconLayerProps<D>['billboard'];
+    iconAlphaCutoff?: IconLayerProps<D>['alphaCutoff'];
+
+    // pointType:text Options (TextLayer Props)
+    getText?: TextLayerProps<D>['getText'];
+    getTextColor?: TextLayerProps<D>['getColor'];
+    getTextAngle?: TextLayerProps<D>['getAngle'];
+    getTextSize?: TextLayerProps<D>['getSize'];
+    getTextAnchor?: TextLayerProps<D>['getTextAnchor'];
+    getTextAlignmentBaseline?: TextLayerProps<D>['getAlignmentBaseline'];
+    getTextPixelOffset?: TextLayerProps<D>['getPixelOffset'];
+    getTextBackgroundColor?: TextLayerProps<D>['getBackgroundColor'];
+    getTextBorderColor?: TextLayerProps<D>['getBorderColor'];
+    getTextBorderWidth?: TextLayerProps<D>['getBorderWidth'];
+    textSizeUnits?: TextLayerProps<D>['sizeUnits'];
+    textSizeScale?: TextLayerProps<D>['sizeScale'];
+    textSizeMinPixels?: TextLayerProps<D>['sizeMinPixels'];
+    textSizeMaxPixels?: TextLayerProps<D>['sizeMaxPixels'];
+    textCharacterSet?: TextLayerProps<D>['characterSet'];
+    textFontFamily?: TextLayerProps<D>['fontFamily'];
+    textFontWeight?: TextLayerProps<D>['fontWeight'];
+    textLineHeight?: TextLayerProps<D>['lineHeight'];
+    textMaxWidth?: TextLayerProps<D>['maxWidth'];
+    textWordBreak?: TextLayerProps<D>['wordBreak'];
+    textBackground?: TextLayerProps<D>['background'];
+    textBackgroundPadding?: TextLayerProps<D>['backgroundPadding'];
+    textOutlineColor?: TextLayerProps<D>['outlineColor'];
+    textOutlineWidth?: TextLayerProps<D>['outlineWidth'];
+    textBillboard?: TextLayerProps<D>['billboard'];
+    textFontSettings?: TextLayerProps<D>['fontSettings'];
   }
   export default class GeoJsonLayer<D, P extends GeoJsonLayerProps<D> = GeoJsonLayerProps<D>> extends CompositeLayer<
     D,
@@ -910,6 +973,8 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
     fontSettings?: FontSettings;
     wordBreak?: 'break-all' | 'break-word';
     maxWidth?: number;
+    outlineColor?: RGBAColor;
+    outlineWidth?: number;
 
     //Data Accessors
     getText?: (x: D) => string;
@@ -922,8 +987,10 @@ declare module '@deck.gl/layers/text-layer/text-layer' {
     getTextAnchor?: ((x: D) => TextAnchor) | TextAnchor;
     getAlignmentBaseline?: ((x: D) => AlignmentBaseline) | AlignmentBaseline;
     getPixelOffset?: ((x: D) => number[]) | number[];
-    outlineColor?: RGBAColor;
-    outlineWidth?: number;
+
+    getBackgroundColor?: ((d: D) => RGBAColor) | RGBAColor;
+    getBorderColor?: ((d: D) => RGBAColor) | RGBAColor;
+    getBorderWidth?: ((d: D) => number) | number;
   }
   export default class TextLayer<D, P extends TextLayerProps<D> = TextLayerProps<D>> extends CompositeLayer<D, P> {
     initializeState(params: any): void;
