@@ -239,6 +239,7 @@ declare module '@deck.gl/geo-layers/trips-layer/trips-layer' {
   export interface TripsLayerProps<D> extends PathLayerProps<D> {
     //Render Options
     currentTime?: number;
+    fadeTrail?: boolean;
     trailLength?: number;
 
     //Data Accessors
