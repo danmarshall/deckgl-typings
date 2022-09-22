@@ -2233,6 +2233,7 @@ declare module '@deck.gl/core/lib/deck' {
     _framebuffer: any;
     parameters: object;
     debug: boolean;
+    drawPickingColors: boolean;
     _animate: boolean;
     _pickable: boolean;
 
