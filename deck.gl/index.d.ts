@@ -97,4 +97,5 @@ declare module 'deck.gl' {
   export { default, DeckGL } from '@deck.gl/react';
   export { DeckProps, PickInfo } from '@deck.gl/core/lib/deck';
   export { LayerInputHandler } from '@deck.gl/core/lib/layer';
+  export { GoogleMapsOverlay } from '@deck.gl/google-maps';
 }

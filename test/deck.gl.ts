@@ -10,6 +10,7 @@ import {
   OrbitView,
   PolygonLayer,
   TextLayer,
+  GoogleMapsOverlay
 } from 'deck.gl';
 
 interface P {
